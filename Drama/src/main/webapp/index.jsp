@@ -64,7 +64,7 @@
 			<div class="row">
 				<div class="left-menu text-right menu-1">
 					<ul>
-						<li><a href="work.html">hi</a></li>
+						<li><a href="work.html">hiroo</a></li>
 						<li><a href="about.html">About</a></li>
 						<li class="has-dropdown">
 							<a href="services.html">Services</a>
