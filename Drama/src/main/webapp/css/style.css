@@ -263,7 +263,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .fh5co-cover .overlay {
   z-index: 0;
-  position: absolute;
+  
   bottom: 0;
   top: 0;
   left: 0;

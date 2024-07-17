@@ -78,7 +78,7 @@
 					</ul>
 				</div>
 				<div class="logo text-center">
-					<div id="fh5co-logo"><a href="index.html">Orange.</a></div>
+					<div id="fh5co-logo"><a href="index.html">여기가 거기야!!</a></div>
 				</div>
 				<div class="right-menu text-left menu-1">
 					<ul>
@@ -101,14 +101,14 @@
 		</div>
 	</nav>
 
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_2.jpg);">
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/newjeans.png);">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1 text-center">
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn"">
-							<h1>We Help to Build Your Site</h1>
+							<h1>두리번</h1>
 							<h2>Free html5 templates Made by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></h2>
 							<div class="row">
 								<form class="form-inline" id="fh5co-header-subscribe">
