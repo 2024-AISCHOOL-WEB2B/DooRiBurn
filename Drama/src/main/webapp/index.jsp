@@ -80,6 +80,7 @@
 	</script>
 	<div class="fh5co-loader"></div>
 	<div id="page">
+<<<<<<< HEAD
 		<nav class="fh5co-nav" role="navigation">
 			<div class="container">
 				<div class="row">
@@ -112,6 +113,44 @@
 							<li class="btn-cta"><a href="#"><span>Login</span></a></li>
 						</ul>
 					</div>
+=======
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="row">
+				<div class="left-menu text-right menu-1">
+					<ul>
+						<li><a href="contact.jsp">회원가입</a></li>
+						<li><a href="about.html">로그인</a></li>
+						<li class="has-dropdown">
+							<a href="services.html">마이페이지</a>
+							<ul class="dropdown">
+								<li><a href="#">관심 촬영지</a></li>
+								<li><a href="#">회원정보수정</a></li>
+								<li><a href="#">참여한 공모전</a></li>
+								<li><a href="#">API</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="logo text-center">
+					<div id="fh5co-logo"><a href="index.jsp">여기가 거기야!!</a></div>
+				</div>
+				<div class="right-menu text-left menu-1">
+					<ul>
+						<li><a href="blog.html">공모전</a></li>
+						<li class="has-dropdown">
+							<a href="#">카테고리</a>
+							<ul class="dropdown">
+								<li><a href="#">HTML5</a></li>
+								<li><a href="#">CSS3</a></li>
+								<li><a href="#">Sass</a></li>
+								<li><a href="#">jQuery</a></li>
+							</ul>
+						</li>
+						<li><a href="contact.html">Contact</a></li>
+						<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
+					</ul>
+>>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 				</div>
 			</div>
 		</nav>

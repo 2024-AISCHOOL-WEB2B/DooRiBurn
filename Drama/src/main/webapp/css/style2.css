@@ -11,15 +11,12 @@
 *
 * ======================================================= */
 body {
+  font-family: "Work Sans", Arial, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.7;
   color: #828282;
   background: #fff;
-  font-family: Arial, sans-serif;
-  background-color: #f8f1db;
-  margin: 0;
-  padding: 0;
 }
 
 #page {
