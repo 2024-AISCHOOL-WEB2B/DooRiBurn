@@ -384,7 +384,7 @@ h1, h2, h3, h4, h5, h6, figure {
   width: 100% !important;
   margin-bottom: 10px;
 }
-#fh5co-header .display-tc .form-inline .form-group .form-control,
+#fh5co-header .display-tc .form-inline .form-group .form-control
 #fh5co-counter .display-tc .form-inline .form-group .form-control,
 .fh5co-cover .display-tc .form-inline .form-group .form-control {
   width: 100%;
@@ -1368,5 +1368,9 @@ h1, h2, h3, h4, h5, h6, figure {
   border-top-left-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
 }
+
+
+
+
 
 /*# sourceMappingURL=style.css.map */

@@ -81,4 +81,37 @@ public class MemberDAO {
 		return cnt;
 	}
 
+	public int checkEmail(String email) {
+		int cnt = 0;
+		
+		getConnection();
+		
+		try {
+			String sql = "SELECT * FROM TB_MEMBER WHERE EMAIL = ?";
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, email);
+			
+			rs = psmt.executeQuery();
+			System.out.println("이메일"+email);
+			System.out.println("값"+rs.next());
+			if(rs.next() || email.equals("")) {
+				System.out.println("맞음");
+				cnt = 0;
+			}else {
+				System.out.println("틀림");
+				cnt = 1;
+			}
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return cnt;
+	}
+
 }
