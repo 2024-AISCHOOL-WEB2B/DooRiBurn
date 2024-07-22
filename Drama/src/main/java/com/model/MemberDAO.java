@@ -94,8 +94,8 @@ public class MemberDAO {
 			psmt.setString(1, email);
 			
 			rs = psmt.executeQuery();
-			System.out.println("이메일"+email);
-			System.out.println("값"+rs.next());
+			
+			
 			if(rs.next() || email.equals("")) {
 				System.out.println("맞음");
 				cnt = 0;
