@@ -38,6 +38,17 @@
 
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+	
+	<style type="text/css">
+		*{
+			font-family: "Jua", sans-serif;
+  			font-weight: 400;
+  			font-style: normal;
+		}
+	</style>
 	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
@@ -64,27 +75,27 @@
 			<div class="row">
 				<div class="left-menu text-right menu-1">
 					<ul>
-						<li><a href="work.html">hiroo</a></li>
-						<li><a href="about.html">About</a></li>
+						<li><a href="work.html">회원가입</a></li>
+						<li><a href="about.html">로그인</a></li>
 						<li class="has-dropdown">
-							<a href="services.html">Services</a>
+							<a href="services.html">마이페이지</a>
 							<ul class="dropdown">
-								<li><a href="#">Web Design</a></li>
-								<li><a href="#">eCommerce</a></li>
-								<li><a href="#">Branding</a></li>
+								<li><a href="#">관심 촬영지</a></li>
+								<li><a href="#">회원정보수정</a></li>
+								<li><a href="#">참여한 공모전</a></li>
 								<li><a href="#">API</a></li>
 							</ul>
 						</li>
 					</ul>
 				</div>
 				<div class="logo text-center">
-					<div id="fh5co-logo"><a href="index.html">여기가 거기야!!</a></div>
+					<div id="fh5co-logo"><a href="index.jsp">여기가 거기야!!</a></div>
 				</div>
 				<div class="right-menu text-left menu-1">
 					<ul>
-						<li><a href="blog.html">Blog</a></li>
+						<li><a href="blog.html">공모전</a></li>
 						<li class="has-dropdown">
-							<a href="#">Tools</a>
+							<a href="#">카테고리</a>
 							<ul class="dropdown">
 								<li><a href="#">HTML5</a></li>
 								<li><a href="#">CSS3</a></li>
@@ -101,21 +112,21 @@
 		</div>
 	</nav>
 
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/newjeans.png);">
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/black.jpg);">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1 text-center">
 					<div class="display-t">
-						<div class="display-tc animate-box" data-animate-effect="fadeIn"">
-							<h1>두리번</h1>
-							<h2>Free html5 templates Made by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></h2>
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<h1 style="font-style: normal;">여기가 거기야!</h1>
+							<br>
 							<div class="row">
 								<form class="form-inline" id="fh5co-header-subscribe">
 									<div class="col-md-6 col-md-offset-3">
 										<div class="form-group">
-											<input type="text" class="form-control" id="email" placeholder="Enter your email">
-											<button type="submit" class="btn btn-default">Join Now</button>
+											<input type="text" class="form-control" id="email" >
+											<button type="submit" class="btn btn-default">검색하기</button>
 										</div>
 									</div>
 								</form>
