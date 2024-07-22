@@ -1,5 +1,6 @@
 package com.model;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,24 +15,22 @@ public class MemberDAO {
 	
 	private void getConnection() {
 		
-		
-		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			
-			String id = "Insa5_SpringB_hacksim_1";
-			String pw = "aishcool1";
+			String Userid = "Insa5_SpringB_hacksim_1";
+			String Userpw = "aishcool1";
 			String url = "jdbc:oracle:thin:@project-db-stu3.smhrd.com:1524:xe";
 			
-			conn = DriverManager.getConnection(url, id, pw);
+			conn = DriverManager.getConnection(url, Userid, Userpw);
 			
 		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 찾기 실패");
+			System.out.println("드라이버 연결 실패");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("연결실패");
+			System.out.println("db연결 실패");
 			e.printStackTrace();
 		}
+		
 	}
 		
 	private void close() {
