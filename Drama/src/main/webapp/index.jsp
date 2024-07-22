@@ -75,7 +75,7 @@
 			<div class="row">
 				<div class="left-menu text-right menu-1">
 					<ul>
-						<li><a href="work.html">회원가입</a></li>
+						<li><a href="contact.jsp">회원가입</a></li>
 						<li><a href="about.html">로그인</a></li>
 						<li class="has-dropdown">
 							<a href="services.html">마이페이지</a>

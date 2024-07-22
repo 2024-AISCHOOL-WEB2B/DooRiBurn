@@ -38,6 +38,17 @@
 
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+	
+	<style type="text/css">
+		*{
+			font-family: "Jua", sans-serif;
+  			font-weight: 400;
+  			font-style: normal;
+		}
+	</style>
 	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
@@ -61,32 +72,32 @@
 	<div class="fh5co-loader"></div>
 	
 	<div id="page">
-	<nav class="fh5co-nav" role="navigation">
+		<nav class="fh5co-nav" role="navigation">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-5 text-right menu-1">
+				<div class="left-menu text-right menu-1">
 					<ul>
-						<li><a href="work.html">Work</a></li>
-						<li><a href="about.html">About</a></li>
+						<li><a href="Join.jsp">회원가입</a></li>
+						<li><a href="about.html">로그인</a></li>
 						<li class="has-dropdown">
-							<a href="services.html">Services</a>
+							<a href="services.html">마이페이지</a>
 							<ul class="dropdown">
-								<li><a href="#">Web Design</a></li>
-								<li><a href="#">eCommerce</a></li>
-								<li><a href="#">Branding</a></li>
+								<li><a href="#">관심 촬영지</a></li>
+								<li><a href="#">회원정보수정</a></li>
+								<li><a href="#">참여한 공모전</a></li>
 								<li><a href="#">API</a></li>
 							</ul>
 						</li>
 					</ul>
 				</div>
-				<div class="col-xs-2 text-center">
-					<div id="fh5co-logo"><a href="index.html">Orange.</a></div>
+				<div class="logo text-center">
+					<div id="fh5co-logo"><a href="index.jsp">여기가 거기야!!</a></div>
 				</div>
-				<div class="col-xs-5 text-left menu-1">
+				<div class="right-menu text-left menu-1">
 					<ul>
-						<li><a href="blog.html">Blog</a></li>
+						<li><a href="blog.html">공모전</a></li>
 						<li class="has-dropdown">
-							<a href="#">Tools</a>
+							<a href="#">카테고리</a>
 							<ul class="dropdown">
 								<li><a href="#">HTML5</a></li>
 								<li><a href="#">CSS3</a></li>
@@ -94,7 +105,8 @@
 								<li><a href="#">jQuery</a></li>
 							</ul>
 						</li>
-						<li class="active"><a href="contact.html">Contact</a></li>
+						<li><a href="contact.html">Contact</a></li>
+						<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
 					</ul>
 				</div>
 			</div>
@@ -102,76 +114,43 @@
 		</div>
 	</nav>
 
-	<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/img_bg_2.jpg);">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center">
-					<div class="display-t">
-						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Contact Us</h1>
-							<h2>Free html5 templates Made by <a href="http://freehtml5.co" target="_blank">freehtml5.co</a></h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/black.jpg);">	
 	</header>
 
 	<div id="fh5co-contact">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-5 col-md-push-1 animate-box">
-					
-					<div class="fh5co-contact-info">
-						<h3>Contact Information</h3>
-						<ul>
-							<li class="address">198 West 21th Street, <br> Suite 721 New York NY 10016</li>
-							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li>
-							<li class="email"><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-							<li class="url"><a href="http://FreeHTML5.co">FreeHTML5.co</a></li>
-						</ul>
-					</div>
 
-				</div>
-				<div class="col-md-6 animate-box">
-					<h3>Get In Touch</h3>
-					<form action="#">
+				<div class="col-md-6 animate-box" align="center">
+					<h3>회원가입</h3>
+					<form action="JoinService" method="post">
 						<div class="row form-group">
 							<div class="col-md-6">
-								<!-- <label for="fname">First Name</label> -->
-								<input type="text" id="fname" class="form-control" placeholder="Your firstname">
+								<input type="email" name="email" id="email" class="form-control" placeholder="아이디(이메일)">
 							</div>
 							<div class="col-md-6">
-								<!-- <label for="lname">Last Name</label> -->
-								<input type="text" id="lname" class="form-control" placeholder="Your lastname">
-							</div>
+								<input type="password" name="pw" id="password" class="form-control" placeholder="비밀번호">
+							</div>	
 						</div>
-
 						<div class="row form-group">
-							<div class="col-md-12">
-								<!-- <label for="email">Email</label> -->
-								<input type="text" id="email" class="form-control" placeholder="Your email address">
+							<div class="col-md-6">
+								<input type="text" name="nick" id="nick" class="form-control" placeholder="닉네임">
 							</div>
 						</div>
-
 						<div class="row form-group">
-							<div class="col-md-12">
-								<!-- <label for="subject">Subject</label> -->
-								<input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
+							<div class="col-md-6">
+								<input type="text" name="name" id="name" class="form-control" placeholder="이름">
+							</div>
+							<div class="col-md-6">
+								<input type="text" name="phone" id="phone" class="form-control" placeholder="전화번호">
+							</div>
+							<div class="col-md-6">
+								<input type="text" name="addr" id="addr" class="form-control" placeholder="주소">
 							</div>
 						</div>
-
 						<div class="row form-group">
-							<div class="col-md-12">
-								<!-- <label for="message">Message</label> -->
-								<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about us"></textarea>
-							</div>
+							<input type="submit" id="submit" value="회원가입">
 						</div>
-						<div class="form-group">
-							<input type="submit" value="Send Message" class="btn btn-primary">
-						</div>
-
 					</form>		
 				</div>
 			</div>
