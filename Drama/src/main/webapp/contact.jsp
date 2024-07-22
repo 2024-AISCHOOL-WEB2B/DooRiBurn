@@ -50,6 +50,8 @@
 		}
 	</style>
 	
+	
+	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -68,6 +70,27 @@
 
 	</head>
 	<body>
+	
+	
+	
+	<script>
+        function validateForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var nick = document.getElementById("nick").value;
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("phone").value;
+            var addr = document.getElementById("addr").value;
+
+            if (email == "" || password == "" || nick == "" || name == "" || phone == "" || addr == "") {
+                alert("모든 필드를 입력해 주세요.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    
+    
 		
 	<div class="fh5co-loader"></div>
 	
@@ -114,19 +137,20 @@
 		</div>
 	</nav>
 
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/black.jpg);">	
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/black.jpg);" >	
 	</header>
 
 	<div id="fh5co-contact">
 		<div class="container">
 			<div class="row">
 
-				<div class="col-md-6 animate-box" align="center">
+				<div class="col-md-6 animate-box" align="center" onsubmit="return validateForm()">
 					<h3>회원가입</h3>
-					<form action="JoinService" method="post">
+					<form action="JoinService" method="post" name="JoinForm">
 						<div class="row form-group">
-							<div class="col-md-6">
-								<input type="email" name="email" id="email" class="form-control" placeholder="아이디(이메일)">
+							<div class="col-md-6" >
+								<input type="email" name="email" id="email" class="form-control" placeholder="아이디(이메일)" >
+								<font id="checkEmail" size = "2"></font>
 							</div>
 							<div class="col-md-6">
 								<input type="password" name="pw" id="password" class="form-control" placeholder="비밀번호">
@@ -158,66 +182,11 @@
 		</div>
 	</div>
 
-	<div id="map" class="fh5co-map"></div>
-
-	<div id="fh5co-started">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Lets Get Started</h2>
-					<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-				</div>
-			</div>
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2">
-					<form class="form-inline">
-						<div class="col-md-6 col-md-offset-3 col-sm-6">
-							<button type="submit" class="btn btn-default btn-block">Get In Touch</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
-			<div class="row row-pb-md">
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<ul class="fh5co-footer-links">
-						<li><a href="#">About</a></li>
-						<li><a href="#">Help</a></li>
-						<li><a href="#">Contact</a></li>
-						<li><a href="#">Terms</a></li>
-						<li><a href="#">Meetups</a></li>
-					</ul>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<ul class="fh5co-footer-links">
-						<li><a href="#">Shop</a></li>
-						<li><a href="#">Privacy</a></li>
-						<li><a href="#">Testimonials</a></li>
-						<li><a href="#">Handbook</a></li>
-						<li><a href="#">Held Desk</a></li>
-					</ul>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6">
-					<ul class="fh5co-footer-links">
-						<li><a href="#">Find Designers</a></li>
-						<li><a href="#">Find Developers</a></li>
-						<li><a href="#">Teams</a></li>
-						<li><a href="#">Advertise</a></li>
-						<li><a href="#">API</a></li>
-					</ul>
-				</div>
-				<div class="col-md-4 col-sm-12 col-xs-12 fh5co-widget col-md-push-1">
-					<h3>A Little About Orange</h3>
-					<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
-					<p><a href="#">Learn More</a></p>
-				</div>
-			</div>
+			
 
 			<div class="row copyright">
 				<div class="col-md-12 text-center">
@@ -258,7 +227,39 @@
 	<script src="js/google_map.js"></script>
 
 	<script src="js/main.js"></script>
-
+	
+	<script src="js/jquery-3.6.0.min.js"></script>
+	
+	<script>
+	$('#email').focusout(function(){
+		let userEmail = $('#email').val();
+		
+		$.ajax({
+			url : "EmailCheckService",
+			type : "post",
+			data : {userEmail: userEmail},
+			dataType : 'json',
+			success : function(result){
+				if(result == 0){
+					$("#checkEmail").html('사용할 수 없는 이메일입니다.');
+					$("#checkEmail").attr('color', 'red');
+				}else{
+					$("#checkEmail").html('사용할 수 있는 이메일입니다.');
+					$("#checkEmail").attr('color', 'green');
+				}
+			},
+			error : function(){
+				alert("서버요청실패");
+			}
+			
+			
+		})
+	})
+	
+	
+	</script>
+	
+	
 	</body>
 </html>
 
