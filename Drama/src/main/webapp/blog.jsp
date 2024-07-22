@@ -109,23 +109,21 @@
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Our Blog</h1>
-							<h2>Free html5 templates Made by <a href="http://freehtml5.co" target="_blank">freehtml5.co</a></h2>
+							<h1>blog</h1>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</header>
-
+	</header> 
 	<div id="fh5co-blog" class="fh5co-bg-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4 col-md-4">
 					<div class="fh5co-blog animate-box">
-						<a href="#"><img class="img-responsive" src="images/work-4.jpg" alt=""></a>
+						<a href="#"><img class="img-responsive" src="images/work-4.jpg" alt=""></a> <!-- 해당 장소 사진 -->
 						<div class="blog-text">
-							<h3><a href=""#>45 Minimal Workspace Rooms for Web Savvys</a></h3>
+							<h3><a href=""#>45 Minimal Worksspace Rooms for Web Savvys</a></h3>
 							<span class="posted_on">Nov. 15th</span>
 							<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
 							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>

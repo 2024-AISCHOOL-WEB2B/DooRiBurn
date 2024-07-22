@@ -365,7 +365,7 @@ img {
   vertical-align: middle;
 }
 
-.img-responsive {
+.img-responsive { 
   display: block;
   max-width: 100%;
   height: auto;
@@ -2490,6 +2490,11 @@ select[multiple].input-lg,
     margin-bottom: 0;
     vertical-align: middle;
   }
+  .form-inline .form-group-search {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
   .form-inline .form-control {
     display: inline-block;
     width: auto;
@@ -2678,7 +2683,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 .btn-primary:hover {
   color: #fff;
   background-color: #286090;
-  border-color: #204d74;
+  border-color: #286090;
 }
 .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
   color: #fff;
