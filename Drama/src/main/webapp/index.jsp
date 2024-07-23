@@ -36,9 +36,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap"
 	rel="stylesheet">
+
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet" />
+	href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+
 
 <style type="text/css">
 * {
@@ -64,7 +66,10 @@
 <!-- main -->
 <link rel="stylesheet" href="css/styles.css">
 
-
+<!-- Bootstrap CSS -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 <!-- Modernizr JS -->
 <script src="js/modernizr-2.6.2.min.js"></script>
 <!-- FOR IE9 below -->
@@ -108,8 +113,8 @@
 									<li><a href="#">인천</a></li>
 									<li><a href="#">대구</a></li>
 								</ul></li>
-							<li><a href="contact.html">Contact</a></li>
-							<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
+							<!-- <li><a href="contact.html">Contact</a></li>
+							<li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
 						</ul>
 					</div>
 				</div>
@@ -124,18 +129,21 @@
 					<div class="col-md-10 col-md-offset-1 text-center">
 						<div class="display-t">
 							<div class="display-tc animate-box" data-animate-effect="fadeIn">
+
 								<h1 style="font-style: normal; text-align: center; color: black">여기가
 									거기여?</h1>
 								<br>
+
 								<div class="row">
 									<form class="form-inline" id="fh5co-header-subscribe"
 										action="SearchService">
 										<div class="col-md-6 col-md-offset-3">
+
 											<div class="search-container"
 												style="display: flex; align-items: center;">
 												<select name="category" style="margin-right: 10px;">
-													<option value="0">  장소 및 지역</option>
-													<option value="1">드라마</option>
+													<option value="location">장소 및 지역</option>
+													<option value="drama">드라마</option>
 												</select> <input name="search" type="text"
 													placeholder="지역 또는 드라마 명을 검색하세요."
 													style="flex-grow: 1; margin-right: 10px;">
@@ -154,6 +162,7 @@
 			</div>
 	</div>
 	</header>
+
 	<main>
 
 		<div class="ranking">
@@ -161,93 +170,95 @@
 				<div class="rank-num">1</div>
 				<div class="rank-text">선재 업고 튀어</div>
 			</div>
+
 			<div class="rank-item">
 				<div class="rank-num">2</div>
 				<div class="rank-text">광주</div>
 			</div>
+
 			<div class="rank-item">
 				<div class="rank-num">3</div>
 				<div class="rank-text">눈물의 여왕</div>
 			</div>
+
 			<div class="rank-item">
 				<div class="rank-num">4</div>
 				<div class="rank-text">제주도</div>
 			</div>
+
 			<div class="rank-item">
 				<div class="rank-num">5</div>
 				<div class="rank-text">전주</div>
 			</div>
+		</div>
 
 
-			<!-- <section class="intro"> -->
-			<div class="intro" style="height: 400px">
-				<h2 class="highlight">선재 업고 튀어에 나온 그 장소!</h2>
-				<h2 class="highlight">나도 가 볼까?</h2>
+		<!-- <section class="intro"> -->
+		<div class="intro" style="height: 400px">
+			<h2 class="highlight">선재 업고 튀어에 나온 그 장소!</h2>
+			<h2 class="highlight">나도 가 볼까?</h2>
 
-				<div id="carouselExampleCaptions" class="carousel slide"
-					data-bs-ride="carousel">
-					<div class="carousel-indicators">
-						<button type="button" data-bs-target="#carouselExampleCaptions"
-							data-bs-slide-to="0" class="active" aria-current="true"
-							aria-label="Slide 1"></button>
-						<button type="button" data-bs-target="#carouselExampleCaptions"
-							data-bs-slide-to="1" aria-label="Slide 2"></button>
-						<button type="button" data-bs-target="#carouselExampleCaptions"
-							data-bs-slide-to="2" aria-label="Slide 3"></button>
-					</div>
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<img src="images/jeju_aquarium.png" class="d-block w-100"
-								alt="...">
-							<div class="carousel-caption d-none d-md-block">
-								<h5>제주 아쿠아리움</h5>
-								<p>제주의 아름다운 바다 생물을 만날 수 있는 곳입니다.</p>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<img src="images/jeonju_hanok_village.jpg" class="d-block w-100"
-								alt="...">
-							<div class="carousel-caption d-none d-md-block">
-								<h5>전주 한옥 마을</h5>
-								<p>한국 전통 가옥을 체험할 수 있는 곳입니다.</p>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<img src="images/seoulforest.jpeg" class="d-block w-100"
-								alt="...">
-							<div class="carousel-caption d-none d-md-block">
-								<h5>서울숲</h5>
-								<p>서울 도심 속의 자연을 느낄 수 있는 공원입니다.</p>
-							</div>
-						</div>
-					</div>
-					<button class="carousel-control-prev" type="button"
-						data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button"
-						data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
+			<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#myCarousel"
+						data-bs-slide-to="0" class="active" aria-current="true"
+						aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#myCarousel"
+						data-bs-slide-to="1" aria-label="Slide 2"></button>
+					<button type="button" data-bs-target="#myCarousel"
+						data-bs-slide-to="2" aria-label="Slide 3"></button>
 				</div>
-
-				<!-- <div class="intro-images">
-					<img src="images/jeju_aquarium.png" alt="Place 1"> <img
-						src="images/jeonju_hanok_village.jpg" alt="Place 2"> <img
-						src="images/seoulforest.jpeg" alt="Place 3">
-				</div> -->
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="images/jeju_aquarium.png" class="d-block w-100"
+							alt="Slide 1">
+						<div class="carousel-caption d-none d-md-block">
+							<h5>First slide label</h5>
+							<p>Some representative placeholder content for the first
+								slide.</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img src="images/jeonju_hanok_village.jpg" class="d-block w-100"
+							alt="Slide 2">
+						<div class="carousel-caption d-none d-md-block">
+							<h5>Second slide label</h5>
+							<p>Some representative placeholder content for the second
+								slide.</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img src="images/seoulforest.jpeg" class="d-block w-100"
+							alt="Slide 3">
+						<div class="carousel-caption d-none d-md-block">
+							<h5>Third slide label</h5>
+							<p>Some representative placeholder content for the third
+								slide.</p>
+						</div>
+					</div>
+				</div>
+				<button class="carousel-control-prev" type="button"
+					data-bs-target="#myCarousel" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button"
+					data-bs-target="#myCarousel" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
 			</div>
+			<!-- 추가 2 -->
+		</div>
 
-			<!-- </section> -->
+		<!-- </section> -->
 
-			<footer>
-				<button class="btn">로그인</button>
-				<button class="btn">회원가입</button>
-				<button class="btn">한국어</button>
-				<button class="btn">English</button>
-			</footer>
+		<footer>
+			<button class="btn">로그인</button>
+			<button class="btn">회원가입</button>
+			<button class="btn">한국어</button>
+			<button class="btn">English</button>
+		</footer>
 	</main>
 
 	<script src="js/jquery.min.js"></script>
@@ -262,8 +273,19 @@
 
 	</div>
 
-	<div class="gototop js-top">
+	<!-- <div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
+	Bootstrap Bundle JS (includes Popper)
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+ -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+	<!-- 추가 3 -->
+
 </body>
 </html>
