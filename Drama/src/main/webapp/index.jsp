@@ -15,8 +15,7 @@
 <meta name="author" content="FreeHTML5.co" />
 
 <!-- Facebook and Twitter integration -->
-<meta property="o+
-g:title" content="" />
+<meta property="og:title" content="" />
 <meta property="og:image" content="" />
 <meta property="og:url" content="" />
 <meta property="og:site_name" content="" />
@@ -86,7 +85,7 @@ g:title" content="" />
 				<div class="row">
 					<div class="left-menu text-right menu-1">
 						<ul>
-							<li><a href="work.html">회원가입</a></li>
+							<li><a href="contact.jsp">회원가입</a></li>
 							<li><a href="about.html">로그인</a></li>
 							<li class="has-dropdown"><a href="services.html">마이 페이지</a>
 								<ul class="dropdown">
@@ -110,7 +109,7 @@ g:title" content="" />
 									<li><a href="#">대구</a></li>
 								</ul></li>
 							<li><a href="contact.html">Contact</a></li>
-							<li class="btn-cta"><a href="#"><span>Login</span></a></li>
+							<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
 						</ul>
 					</div>
 				</div>
@@ -118,21 +117,28 @@ g:title" content="" />
 		</nav>
 
 		<header id="fh5co-header" class="fh5co-cover" role="banner"
-			style="background-image: url(images/backGround.png);">
+			style="background-image: url(images/backgroundco.png);">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row">
-					<div class="">
+					<div class="col-md-10 col-md-offset-1 text-center">
 						<div class="display-t">
 							<div class="display-tc animate-box" data-animate-effect="fadeIn">
 								<h1 style="font-style: normal; text-align: center; color: black">여기가
 									거기여?</h1>
 								<br>
 								<div class="row">
-									<form class="form-inline" id="fh5co-header-subscribe">
+									<form class="form-inline" id="fh5co-header-subscribe"
+										action="SearchService">
 										<div class="col-md-6 col-md-offset-3">
-											<div class="search-container">
-												<input type="text" placeholder="지역 또는 드라마 명을 검색하세요.">
+											<div class="search-container"
+												style="display: flex; align-items: center;">
+												<select name="category" style="margin-right: 10px;">
+													<option value="0">  장소 및 지역</option>
+													<option value="1">드라마</option>
+												</select> <input name="search" type="text"
+													placeholder="지역 또는 드라마 명을 검색하세요."
+													style="flex-grow: 1; margin-right: 10px;">
 												<button type="submit" id="search-button">
 													<i class="search-icon">&#128269;</i>
 												</button>
@@ -140,35 +146,37 @@ g:title" content="" />
 										</div>
 									</form>
 								</div>
-								<div class="ranking">
-									<div class="rank-item">
-										<div class="rank-num">1</div>
-										<div class="rank-text">선재 업고 튀어</div>
-									</div>
-									<div class="rank-item">
-										<div class="rank-num">2</div>
-										<div class="rank-text">광주</div>
-									</div>
-									<div class="rank-item">
-										<div class="rank-num">3</div>
-										<div class="rank-text">눈물의 여왕</div>
-									</div>
-									<div class="rank-item">
-										<div class="rank-num">4</div>
-										<div class="rank-text">제주도</div>
-									</div>
-									<div class="rank-item">
-										<div class="rank-num">5</div>
-										<div class="rank-text">전주</div>
-									</div>
-								</div>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</header>
-		<main>
+	</div>
+	</header>
+	<main>
+
+		<div class="ranking">
+			<div class="rank-item">
+				<div class="rank-num">1</div>
+				<div class="rank-text">선재 업고 튀어</div>
+			</div>
+			<div class="rank-item">
+				<div class="rank-num">2</div>
+				<div class="rank-text">광주</div>
+			</div>
+			<div class="rank-item">
+				<div class="rank-num">3</div>
+				<div class="rank-text">눈물의 여왕</div>
+			</div>
+			<div class="rank-item">
+				<div class="rank-num">4</div>
+				<div class="rank-text">제주도</div>
+			</div>
+			<div class="rank-item">
+				<div class="rank-num">5</div>
+				<div class="rank-text">전주</div>
+			</div>
 
 
 			<!-- <section class="intro"> -->
@@ -189,21 +197,24 @@ g:title" content="" />
 					</div>
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img src="images/jeju_aquarium.png" class="d-block w-100" alt="...">
+							<img src="images/jeju_aquarium.png" class="d-block w-100"
+								alt="...">
 							<div class="carousel-caption d-none d-md-block">
 								<h5>제주 아쿠아리움</h5>
 								<p>제주의 아름다운 바다 생물을 만날 수 있는 곳입니다.</p>
 							</div>
 						</div>
 						<div class="carousel-item">
-							<img src="images/jeonju_hanok_village.jpg" class="d-block w-100" alt="...">
+							<img src="images/jeonju_hanok_village.jpg" class="d-block w-100"
+								alt="...">
 							<div class="carousel-caption d-none d-md-block">
 								<h5>전주 한옥 마을</h5>
 								<p>한국 전통 가옥을 체험할 수 있는 곳입니다.</p>
 							</div>
 						</div>
 						<div class="carousel-item">
-							<img src="images/seoulforest.jpeg" class="d-block w-100" alt="...">
+							<img src="images/seoulforest.jpeg" class="d-block w-100"
+								alt="...">
 							<div class="carousel-caption d-none d-md-block">
 								<h5>서울숲</h5>
 								<p>서울 도심 속의 자연을 느낄 수 있는 공원입니다.</p>
@@ -237,17 +248,17 @@ g:title" content="" />
 				<button class="btn">한국어</button>
 				<button class="btn">English</button>
 			</footer>
-		</main>
+	</main>
 
-		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery.easing.1.3.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery.waypoints.min.js"></script>
-		<script src="js/main.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-			crossorigin="anonymous"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/main.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+		crossorigin="anonymous"></script>
 
 	</div>
 
