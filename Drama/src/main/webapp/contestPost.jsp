@@ -5,7 +5,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Search</title>
+	<title>contestPost</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -31,7 +31,7 @@
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style2.css">
+	<link rel="stylesheet" href="css/style.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -40,6 +40,7 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	</head>
 	</head>
 	<body>
 		
@@ -109,26 +110,47 @@
 			</div>
 		</div>
 	</header>
-		
-	<div id="fh5co-blog" class="fh5co-bg-section">
-		<div class="container">		
-			<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
-			<div class="row">
-				<div class="col-lg-4 col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="#"><img class="img-responsive" src="images/work-4.jpg" alt=""></a> <!-- 해당 장소 사진 -->
-						<div class="blog-text">
-							<h3><a href=""#>수원 행궁동 행리단길</a></h3><!-- 장소명 -->
-							<span class="posted_on">선재 업고 튀어</span><!-- 드라마명 -->
-							<span class="favorites">⭐</span><!-- 즐겨찾기 -->		
-							<p>'선재 업고 튀어' 9화에서 선재와 솔이가 첫 데이트를 하는 장소로..</p><!-- 상세줄거리 미리보기 -->
-							<a href="#" class="btn btn-primary">상세보기</a>
-						</div> 
-					</div>
-				</div> 
-			</div>
+ 
+	<!-- 관리자만 글 작성할 수 있게 해야 함 -->
+	<!-- 공모전 게시글 작성 -->
+	<div class="container">
+		<div class="row">
+			<form method="post" action="contestPostAction.jsp">
+				<table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
+					<thead>
+						<tr>
+							<th style="background-color: #f9f9f9; text-align: center;">공모전 게시글 작성</th> 
+						</tr>
+					</thead>
+					<tbody style="background-color: #f9f9f9;"> 
+						<tr> 
+							<td><input type="text" class="form-control" placeholder="제목을 입력해주세요." name="contestTitle"  style="background-color: #eeeeee;"></td>
+						</tr> 
+						<tr> 
+							<td><textarea class="form-control" placeholder="내용을 입력해주세요." name="contestContents" style="height: 350px; background-color: #eeeeee;"></textarea></td>
+						</tr>  
+						<tr>
+							<td>
+								<ul class="fh5co-social-icons">  
+									<label for="file">
+										<div class="btn btn-file">
+											<li><a href="#"><i class="icon-camera"></i></a></li>
+										</div>
+									</label> 
+									<input type="file" name="file" id="file" style="display: none;">
+								</ul>
+							</td>							
+						</tr> 
+					</tbody>
+				</table>
+				<input type="submit" class="btn btn-primary pull-right" value="작성">
+			</form> 
 		</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://bootstrap.js"></script>
+
+  
  	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 				  
@@ -168,4 +190,3 @@
 
 	</body>
 </html>
-

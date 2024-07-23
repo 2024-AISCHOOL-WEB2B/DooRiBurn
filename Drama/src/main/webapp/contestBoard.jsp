@@ -5,7 +5,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Search</title>
+	<title>contestBoard</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -31,7 +31,7 @@
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style2.css">
+	<link rel="stylesheet" href="css/style.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -40,6 +40,7 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	</head>
 	</head>
 	<body>
 		
@@ -109,26 +110,49 @@
 			</div>
 		</div>
 	</header>
-		
-	<div id="fh5co-blog" class="fh5co-bg-section">
-		<div class="container">		
-			<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
-			<div class="row">
-				<div class="col-lg-4 col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="#"><img class="img-responsive" src="images/work-4.jpg" alt=""></a> <!-- 해당 장소 사진 -->
-						<div class="blog-text">
-							<h3><a href=""#>수원 행궁동 행리단길</a></h3><!-- 장소명 -->
-							<span class="posted_on">선재 업고 튀어</span><!-- 드라마명 -->
-							<span class="favorites">⭐</span><!-- 즐겨찾기 -->		
-							<p>'선재 업고 튀어' 9화에서 선재와 솔이가 첫 데이트를 하는 장소로..</p><!-- 상세줄거리 미리보기 -->
-							<a href="#" class="btn btn-primary">상세보기</a>
-						</div> 
-					</div>
-				</div> 
-			</div>
+ 
+ 
+ 	<div class="container">
+		<div class="row">
+			<table class="table table-striped" style="text-align: center; border:1px solid #dddddd">
+				<thead>
+					<tr>
+						<th style="background-color: #eeeeee; text-align: center;">번호</th>
+						<th style="background-color: #eeeeee; text-align: center;">제목</th> 
+						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>'선재 업고 튀어' 사진 공모전</td> 
+						<td>2024-07-23</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- 관리자만 글 작성할 수 있게 해야 함!!! -->
+			<a href="contestPost.jsp" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
+	
+	<div class="pagination">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1 text-center">
+		     	<button>&lsaquo;</button>
+		     	<button class="active">1</button>
+		     	<button>2</button> 
+		     	<button>3</button> 
+		     	<button>&rsaquo;</button>
+		     </div>
+		</div>
+	</div>
+            
+            
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://bootstrap.js"></script>
+ 
+   
+
  	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 				  
@@ -168,4 +192,3 @@
 
 	</body>
 </html>
-
