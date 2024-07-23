@@ -15,7 +15,8 @@
 <meta name="author" content="FreeHTML5.co" />
 
 <!-- Facebook and Twitter integration -->
-<meta property="og:title" content="" />
+<meta property="o+
+g:title" content="" />
 <meta property="og:image" content="" />
 <meta property="og:url" content="" />
 <meta property="og:site_name" content="" />
@@ -80,7 +81,6 @@
 	</script>
 	<div class="fh5co-loader"></div>
 	<div id="page">
-<<<<<<< HEAD
 		<nav class="fh5co-nav" role="navigation">
 			<div class="container">
 				<div class="row">
@@ -113,44 +113,6 @@
 							<li class="btn-cta"><a href="#"><span>Login</span></a></li>
 						</ul>
 					</div>
-=======
-	<nav class="fh5co-nav" role="navigation">
-		<div class="container">
-			<div class="row">
-				<div class="left-menu text-right menu-1">
-					<ul>
-						<li><a href="contact.jsp">회원가입</a></li>
-						<li><a href="about.html">로그인</a></li>
-						<li class="has-dropdown">
-							<a href="services.html">마이페이지</a>
-							<ul class="dropdown">
-								<li><a href="#">관심 촬영지</a></li>
-								<li><a href="#">회원정보수정</a></li>
-								<li><a href="#">참여한 공모전</a></li>
-								<li><a href="#">API</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				<div class="logo text-center">
-					<div id="fh5co-logo"><a href="index.jsp">여기가 거기야!!</a></div>
-				</div>
-				<div class="right-menu text-left menu-1">
-					<ul>
-						<li><a href="blog.html">공모전</a></li>
-						<li class="has-dropdown">
-							<a href="#">카테고리</a>
-							<ul class="dropdown">
-								<li><a href="#">HTML5</a></li>
-								<li><a href="#">CSS3</a></li>
-								<li><a href="#">Sass</a></li>
-								<li><a href="#">jQuery</a></li>
-							</ul>
-						</li>
-						<li><a href="contact.html">Contact</a></li>
-						<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
-					</ul>
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 				</div>
 			</div>
 		</nav>
@@ -229,25 +191,22 @@
 						<div class="carousel-item active">
 							<img src="images/jeju_aquarium.png" class="d-block w-100" alt="...">
 							<div class="carousel-caption d-none d-md-block">
-								<h5>First slide label</h5>
-								<p>Some representative placeholder content for the first
-									slide.</p>
+								<h5>제주 아쿠아리움</h5>
+								<p>제주의 아름다운 바다 생물을 만날 수 있는 곳입니다.</p>
 							</div>
 						</div>
 						<div class="carousel-item">
 							<img src="images/jeonju_hanok_village.jpg" class="d-block w-100" alt="...">
 							<div class="carousel-caption d-none d-md-block">
-								<h5>Second slide label</h5>
-								<p>Some representative placeholder content for the second
-									slide.</p>
+								<h5>전주 한옥 마을</h5>
+								<p>한국 전통 가옥을 체험할 수 있는 곳입니다.</p>
 							</div>
 						</div>
 						<div class="carousel-item">
 							<img src="images/seoulforest.jpeg" class="d-block w-100" alt="...">
 							<div class="carousel-caption d-none d-md-block">
-								<h5>Third slide label</h5>
-								<p style="font-size: 50px">Some representative placeholder content for the third
-									slide.</p>
+								<h5>서울숲</h5>
+								<p>서울 도심 속의 자연을 느낄 수 있는 공원입니다.</p>
 							</div>
 						</div>
 					</div>
