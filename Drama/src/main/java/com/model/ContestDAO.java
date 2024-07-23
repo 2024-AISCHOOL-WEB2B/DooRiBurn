@@ -71,19 +71,20 @@ public class ContestDAO {
 	
 	
 	// 공모전 게시판 페이징 위한 List 생성
-	public List getBoardList(int startRow, int pageSize){
-		List boardList = new ArrayList();
+	public ArrayList<ContestDTO> getBoardList(int startRow, int pageSize){
+		ArrayList<ContestDTO> boardList = new ArrayList<>();
 	    
 		dbOpen();
 		try { 
 			// 글 re_ref 최신글 위쪽(내림차순), re_seq (오름차순)
-			// DB 데이터를 원하는만큼씩 잘라내기 : limit 시작행-1, 페이지크기 
-			String sql = "SELECT * FROM TB_CONTEST ORDER BY C_NUM DESC, C_TITLE ASC limit ?,?";
-			psmt = conn.prepareStatement(sql);
-				
-			// ?
-			psmt.setInt(1, startRow-1); //시작행-1 (시작 row 인덱스 번호)
-			psmt.setInt(2, pageSize); // 페이지크기 (한번에 출력되는 수)
+			// DB 데이터를 원하는만큼씩 잘라내기 : limit 시작행-1, 페이지크기  
+	        String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, C_NUM, C_TITLE, C_DATE, C_IMG, C_CONTENT " +
+                    "FROM (SELECT * FROM TB_CONTEST ORDER BY C_NUM DESC)) " +
+                    "WHERE RNUM BETWEEN ? AND ?";
+	        
+			psmt = conn.prepareStatement(sql); 
+			psmt.setInt(1, startRow); //시작행 (시작 row 인덱스 번호)
+			psmt.setInt(2, startRow + pageSize - 1); // 끝행
 				
 			// 4. sql 실행
 			rs = psmt.executeQuery();
@@ -97,12 +98,9 @@ public class ContestDAO {
 				dto.setC_date(rs.getString("C_DATE")); 
 				dto.setC_img(rs.getString("C_IMG")); 
 				dto.setC_content(rs.getString("C_CONTENT")); 
-					  
-				// DTO 객체를 ArrayList 한칸에 저장
+					   
 				boardList.add(dto);				
-			}
-			System.out.println("DAO : 글 정보 저장완료 "+boardList.size());
-				
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -120,7 +118,7 @@ public class ContestDAO {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
-				cnt = rs.getInt(0); 
+				cnt = rs.getInt(1); 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -146,10 +144,10 @@ public class ContestDAO {
 				int num = rs.getInt("C_NUM");
 				String title = rs.getString("C_TITLE");
 				String date = rs.getString("C_DATE");
-				String img = rs.getString("C_DATE");
+				String img = rs.getString("C_IMG");
 				String content = rs.getString("C_CONTENT"); 
 				
-				dto = new ContestDTO(num, title, date, img, content);
+				dtoTest = new ContestDTO(num, title, date, img, content);
 				list.add(dtoTest); 
 			}  
 		} catch (SQLException e) { 

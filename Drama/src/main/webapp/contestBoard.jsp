@@ -44,12 +44,12 @@
 		// BoardDAO 객체 생성
 		ContestDAO dao = new ContestDAO();
 		// 게시판 DB에 있는 글 개수를 확인
-		int cnt = dao.getCount(); 
+		int cnt = dao.getCount();  
 		//////////////////////////////////////////////////////////////////////////////////////////
 		// 페이징 처리
 		
 		// 한 페이지에 출력될 글 수 
-		int pageSize = 3;
+		int pageSize = 2;
 		
 		// 현 페이지 정보 설정
 		int pageNum = 1;
@@ -57,9 +57,11 @@
 			pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		} 
 		
-		// 첫행번호를 계산
-		int currentPage = pageNum;	
-		int startRow = (currentPage-1)*pageSize + 1; 
+		// 첫행번호를 계산 
+		int startRow = (pageNum - 1) * pageSize + 1; 
+		
+		// 게시글 목록 가져오기
+        ArrayList<ContestDTO> list = dao.getBoardList(startRow, pageSize);
 		%>  
  
 		 
@@ -143,7 +145,17 @@
 				<tbody>
 				
 				<%-- 😎😎 수정 필수!!!!!!!!!!!!!!!!!!!!!!!!!! --%>
-					<% 
+				
+                        <% for (ContestDTO dto : list) { %>
+                            <tr>
+                                <td><%= dto.getC_num() %></td>
+                                <td><a href="contestBoard?C_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
+                                <td><%= dto.getC_date() %></td>
+                            </tr>
+                        <% } %>
+                        
+                        
+<%-- 					<% 
 						ContestDTO dto = new ContestDTO();
 						ArrayList<ContestDTO> list = dao.getContests(dto); 
 						for (int i = 0; i < list.size(); i++){
@@ -155,7 +167,21 @@
 					</tr> 
 				 	<%
 				 		}
-				 	%>
+				 	%> --%>
+					
+<%-- 					<tr>
+						<td><%= dto.getC_num() %></td>
+						<td><a href="contestBoard?C_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
+						<td><%= dto.getC_date() %></td>
+						<td><img src="<%= dto.getC_img() %>" alt="이미지" width="100"></td>
+						<td><%= dto.getC_content() %></td>
+					</tr>
+					    <% } %> --%>
+    
+    
+    
+    
+
 <%-- 					<tr>  
 						<td>c_num1</td> 
 						<td>c_title'선재 업고 튀어' 사진 공모전</td> 
@@ -169,39 +195,36 @@
 			<a href="contestPost.jsp" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
-	  
+	
+	<!-- 페이징 처리 -->
 	<div id="page_control">
-		<%if(cnt != 0){ 
-			////////////////////////////////////////////////////////////////
-			// 페이징 처리
-			// 전체 페이지수 계산
-			int pageCount = cnt / pageSize + (cnt%pageSize==0?0:1);
-			
-			// 한 페이지에 보여줄 페이지 블럭
-			int pageBlock = 10;
-			
-			// 한 페이지에 보여줄 페이지 블럭 시작번호 계산
-			int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
-			
-			// 한 페이지에 보여줄 페이지 블럭 끝 번호 계산
-			int endPage = startPage + pageBlock-1;
-			if(endPage > pageCount){
-				endPage = pageCount;
-			}	
-		%>
-	    
-		<% if(startPage>pageBlock){ %>
-			<a href="notice.jsp?pageNum=<%=startPage-pageBlock%>">이전</a>
-		<%} %>
-	    
-		<% for(int i=startPage;i<=endPage;i++){ %>
-			<a href="notice.jsp?pageNum=<%=i%>"><%=i %></a>
-		<%} %>
-	    
-		<% if(endPage<pageCount){ %>
-			<a href="notice.jsp?pageNum=<%=startPage+pageBlock%>">다음</a>
-		<%} %>
-		<%} %>
+		<% if(cnt != 0){  
+				// 전체 페이지수 계산
+				int pageCount = cnt / pageSize + (cnt%pageSize==0?0:1);
+				
+				// 한 페이지에 보여줄 페이지 블럭
+				int pageBlock = 5;
+				
+				// 한 페이지에 보여줄 페이지 블럭 시작번호 계산
+				int startPage = ((pageNum-1)/pageBlock)*pageBlock+1;
+				
+				// 한 페이지에 보여줄 페이지 블럭 끝 번호 계산
+				int endPage = startPage + pageBlock-1;
+				if(endPage > pageCount){
+					endPage = pageCount;
+				}
+				if(startPage > pageBlock) { %>
+					<a href="contestBoard.jsp?pageNum=<%=startPage - pageBlock%>">prev</a>
+				<%} %>
+			    
+				<% for(int i=startPage ; i <= endPage ; i++) { %>
+					<a href="contestBoard.jsp?pageNum=<%=i%>"><%=i %></a>
+				<%} %>
+			    
+				<% if(endPage < pageCount){ %>
+					<a href="contestBoard.jsp?pageNum=<%=startPage + pageBlock%>">next</a>
+				<%} %>
+			<%} %>
 	</div>
 
 
