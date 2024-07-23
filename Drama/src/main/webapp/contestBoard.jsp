@@ -1,3 +1,6 @@
+<%@page import="com.model.ContestDAO"%>
+<%@page import="com.model.ContestDTO"%> 
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -32,18 +35,34 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
-
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-
-	</head>
-	</head>
+ 
+	<script src="js/modernizr-2.6.2.min.js"></script> 
+	</head> 
+	
 	<body>
+		<%
+		// BoardDAO 객체 생성
+		ContestDAO dao = new ContestDAO();
+		// 게시판 DB에 있는 글 개수를 확인
+		int cnt = dao.getCount(); 
+		//////////////////////////////////////////////////////////////////////////////////////////
+		// 페이징 처리
 		
+		// 한 페이지에 출력될 글 수 
+		int pageSize = 3;
+		
+		// 현 페이지 정보 설정
+		int pageNum = 1;
+		if (request.getParameter("pageNum") != null){
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		} 
+		
+		// 첫행번호를 계산
+		int currentPage = pageNum;	
+		int startRow = (currentPage-1)*pageSize + 1; 
+		%>  
+ 
+		 
 	<div class="fh5co-loader"></div> 
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
@@ -79,8 +98,7 @@
 								<li><a href="#">jQuery</a></li>
 							</ul>
 						</li>
-						<li><a href="contact.html">Contact</a></li>
-						<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
+						<li><a href="contact.html">Contact</a></li> 
 					</ul>
 				</div>
 			</div>
@@ -123,30 +141,71 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>'선재 업고 튀어' 사진 공모전</td> 
-						<td>2024-07-23</td>
-					</tr>
+				
+				<%-- 😎😎 수정 필수!!!!!!!!!!!!!!!!!!!!!!!!!! --%>
+					<% 
+						ContestDTO dto = new ContestDTO();
+						ArrayList<ContestDTO> list = dao.getContests(dto); 
+						for (int i = 0; i < list.size(); i++){
+					%>
+					<tr>  
+						<td><%= list.get(i).getC_num() %></td> 
+						<td><a href="contestBoard?C_num=<%=list.get(i).getC_num()%>"><%= list.get(i).getC_title() %></a></td> 
+						<td><%= list.get(i).getC_date() %></td> 
+					</tr> 
+				 	<%
+				 		}
+				 	%>
+<%-- 					<tr>  
+						<td>c_num1</td> 
+						<td>c_title'선재 업고 튀어' 사진 공모전</td> 
+						<td>c_date2024-07-23</td>
+						<td> <a href="contestBoard?C_num=<%=list.get(i).getC_num()%>"><%= list.get(i).getC_title() %></a></td>
+					</tr>  
+				 --%>
 				</tbody>
 			</table>
-			<!-- 관리자만 글 작성할 수 있게 해야 함!!! -->
+			<!-- 관리자만 글 작성할 수 있게 해야 함!!!!!! -->
 			<a href="contestPost.jsp" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
-	
-	<div class="pagination">
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1 text-center">
-		     	<button>&lsaquo;</button>
-		     	<button class="active">1</button>
-		     	<button>2</button> 
-		     	<button>3</button> 
-		     	<button>&rsaquo;</button>
-		     </div>
-		</div>
+	  
+	<div id="page_control">
+		<%if(cnt != 0){ 
+			////////////////////////////////////////////////////////////////
+			// 페이징 처리
+			// 전체 페이지수 계산
+			int pageCount = cnt / pageSize + (cnt%pageSize==0?0:1);
+			
+			// 한 페이지에 보여줄 페이지 블럭
+			int pageBlock = 10;
+			
+			// 한 페이지에 보여줄 페이지 블럭 시작번호 계산
+			int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
+			
+			// 한 페이지에 보여줄 페이지 블럭 끝 번호 계산
+			int endPage = startPage + pageBlock-1;
+			if(endPage > pageCount){
+				endPage = pageCount;
+			}	
+		%>
+	    
+		<% if(startPage>pageBlock){ %>
+			<a href="notice.jsp?pageNum=<%=startPage-pageBlock%>">이전</a>
+		<%} %>
+	    
+		<% for(int i=startPage;i<=endPage;i++){ %>
+			<a href="notice.jsp?pageNum=<%=i%>"><%=i %></a>
+		<%} %>
+	    
+		<% if(endPage<pageCount){ %>
+			<a href="notice.jsp?pageNum=<%=startPage+pageBlock%>">다음</a>
+		<%} %>
+		<%} %>
 	</div>
-            
+
+
+
             
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>

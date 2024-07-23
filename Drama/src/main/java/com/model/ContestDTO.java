@@ -8,8 +8,10 @@ public class ContestDTO {
 	private String c_img;
 	private String c_content;
   
+	public ContestDTO() { 
+	}
+
 	public ContestDTO(int c_num, String c_title, String c_date, String c_img, String c_content) {
-		super();
 		this.c_num = c_num;
 		this.c_title = c_title;
 		this.c_date = c_date;
@@ -17,6 +19,15 @@ public class ContestDTO {
 		this.c_content = c_content;
 	}
 	
+	
+	public ContestDTO(int c_num, String c_title, String c_date) {
+		super();
+		this.c_num = c_num;
+		this.c_title = c_title;
+		this.c_date = c_date;
+	}
+
+
 	public ContestDTO(String c_title, String c_img, String c_content) {
 		super();
 		this.c_title = c_title;
