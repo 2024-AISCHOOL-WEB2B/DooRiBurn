@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #ffe591;
+    background-color: #f8f1db;;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -29,6 +29,7 @@ header {
     margin: 20px auto;
     max-width: 700px;
     font-size: 18px;
+    width: 100%;
 }
 
 .search-container input {
@@ -164,70 +165,4 @@ footer .btn {
     font-size: 11px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-ul{
-    margin: 0;
-    padding: 0;
-}
-
-/* design */
-
-.selectbox{
-    margin: 150px auto;
-}
-
-.pl{
-width: 200px;
-border: 1px solid #C4C4C4;
-box-sizing: border-box;
-border-radius: 10px;
-padding: 12px 13px;
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 16px;
-background: url(./img/Polygon_up.png) 93% no-repeat; /*화살표 이미지 삽입*/
-appearance: none;
-text-align: left;
-}
-.pl:focus{
-    border: 1px solid #9B51E0;
-    box-sizing: border-box;
-    border-radius: 10px;
-    outline: 3px solid #F8E4FF;
-    border-radius: 10px;
-}
-
-.listbox{
-    width: 200px;
-    list-style: none;
-    background: #FFFFFF;
-    border: 1px solid #C4C4C4;
-    box-sizing: border-box;
-    box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    margin-top: 9px;
-}
-
-.list{
-    border: none;
-    background-color: #FFFFFF;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    padding: 7px 10px;
-    margin: 5px 7px;
-    box-sizing: border-box;
-}
-
-.list:focus{
-    background: #F8E4FF;
-    width: 184px;
-    border-radius: 8px;
-    box-sizing: border-box;
-    text-align: left;
 }
