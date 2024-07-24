@@ -131,15 +131,17 @@
 			}
 			ContestDTO dto = new ContestDAO().getView(num);
 			
-			// 회원 정보 확인
-			MemberDTO info = (MemberDTO)session.getAttribute("info");   
+			
+			MemberDTO info = (MemberDTO)session.getAttribute("info"); 			
+			MemberDAO memDAO = new MemberDAO();
 			
 			// 댓글 작성
 		    CommentDAO comDao = new CommentDAO();
 		    ArrayList<CommentDTO> commentList = comDao.getComment(num);
+		    
 		%>
   
-	<!-- 공모전 게시글 작성 ┗|｀O′|┛ -->-->
+	<!-- 공모전 게시글 작성 ┗|｀O′|┛ -->
 	<div class="container">
 		<div class="row"> 
 	        <table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
@@ -178,7 +180,7 @@
 					        String comEmail = comDto.getEmail(); // CommentDTO에서 가져온 email 값
 					
 					        // MemberDAO를 사용하여 MemberDTO 가져오기
-					        MemberDTO memDto = MemberDAO.getMemberByEmail(comEmail);
+					        MemberDTO memDto = memDAO.getMemberByEmail(comEmail);
 					
 					        // MemberDTO에서 nick 값 가져오기
 					        String comNick = memDto != null ? memDto.getNick() : "";
@@ -209,30 +211,34 @@
 				<header>
 					<h3>공모전 응모를 위한 사진을 댓글로 올려주세요.</h3>
 				</header>
-				<form method="post" encType = "multipart/form-data" action="CommentPostService?cmt_num=<%= comDto.getCmt_num() %>&c_num=<%= comDto.getC_num()%>">
+				<% CommentDTO commentDto = new CommentDTO();  %>
+				<form method="post" encType = "multipart/form-data" action="CommentPostService?cmt_num=<%= commentDto.getCmt_num() %>&c_num=<%= commentDto.getC_num()%>">
 					<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 						<tr>
 							<td colspan="2" style="border-bottom:none; text-align: left;" valign="middle"><br><br><%= info.getNick() %></td>
 						</tr>
 						<tr>
-							<td> 
-								<ul class="fh5co-social-icons"> 
-								    <% if (info == null) { %>
+							<td>   
+								<ul class="fh5co-social-icons">
+								    <% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
 								        <li>
-											<p>로그인 후 공모전에 응모할 수 있습니다.</p>
-            								<button class="btn btn-primary"><a href="login.jsp" style="color: #ddddd;">로그인</a></button>
+								        	<p>관리자 계정입니다.</p><br>
 								        </li>
-								    <% } else { %>
+								    <% } else if (info != null){ %>
 								        <li>
 								            <label for="file">
 								                <div class="btn btn-file">
-								                    <i class="icon-camera"></i> 사진 업로드
+								                    <i class="icon-camera"></i> 공모전 사진 선택
 								                </div>
 								            </label>
 								            <input type="file" name="commentImg" id="file" style="display: none;">
+								        </li> 
+								    <% } else { %>
+								        <li>
+								        	<p><a href="login.jsp">로그인 후 공모전에 응모할 수 있습니다.</a></p> 
 								        </li>
-								    <% } %>
-								</ul>
+								    <% }  %>
+								</ul> 
 							</td>							
 						</tr> 
 						<tr> 
