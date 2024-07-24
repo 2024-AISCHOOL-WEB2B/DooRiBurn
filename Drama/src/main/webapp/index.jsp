@@ -25,6 +25,7 @@
 <meta name="twitter:url" content="" />
 <meta name="twitter:card" content="" />
 
+<!-- 폰트 -->
 <link
 	href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700'
 	rel='stylesheet' type='text/css'>
@@ -37,10 +38,11 @@
 	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap"
 	rel="stylesheet">
 
-<link
+<!-- 캐러셀 문제로 메뉴 안 보임 -->
+<!-- <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css"
 	rel="stylesheet">
-
+ -->
 
 <style type="text/css">
 * {
@@ -62,6 +64,9 @@
 <!-- Theme style  -->
 <link rel="stylesheet" href="css/style.css">
 
+
+<!-- main -->
+<link rel="stylesheet" href="css/styles.css">
 
 <!-- main -->
 <link rel="stylesheet" href="css/styles.css">

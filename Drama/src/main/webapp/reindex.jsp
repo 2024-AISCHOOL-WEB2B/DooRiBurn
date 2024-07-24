@@ -13,19 +13,6 @@
 	content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 <meta name="author" content="FreeHTML5.co" />
 
-<!-- 
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FreeHTML5.co
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
 
 <!-- Facebook and Twitter integration -->
 <meta property="og:title" content="" />
@@ -38,6 +25,7 @@
 <meta name="twitter:url" content="" />
 <meta name="twitter:card" content="" />
 
+<!-- 폰트 -->
 <link
 	href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700'
 	rel='stylesheet' type='text/css'>
@@ -50,12 +38,6 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap"
 	rel="stylesheet">
-	
-<!-- 얘가 문제임 -->	
-<!-- <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet" /> -->
-
 
 <style type="text/css">
 * {
@@ -63,7 +45,31 @@
 	font-weight: 400;
 	font-style: normal;
 }
+
+/* 메뉴 지역 가로 정렬 추가 */
+.horizontal-menu {
+	display: flex !important;
+	flex-wrap: wrap !important;
+}
+
+.horizontal-menu li {
+	width: 25% !important; /* 4개씩 나열하기 위해 각 항목의 너비를 25%로 설정 */
+	margin-bottom: 10px !important; /* 항목 간의 간격 설정 */
+	list-style-type: none;
+}
+
+.horizontal-menu li a {
+	display: block;
+	padding: 5px 0;
+}
+
+#fh5co-header{
+	height: 300px !important;
+}
 </style>
+
+
+
 
 <!-- Animate.css -->
 <link rel="stylesheet" href="css/animate.css">
@@ -78,15 +84,19 @@
 
 <!-- Modernizr JS -->
 <script src="js/modernizr-2.6.2.min.js"></script>
+
 <!-- FOR IE9 below -->
 <!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+<!-- 5.0.0 -> 5.3.0 : 메뉴 에러 -->
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- 추가 1  -->
+
+
 
 </head>
 <body>
@@ -100,31 +110,41 @@
 						<ul>
 							<li><a href="contact.jsp">회원가입</a></li>
 							<li><a href="about.html">로그인</a></li>
-							<li class="has-dropdown"><a href="services.html">마이페이지</a>
+							<li class="has-dropdown"><a href="#">마이페이지</a>
 								<ul class="dropdown">
 									<li><a href="#">관심 촬영지</a></li>
-									<li><a href="#">회원정보수정</a></li>
+									<li><a href="#">회원정보 수정</a></li>
 									<li><a href="#">참여한 공모전</a></li>
-								</ul></li>
+								</ul>
+							</li>
 						</ul>
 					</div>
-					<div class="logo text-center">
-						<div id="fh5co-logo">
-							<a href="index.jsp">여</a>
-						</div>
-					</div>
+
 					<div class="right-menu text-left menu-1">
 						<ul>
 							<li><a href="blog.html">공모전</a></li>
-							<li class="has-dropdown"><a href="#">지역 별로 찾기</a>
-								<ul class="dropdown">
+							<li class="has-dropdown"><a href="">지역 별로 찾기</a>
+								<ul class="horizontal-menu">
 									<li><a href="#">서울</a></li>
 									<li><a href="#">부산</a></li>
 									<li><a href="#">인천</a></li>
 									<li><a href="#">대구</a></li>
-								</ul></li>
+									<li><a href="#">대전</a></li>
+									<li><a href="#">광주</a></li>
+									<li><a href="#">울산</a></li>
+									<li><a href="#">세종</a></li>
+									<li><a href="#">경기</a></li>
+									<li><a href="#">충북</a></li>
+									<li><a href="#">충남</a></li>
+									<li><a href="#">전북</a></li>
+									<li><a href="#">전남</a></li>
+									<li><a href="#">경북</a></li>
+									<li><a href="#">경남</a></li>
+									<li><a href="#">강원</a></li>
+									<li><a href="#">제주</a></li>
+								</ul>
+							</li>
 							<li><a href="contact.html">Contact</a></li>
-							<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
 						</ul>
 					</div>
 				</div>
@@ -139,8 +159,8 @@
 					<div class="col-md-10 col-md-offset-1 text-center">
 						<div class="display-t">
 							<div class="display-tc animate-box" data-animate-effect="fadeIn">
-								<h1 style="font-style: normal; text-align: center; color: black">여기가
-									거기여?</h1>
+								<h1 style="font-style: normal; text-align: center; color: black">
+									여기가 거기여?</h1>
 								<br>
 
 
@@ -151,15 +171,23 @@
 
 											<div class="search-container"
 												style="display: flex; align-items: center;">
-												<select name="category" style="margin-right: 10px;">
+												<select name="category" style="margin-right: 7px;">
 													<option value="location">장소 및 지역</option>
 													<option value="drama">드라마</option>
-												</select> <input name="search" type="text"
-													placeholder="지역 또는 드라마 명을 검색하세요."
-													style="flex-grow: 1; margin-right: 10px;">
-												<button type="submit" id="search-button">
-													<i class="search-icon">&#128269;</i>
+												</select> <input name="search" type="text" placeholder="검색"
+													style="flex-grow: 1; margin-right: 5px;">
+
+
+												<button type="button" onclick="">
+													<img src="images/search.png"
+														style="width: 40px; height: 40px;" />
 												</button>
+
+
+
+												<!-- <button type="submit" id="search-button">
+													<i class="search-icon">&#128269;</i>
+												</button> -->
 
 											</div>
 										</div>
@@ -199,71 +227,23 @@
 			</div>
 		</div>
 
-		<div class="intro" style="height: 400px">
+		<div class="intro" style="height: 300px">
 			<h2 class="highlight">선재 업고 튀어에 나온 그 장소!</h2>
 			<h2 class="highlight">나도 가 볼까?</h2>
 
-			<div id="carouselExampleCaptions" class="carousel slide"
-				data-bs-ride="carousel">
-				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#carouselExampleCaptions"
-						data-bs-slide-to="0" class="active" aria-current="true"
-						aria-label="Slide 1"></button>
-					<button type="button" data-bs-target="#carouselExampleCaptions"
-						data-bs-slide-to="1" aria-label="Slide 2"></button>
-					<button type="button" data-bs-target="#carouselExampleCaptions"
-						data-bs-slide-to="2" aria-label="Slide 3"></button>
-				</div>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="images/jeju_aquarium.png" class="d-block w-100"
-							alt="...">
-						<div class="carousel-caption d-none d-md-block">
-							<h5>제주 아쿠아리움</h5>
-							<p>제주의 아름다운 바다 생물을 만날 수 있는 곳입니다.</p>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<img src="images/jeonju_hanok_village.jpg" class="d-block w-100"
-							alt="...">
-						<div class="carousel-caption d-none d-md-block">
-							<h5>전주 한옥 마을</h5>
-							<p>한국 전통 가옥을 체험할 수 있는 곳입니다.</p>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<img src="images/seoulforest.jpeg" class="d-block w-100" alt="...">
-						<div class="carousel-caption d-none d-md-block">
-							<h5>서울숲</h5>
-							<p>서울 도심 속의 자연을 느낄 수 있는 공원입니다.</p>
-						</div>
-					</div>
-				</div>
-				<button class="carousel-control-prev" type="button"
-					data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Previous</span>
-				</button>
-				<button class="carousel-control-next" type="button"
-					data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Next</span>
-				</button>
-				
+			<div class="image-container">
+				<a href="detail.jsp"><img src="images/jeju_aquarium.png" alt="Aquarium"></a> 
+				<a href="page2.html"><img src="images/jeonju_hanok_village.jpg" alt="Forest Path"></a> 
+				<a href="page3.html"><img src="images/seoulforest.jpeg" alt="Traditional Village"></a>
 			</div>
-
-			
-
-
 		</div>
-
 
 
 
 
 		<footer>
 			<button class="btn">로그인</button>
-			<button class="btn">회원가입</button>
+			<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
 			<button class="btn">한국어</button>
 			<button class="btn">English</button>
 			<br>
@@ -289,7 +269,6 @@
 	<!-- Main -->
 	<script src="js/main.js"></script>
 
-	
+
 </body>
 </html>
-
