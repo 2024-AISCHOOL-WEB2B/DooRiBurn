@@ -1,8 +1,10 @@
+<%@page import="com.model.MemberDTO"%>
 <%@page import="com.model.ContestDAO"%>
 <%@page import="com.model.ContestDTO"%> 
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -34,15 +36,19 @@
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style2.css">
  
 	<script src="js/modernizr-2.6.2.min.js"></script> 
 	</head> 
 	
 	<body>
-		<%
+		<% 
+		// 로그인 정보 가져오기 
+		MemberDTO info = (MemberDTO)session.getAttribute("info");
+
 		// BoardDAO 객체 생성
 		ContestDAO dao = new ContestDAO();
+		
 		// 게시판 DB에 있는 글 개수를 확인
 		int cnt = dao.getCount();  
 		//////////////////////////////////////////////////////////////////////////////////////////
@@ -114,15 +120,7 @@
 				<div class="col-md-10 col-md-offset-1 text-center">
 					<div class="display-t" >
 						<div class="display-tc animate-box" data-animate-effect="fadeIn" > 
-							<div class="row">
-								<form class="form-inline" id="fh5co-header-subscribe">
-									<div class="col-md-6 col-md-offset-3">
-										<div class="form-group">
-											<input type="text" class="form-control" id="email" >
-											<button type="submit" class="btn btn-default">검색</button>
-										</div>
-									</div>
-								</form>
+							<div class="row"> 
 							</div>
 						</div>
 					</div>
@@ -139,60 +137,26 @@
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;">번호</th>
 						<th style="background-color: #eeeeee; text-align: center;">제목</th> 
-						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
+						<th style="background-color: #eeeeee; text-align: center;">공모일</th>
 					</tr>
 				</thead>
 				<tbody>
-				
-				<%-- 😎😎 수정 필수!!!!!!!!!!!!!!!!!!!!!!!!!! --%>
-				
-                        <% for (ContestDTO dto : list) { %>
-                            <tr>
-                                <td><%= dto.getC_num() %></td>
-                                <td><a href="contestBoard?C_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
-                                <td><%= dto.getC_date() %></td>
-                            </tr>
-                        <% } %>
-                        
-                        
-<%-- 					<% 
-						ContestDTO dto = new ContestDTO();
-						ArrayList<ContestDTO> list = dao.getContests(dto); 
-						for (int i = 0; i < list.size(); i++){
-					%>
-					<tr>  
-						<td><%= list.get(i).getC_num() %></td> 
-						<td><a href="contestBoard?C_num=<%=list.get(i).getC_num()%>"><%= list.get(i).getC_title() %></a></td> 
-						<td><%= list.get(i).getC_date() %></td> 
-					</tr> 
-				 	<%
-				 		}
-				 	%> --%>
-					
-<%-- 					<tr>
-						<td><%= dto.getC_num() %></td>
-						<td><a href="contestBoard?C_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
-						<td><%= dto.getC_date() %></td>
-						<td><img src="<%= dto.getC_img() %>" alt="이미지" width="100"></td>
-						<td><%= dto.getC_content() %></td>
-					</tr>
-					    <% } %> --%>
-    
-    
-    
-    
-
-<%-- 					<tr>  
-						<td>c_num1</td> 
-						<td>c_title'선재 업고 튀어' 사진 공모전</td> 
-						<td>c_date2024-07-23</td>
-						<td> <a href="contestBoard?C_num=<%=list.get(i).getC_num()%>"><%= list.get(i).getC_title() %></a></td>
-					</tr>  
-				 --%>
+					<% for (ContestDTO dto : list) { %>
+						<tr>
+							<td><%= dto.getC_num() %></td>
+							<td><a href="contestBoard?C_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
+							<td><%= dto.getC_create_date() %> ~ <%= dto.getC_delete_date() %></td>
+					 	</tr>
+					<% } %> 
 				</tbody>
-			</table>
-			<!-- 관리자만 글 작성할 수 있게 해야 함!!!!!! -->
-			<a href="contestPost.jsp" class="btn btn-primary pull-right">글쓰기</a>
+			</table>  
+		
+			<!-- 관리자만 글 작성 버튼 뜨게 만듦  -->
+			<% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
+				<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a>
+			<% } %> 
+		 
+		
 		</div>
 	</div>
 	
@@ -203,7 +167,7 @@
 				int pageCount = cnt / pageSize + (cnt%pageSize==0?0:1);
 				
 				// 한 페이지에 보여줄 페이지 블럭
-				int pageBlock = 5;
+				int pageBlock = 2;
 				
 				// 한 페이지에 보여줄 페이지 블럭 시작번호 계산
 				int startPage = ((pageNum-1)/pageBlock)*pageBlock+1;
