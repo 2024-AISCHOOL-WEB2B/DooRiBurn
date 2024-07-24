@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ContestDAO {
@@ -52,7 +53,7 @@ public class ContestDAO {
 		dbOpen();
 		
 		try { 
-			String sql = "INSERT INTO TB_CONTEST VALUES(MSGNUM.NEXTVAL, ?, SYSDATE, ?,? )";
+			String sql = "INSERT INTO TB_CONTEST VALUES (MSGNUM.NEXTVAL, ?, TO_DATE(TO_CHAR(SYSDATE)), ?, ?, TO_DATE(TO_CHAR(ADD_MONTHS(SYSDATE, 1))))"; 
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getC_title());
 			psmt.setString(2, dto.getC_img());
@@ -77,8 +78,8 @@ public class ContestDAO {
 		dbOpen();
 		try { 
 			// 글 re_ref 최신글 위쪽(내림차순), re_seq (오름차순)
-			// DB 데이터를 원하는만큼씩 잘라내기 : limit 시작행-1, 페이지크기  
-	        String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, C_NUM, C_TITLE, C_DATE, C_IMG, C_CONTENT " +
+			// DB 데이터를 원하는만큼씩 잘라내기 : 
+	        String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, C_NUM, C_TITLE, C_CREATE_DATE, C_IMG, C_CONTENT, C_DELETE_DATE " +
                     "FROM (SELECT * FROM TB_CONTEST ORDER BY C_NUM DESC)) " +
                     "WHERE RNUM BETWEEN ? AND ?";
 	        
@@ -95,9 +96,10 @@ public class ContestDAO {
 					
 				dto.setC_num(rs.getInt("C_NUM")); 
 				dto.setC_title(rs.getString("C_TITLE")); 
-				dto.setC_date(rs.getString("C_DATE")); 
+				dto.setC_create_date(rs.getDate("C_CREATE_DATE")); 
 				dto.setC_img(rs.getString("C_IMG")); 
 				dto.setC_content(rs.getString("C_CONTENT")); 
+				dto.setC_delete_date(rs.getDate("C_DELETE_DATE")); 
 					   
 				boardList.add(dto);				
 			} 
@@ -130,7 +132,7 @@ public class ContestDAO {
 	
 	 
 
-	// 공모전 글 가져오기 !!!!!!!!😎😎 필수!!!!!!!!!    //////////////////////	 
+	// 공모전 글 가져오기 !!!😎😎 필수
 	public ArrayList<ContestDTO> getContests(ContestDTO dto) { 
 		ArrayList<ContestDTO> list = new ArrayList<ContestDTO>();
 		ContestDTO dtoTest = null;
@@ -143,11 +145,12 @@ public class ContestDAO {
 			while(rs.next()) {
 				int num = rs.getInt("C_NUM");
 				String title = rs.getString("C_TITLE");
-				String date = rs.getString("C_DATE");
+				Date cDate = rs.getDate("C_CREATE_DATE");
 				String img = rs.getString("C_IMG");
 				String content = rs.getString("C_CONTENT"); 
+				Date dDate = rs.getDate("C_DELETE_DATE"); 
 				
-				dtoTest = new ContestDTO(num, title, date, img, content);
+				dtoTest = new ContestDTO(num, title, cDate, img, content, dDate);
 				list.add(dtoTest); 
 			}  
 		} catch (SQLException e) { 
