@@ -150,6 +150,27 @@ public class MemberDAO {
 		
 		return info;
 	}
+	
+	public MemberDTO getMemberByEmail(String email) {
+        MemberDTO member = null;
+        getConnection();
+        try {
+            String sql = "SELECT * FROM TB_MEMBER WHERE EMAIL = ?";
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, email);
+            rs = psmt.executeQuery();
 
-
+            if (rs.next()) { 
+                String nick = rs.getString("NICK");
+                member = new MemberDTO(email, nick);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return member;
+    }
+ 
+	
 }

@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 public class ContestUpdateService extends HttpServlet { 
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 한글 처리
+
+
+    	
+    	// 수정 필요@@@@@@@@@@@@@
         request.setCharacterEncoding("EUC-KR");
         
         // 폼 데이터 수신
