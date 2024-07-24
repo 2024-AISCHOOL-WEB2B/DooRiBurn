@@ -55,7 +55,7 @@
 		// 페이징 처리
 		
 		// 한 페이지에 출력될 글 수 
-		int pageSize = 2;
+		int pageSize = 5;
 		
 		// 현 페이지 정보 설정
 		int pageNum = 1;
@@ -144,20 +144,19 @@
 					<% for (ContestDTO dto : list) { %>
 						<tr>
 							<td><%= dto.getC_num() %></td>
-							<td><a href="contestBoard?C_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
+							<td><a stlyle="color:#ffd964" href="contestView.jsp?c_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
 							<td><%= dto.getC_create_date() %> ~ <%= dto.getC_delete_date() %></td>
 					 	</tr>
 					<% } %> 
 				</tbody>
 			</table>  
-		
-			<!-- 관리자만 글 작성 버튼 뜨게 만듦  -->
+		</div>
+			<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a>
+			
+			<!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! 위 글작성 a태그 제거 해야됨-->
 			<% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
 				<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a>
-			<% } %> 
-		 
-		
-		</div>
+			<% } %>  
 	</div>
 	
 	<!-- 페이징 처리 -->
@@ -206,7 +205,7 @@
 				<div class="col-md-12 text-center">
 					<p>
 						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
-						<small class="block">Designed by DOORIBURN</a></small>
+						<small class="block">Designed by DOORIBURN</small>
 					</p>
 					<p>
 						<ul class="fh5co-social-icons">  

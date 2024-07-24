@@ -1,5 +1,8 @@
+<%@page import="com.model.ContestDAO"%>
+<%@page import="com.model.ContestDTO"%>
+<%@page import="com.model.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -97,10 +100,7 @@
 							<div class="row">
 								<form class="form-inline" id="fh5co-header-subscribe">
 									<div class="col-md-6 col-md-offset-3">
-										<div class="form-group">
-											<input type="text" class="form-control" id="email" >
-											<button type="submit" class="btn btn-default">검색</button>
-										</div>
+ 
 									</div>
 								</form>
 							</div>
@@ -110,12 +110,24 @@
 			</div>
 		</div>
 	</header>
- 
-	<!-- 관리자만 글 작성할 수 있게 해야 함 -->
+  
+  		<%
+			// 글 번호 가져오기
+			int num = 0;
+			if (request.getParameter("num") != null){
+				num = Integer.parseInt(request.getParameter("num"));
+			} 
+
+			ContestDTO dto = new ContestDAO().getView(num);
+			
+			// 회원 정보 확인
+			MemberDTO info = (MemberDTO)session.getAttribute("info");   
+		%>
+  
 	<!-- 공모전 게시글 작성 -->
 	<div class="container">
 		<div class="row">
-			<form method="post" action="contestPostAction.jsp">
+			<form method="post" action="ContestPostService" encType = "multipart/form-data">
 				<table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
 					<thead>
 						<tr>
@@ -124,28 +136,32 @@
 					</thead>
 					<tbody style="background-color: #f9f9f9;"> 
 						<tr> 
-							<td><input type="text" class="form-control" placeholder="제목을 입력해주세요." name="contestTitle"  style="background-color: #eeeeee;"></td>
+							<td><input type="text" class="form-control" placeholder="제목을 입력해주세요." name="contestTitle" style="background-color: #f5f5f5;"></td>
 						</tr> 
 						<tr> 
-							<td><textarea class="form-control" placeholder="내용을 입력해주세요." name="contestContents" style="height: 350px; background-color: #eeeeee;"></textarea></td>
-						</tr>  
+							<td><textarea class="form-control" placeholder="내용을 입력해주세요." name="contestContent" style="height: 350px; background-color: #f5f5f5;"></textarea></td>
+						</tr>
+						  
 						<tr>
 							<td>
 								<ul class="fh5co-social-icons">  
-									<label for="file">
-										<div class="btn btn-file">
-											<li><a href="#"><i class="icon-camera"></i></a></li>
-										</div>
-									</label> 
-									<input type="file" name="file" id="file" style="display: none;">
+		                            <label for="file">
+		                                <div class="btn btn-file">
+		                                    <i class="icon-camera"></i> 사진 업로드
+		                                </div>
+		                            </label>
+		                            <input type="file" name="contestImg" id="file" style="display: none;">
 								</ul>
 							</td>							
 						</tr> 
 					</tbody>
 				</table>
 				<input type="submit" class="btn btn-primary pull-right" value="작성">
-			</form> 
+			</form>  
 		</div>
+		 
+		
+		
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>
@@ -158,7 +174,7 @@
 				<div class="col-md-12 text-center">
 					<p>
 						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
-						<small class="block">Designed by DOORIBURN</a></small>
+						<small class="block">Designed by DOORIBURN</small>
 					</p>
 					<p>
 						<ul class="fh5co-social-icons">  
