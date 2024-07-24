@@ -257,7 +257,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .fh5co-cover {
-  height: 800px;
+  height: 300px; /* 원래 800 */
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -287,7 +287,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 @media screen and (max-width: 768px) {
   .fh5co-cover {  
-    height: 600px;
+    height: 200px; /* 원래 600 */
   }
 } 
 @media screen and (max-width: 768px) {
@@ -305,7 +305,7 @@ h1, h2, h3, h4, h5, h6, figure {
 @media screen and (max-width: 768px) {
   .fh5co-cover .display-t,
   .fh5co-cover .display-tc {
-    height: 600px;
+    height: 200px; /* 원래 300 */
   }
 }
 /* @media screen and (max-width: 768px) {
@@ -317,7 +317,7 @@ h1, h2, h3, h4, h5, h6, figure {
   }
 } */
 .fh5co-cover.fh5co-cover-sm {
-  height: 600px;
+  height: 200px; /* 원래 600 */
 }
 @media screen and (max-width: 768px) {
   .fh5co-cover.fh5co-cover-sm {
@@ -326,7 +326,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .fh5co-cover.fh5co-cover-sm .display-t,
 .fh5co-cover.fh5co-cover-sm .display-tc {
-  height: 600px;
+  height: 300px;
   display: table;
   width: 100%;
 }
@@ -1386,5 +1386,7 @@ h1, h2, h3, h4, h5, h6, figure {
   border-top-left-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
 }
+
+
 
 /*# sourceMappingURL=style.css.map */
