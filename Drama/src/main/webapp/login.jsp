@@ -68,6 +68,11 @@
 	#fh5co-header{
 		height: 180px !important;
 	}
+	
+	#submit{
+		padding: 4px 30%;
+		border-radius: 5px;
+	}
 	</style>
 	
 	
@@ -92,26 +97,32 @@
 	</head>
 	<body>
 	
-	
+	<%
+			String error = (String)session.getAttribute("error");
+	%>
 	
 	<script>
         function validateForm() {
             var email = document.getElementById("email").value;
             var password = document.getElementById("password").value;
-            var nick = document.getElementById("nick").value;
-            var name = document.getElementById("name").value;
-            var phone = document.getElementById("phone").value;
-            var addr = document.getElementById("addr").value;
 
-            if (email == "" || password == "" || nick == "" || name == "" || phone == "" || addr == "") {
+            if (email == "") {
+                alert("이메일 칸을 입력해 주세요.");
+                return false;
+            }
+            
+            if (password == "") {
+                alert("비밀번호 칸을 입력해 주세요.");
+                return false;
+            }
+            
+            if (email == "" || password == "") {
                 alert("모든 필드를 입력해 주세요.");
                 return false;
             }
             return true;
         }
-    </script>
-    
-    
+    </script>   
 		
 	<div class="fh5co-loader"></div>
 	
@@ -187,35 +198,28 @@
 			<div class="row">
 
 				<div class="col-md-6 animate-box" align="center" onsubmit="return validateForm()">
-					<h3>회원가입</h3>
-					<form action="JoinService" method="post" name="JoinForm">
+					<h2 align="left">Login</h3>
+					<form action="LoginService" method="post" name="JoinForm">
 						<div class="row form-group">
 							<div class="col-md-6" >
-								<input type="email" name="email" id="email" class="form-control" placeholder="아이디(이메일)" >
-								<font id="checkEmail" size = "2"></font>
-							</div>
+								<input type="email" name="email" id="email" class="form-control" placeholder="Email">
+							</div>		
+						</div>
+						<div class="row form-group">
 							<div class="col-md-6">
 								<input type="password" name="pw" id="password" class="form-control" placeholder="비밀번호">
-							</div>	
-						</div>
-						<div class="row form-group">
-							<div class="col-md-6">
-								<input type="text" name="nick" id="nick" class="form-control" placeholder="닉네임">
 							</div>
 						</div>
 						<div class="row form-group">
-							<div class="col-md-6">
-								<input type="text" name="name" id="name" class="form-control" placeholder="이름">
-							</div>
-							<div class="col-md-6">
-								<input type="text" name="phone" id="phone" class="form-control" placeholder="전화번호">
-							</div>
-							<div class="col-md-6">
-								<input type="text" name="addr" id="addr" class="form-control" placeholder="주소">
-							</div>
+							<a href="contact.jsp" style="color: green;">회원가입</a>
 						</div>
+						<% if(error != null){ %>
 						<div class="row form-group">
-							<input type="submit" id="submit" value="회원가입">
+							<span><%= error %></span>
+						</div>
+						<% }%>
+						<div class="row form-group">
+							<input type="submit" id="submit" value="로그인">
 						</div>
 					</form>		
 				</div>
@@ -232,7 +236,6 @@
 
 
 	<footer>
-		<button class="btn" onclick="location.href='login.jsp'">로그인</button>
 		<button class="btn">한국어</button>
 		<button class="btn">English</button>
 		<br>
@@ -258,36 +261,6 @@
 	<!-- Google Map -->
 
 	<script src="js/main.js"></script>
-	
-	
-	<script>
-	$('#email').focusout(function(){
-		let userEmail = $('#email').val();
-		
-		$.ajax({
-			url : "EmailCheckService",
-			type : "post",
-			data : {userEmail: userEmail},
-			dataType : 'json',
-			success : function(result){
-				if(result == 0){
-					$("#checkEmail").html('사용할 수 없는 이메일입니다.');
-					$("#checkEmail").attr('color', 'red');
-				}else{
-					$("#checkEmail").html('사용할 수 있는 이메일입니다.');
-					$("#checkEmail").attr('color', 'green');
-				}
-			},
-			error : function(){
-				alert("서버요청실패");
-			}
-			
-			
-		})
-	})
-	
-	
-	</script>
 	
 	
 	</body>

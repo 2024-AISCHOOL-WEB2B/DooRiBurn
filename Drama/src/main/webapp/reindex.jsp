@@ -1,3 +1,4 @@
+<%@page import="com.model.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -100,7 +101,11 @@
 
 </head>
 <body>
-
+	
+	<%
+			MemberDTO info = (MemberDTO)session.getAttribute("info");
+	%>
+	
 	<div class="fh5co-loader"></div>
 	<div id="page">
 		<nav class="fh5co-nav" role="navigation">
@@ -108,9 +113,14 @@
 				<div class="row">
 					<div class="left-menu text-right menu-1">
 						<ul>
+							<%if(info == null){ %>
 							<li><a href="contact.jsp">회원가입</a></li>
-							<li><a href="about.html">로그인</a></li>
+							<li><a href="login.jsp">로그인</a></li>
+							<%}else { %>
+			 				<li><span style="color: white;"><%=info.getNick() %></span>님 환영합니다
+			 				<li><a href="LogoutService">로그아웃</a>
 							<li class="has-dropdown"><a href="#">마이페이지</a>
+							<%} %>
 								<ul class="dropdown">
 									<li><a href="#">관심 촬영지</a></li>
 									<li><a href="#">회원정보 수정</a></li>
@@ -242,8 +252,10 @@
 
 
 		<footer>
-			<button class="btn">로그인</button>
+			<%if(info == null){ %>
+			<button class="btn" onclick="location.href='login.jsp'">로그인</button>
 			<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
+			<%} %>
 			<button class="btn">한국어</button>
 			<button class="btn">English</button>
 			<br>
