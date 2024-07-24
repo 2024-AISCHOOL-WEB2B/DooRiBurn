@@ -10,6 +10,10 @@
 * 	Template Style 
 *
 * ======================================================= */
+
+ 
+	
+	
 body {
   font-family: "Work Sans", Arial, sans-serif;
   font-weight: 400;
@@ -1205,7 +1209,7 @@ h1, h2, h3, h4, h5, h6, figure {
 .btn-primary {
   background: #FFEEB9;
   color: black;
-  border: 2px solid #FFEEB9;
+  border: 2px solid #FFEEB9; 
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   background: #ffd964 !important;
@@ -1213,11 +1217,11 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .btn-primary.btn-outline {
   background: transparent;
-  color: #F36363;
-  border: 2px solid #F36363;
+  color: #ffd964;
+  border: 2px solid #ffd964;
 }
 .btn-primary.btn-outline:hover, .btn-primary.btn-outline:focus, .btn-primary.btn-outline:active {
-  background: #F36363;
+  background: #ffd964;
   color: #fff;
 }
 
@@ -1239,6 +1243,27 @@ h1, h2, h3, h4, h5, h6, figure {
   background: #5cb85c;
   color: #fff;
 }
+
+
+.btn-file {
+  background: #5cb85c !important;;
+  color: #fff !important;;
+  border: 2px solid #5cb85c;
+}
+.btn-file:hover, .btn-file:focus, .btn-file:active {
+  background: #4cae4c !important;  
+  border-color: #4cae4c !important;
+}
+.btn-file.btn-outline {
+  background: transparent;
+  color: #5cb85c;
+  border: 2px solid #5cb85c;
+}
+.btn-file.btn-outline:hover, .btn-file.btn-outline:focus, .btn-file.btn-outline:active {
+  background: #5cb85c;
+  color: #fff;
+}
+
 
 .btn-info {
   background: #5bc0de;

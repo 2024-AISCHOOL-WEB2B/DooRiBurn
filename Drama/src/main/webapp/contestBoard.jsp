@@ -1,3 +1,6 @@
+<%@page import="com.model.ContestDAO"%>
+<%@page import="com.model.ContestDTO"%> 
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -5,7 +8,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Search</title>
+	<title>contestBoard</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -31,18 +34,37 @@
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style2.css">
-
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-
-	</head>
+	<link rel="stylesheet" href="css/style.css">
+ 
+	<script src="js/modernizr-2.6.2.min.js"></script> 
+	</head> 
+	
 	<body>
+		<%
+		// BoardDAO 객체 생성
+		ContestDAO dao = new ContestDAO();
+		// 게시판 DB에 있는 글 개수를 확인
+		int cnt = dao.getCount();  
+		//////////////////////////////////////////////////////////////////////////////////////////
+		// 페이징 처리
 		
+		// 한 페이지에 출력될 글 수 
+		int pageSize = 2;
+		
+		// 현 페이지 정보 설정
+		int pageNum = 1;
+		if (request.getParameter("pageNum") != null){
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		} 
+		
+		// 첫행번호를 계산 
+		int startRow = (pageNum - 1) * pageSize + 1; 
+		
+		// 게시글 목록 가져오기
+        ArrayList<ContestDTO> list = dao.getBoardList(startRow, pageSize);
+		%>  
+ 
+		 
 	<div class="fh5co-loader"></div> 
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
@@ -78,8 +100,7 @@
 								<li><a href="#">jQuery</a></li>
 							</ul>
 						</li>
-						<li><a href="contact.html">Contact</a></li>
-						<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
+						<li><a href="contact.html">Contact</a></li> 
 					</ul>
 				</div>
 			</div>
@@ -109,26 +130,111 @@
 			</div>
 		</div>
 	</header>
-		
-	<div id="fh5co-blog" class="fh5co-bg-section">
-		<div class="container">		
-			<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
-			<div class="row">
-				<div class="col-lg-4 col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="#"><img class="img-responsive" src="images/work-4.jpg" alt=""></a> <!-- 해당 장소 사진 -->
-						<div class="blog-text">
-							<h3><a href=""#>수원 행궁동 행리단길</a></h3><!-- 장소명 -->
-							<span class="posted_on">선재 업고 튀어</span><!-- 드라마명 -->
-							<span class="favorites">⭐</span><!-- 즐겨찾기 -->		
-							<p>'선재 업고 튀어' 9화에서 선재와 솔이가 첫 데이트를 하는 장소로..</p><!-- 상세줄거리 미리보기 -->
-							<a href="#" class="btn btn-primary">상세보기</a>
-						</div> 
-					</div>
-				</div> 
-			</div>
+ 
+ 
+ 	<div class="container">
+		<div class="row">
+			<table class="table table-striped" style="text-align: center; border:1px solid #dddddd">
+				<thead>
+					<tr>
+						<th style="background-color: #eeeeee; text-align: center;">번호</th>
+						<th style="background-color: #eeeeee; text-align: center;">제목</th> 
+						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<%-- 😎😎 수정 필수!!!!!!!!!!!!!!!!!!!!!!!!!! --%>
+				
+                        <% for (ContestDTO dto : list) { %>
+                            <tr>
+                                <td><%= dto.getC_num() %></td>
+                                <td><a href="contestBoard?C_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
+                                <td><%= dto.getC_date() %></td>
+                            </tr>
+                        <% } %>
+                        
+                        
+<%-- 					<% 
+						ContestDTO dto = new ContestDTO();
+						ArrayList<ContestDTO> list = dao.getContests(dto); 
+						for (int i = 0; i < list.size(); i++){
+					%>
+					<tr>  
+						<td><%= list.get(i).getC_num() %></td> 
+						<td><a href="contestBoard?C_num=<%=list.get(i).getC_num()%>"><%= list.get(i).getC_title() %></a></td> 
+						<td><%= list.get(i).getC_date() %></td> 
+					</tr> 
+				 	<%
+				 		}
+				 	%> --%>
+					
+<%-- 					<tr>
+						<td><%= dto.getC_num() %></td>
+						<td><a href="contestBoard?C_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
+						<td><%= dto.getC_date() %></td>
+						<td><img src="<%= dto.getC_img() %>" alt="이미지" width="100"></td>
+						<td><%= dto.getC_content() %></td>
+					</tr>
+					    <% } %> --%>
+    
+    
+    
+    
+
+<%-- 					<tr>  
+						<td>c_num1</td> 
+						<td>c_title'선재 업고 튀어' 사진 공모전</td> 
+						<td>c_date2024-07-23</td>
+						<td> <a href="contestBoard?C_num=<%=list.get(i).getC_num()%>"><%= list.get(i).getC_title() %></a></td>
+					</tr>  
+				 --%>
+				</tbody>
+			</table>
+			<!-- 관리자만 글 작성할 수 있게 해야 함!!!!!! -->
+			<a href="contestPost.jsp" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
+	
+	<!-- 페이징 처리 -->
+	<div id="page_control">
+		<% if(cnt != 0){  
+				// 전체 페이지수 계산
+				int pageCount = cnt / pageSize + (cnt%pageSize==0?0:1);
+				
+				// 한 페이지에 보여줄 페이지 블럭
+				int pageBlock = 5;
+				
+				// 한 페이지에 보여줄 페이지 블럭 시작번호 계산
+				int startPage = ((pageNum-1)/pageBlock)*pageBlock+1;
+				
+				// 한 페이지에 보여줄 페이지 블럭 끝 번호 계산
+				int endPage = startPage + pageBlock-1;
+				if(endPage > pageCount){
+					endPage = pageCount;
+				}
+				if(startPage > pageBlock) { %>
+					<a href="contestBoard.jsp?pageNum=<%=startPage - pageBlock%>">prev</a>
+				<%} %>
+			    
+				<% for(int i=startPage ; i <= endPage ; i++) { %>
+					<a href="contestBoard.jsp?pageNum=<%=i%>"><%=i %></a>
+				<%} %>
+			    
+				<% if(endPage < pageCount){ %>
+					<a href="contestBoard.jsp?pageNum=<%=startPage + pageBlock%>">next</a>
+				<%} %>
+			<%} %>
+	</div>
+
+
+
+            
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://bootstrap.js"></script>
+ 
+   
+
  	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 				  
@@ -168,4 +274,3 @@
 
 	</body>
 </html>
-
