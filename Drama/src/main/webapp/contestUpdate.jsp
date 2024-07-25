@@ -14,17 +14,26 @@
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FreeHTML5.co" />
- 
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
-
+  
+	 
+	<!-- realindex에서 가져온 것들 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+ 	<!-- 폰트 -->
+	<link href="https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+	
+	<!-- Realstyle.css를 가장 먼저 연결 -->
+	<link rel="stylesheet" href="css/Realstyle.css">
+	
+	<!-- 나머지 CSS 파일들 -->
+	<link rel="stylesheet" href="css/other-style1.css">
+	<link rel="stylesheet" href="css/other-style2.css">
+	
+	 
+	
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 	
@@ -35,80 +44,73 @@
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
-
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-
-	</head>
-	</head>
+	<link rel="stylesheet" href="css/style2.css">
+  
+	<script src="js/modernizr-2.6.2.min.js"></script> 
+	<style>
+	/* 메뉴 위치 우상단으로 조정 */
+	.menu-icon {
+	    position: absolute;
+	    top: 10px;  
+	    right: 20px; 
+	    cursor: pointer; 
+	}
+ 
+	/* .btn-file 클래스에 대한 스타일 조정 */
+	#uploadLabel .btn-file {
+	    background-color: #FFEEB9 !important;  
+	    border-color: #FFEEB9 !important;  
+	    color: #000 !important;
+	} 
+	 
+	</style> 
+	
+	</head> 
 	<body>
-		
+		<%  
+			MemberDTO info = (MemberDTO)session.getAttribute("info"); 		 
+		%>
+	<header>
+		<div class="banner">여기가 거기여?</div>
+		<div class="menu-icon" onclick="openNav()">☰</div>
+	</header>
 	<div class="fh5co-loader"></div> 
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
-		<div class="container">
-			<div class="row">
-				<div class="left-menu text-right menu-1">
-					<ul>
-						<li><a href="contact.jsp">회원가입</a></li>
-						<li><a href="about.html">로그인</a></li>
-						<li class="has-dropdown">
-							<a href="services.html">마이페이지</a>
-							<ul class="dropdown">
-								<li><a href="#">관심 촬영지</a></li>
-								<li><a href="#">회원정보수정</a></li>
-								<li><a href="#">참여한 공모전</a></li>
-								<li><a href="#">API</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				<div class="logo text-center">
-					<div id="fh5co-logo"><a href="index.jsp">여</a></div>
-				</div>
-				<div class="right-menu text-left menu-1">
-					<ul>
-						<li><a href="blog.html">공모전</a></li>
-						<li class="has-dropdown">
-							<a href="#">카테고리</a>
-							<ul class="dropdown">
-								<li><a href="#">HTML5</a></li>
-								<li><a href="#">CSS3</a></li>
-								<li><a href="#">Sass</a></li>
-								<li><a href="#">jQuery</a></li>
-							</ul>
-						</li>
-						<li><a href="contact.html">Contact</a></li>
-						<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
-					</ul>
-				</div>
+	 
+	<div id="mySidenav" class="sidenav" style="width: 0;">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div class="menu-section">
+			<h2>지역별로 찾기</h2>
+			<div class="menu-items">
+				<a href="#">서울</a> <a href="#">부산</a> <a href="#">인천</a> <a href="#">대구</a>
+				<a href="#">대전</a> <a href="#">광주</a> <a href="#">울산</a> <a href="#">세종</a>
+				<a href="#">경기</a> <a href="#">충북</a> <a href="#">충남</a> <a href="#">전북</a>
+				<a href="#">전남</a> <a href="#">경북</a> <a href="#">경남</a> <a href="#">강원</a>
+				<a href="#">제주</a> <a href="#">-</a>
 			</div>
-			
 		</div>
-	</nav>
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_2.jpg);">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-10 col-md-offset-1 text-center">
-					<div class="display-t" >
-						<div class="display-tc animate-box" data-animate-effect="fadeIn" > 
-							<div class="row">
-								<form class="form-inline" id="fh5co-header-subscribe">
-									<div class="col-md-6 col-md-offset-3">
- 
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+		<div class="menu-section">
+			<h2>공모전</h2>
+			<div class="menu-items">
+				<a href="#">참여하기</a>
 			</div>
+		</div>
+		<%if(info != null){ %>
+		<div class="menu-section">
+			<h2>마이 페이지</h2>
+			<div class="menu-itemss">
+				<a href="#">회원정보 수정</a> <a href="#">관심 촬영지</a> <a href="#">참여한
+					공모전</a>
+			</div>
+		</div>
+		<%} %>
+	</div>
+	</nav>
+	 
+	<header id="fh5co-header" class="fh5co-cover" style="height: 100px;">
+		<div class="overlay"></div>
+		<div class="container">  
 		</div>
 	</header>
 		<%
@@ -145,23 +147,19 @@
                         <td><textarea class="form-control" placeholder="내용을 입력해주세요." name="contestContent" style="height: 350px; background-color: #f5f5f5;"><%=dto.getC_content() %></textarea></td>
                     </tr>   
                     <tr> 
-                        <td>
-                            <ul class="fh5co-social-icons">  
-                                <label for="file">
-                                    <div class="btn btn-file">
-                                        <i class="icon-camera"></i> 사진 업로드
-                                    </div>
-                                </label>
-                                <input type="file" name="contestImg" id="file" style="display: none;" onchange="previewImage(this);">
-                            </ul>
-                        </td>                           
+						<td>
+						    <label for="file">
+						        <div class="btn btn-file">
+						            <i class="icon-camera"></i> 사진 업로드
+						        </div>
+						    </label>
+						    <input type="file" name="contestImg" id="file" style="display: none;" onchange="previewImage(this);">
+						</td>                       
                     </tr> 
                     <tr>
                         <td>
-                            <div id="imagePreview">
-                                <%-- 이미지 미리보기를 표시할 공간 --%>
-                                <img id="preview" src="" alt="이미지 미리보기" style="max-width: 100%; height: auto;">
-                            </div>
+                            <div id="imagePreview"></div>
+                                <img id="preview" src="" alt="" style="max-width: 100%; height: auto;">
                         </td>
                     </tr>
                     
@@ -177,7 +175,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>
 	
-	<!-- 삭제 버튼 클릭시 Confirm 창 구현 -->
+	<!-- 삭제 버튼 클릭시 Confirm 창 -->
 	<script>
 		function confirmUpdate(num) {
 			var result = confirm("삭제하시겠습니까?");
@@ -187,7 +185,7 @@
 		}
 	</script>
 	
-	<!-- 수정 버튼 클릭시 Confirm 창 구현 -->
+	<!-- 수정 버튼 클릭시 Confirm 창 -->
 	<script>
 		function confirmUpdate(num) {
 			var result = confirm("수정하시겠습니까?");
@@ -197,6 +195,7 @@
 		}
 	</script>
 	 
+	<!-- 업로드하는 사진 미리보기 -->
 	<script>
 	    function previewImage(input) {
 	        var file = input.files[0];
@@ -229,6 +228,7 @@
 	</script>
 	</script> 
 	  
+	
  	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 				  
@@ -238,17 +238,48 @@
 						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
 						<small class="block">Designed by DOORIBURN</small>
 					</p>
+ 			
+ 			
+<!-- 버튼 -->
+			   	<div>    
+					<%if(info == null) {%>
+						<button class="btn" onclick="location.href='login.jsp'">로그인</button>
+						<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
+					<%}else{ %>
+						<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
+					<%} %>
+						<button class="btn">한국어</button>
+						<button class="btn">English</button>   
+				</div>						
 					<p>
 						<ul class="fh5co-social-icons">  
 							<li><a href="#"><i class="icon-sun"></i></a></li>
 							<li><a href="#"><i class="icon-cloud"></i></a></li>
-						</ul>
+						</ul> 
 					</p>
 				</div>
 			</div>
-
 		</div>
 	</footer>
+	
+	</div>
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+			<!-- Side navigation script -->
+	<script>
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "80%";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+		}
+	</script>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://bootstrap.js"></script>
 	
 	</div>
 	<div class="gototop js-top">

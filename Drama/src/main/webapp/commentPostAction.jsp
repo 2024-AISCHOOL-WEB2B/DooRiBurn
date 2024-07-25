@@ -5,7 +5,7 @@
 <%@page import="com.model.ContestDTO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,22 +31,20 @@
 		MultipartRequest multi = new MultipartRequest(request, path, maxFileSize, "UTF-8", new DefaultFileRenamePolicy());
  
 	 
-		String img = multi.getFilesystemName("commentImg");  
-		int c_num = Integer.parseInt(multi.getParameter("c_num"));  // 해당 페이지의 c_num 가져오기.. 어떻게 가져오지
-		String email = info.getEmail(); 
-		
-		
-		CommentDTO dto = new CommentDTO(img, c_num, email);
-		CommentDAO dao = new CommentDAO();  
+        String img = multi.getFilesystemName("commentImg");
+        int c_num = Integer.parseInt(multi.getParameter("c_num"));
+        String email = info.getEmail();
+
+        CommentDTO dto = new CommentDTO(img, c_num, email);
+        CommentDAO dao = new CommentDAO(); 
 		
 		int cnt = dao.commentPost(dto);
 		 
-	    if (cnt > 0) { 
-	        out.println("<script>alert('댓글 작성 성공');</script>");
-	        response.sendRedirect("contestBoard.jsp"); 
+	    if (cnt > 0) {  
+	        response.sendRedirect("contestView.jsp?c_num=" + c_num); 
 	    } else { 
 	        out.println("<script>alert('댓글 작성 실패');</script>");
-	        out.flush();
+	        response.sendRedirect("contestView.jsp?c_num=" + c_num);   
 	    }
     } catch (Exception e) {
         out.println("<script>alert('댓글 작성 중 오류 발생: " + e.getMessage() + "');</script>");
