@@ -128,62 +128,107 @@
 			  
 		%>
   
-	<!-- 공모전 게시글 수정 -->
 	<div class="container">
-		<div class="row">
-			<form method="post" action="ContestUpdateService?c_num=<%= dto.getC_num() %>">
-				<table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
-					<thead>
-						<tr>
-							<th style="background-color: #f9f9f9; text-align: center;">공모전 게시글 수정</th> 
-						</tr>
-					</thead>
-					<tbody style="background-color: #f9f9f9;"> 
-						<tr> 
-							<td><input type="text" class="form-control" placeholder="제목을 입력해주세요." name="contestTitle" value="<%=dto.getC_title() %>" style="background-color: #f5f5f5;"></td>
-						</tr>
-						<tr> 
-							<td><textarea class="form-control" placeholder="내용을 입력해주세요." name="contestContent" style="height: 350px; background-color: #f5f5f5;"><%=dto.getC_content() %></textarea></td>
-						</tr>   
-						<tr>
-							<td>기존 이미지 띄울 예정</td>	
-							<!-- <td><img src="   dto.getC_img_path() " alt="공모전 이미지"></td> -->					
-						</tr> 
-						<tr>
-							<td>
-								<ul class="fh5co-social-icons">  
-		                            <label for="file">
-		                                <div class="btn btn-file">
-		                                    <i class="icon-camera"></i> 사진 업로드
-		                                </div>
-		                            </label>
-		                            <input type="file" name="contestImg" id="file" style="display: none;">
-								</ul>
-							</td>							
-						</tr> 
-					</tbody>
-				</table>
-	            <input type="hidden" name="c_num" value="<%= dto.getC_num() %>">
-	            <input type="submit" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;" value="수정">
-	            <a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>
-			</form>  		  
-		</div> 
-  
-		
+    <div class="row">
+        <form method="post" action="contestUpdateAction.jsp?c_num=<%= dto.getC_num() %>" enctype="multipart/form-data">
+            <table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="background-color: #f9f9f9; text-align: center;">공모전 게시글 수정</th> 
+                    </tr>
+                </thead>
+                <tbody style="background-color: #f9f9f9;"> 
+                    <tr> 
+                        <td><input type="text" class="form-control" placeholder="제목을 입력해주세요." name="contestTitle" value="<%=dto.getC_title() %>" style="background-color: #f5f5f5;"></td>
+                    </tr>
+                    <tr> 
+                        <td><textarea class="form-control" placeholder="내용을 입력해주세요." name="contestContent" style="height: 350px; background-color: #f5f5f5;"><%=dto.getC_content() %></textarea></td>
+                    </tr>   
+                    <tr> 
+                        <td>
+                            <ul class="fh5co-social-icons">  
+                                <label for="file">
+                                    <div class="btn btn-file">
+                                        <i class="icon-camera"></i> 사진 업로드
+                                    </div>
+                                </label>
+                                <input type="file" name="contestImg" id="file" style="display: none;" onchange="previewImage(this);">
+                            </ul>
+                        </td>                           
+                    </tr> 
+                    <tr>
+                        <td>
+                            <div id="imagePreview">
+                                <%-- 이미지 미리보기를 표시할 공간 --%>
+                                <img id="preview" src="" alt="이미지 미리보기" style="max-width: 100%; height: auto;">
+                            </div>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+            <input type="hidden" name="c_num" value="<%= dto.getC_num() %>">
+            <input type="submit" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;" value="수정">
+            <a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>
+        </form>        
+    </div> 
+</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>
 	
-	<!-- JavaScript Confirm 창 구현 -->
+	<!-- 삭제 버튼 클릭시 Confirm 창 구현 -->
 	<script>
 		function confirmUpdate(num) {
-			var result = confirm("정말로 삭제하시겠습니까?");
+			var result = confirm("삭제하시겠습니까?");
+			if (result) {
+				location.href = "ContestDeleteService?c_num=" + num;
+			}
+		}
+	</script>
+	
+	<!-- 수정 버튼 클릭시 Confirm 창 구현 -->
+	<script>
+		function confirmUpdate(num) {
+			var result = confirm("수정하시겠습니까?");
 			if (result) {
 				location.href = "ContestUpdateService?c_num=" + num;
 			}
 		}
 	</script>
-  
+	 
+	<script>
+	    function previewImage(input) {
+	        var file = input.files[0];
+	        var reader = new FileReader();
+	
+	        reader.onload = function(e) {
+	            var preview = document.getElementById('imagePreview');
+	            preview.innerHTML = '<img src="' + e.target.result + '" alt="이미지 미리보기" style="max-width: 100%; height: auto;">';
+	        };
+	
+	        if (file) {
+	            reader.readAsDataURL(file);
+	        }
+	    }
+	
+	    // 페이지 로드 후 기존 이미지 미리보기 초기화
+	    window.onload = function() {
+	        var existingImg = '<%= dto.getC_img() %>';
+	        if (existingImg) {
+	            var preview = document.getElementById('imagePreview');
+	            preview.innerHTML = '<img src="boardImg/' + existingImg + '" alt="공모전 이미지" style="max-width: 100%; height: auto;">';
+	        }
+	    };
+	
+	    // 새로운 이미지 업로드 시 기존 이미지 숨기기
+	    function hideExistingImage() {
+	        var preview = document.getElementById('imagePreview');
+	        preview.innerHTML = ''; // 이미지 미리보기 영역 비우기
+	    }
+	</script>
+	</script> 
+	  
  	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 				  

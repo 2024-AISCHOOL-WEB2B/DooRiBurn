@@ -117,31 +117,43 @@
 	</header>
    
 		<%
-			// 글 번호 가져오기
-			int num = 0;
-			if (request.getParameter("c_num") != null){
-				num = Integer.parseInt(request.getParameter("c_num"));
-			}
-			if (num == 0) {
-				PrintWriter script = response.getWriter();
-		        script.println("<script>");
-		        script.println("alert('유효하지 않는 글입니다.');"); // 경고창 메시지 오류 수정
-		        script.println("location.href = 'contestBoard.jsp';");
-		        script.println("</script>");
-			}
+		int num = 0;
+		try {
+		    if (request.getParameter("c_num") != null){
+		        num = Integer.parseInt(request.getParameter("c_num"));
+		    }
+		} catch (NumberFormatException e) {
+		    // 숫자로 변환할 수 없는 경우 처리
+		    PrintWriter script = response.getWriter();
+		    script.println("<script>");
+		    script.println("alert('유효하지 않은 글 번호입니다.');");
+		    script.println("location.href = 'contestBoard.jsp';");
+		    script.println("</script>");
+		    return;  
+		}
+
+		if (num == 0) {
+		    // 유효하지 않은 글 번호 처리
+		    PrintWriter script = response.getWriter();
+		    script.println("<script>");
+		    script.println("alert('유효하지 않은 글입니다.');");
+		    script.println("location.href = 'contestBoard.jsp';");
+		    script.println("</script>");
+		    return;  
+		}
 			ContestDTO dto = new ContestDAO().getView(num);
 			
 			
 			MemberDTO info = (MemberDTO)session.getAttribute("info"); 			
 			MemberDAO memDAO = new MemberDAO();
-			
+			  
 			// 댓글 작성
 		    CommentDAO comDao = new CommentDAO();
 		    ArrayList<CommentDTO> commentList = comDao.getComment(num);
 		    
 		%>
   
-	<!-- 공모전 게시글 작성 ┗|｀O′|┛ -->
+	<!-- 공모전 게시글 ┗|｀O′|┛ -->
 	<div class="container">
 		<div class="row"> 
 	        <table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
@@ -159,10 +171,9 @@
 	                    <td>공모일</td>
 	                    <td colspan="3"><%= dto.getC_create_date() %> ~ <%= dto.getC_delete_date() %></td>
 	                </tr>
-	                <tr>
-	                   <%--  <td colspan="4" ><%= dto.getC_img() %></td> --%>
-	                   <td><img src="<%= dto.getC_img() %>" alt="공모전 이미지"></td>
-	                </tr>
+	                <tr> 
+	                   <td colspan="4"><img src="boardImg/<%= dto.getC_img() %>" alt="공모전 이미지" style="max-width: 100%; height: auto;"></td>
+	                </tr> 
 	                <tr>
 	                    <td colspan="4" ><%= dto.getC_content() %></td>
 	                </tr>
@@ -175,61 +186,59 @@
 		    <a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>
         	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
 			<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
-	        <!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! 위 삭제/수정 a태그 제거 해야됨-->
+<!--👨‍🍳👨‍🍳👨‍🍳👨‍🍳👨‍🍳👨‍🍳 관리자만 글 작성 버튼 뜨게 만듦!!!! 위 삭제/수정 a태그 제거 해야됨-->
 	        <% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
 	        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
 				<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
 			<% } %>
 		</div>
 		
-		
-		
-		
+		 
 		<!-- 해당 게시글에 작성된 댓글 리스트 가져오기!!!! ┗|｀O′|┛  수정 중~~~~~~~-->
 		<div class="container">
 			<div class="row">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<br><br><br> 
 					<% for (CommentDTO comDto : commentList) { %>
 					    <%
-					        // 이메일을 통해 MemberDTO의 nick을 가져오기 위한 예시 코드
-					        String comEmail = comDto.getEmail(); // CommentDTO에서 가져온 email 값
-					
-					        // MemberDAO를 사용하여 MemberDTO 가져오기
-					        MemberDTO memDto = memDAO.getMemberByEmail(comEmail);
-					
-					        // MemberDTO에서 nick 값 가져오기
-					        String comNick = memDto != null ? memDto.getNick() : "";
-					
-					        // 가져온 nick 값 출력
-					        out.println("작성자: " + comNick);
+					        // 이메일로  MemberDTO의 nick 가져오기
+					        String comEmail = comDto.getEmail();  
+					        MemberDTO memDto = memDAO.getMemberByEmail(comEmail); 
+					        String comNick = (memDto != null) ? memDto.getNick() : "Unknown";
+					  
 					    %>
+					    <tr>
+					    	<td style="text-align: left; margin-left: 10px;"><%= comNick %></td>
+					    </tr>
 						<tr> 
-							<td colspan="5" style="margin-left: 10px;"><%= comDto.getCmt_img() %></td>
+							<td><img src="commentImg/<%= comDto.getCmt_img() %>" alt="공모전 이미지" style="margin-left: 10px; max-width: 100%; height: auto;"></td>
 	                    </tr>
 	                    <tr>
-							<td colspan="2" style="margin-left: 10px;" ><%= comNick %> %>
-							<td colspan="3" style="text-align: left; margin-right: 10px;">♥ 아이콘 + 좋아요 수</td>
-							CommentLikeDTO comLikeDto = new CommentLikeDTO(); 
-							comDto.getCmt_num(); <!-- 코멘트 번호 -->
-							
-							comLikeDto.getCmt_like(); 
-							
+	                    
+	<%-- 좋아요 테이블 필요 --%>
+							<td style="text-align: left; margin-left: 10px;">♥ 아이콘 + 좋아요 수</td>
+					 
 	                    </tr>
 	                    <tr>	                    	
-							<td colspan="5" style="text-align: left; margin-right: 10px; "><%= comDto.getCmt_date() %></td> 
-	                    </tr> 
+							<td style="text-align: left; margin-right: 10px; "><%= comDto.getCmt_date() %></td> 
+	                    </tr>
+	                    <tr>
+	                    <% if (info != null && info.getEmail().equals(comEmail)) %>
+	                    	<td><a href="javascript:;" onclick="confirmCommentDelete(<%= comDto.getCmt_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a></td>
+	                    </tr>
 					<% } %>  
+					
 				</table>
 			</div>
 		</div>
-		
+		<br>
 		
 		
 		<!-- 댓글 작성란 ┗|｀O′|┛ --> <!-- 수정중!!!!!!!!!!!!!!!!!!! -->
 		<div class="container">
 			<div class="form-group">
 				<header>
-					<h3>공모전 응모를 위한 사진을 댓글로 올려주세요.</h3>
+					<h4>공모전 응모를 위한 사진을 댓글로 올려주세요.</h4>
 				</header>
 				<% CommentDTO commentDto = new CommentDTO();  %>
 				<form method="post" encType = "multipart/form-data" action="commentPostAction.jsp?cmt_num=<%= commentDto.getCmt_num() %>&c_num=<%= commentDto.getC_num()%>">
@@ -237,15 +246,39 @@
  						<tr>
 							<td colspan="2" style="border-bottom:none; text-align: left;" valign="middle">
 								<%if (info == null){%>
-									<p>로그인 필요</p>
+									<p></p>
 								<% } else { %>
 									<%= info.getNick() %>
 								<%}%></td>
 						</tr>
 						<tr>
 							<td>   
+							
+							
+<!-- 👋👋👋👋👋👋👋  test용임 아래 코드는 지워야 됨 -->
 								<ul class="fh5co-social-icons">
-									<% if (info != null) { %>
+									<li>
+									    <label for="file">
+									        <div class="btn btn-file">
+									            <i class="icon-camera"></i> 공모전 사진 선택
+									        </div>
+									    </label>
+									    <input type="file" name="commentImg" id="file" style="display: none;" onchange="previewImage(this);">
+									</li>
+									<!-- 미리보기 영역 -->
+									<div id="imagePreview"> 
+									    <img id="preview" src="" alt="" style="max-width: 100%; height: auto;">
+									</div>
+						        </ul> 
+							</td>							
+						</tr> 
+						<tr> 
+							<td><br><input type="submit" class="btn-primary pull" value="댓글 작성"></td>
+						</tr> 
+								
+								
+	<!-- 👋👋👋👋👋👋👋 찐 코드 !!!!!!!!!!!!!!!!-->
+<%-- 									<% if (info != null) { %>
 									        <li>
 									            <label for="file">
 									                <div class="btn btn-file">
@@ -256,7 +289,7 @@
 									        </li>
 									<% } else { %>
 									    <li>
-									        <p><a href="login.jsp">로그인 후 공모전에 응모할 수 있습니다.</a></p>
+									        <p><a href="login.jsp" style="color: #000">로그인 후 공모전에 응모할 수 있습니다.</a></p>
 									    </li>
 									<% } %>
 								</ul> 
@@ -264,7 +297,8 @@
 						</tr> 
 						<tr> 
 							<td><br><input type="submit" class="btn-primary pull" value="댓글 작성"></td>
-						</tr> 
+						</tr>  --%>
+						 
 					</table>
 				</form>
 			</div>
@@ -273,16 +307,48 @@
 
 	
 	 
-		<!-- 해당 글 삭제시 JavaScript Confirm 창 구현 -->
+	<!-- 해당 글 삭제시 Confirm 창 -->
 	<script>
-		function confirmDelete(num) {
-			var result = confirm("정말로 삭제하시겠습니까?");
+		function confirmDelete(c_num) {
+			var result = confirm("삭제하시겠습니까?");
 			if (result) {
-	            location.href = "ContestDeleteService?c_num=" + num; 
+	            location.href = "ContestDeleteService?c_num=" + c_num; 
 	            // alert("삭제 완료되었습니다.");
 			}
 		}
 	</script>
+
+	<!-- 댓글 삭제시 Confirm 창 -->
+	<script>
+		function confirmCommentDelete(cmt_num) {
+			var result = confirm("삭제하시겠습니까?");
+			if (result) {
+	            location.href = "CommentDeleteService?c_num=" + <%= dto.getC_num() %> +"&cmt_num=" + cmt_num; 
+	            CommentDeleteService?c_num=14&cmt_num=14
+	            // alert("삭제 완료되었습니다.");
+			}
+		}
+	</script>
+	 
+
+
+
+	<!-- 댓글 사진 업로드시 미리보기 -->
+	<script>
+	    function previewImage(input) {
+	        var preview = document.getElementById('preview');
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            reader.onload = function(e) {
+	                preview.src = e.target.result;
+	            }
+	            reader.readAsDataURL(input.files[0]); // 파일을 읽어 데이터 URL로 변환
+	        } else {
+	            preview.src = ""; // 파일이 선택되지 않은 경우 미리보기 초기화
+	        }
+	    }
+	</script>
+
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>
 	

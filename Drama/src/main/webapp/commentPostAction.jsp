@@ -1,3 +1,6 @@
+<%@page import="com.model.MemberDTO"%>
+<%@page import="com.model.CommentDAO"%>
+<%@page import="com.model.CommentDTO"%>
 <%@page import="com.model.ContestDAO"%>
 <%@page import="com.model.ContestDTO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
@@ -14,33 +17,39 @@
 
 
 <!-- 댓글 작성 action  --> 
-	<%
+	<% 
+     
 	request.setCharacterEncoding("UTF-8");
 	
 	int maxFileSize = 1024 * 1024 * 1024;
-	String path = request.getRealPath("boardImg");
+	String path = request.getRealPath("commentImg");
+	 
+	MemberDTO info = (MemberDTO)session.getAttribute("info");
+	
 	
     try { 
 		MultipartRequest multi = new MultipartRequest(request, path, maxFileSize, "UTF-8", new DefaultFileRenamePolicy());
-		
-		String title = multi.getParameter("contestTitle");  
-		String img = multi.getFilesystemName("contestImg"); 
-		String content = multi.getParameter("contestContent"); 
+ 
 	 
-		ContestDTO dto = new ContestDTO(title, img, content);
-		ContestDAO dao = new ContestDAO();  
+		String img = multi.getFilesystemName("commentImg");  
+		int c_num = Integer.parseInt(multi.getParameter("c_num"));  // 해당 페이지의 c_num 가져오기.. 어떻게 가져오지
+		String email = info.getEmail(); 
 		
-		int cnt = dao.contestPost(dto);
+		
+		CommentDTO dto = new CommentDTO(img, c_num, email);
+		CommentDAO dao = new CommentDAO();  
+		
+		int cnt = dao.commentPost(dto);
 		 
 	    if (cnt > 0) { 
-	        out.println("<script>alert('글 작성 성공');</script>");
+	        out.println("<script>alert('댓글 작성 성공');</script>");
 	        response.sendRedirect("contestBoard.jsp"); 
 	    } else { 
-	        out.println("<script>alert('글 작성 실패');</script>");
+	        out.println("<script>alert('댓글 작성 실패');</script>");
 	        out.flush();
 	    }
     } catch (Exception e) {
-        out.println("<script>alert('글 작성 중 오류 발생: " + e.getMessage() + "');</script>");
+        out.println("<script>alert('댓글 작성 중 오류 발생: " + e.getMessage() + "');</script>");
         out.flush();
         e.printStackTrace();
     }

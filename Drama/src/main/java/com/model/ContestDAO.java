@@ -71,9 +71,7 @@ public class ContestDAO {
 		} 
 		return cnt; 
 	} 
-	 
-	// 공모전 게시글 수정  (연결x, 글보는 화면 구성 후 연결 예정)
-	// 보고 있는 글 -> C_NUM 가져와서 수정 
+	  
 	public int contestUpdate(ContestDTO dto) {
 		int cnt = 0;
 		dbOpen();
