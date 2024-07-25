@@ -32,7 +32,7 @@ public class JoinService extends HttpServlet {
 		
 		if(cnt > 0) {
 			System.out.println("회원가입 성공");
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("Realindex.jsp");
 		}else {
 			System.out.println("회원가입 실패");
 			response.sendRedirect("contact.jsp");

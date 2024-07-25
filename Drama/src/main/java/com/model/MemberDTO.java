@@ -66,6 +66,12 @@ public class MemberDTO {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
+
+	public MemberDTO(String email, String pw) {
+		super();
+		this.email = email;
+		this.pw = pw;
+	}
 	
 	
 	

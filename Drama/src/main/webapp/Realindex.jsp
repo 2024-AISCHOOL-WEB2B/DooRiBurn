@@ -1,3 +1,4 @@
+<%@page import="com.model.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,7 +29,11 @@
 </style>
 </head>
 <body>
-
+	
+	<%
+		MemberDTO info = (MemberDTO)session.getAttribute("info");
+	%>
+	
 	<header>
 		<div class="banner">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
@@ -52,6 +57,7 @@
 				<a href="#">참여하기</a>
 			</div>
 		</div>
+		<%if(info != null){ %>
 		<div class="menu-section">
 			<h2>마이 페이지</h2>
 			<div class="menu-itemss">
@@ -59,6 +65,7 @@
 					공모전</a>
 			</div>
 		</div>
+		<%} %>
 	</div>
 
 
@@ -115,8 +122,12 @@
 		</div>
 
 		<footer>
-			<button class="btn">로그인</button>
+			<%if(info == null) {%>
+			<button class="btn" onclick="location.href='login.jsp'">로그인</button>
 			<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
+			<%}else{ %>
+			<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
+			<%} %>
 			<button class="btn">한국어</button>
 			<button class="btn">English</button>
 			<br>

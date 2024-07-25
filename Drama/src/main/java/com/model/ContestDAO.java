@@ -69,6 +69,51 @@ public class ContestDAO {
 		return cnt; 
 	} 
 	 
+	// 공모전 게시글 수정  (연결x, 글보는 화면 구성 후 연결 예정)
+	// 보고 있는 글 -> C_NUM 가져와서 수정 
+	public int contestUpdate(ContestDTO dto) {
+		int cnt = 0;
+		dbOpen();
+
+		String sql = "UPDATE TB_CONTEST SET C_TITLE = ?, C_IMG = ?, C_CONTENT = ? WHERE C_NUM = ?";
+		try {
+			psmt = conn.prepareStatement(sql); 
+			psmt.setString(1, dto.getC_title());
+			psmt.setString(2, dto.getC_img());
+			psmt.setString(3, dto.getC_content()); 
+			psmt.setInt(4, dto.getC_num()); 
+			cnt = psmt.executeUpdate(); 
+			
+		} catch (SQLException e) { 
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}
+		return cnt;
+		
+	}
+	
+	
+	// 공모전 게시글 개별 삭제 
+	public int contestDelete(int num) { 
+		
+		int cnt = 0;
+		dbOpen();
+		 
+		try {
+			String sql = "DELETE FROM TB_CONTEST WHERE C_NUM = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, num);
+			cnt = psmt.executeUpdate();
+			
+		} catch (SQLException e) { 
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		} 
+		return cnt;
+	}
+	 
 	
 	
 	// 공모전 게시판 페이징 위한 List 생성
@@ -110,6 +155,36 @@ public class ContestDAO {
 		}		
 		return boardList;
 	}
+	
+	// 글 보기 
+	public ContestDTO getView(int num) {
+		dbOpen();
+		try { 
+			String sql = "SELECT * FROM TB_CONTEST WHERE C_NUM = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, num);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				ContestDTO dto = new ContestDTO();
+				dto.setC_num(rs.getInt("C_NUM")); 
+				dto.setC_title(rs.getString("C_TITLE")); 
+				dto.setC_create_date(rs.getDate("C_CREATE_DATE")); 
+				dto.setC_img(rs.getString("C_IMG")); 
+				dto.setC_content(rs.getString("C_CONTENT")); 
+				dto.setC_delete_date(rs.getDate("C_DELETE_DATE")); 
+				return dto;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}
+		return null;
+		 
+	}
+	
+	
+	
 	
 	// 게시판 글 개수 카운트
 	public int getCount() {

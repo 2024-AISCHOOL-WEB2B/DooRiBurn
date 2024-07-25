@@ -114,4 +114,63 @@ public class MemberDAO {
 		return cnt;
 	}
 
+	public MemberDTO login(MemberDTO dto) {
+
+		MemberDTO info = null ;
+		
+		getConnection();
+		
+		
+		try {
+			String sql = "SELECT * FROM TB_MEMBER WHERE EMAIL = ? AND PW = ?";
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, dto.getEmail());
+			psmt.setString(2, dto.getPw());
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				String email = rs.getString("EMAIL");
+				String pw = rs.getString("PW");
+				String name = rs.getString("NAME");
+				String phone = rs.getString("PHONE");
+				String addr = rs.getString("ADDR");
+				String nick = rs.getString("NICK");
+				
+				info = new MemberDTO(email, pw, nick, name, phone, addr);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("오라클 오류");
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return info;
+	}
+	
+	public MemberDTO getMemberByEmail(String email) {
+        MemberDTO member = null;
+        getConnection();
+        try {
+            String sql = "SELECT * FROM TB_MEMBER WHERE EMAIL = ?";
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, email);
+            rs = psmt.executeQuery();
+
+            if (rs.next()) { 
+                String nick = rs.getString("NICK");
+                member = new MemberDTO(email, nick);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return member;
+    }
+ 
+	
 }
