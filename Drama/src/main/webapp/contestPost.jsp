@@ -1,31 +1,19 @@
+<%@page import="com.model.ContestDAO"%>
+<%@page import="com.model.ContestDTO"%>
+<%@page import="com.model.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
 <!DOCTYPE HTML>
 <html>
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Search</title>
+	<title>contestPost</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FreeHTML5.co" />
-
-	<!-- 
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FreeHTML5.co
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
-
-  	<!-- Facebook and Twitter integration -->
+ 
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
 	<meta property="og:url" content=""/>
@@ -46,7 +34,7 @@
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style2.css">
+	<link rel="stylesheet" href="css/style.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -55,6 +43,7 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	</head>
 	</head>
 	<body>
 		
@@ -73,7 +62,7 @@
 								<li><a href="#">관심 촬영지</a></li>
 								<li><a href="#">회원정보수정</a></li>
 								<li><a href="#">참여한 공모전</a></li>
-							
+								<li><a href="#">API</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -85,12 +74,12 @@
 					<ul>
 						<li><a href="blog.html">공모전</a></li>
 						<li class="has-dropdown">
-							<a href="#">지역 별로 찾기</a>
+							<a href="#">카테고리</a>
 							<ul class="dropdown">
-								<li><a href="#">서울</a></li>
-								<li><a href="#">부산</a></li>
-								<li><a href="#">인천</a></li>
-								<li><a href="#">대구</a></li>
+								<li><a href="#">HTML5</a></li>
+								<li><a href="#">CSS3</a></li>
+								<li><a href="#">Sass</a></li>
+								<li><a href="#">jQuery</a></li>
 							</ul>
 						</li>
 						<li><a href="contact.html">Contact</a></li>
@@ -101,9 +90,7 @@
 			
 		</div>
 	</nav>
-	
-	
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/backgroundco.png);">
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_2.jpg);">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -113,10 +100,7 @@
 							<div class="row">
 								<form class="form-inline" id="fh5co-header-subscribe">
 									<div class="col-md-6 col-md-offset-3">
-										<div class="form-group">
-											<input type="text" class="form-control" id="email" >
-											<button type="submit" class="btn btn-default">검색</button>
-										</div>
+ 
 									</div>
 								</form>
 							</div>
@@ -126,26 +110,63 @@
 			</div>
 		</div>
 	</header>
-		
-	<div id="fh5co-blog" class="fh5co-bg-section">
-		<div class="container">		
-			<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
-			<div class="row">
-				<div class="col-lg-4 col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="#"><img class="img-responsive" src="images/work-4.jpg" alt=""></a> <!-- 해당 장소 사진 -->
-						<div class="blog-text">
-							<h3><a href=""#>수원 행궁동 행리단길</a></h3><!-- 장소명 -->
-							<span class="posted_on">선재 업고 튀어</span><!-- 드라마명 -->
-							<span class="favorites">⭐</span><!-- 즐겨찾기 -->		
-							<p>'선재 업고 튀어' 9화에서 선재와 솔이가 첫 데이트를 하는 장소로..</p><!-- 상세줄거리 미리보기 -->
-							<a href="#" class="btn btn-primary">상세보기</a>
-						</div> 
-					</div>
-				</div> 
-			</div>
+  
+  		<%
+			// 글 번호 가져오기
+			int num = 0;
+			if (request.getParameter("num") != null){
+				num = Integer.parseInt(request.getParameter("num"));
+			} 
+
+			ContestDTO dto = new ContestDAO().getView(num);
+			
+			// 회원 정보 확인
+			MemberDTO info = (MemberDTO)session.getAttribute("info");   
+		%>
+  
+	<!-- 공모전 게시글 작성 -->
+	<div class="container">
+		<div class="row">
+			<form method="post" action="ContestPostService" encType = "multipart/form-data">
+				<table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
+					<thead>
+						<tr>
+							<th style="background-color: #f9f9f9; text-align: center;">공모전 게시글 작성</th> 
+						</tr>
+					</thead>
+					<tbody style="background-color: #f9f9f9;"> 
+						<tr> 
+							<td><input type="text" class="form-control" placeholder="제목을 입력해주세요." name="contestTitle" style="background-color: #f5f5f5;"></td>
+						</tr> 
+						<tr> 
+							<td><textarea class="form-control" placeholder="내용을 입력해주세요." name="contestContent" style="height: 350px; background-color: #f5f5f5;"></textarea></td>
+						</tr>
+						  
+						<tr>
+							<td>
+								<ul class="fh5co-social-icons">  
+		                            <label for="file">
+		                                <div class="btn btn-file">
+		                                    <i class="icon-camera"></i> 사진 업로드
+		                                </div>
+		                            </label>
+		                            <input type="file" name="contestImg" id="file" style="display: none;">
+								</ul>
+							</td>							
+						</tr> 
+					</tbody>
+				</table>
+				<input type="submit" class="btn btn-primary pull-right" value="작성">
+			</form>  
 		</div>
+		 
+		
+		
 	</div>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://bootstrap.js"></script>
+
+  
  	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 				  
@@ -153,7 +174,7 @@
 				<div class="col-md-12 text-center">
 					<p>
 						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
-						<small class="block">Designed by DOORIBURN</a></small>
+						<small class="block">Designed by DOORIBURN</small>
 					</p>
 					<p>
 						<ul class="fh5co-social-icons">  
@@ -185,4 +206,3 @@
 
 	</body>
 </html>
-

@@ -10,6 +10,10 @@
 * 	Template Style 
 *
 * ======================================================= */
+
+ 
+	
+	
 body {
   font-family: "Work Sans", Arial, sans-serif;
   font-weight: 400;
@@ -252,7 +256,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .fh5co-cover {
-  height: 800px;
+  height: 300px;
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -280,39 +284,46 @@ h1, h2, h3, h4, h5, h6, figure {
   position: relative;
   z-index: 10;
 }
+/* 상단 */
 @media screen and (max-width: 768px) {
   .fh5co-cover {  
-    height: 600px;
-  }
-} 
-@media screen and (max-width: 768px) {
-  .fh5co-cover2 {  /* 상단 프레임(검정)*/
     height: 200px;
   }
-}  
+} 
+
+/* @media screen and (max-width: 768px) {
+  .fh5co-cover2 {  상단 프레임(검정)
+    height: 300px;
+  }
+}  */ 
+
+/* 상단 */
 .fh5co-cover .display-t,
 .fh5co-cover .display-tc  {
   z-index: 9;
-  height: 900px;
+  height: 200px;
   display: table;
   width: 100%;
 }
-@media screen and (max-width: 768px) {
+/* 상단 */
+ @media screen and (max-width: 768px) {
   .fh5co-cover .display-t,
   .fh5co-cover .display-tc {
-    height: 600px;
+    height: 200px;
   }
-}
-/* @media screen and (max-width: 768px) {
+} 
+/*  @media screen and (max-width: 768px) {
   .fh5co-cover .display-t,
   .fh5co-cover .display-tc
   .fh5co-cover2 .display-t,
   .fh5co-cover2 .display-tc {  상단 프레임 검색창
-    height: 200px;
+    height: 300px;
   }
-} */
+}  */
+
+/* 상단 */
 .fh5co-cover.fh5co-cover-sm {
-  height: 600px;
+  height: 200px;
 }
 @media screen and (max-width: 768px) {
   .fh5co-cover.fh5co-cover-sm {
@@ -1205,7 +1216,7 @@ h1, h2, h3, h4, h5, h6, figure {
 .btn-primary {
   background: #FFEEB9;
   color: black;
-  border: 2px solid #FFEEB9;
+  border: 2px solid #FFEEB9; 
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   background: #ffd964 !important;
@@ -1213,11 +1224,11 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .btn-primary.btn-outline {
   background: transparent;
-  color: #F36363;
-  border: 2px solid #F36363;
+  color: #ffd964;
+  border: 2px solid #ffd964;
 }
 .btn-primary.btn-outline:hover, .btn-primary.btn-outline:focus, .btn-primary.btn-outline:active {
-  background: #F36363;
+  background: #ffd964;
   color: #fff;
 }
 
@@ -1239,6 +1250,27 @@ h1, h2, h3, h4, h5, h6, figure {
   background: #5cb85c;
   color: #fff;
 }
+
+
+.btn-file {
+  background: #5cb85c !important;;
+  color: #fff !important;;
+  border: 2px solid #5cb85c;
+}
+.btn-file:hover, .btn-file:focus, .btn-file:active {
+  background: #4cae4c !important;  
+  border-color: #4cae4c !important;
+}
+.btn-file.btn-outline {
+  background: transparent;
+  color: #5cb85c;
+  border: 2px solid #5cb85c;
+}
+.btn-file.btn-outline:hover, .btn-file.btn-outline:focus, .btn-file.btn-outline:active {
+  background: #5cb85c;
+  color: #fff;
+}
+
 
 .btn-info {
   background: #5bc0de;
@@ -1381,5 +1413,29 @@ h1, h2, h3, h4, h5, h6, figure {
   border-top-left-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
 }
+
+#page_control {
+    text-align: center; /* 가운데 정렬 */
+    margin-top: 8px; /* 상단 여백 추가 */
+}
+
+#page_control a {
+    display: inline-block; /* 인라인 블록 요소로 설정하여 한 줄에 나열되도록 함 */
+    padding: 3px 8px; /* 버튼의 패딩 설정 */
+    margin: 0 3px; /* 버튼 사이의 간격 설정 */
+    text-decoration: none; /* 링크에 밑줄 제거 */
+    border: 1px solid #ffd964; /* 테두리 추가 */
+    /*background-color: #f0f0f0;*/ /* 배경색 설정 */
+    color: #333; /* 글자색 설정 */
+}
+
+#page_control a:hover {
+    background-color: #ffd964; /* 호버 시 배경색 변경 */
+}
+
+#page_control .current {
+    font-weight: bold; /* 현재 페이지 버튼의 글씨를 두껍게 설정 */
+}
+
 
 /*# sourceMappingURL=style.css.map */

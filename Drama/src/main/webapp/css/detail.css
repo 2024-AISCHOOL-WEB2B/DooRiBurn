@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.header-img {
+    width: 100%;
+    height: auto;
+}
+
+.info {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: -5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info h1 {
+    margin: 0;
+}
+
+.info p {
+    margin: 5px 0;
+}
+
+.tags span {
+    display: inline-block;
+    background-color: #ffe262;;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.drama {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.drama-img {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.drama-info h2 {
+    margin: 0;
+}
+
+.map-img {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.review {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.review p {
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .drama {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .drama-img {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .info {
+        padding: 10px;
+    }
+
+    .info h1 {
+        font-size: 24px;
+    }
+
+    .tags span {
+        font-size: 12px;
+        padding: 3px 8px;
+    }
+
+    .drama-info h2 {
+        font-size: 18px;
+    }
+
+    .drama-info p {
+        font-size: 14px;
+    }
+
+    .review {
+        padding: 10px;
+    }
+
+    .review p {
+        font-size: 14px;
+    }
+}

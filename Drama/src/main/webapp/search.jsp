@@ -37,15 +37,24 @@
 	 -->
 
 <!-- Facebook and Twitter integration -->
-<meta property="og:title" content="" />
-<meta property="og:image" content="" />
-<meta property="og:url" content="" />
-<meta property="og:site_name" content="" />
-<meta property="og:description" content="" />
-<meta name="twitter:title" content="" />
-<meta name="twitter:image" content="" />
-<meta name="twitter:url" content="" />
-<meta name="twitter:card" content="" />
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Search</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FreeHTML5.co" />
+ 
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
 
 <link
 	href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700'
@@ -238,6 +247,22 @@
 													<i class="search-icon">&#128269;</i>
 												</button>
 											</div>
+			
+		</div>
+	</nav>
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_2.jpg);">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1 text-center">
+					<div class="display-t" >
+						<div class="display-tc animate-box" data-animate-effect="fadeIn" > 
+							<div class="row">
+								<form class="form-inline" id="fh5co-header-subscribe">
+									<div class="col-md-6 col-md-offset-3">
+										<div class="form-group">
+											<input type="text" class="form-control" id="email" >
+											<button type="submit" class="btn btn-default">검색</button>
 										</div>
 									</form>
 								</div>
