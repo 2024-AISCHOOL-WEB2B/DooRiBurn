@@ -11,30 +11,6 @@
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FreeHTML5.co" />
 
-	<!-- 
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FreeHTML5.co
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
-
-  	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
 
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
@@ -42,38 +18,6 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 	
-	<style type="text/css">
-		*{
-			font-family: "Jua", sans-serif;
-  			font-weight: 400;
-  			font-style: normal;
-		}
-		
-	.horizontal-menu {
-		display: flex !important;
-		flex-wrap: wrap !important;
-	}
-	
-	.horizontal-menu li {
-		width: 25% !important; /* 4개씩 나열하기 위해 각 항목의 너비를 25%로 설정 */
-		margin-bottom: 10px !important; /* 항목 간의 간격 설정 */
-		list-style-type: none;
-	}
-	
-	.horizontal-menu li a {
-		display: block;
-		padding: 5px 0;
-	}
-	
-	#fh5co-header{
-		height: 180px !important;
-	}
-	
-	#submit{
-		padding: 4px 30%;
-		border-radius: 5px;
-	}
-	</style>
 	
 	
 	
@@ -87,6 +31,7 @@
 	<link rel="stylesheet" href="css/styles.css">
 	
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/Realstyle.css">
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
@@ -124,76 +69,32 @@
         }
     </script>   
 		
-	<div class="fh5co-loader"></div>
-	
-	<div id="page">
-	<nav class="fh5co-nav" role="navigation">
-				<div class="container">
-					<div class="row">
-						<div class="left-menu text-right menu-1">
-							<ul>
-								<li><a href="contact.jsp">회원가입</a></li>
-								<li><a href="about.html">로그인</a></li>
-								<li class="has-dropdown"><a href="#">마이페이지</a>
-									<ul class="dropdown">
-										<li><a href="#">관심 촬영지</a></li>
-										<li><a href="#">회원정보 수정</a></li>
-										<li><a href="#">참여한 공모전</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-	
-						<div class="right-menu text-left menu-1">
-							<ul>
-								<li><a href="blog.html">공모전</a></li>
-								<li class="has-dropdown"><a href="">지역 별로 찾기</a>
-									<ul class="horizontal-menu">
-										<li><a href="#">서울</a></li>
-										<li><a href="#">부산</a></li>
-										<li><a href="#">인천</a></li>
-										<li><a href="#">대구</a></li>
-										<li><a href="#">대전</a></li>
-										<li><a href="#">광주</a></li>
-										<li><a href="#">울산</a></li>
-										<li><a href="#">세종</a></li>
-										<li><a href="#">경기</a></li>
-										<li><a href="#">충북</a></li>
-										<li><a href="#">충남</a></li>
-										<li><a href="#">전북</a></li>
-										<li><a href="#">전남</a></li>
-										<li><a href="#">경북</a></li>
-										<li><a href="#">경남</a></li>
-										<li><a href="#">강원</a></li>
-										<li><a href="#">제주</a></li>
-									</ul>
-								</li>
-								<li><a href="contact.html">Contact</a></li>
-							</ul>
-						</div>
-					</div>
-	
-				</div>
-			</nav>
+	<header>
+		<div class="banner">여기가 거기여?</div>
+		<div class="menu-icon" onclick="openNav()">☰</div>
+	</header>
 
-	<header id="fh5co-header" class="fh5co-cover" role="banner"
-			style="background-image: url(images/backgroundco.jpg);">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1 text-center">
-						<div class="display-t">
-							<div class="display-tc animate-box" data-animate-effect="fadeIn">
-								<h1 style="font-style: normal; text-align: center; color: black">
-									여기가 거기여?</h1>
-							</div>
-						</div>
-					</div>
-				</div>
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div class="menu-section">
+			<h2>지역별로 찾기</h2>
+			<div class="menu-items">
+				<a href="#">서울</a> <a href="#">부산</a> <a href="#">인천</a> <a href="#">대구</a>
+				<a href="#">대전</a> <a href="#">광주</a> <a href="#">울산</a> <a href="#">세종</a>
+				<a href="#">경기</a> <a href="#">충북</a> <a href="#">충남</a> <a href="#">전북</a>
+				<a href="#">전남</a> <a href="#">경북</a> <a href="#">경남</a> <a href="#">강원</a>
+				<a href="#">제주</a> <a href="#">-</a>
 			</div>
-		</header>
+		</div>
+		<div class="menu-section">
+			<h2>공모전</h2>
+			<div class="menu-items">
+				<a href="#">참여하기</a>
+			</div>
+		</div>
+	</div>
 
-	<div id="fh5co-contact">
+	<div id="fh5co-contact" style="align-content: center;">
 		<div class="container">
 			<div class="row">
 
@@ -236,10 +137,13 @@
 
 
 	<footer>
-		<button class="btn">한국어</button>
-		<button class="btn">English</button>
-		<br>
-	</footer>
+			
+			<button class="btn" onclick="location.href='login.jsp'">로그인</button>
+			<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
+			<button class="btn">한국어</button>
+			<button class="btn">English</button>
+			<br>
+		</footer>
 
 
 	</div>
@@ -262,6 +166,15 @@
 
 	<script src="js/main.js"></script>
 	
+	<script>
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "50%";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+		}
+	</script>
 	
 	</body>
 </html>

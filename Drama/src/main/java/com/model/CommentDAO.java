@@ -50,10 +50,11 @@ public class CommentDAO {
 		int cnt = 0; 
 		dbOpen();
 		
+		
 		try { 
-			String sql = "INSERT INTO TB_C_COMMENT VALUES (MSGNUM.NEXTVAL, ?, ?, TO_DATE(TO_CHAR(SYSDATE)), ?, ?, TO_DATE(TO_CHAR(ADD_MONTHS(SYSDATE, 1))))";
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, dto.getCmt_content());
+			
+			String sql = "INSERT INTO TB_C_COMMENT (cmt_num, cmt_img, cmt_date, c_num, email) VALUES (?, TO_DATE(TO_CHAR(SYSDATE)), ?, ?)"; 
+			psmt = conn.prepareStatement(sql); 
 			psmt.setString(2, dto.getCmt_img());
 			psmt.setInt(3, dto.getC_num());
 			psmt.setString(4, dto.getEmail());
@@ -82,14 +83,12 @@ public class CommentDAO {
 	        rs = psmt.executeQuery();
 	        
 	        while(rs.next()) {
-	            int cmtNum = rs.getInt("CMT_NUM");
-	            String content = rs.getString("CMT_CONTENT"); 
+	            int cmtNum = rs.getInt("CMT_NUM"); 
 	            String img = rs.getString("CMT_IMG");
 	            Date date = rs.getDate("CMT_DATE");
-	            String email = rs.getString("EMAIL"); 
-	            String title = rs.getString("CMT_TITLE");  
+	            String email = rs.getString("EMAIL");   
 	            
-	            CommentDTO comDto = new CommentDTO(cmtNum, content, img, date, cNum, email, title);
+	            CommentDTO comDto = new CommentDTO(cmtNum, img, date, cNum, email);
 	            list.add(comDto); 
 			}  
 		} catch (SQLException e) { 

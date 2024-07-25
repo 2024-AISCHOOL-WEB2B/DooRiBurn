@@ -25,6 +25,8 @@
 
 <!-- CSS 파일 연결 -->
 <link rel="stylesheet" href="css/Realstyle.css">
+<style type="text/css">
+</style>
 </head>
 <body>
 	
@@ -59,25 +61,29 @@
 		<div class="menu-section">
 			<h2>마이 페이지</h2>
 			<div class="menu-itemss">
-				<a href="#">회원정보 수정</a> 
-				<a href="#">관심 촬영지</a> 
-				<a href="#">참여한 공모전</a>
+				<a href="#">회원정보 수정</a> <a href="#">관심 촬영지</a> <a href="#">참여한
+					공모전</a>
 			</div>
 		</div>
 		<%} %>
 	</div>
 
+
+
 	<div class="main-content">
-		<div class="search-container" style="height: 30px;">
-			<select name="category" style="margin-right: 7px;">
-				<option value="location">장소 및 지역</option>
-				<option value="drama">드라마</option>
-			</select> <input name="search" type="text" placeholder="검색"
-				style="flex-grow: 1; margin-right: 5px;">
-			<button type="button">
-				<img src="images/search.png" style="width: 40px; height: 40px;" />
-			</button>
-		</div>
+		<form action="search.jsp">
+			<div class="search-container" style="height: 30px;">
+				<select name="s_option" style="margin-right: 7px;"> <!-- name="category" -> s_option -->
+					<option value="1">장소 및 지역</option>
+					<option value="0">드라마</option>
+				</select>
+				 <input name="search" type="text" placeholder="검색"
+					style="flex-grow: 1; margin-right: 5px;">
+				<button type="button">
+					<img src="images/search.png" style="width: 40px; height: 40px;" />
+				</button>
+			</div>
+		</form>
 
 		<div class="ranking">
 			<div class="rank-item">
@@ -102,14 +108,16 @@
 			</div>
 		</div>
 
-		<div class="intro" style="height: 230px">
+		<div class="intro">
 			<h2 class="highlight">선재 업고 튀어에 나온 그 장소!</h2>
 			<h2 class="highlight">나도 가 볼까?</h2>
 
 			<div class="image-container">
-				<a href="detail.jsp"><img src="images/jeju_aquarium.png" alt="Aquarium"></a> 
-				<a href="page2.html"><img src="images/jeonju_hanok_village.jpg" alt="Forest Path"></a> 
-				<a href="page3.html"><img src="images/seoulforest.jpeg" alt="Traditional Village"></a>
+				<a href="detail.jsp"><img src="images/jeju_aquarium.png"
+					alt="Aquarium"></a> <a href="page2.html"><img
+					src="images/jeonju_hanok_village.jpg" alt="Forest Path"></a> <a
+					href="page3.html"><img src="images/seoulforest.jpeg"
+					alt="Traditional Village"></a>
 			</div>
 		</div>
 
@@ -136,6 +144,10 @@
 			document.getElementById("mySidenav").style.width = "0";
 		}
 	</script>
+
+	<!-- JavaScript 파일 연결 -->
+	<!-- 여기서는 없어도 되긴 함 detail에서 먼저 js 만들고 여기도 연결해 봄 -->
+	<!-- <script src="js/menu.js"></script> -->
 
 </body>
 </html>

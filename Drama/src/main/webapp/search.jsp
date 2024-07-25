@@ -6,7 +6,8 @@
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.net.HttpURLConnection"%>
 <%@page import="java.net.URL"%>
-<%@ page import="java.io.*, java.net.*, org.json.JSONArray, org.json.JSONObject" %>
+<%@ page
+	import="java.io.*, java.net.*, org.json.JSONArray, org.json.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -23,38 +24,40 @@
 <meta name="author" content="FreeHTML5.co" />
 
 <!-- 
-	//////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////
 
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FreeHTML5.co
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
+   FREE HTML5 TEMPLATE 
+   DESIGNED & DEVELOPED by FreeHTML5.co
+      
+   Website:       http://freehtml5.co/
+   Email:          info@freehtml5.co
+   Twitter:       http://twitter.com/fh5co
+   Facebook:       https://www.facebook.com/fh5co
 
-	//////////////////////////////////////////////////////
-	 -->
+   //////////////////////////////////////////////////////
+    -->
 
 <!-- Facebook and Twitter integration -->
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Search</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FreeHTML5.co" />
- 
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Search</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description"
+	content="Free HTML5 Website Template by FreeHTML5.co" />
+<meta name="keywords"
+	content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+<meta name="author" content="FreeHTML5.co" />
+
+<meta property="og:title" content="" />
+<meta property="og:image" content="" />
+<meta property="og:url" content="" />
+<meta property="og:site_name" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:title" content="" />
+<meta name="twitter:image" content="" />
+<meta name="twitter:url" content="" />
+<meta name="twitter:card" content="" />
 
 <link
 	href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700'
@@ -76,8 +79,8 @@
 <script src="js/modernizr-2.6.2.min.js"></script>
 <!-- FOR IE9 below -->
 <!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+   <script src="js/respond.min.js"></script>
+   <![endif]-->
 
 
 
@@ -85,71 +88,71 @@
 <body>
 
 	<!-- flask   -->
-	 <body>
-      <%
-        String s_option = request.getParameter("s_option");
-        String search = request.getParameter("search");
-	
-        List<String> titles = new ArrayList<>();
-        List<String> places = new ArrayList<>();
-        List<String> scene = new ArrayList<>();
-        List<Integer> index = new ArrayList<>();
-        // Flask 서버로 데이터를 전송합니다.
-        HttpURLConnection conn = null;
-        try {
-            // Flask 서버의 URL 설정
-            URL url = new URL("http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
-            conn = (HttpURLConnection) url.openConnection();
-            // 요청 방식 및 헤더 설정
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+<body>
+	<%
+	String s_option = request.getParameter("s_option");
+	String search = request.getParameter("search");
 
-            // 서버 응답 확인
-            int responseCode = conn.getResponseCode();
-            System.out.println("GET Response Code :: " + responseCode);
+	List<String> titles = new ArrayList<>();
+	List<String> places = new ArrayList<>();
+	List<String> scene = new ArrayList<>();
+	List<Integer> index = new ArrayList<>();
+	// Flask 서버로 데이터를 전송합니다.
+	HttpURLConnection conn = null;
+	try {
+		// Flask 서버의 URL 설정
+		URL url = new URL(
+		"http://localhost:5001/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
+		conn = (HttpURLConnection) url.openConnection();
+		// 요청 방식 및 헤더 설정
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Accept", "application/json");
 
-            if (responseCode == HttpURLConnection.HTTP_OK) { // success
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                String inputLine;
-                StringBuffer response_data = new StringBuffer();
+		// 서버 응답 확인
+		int responseCode = conn.getResponseCode();
+		System.out.println("GET Response Code :: " + responseCode);
 
-                // 서버 응답 데이터 읽기
-                while ((inputLine = in.readLine()) != null) {
-                    response_data.append(inputLine);
-                }
-                in.close();
+		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+			String inputLine;
+			StringBuffer response_data = new StringBuffer();
 
-                // JSON 데이터 파싱
-                JSONArray jsonArray = new JSONArray(response_data.toString());
+			// 서버 응답 데이터 읽기
+			while ((inputLine = in.readLine()) != null) {
+		response_data.append(inputLine);
+			}
+			in.close();
 
-                if (jsonArray.length() > 0) {
-                	System.out.println(jsonArray.length());
-                    out.println("<ul>");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                       
-                        
-                        titles.add(jsonObject.getString("제목"));
-                        places.add(jsonObject.getString("장소명"));
-                        scene.add(jsonObject.getString("장소설명"));
-                        index.add(jsonObject.getInt("index"));
-                    }
-                    out.println("</ul>");
-                } else {
-                    out.println("No results found.");
-                }
-            } else {
-                out.println("GET request not worked");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            out.println("Error: " + e.getMessage());
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
-            }
-        }
-    %>
+			// JSON 데이터 파싱
+			JSONArray jsonArray = new JSONArray(response_data.toString());
+
+			if (jsonArray.length() > 0) {
+		System.out.println(jsonArray.length());
+		out.println("<ul>");
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+			titles.add(jsonObject.getString("제목"));
+			places.add(jsonObject.getString("장소명"));
+			scene.add(jsonObject.getString("장소설명"));
+			index.add(jsonObject.getInt("index"));
+		}
+		out.println("</ul>");
+			} else {
+		out.println("No results found.");
+			}
+		} else {
+			out.println("GET request not worked");
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+		out.println("Error: " + e.getMessage());
+	} finally {
+		if (conn != null) {
+			conn.disconnect();
+		}
+	}
+	%>
 
 
 	<div class="fh5co-loader"></div>
@@ -195,146 +198,166 @@
 		</nav>
 		<header id="fh5co-header" class="fh5co-cover" role="banner"
 			style="background-image: url(images/black.jpg);">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1 text-center">
-						<div class="display-t">
-							<div class="display-tc animate-box" data-animate-effect="fadeIn">
-								<div class="row">
-									<form class="form-inline" id="fh5co-header-subscribe"
-										action="search.jsp" method="get">
-										<div class="col-md-6 col-md-offset-3">
-											<div class="search-container"
-												style="display: flex; align-items: center;">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1 text-center">
+							<div class="display-t">
+								<div class="display-tc animate-box" data-animate-effect="fadeIn">
+									<div class="row">
+										<form class="form-inline" id="fh5co-header-subscribe"
+											action="search.jsp" method="get">
+											<div class="col-md-6 col-md-offset-3">
+												<div class="search-container"
+													style="display: flex; align-items: center;">
 
-												<select name="s_option" style="margin-right: 10px;">
+													<select name="s_option" style="margin-right: 10px;">
+														<%
+														try {
+															if ("0".equals(s_option)) {
+														%>
+														<option value="0">드라마</option>
+														<option value="1">장소및 지역</option>
+														<%
+														} else {
+														%>
+														<option value="1">장소및 지역</option>
+														<option value="0">드라마</option>
+														<%
+														}
+														} catch (Exception e) {
+														%>
+														<option value="0">드라마</option>
+														<option value="1">장소및 지역</option>
+														<%
+														}
+														%>
+
+													</select>
 													<%
-													try {
-														if ("0".equals(s_option)) {
+													if (search == null) {
 													%>
-													<option value="0">드라마</option>
-													<option value="1">장소및 지역</option>
+													<input name="search" type="text"
+														placeholder="지역 또는 드라마 명을 검색하세요."
+														style="flex-grow: 1; margin-right: 10px;">
 													<%
 													} else {
 													%>
-													<option value="1">장소및 지역</option>
-													<option value="0">드라마</option>
-													<%
-													}
-													} catch (Exception e) {
-													%>
-													<option value="0">드라마</option>
-													<option value="1">장소및 지역</option>
+													<input name="search" type="text"
+														placeholder="지역 또는 드라마 명을 검색하세요." value="<%=search%>"
+														style="flex-grow: 1; margin-right: 10px;">
 													<%
 													}
 													%>
 
-												</select> 
-												<%
-														if (search ==null) {
-													%>
-													<input name="search" type="text"
-													placeholder="지역 또는 드라마 명을 검색하세요."
-													style="flex-grow: 1; margin-right: 10px;">
-													<%} else{ %>
-													<input name="search" type="text"
-													placeholder="지역 또는 드라마 명을 검색하세요." value="<%=search%>"
-													style="flex-grow: 1; margin-right: 10px;">
-													<%}%>
-												
-												<button type="submit" id="search-button">
-													<i class="search-icon">&#128269;</i>
-												</button>
-											</div>
-			
-		</div>
-	</nav>
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_2.jpg);">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-10 col-md-offset-1 text-center">
-					<div class="display-t" >
-						<div class="display-tc animate-box" data-animate-effect="fadeIn" > 
-							<div class="row">
-								<form class="form-inline" id="fh5co-header-subscribe">
-									<div class="col-md-6 col-md-offset-3">
-										<div class="form-group">
-											<input type="text" class="form-control" id="email" >
-											<button type="submit" class="btn btn-default">검색</button>
-										</div>
-									</form>
+													<button type="submit" id="search-button">
+														<i class="search-icon">&#128269;</i>
+													</button>
+													</div>
+													</div>
+										</form>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</header>
 
-		<div id="fh5co-blog" class="fh5co-bg-section">
-		
-			<!-- 상세설명 길면 자르고 ... 붙히기 -->
-			<%String seen=""; %>
-			<%for(int i =0; i<index.size(); i++) {%>
-			<%
-				if(scene.get(i).length()>50){
-				seen = scene.get(i).substring(0, 40) + "...";
-				}else{
-					seen=scene.get(i);
-				}%>
-				
-				
-			
-			<div class="container">
-				<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
-				<div class="row">
-					<div class="col-lg-4 col-md-4">
-						<div class="fh5co-blog animate-box">
-							<a href="#"><img class="img-responsive"
-								src="https://th.bing.com/th/id/OIP.FKwVfi4SsgnhqTDPMLoLTAHaE7?w=300&h=199&c=7&r=0&o=5&pid=1.7" alt=""></a>
-							<!-- 해당 장소 사진 -->
-							<div class="blog-text" OnClick="location.href ='http://localhost:8082/Drama/detail.jsp?index=<%=index.get(i) %>'"  style="cursor:pointer;">
-								<h3>
-									<a href=""><%=places.get(i) %></a>
-								</h3>
-								<!-- 장소명 -->
-								<span class="posted_on"><%=titles.get(i) %></span>
-								<!-- 드라마명 -->
-								<span class="favorites">⭐</span>
-								<!-- 즐겨찾기 -->
-								<p><%= seen%></p>
-								<!-- 상세줄거리 미리보기 -->
-								<a href="#" class="btn btn-primary">상세보기</a>
-							</div>
+			</div>
+			</header>
+	</div>
+	
+
+
+
+
+ 	   <header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_2.jpg);">
+      <div class="overlay"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-10 col-md-offset-1 text-center">
+               <div class="display-t" >
+                  <div class="display-tc animate-box" data-animate-effect="fadeIn" > 
+                     <div class="row">
+                        <form class="form-inline" id="fh5co-header-subscribe">
+                           <div class="col-md-6 col-md-offset-3">
+                              <div class="form-group">
+                                 <input type="text" class="form-control" id="email" >
+                                 <button type="submit" class="btn btn-default">검색</button>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+
+
+		<!-- 상세설명 길면 자르고 ... 붙히기 -->
+		<%
+		String seen = "";
+		%>
+		<%
+		for (int i = 0; i < index.size(); i++) {
+		%>
+		<%
+		if (scene.get(i).length() > 50) {
+			seen = scene.get(i).substring(0, 40) + "...";
+		} else {
+			seen = scene.get(i);
+		}
+		%>
+
+
+
+		<div class="container">
+			<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
+			<div class="row">
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#"><img class="img-responsive"
+							src="https://th.bing.com/th/id/OIP.FKwVfi4SsgnhqTDPMLoLTAHaE7?w=300&h=199&c=7&r=0&o=5&pid=1.7"
+							alt=""></a>
+						<!-- 해당 장소 사진 -->
+						<div class="blog-text">
+							<h3>
+								<a href="" #><%=places.get(i)%></a>
+							</h3>
+							<!-- 장소명 -->
+							<span class="posted_on"><%=titles.get(i)%></span>
+							<!-- 드라마명 -->
+							<span class="favorites">⭐</span>
+							<!-- 즐겨찾기 -->
+							<p><%=seen%></p>
+							<!-- 상세줄거리 미리보기 -->
+							<a href="#" class="btn btn-primary">상세보기</a>
 						</div>
 					</div>
 				</div>
 			</div>
-			<%} %>
 		</div>
-		<ul id="results"></ul>
-		<footer id="fh5co-footer" role="contentinfo">
-			<div class="container">
+		<%
+		}
+		%>
+	<ul id="results"></ul>
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
 
-				<div class="row copyright">
-					<div class="col-md-12 text-center">
-						<p>
-							<small class="block">&copy; 2024 DOORIBURN. All Rights
-								Reserved.</small> <small class="block">Designed by DOORIBURN</a></small>
-						</p>
-						<p>
-						<ul class="fh5co-social-icons">
-							<li><a href="#"><i class="icon-sun"></i></a></li>
-							<li><a href="#"><i class="icon-cloud"></i></a></li>
-						</ul>
-						</p>
-					</div>
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2024 DOORIBURN. All Rights
+							Reserved.</small> <small class="block">Designed by DOORIBURN</small>
+					</p>
+					<ul class="fh5co-social-icons">
+						<li><a href="#"><i class="icon-sun"></i></a></li>
+						<li><a href="#"><i class="icon-cloud"></i></a></li>
+					</ul>
 				</div>
-
 			</div>
-		</footer>
+
+		</div>
+	</footer>
 
 	</div>
 	<div class="gototop js-top">

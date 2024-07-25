@@ -160,7 +160,8 @@
 	                    <td colspan="3"><%= dto.getC_create_date() %> ~ <%= dto.getC_delete_date() %></td>
 	                </tr>
 	                <tr>
-	                    <td colspan="4" ><%= dto.getC_img() %></td>
+	                   <%--  <td colspan="4" ><%= dto.getC_img() %></td> --%>
+	                   <td><img src="<%= dto.getC_img() %>" alt="공모전 이미지"></td>
 	                </tr>
 	                <tr>
 	                    <td colspan="4" ><%= dto.getC_content() %></td>
@@ -168,6 +169,20 @@
 	            </tbody>
 			</table> 
 		</div>
+		
+		<div>
+		<!-- 목록 / 작성 / 삭제 -->
+		    <a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>
+        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
+			<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
+	        <!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! 위 삭제/수정 a태그 제거 해야됨-->
+	        <% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
+	        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
+				<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
+			<% } %>
+		</div>
+		
+		
 		
 		
 		<!-- 해당 게시글에 작성된 댓글 리스트 가져오기!!!! ┗|｀O′|┛  수정 중~~~~~~~-->
@@ -189,14 +204,19 @@
 					        out.println("작성자: " + comNick);
 					    %>
 						<tr> 
-							<td colspan=""><%= comDto.getCmt_img() %></td>
+							<td colspan="5" style="margin-left: 10px;"><%= comDto.getCmt_img() %></td>
 	                    </tr>
 	                    <tr>
-							<td><%= comNick %> %>
-							<td>♥ 아이콘 + 좋아요 수</td>
+							<td colspan="2" style="margin-left: 10px;" ><%= comNick %> %>
+							<td colspan="3" style="text-align: left; margin-right: 10px;">♥ 아이콘 + 좋아요 수</td>
+							CommentLikeDTO comLikeDto = new CommentLikeDTO(); 
+							comDto.getCmt_num(); <!-- 코멘트 번호 -->
+							
+							comLikeDto.getCmt_like(); 
+							
 	                    </tr>
 	                    <tr>	                    	
-							<td><%= comDto.getCmt_date() %></td> 
+							<td colspan="5" style="text-align: left; margin-right: 10px; "><%= comDto.getCmt_date() %></td> 
 	                    </tr> 
 					<% } %>  
 				</table>
@@ -212,32 +232,33 @@
 					<h3>공모전 응모를 위한 사진을 댓글로 올려주세요.</h3>
 				</header>
 				<% CommentDTO commentDto = new CommentDTO();  %>
-				<form method="post" encType = "multipart/form-data" action="CommentPostService?cmt_num=<%= commentDto.getCmt_num() %>&c_num=<%= commentDto.getC_num()%>">
+				<form method="post" encType = "multipart/form-data" action="commentPostAction.jsp?cmt_num=<%= commentDto.getCmt_num() %>&c_num=<%= commentDto.getC_num()%>">
 					<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-						<tr>
-							<td colspan="2" style="border-bottom:none; text-align: left;" valign="middle"><br><br><%= info.getNick() %></td>
+ 						<tr>
+							<td colspan="2" style="border-bottom:none; text-align: left;" valign="middle">
+								<%if (info == null){%>
+									<p>로그인 필요</p>
+								<% } else { %>
+									<%= info.getNick() %>
+								<%}%></td>
 						</tr>
 						<tr>
 							<td>   
 								<ul class="fh5co-social-icons">
-								    <% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
-								        <li>
-								        	<p>관리자 계정입니다.</p><br>
-								        </li>
-								    <% } else if (info != null){ %>
-								        <li>
-								            <label for="file">
-								                <div class="btn btn-file">
-								                    <i class="icon-camera"></i> 공모전 사진 선택
-								                </div>
-								            </label>
-								            <input type="file" name="commentImg" id="file" style="display: none;">
-								        </li> 
-								    <% } else { %>
-								        <li>
-								        	<p><a href="login.jsp">로그인 후 공모전에 응모할 수 있습니다.</a></p> 
-								        </li>
-								    <% }  %>
+									<% if (info != null) { %>
+									        <li>
+									            <label for="file">
+									                <div class="btn btn-file">
+									                    <i class="icon-camera"></i> 공모전 사진 선택
+									                </div>
+									            </label>
+									            <input type="file" name="commentImg" id="file" style="display: none;">
+									        </li>
+									<% } else { %>
+									    <li>
+									        <p><a href="login.jsp">로그인 후 공모전에 응모할 수 있습니다.</a></p>
+									    </li>
+									<% } %>
 								</ul> 
 							</td>							
 						</tr> 
@@ -249,15 +270,7 @@
 			</div>
 		</div> 
 		 
-		        <a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>
-		        
-		        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
-					<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
-		        <!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! 위 삭제/수정 a태그 제거 해야됨-->
-		        <% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
-		        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
-					<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
-				<% } %>
+
 	
 	 
 		<!-- 해당 글 삭제시 JavaScript Confirm 창 구현 -->

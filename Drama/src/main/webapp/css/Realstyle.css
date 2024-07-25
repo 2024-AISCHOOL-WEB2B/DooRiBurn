@@ -126,13 +126,19 @@ header {
 	flex-grow: 1;
 	font-size: 18px;
 	width: 50%;
+	margin-top: 8px;
 }
+
 
 .search-container button {
 	background: none;
 	border: none;
 	cursor: pointer;
 	font-size: 20px;
+}
+
+.search-container img {
+	margin-top: 8px;
 }
 
 .ranking {
@@ -187,6 +193,7 @@ header {
 	background-color: #fff;
 	padding: 20px;
 	border-radius: 10px;
+	height: 250px;
 }
 
 .intro h2 {
@@ -315,6 +322,8 @@ footer .btn {
 	border-radius: 50%;
 }
 
+
+
 @media ( max-width : 768px) {
 	.search-container {
 		width: 56%; /* 90%; */
@@ -359,3 +368,10 @@ footer .btn {
 		font-size: 25px;
 	}
 }
+
+
+/* .search-container img{
+	margin-top: 8px !important; 
+}*/
+	
+
