@@ -160,7 +160,8 @@
 	                    <td colspan="3"><%= dto.getC_create_date() %> ~ <%= dto.getC_delete_date() %></td>
 	                </tr>
 	                <tr>
-	                    <td colspan="4" ><%= dto.getC_img() %></td>
+	                   <%--  <td colspan="4" ><%= dto.getC_img() %></td> --%>
+	                   <td><img src="<%= dto.getC_img() %>" alt="공모전 이미지"></td>
 	                </tr>
 	                <tr>
 	                    <td colspan="4" ><%= dto.getC_content() %></td>
@@ -169,6 +170,17 @@
 			</table> 
 		</div>
 		
+		<div>
+		<!-- 목록 / 작성 / 삭제 -->
+		    <a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>
+        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
+			<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
+	        <!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! 위 삭제/수정 a태그 제거 해야됨-->
+	        <% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
+	        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
+				<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
+			<% } %>
+		</div>
 		
 		<!-- 해당 게시글에 작성된 댓글 리스트 가져오기!!!! ┗|｀O′|┛  수정 중~~~~~~~-->
 		<div class="container">
@@ -194,10 +206,12 @@
 	                    <tr>
 							<td colspan="2" style="margin-left: 10px;" ><%= comNick %> %>
 							<td colspan="3" style="text-align: left; margin-right: 10px;">♥ 아이콘 + 좋아요 수</td>
+							CommentLikeDTO comLikeDto = new CommentLikeDTO(); 
+							comDto.getCmt_num(); <!-- 코멘트 번호 -->
+							
+							comLikeDto.getCmt_like(); 
+							
 	                    </tr>
-	                    <tr>	                    	
-							<td colspan="5" style="text-align: center;"><%= comDto.getCmt_content() %></td> 
-	                    </tr> 
 	                    <tr>	                    	
 							<td colspan="5" style="text-align: left; margin-right: 10px; "><%= comDto.getCmt_date() %></td> 
 	                    </tr> 
@@ -248,15 +262,7 @@
 			</div>
 		</div> 
 		 
-		        <a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>
-		        
-		        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
-					<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
-		        <!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! 위 삭제/수정 a태그 제거 해야됨-->
-		        <% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
-		        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
-					<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
-				<% } %>
+
 	
 	 
 		<!-- 해당 글 삭제시 JavaScript Confirm 창 구현 -->

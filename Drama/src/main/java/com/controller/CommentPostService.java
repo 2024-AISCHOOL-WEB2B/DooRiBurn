@@ -29,9 +29,7 @@ public class CommentPostService extends HttpServlet {
 		String img = request.getParameter("conmmentImg");  
 		int num = Integer.parseInt(request.getParameter("c_num"));
 		String email = info.getEmail();
-		 
-		// cmt_content, cmt_title 삭제 필요~~ !!!!!!!!!!!!!!!!!!!!
-		
+		   
 		CommentDTO dto = new CommentDTO(img, num, email);
 		CommentDAO dao = new CommentDAO(); 
 		

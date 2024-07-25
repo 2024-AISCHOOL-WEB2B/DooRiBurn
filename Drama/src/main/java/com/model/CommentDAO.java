@@ -50,6 +50,7 @@ public class CommentDAO {
 		int cnt = 0; 
 		dbOpen();
 		
+		
 		try { 
 			String sql = "INSERT INTO TB_C_COMMENT VALUES (MSGNUM.NEXTVAL, ?, ?, TO_DATE(TO_CHAR(SYSDATE)), ?, ?, TO_DATE(TO_CHAR(ADD_MONTHS(SYSDATE, 1))))";
 			psmt = conn.prepareStatement(sql);

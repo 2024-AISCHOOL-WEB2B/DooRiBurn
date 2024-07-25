@@ -27,90 +27,11 @@
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
-
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-
-	</head>
-	</head>
-	<body>
-		
-	<div class="fh5co-loader"></div> 
-	<div id="page">
-	<nav class="fh5co-nav" role="navigation">
-		<div class="container">
-			<div class="row">
-				<div class="left-menu text-right menu-1">
-					<ul>
-						<li><a href="contact.jsp">회원가입</a></li>
-						<li><a href="about.html">로그인</a></li>
-						<li class="has-dropdown">
-							<a href="services.html">마이페이지</a>
-							<ul class="dropdown">
-								<li><a href="#">관심 촬영지</a></li>
-								<li><a href="#">회원정보수정</a></li>
-								<li><a href="#">참여한 공모전</a></li>
-								<li><a href="#">API</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				<div class="logo text-center">
-					<div id="fh5co-logo"><a href="index.jsp">여</a></div>
-				</div>
-				<div class="right-menu text-left menu-1">
-					<ul>
-						<li><a href="blog.html">공모전</a></li>
-						<li class="has-dropdown">
-							<a href="#">카테고리</a>
-							<ul class="dropdown">
-								<li><a href="#">HTML5</a></li>
-								<li><a href="#">CSS3</a></li>
-								<li><a href="#">Sass</a></li>
-								<li><a href="#">jQuery</a></li>
-							</ul>
-						</li>
-						<li><a href="contact.html">Contact</a></li>
-						<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
-					</ul>
-				</div>
-			</div>
-			
-		</div>
-	</nav>
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_2.jpg);">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-10 col-md-offset-1 text-center">
-					<div class="display-t" >
-						<div class="display-tc animate-box" data-animate-effect="fadeIn" > 
-							<div class="row">
-								<form class="form-inline" id="fh5co-header-subscribe">
-									<div class="col-md-6 col-md-offset-3">
  
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-  
+	<link rel="stylesheet" href="css/style.css">
+ 
+	</head>
+	<body> 
   		<%
 			// 글 번호 가져오기
 			int num = 0;
@@ -157,15 +78,7 @@
 	        </form>  
 	    </div>
 	</div>
-		
 		 
-		
-		
-	</div>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://bootstrap.js"></script>
-
-  
  	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 				  
@@ -186,22 +99,7 @@
 
 		</div>
 	</footer>
-	
-	</div>
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-	
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
+ 
 
 	</body>
 </html>
