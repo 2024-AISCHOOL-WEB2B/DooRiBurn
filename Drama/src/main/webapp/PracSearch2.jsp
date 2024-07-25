@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+<%-- <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="java.io.InputStreamReader"%>
@@ -9,14 +9,36 @@
 <%@ page
 	import="java.io.*, java.net.*, org.json.JSONArray, org.json.JSONObject"%>
 
-<%@page import="com.model.MemberDTO"%>
+
+<%@page import="com.model.MemberDTO"%> --%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%> --%>
+
+<!-- ------- 7/25 오후 7:17 위 주석 처리 -->
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="org.json.JSONArray"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="java.io.InputStreamReader"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.net.HttpURLConnection"%>
+<%@page import="java.net.URL"%>
+<%@page import="java.net.URLEncoder"%> <!-- 추가된 부분 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.model.MemberDTO"%>
+
+
+
+
 
 <!DOCTYPE HTML>
+<html lang="ko">
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>PracSearch</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,6 +89,7 @@
 		// Flask 서버의 URL 설정
 		URL url = new URL(
 		"http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
+
 		conn = (HttpURLConnection) url.openConnection();
 		// 요청 방식 및 헤더 설정
 		conn.setRequestMethod("GET");
@@ -88,11 +111,11 @@
 			in.close();
 
 			// JSON 데이터 파싱
+
 			JSONArray jsonArray = new JSONArray(response_data.toString());
 
 			if (jsonArray.length() > 0) {
 		System.out.println(jsonArray.length());
-		out.println("<ul>");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -101,7 +124,23 @@
 			scene.add(jsonObject.getString("장소설명"));
 			index.add(jsonObject.getInt("index"));
 		}
-		out.println("</ul>");
+
+		/* 7/25 오후 7:14 */
+		/* 		JSONArray jsonArray = new JSONArray(response_data.toString());
+		
+				if (jsonArray.length() > 0) {
+			System.out.println(jsonArray.length());
+			out.println("<ul>");
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+		
+				titles.add(jsonObject.getString("제목"));
+				places.add(jsonObject.getString("장소명"));
+				scene.add(jsonObject.getString("장소설명"));
+				index.add(jsonObject.getInt("index"));
+			}
+			out.println("</ul>"); */
+
 			} else {
 		out.println("No results found.");
 			}
@@ -159,7 +198,7 @@
 
 	<!-- 검색 -->
 	<div class="main-content">
-		<form action="search.jsp" method="get">
+		<form action="PracSearch2.jsp" method="get">
 			<div class="search-container" style="height: 30px;">
 				<select name="s_option" style="margin-right: 7px;">
 					<%
