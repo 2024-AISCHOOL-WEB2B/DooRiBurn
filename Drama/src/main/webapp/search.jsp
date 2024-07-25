@@ -239,7 +239,7 @@
 													<%
 													} else {
 													%>
-													<input name="search" type="text"
+													<input name="search" type="text" class="form-control"
 														placeholder="지역 또는 드라마 명을 검색하세요." value="<%=search%>"
 														style="flex-grow: 1; margin-right: 10px;">
 													<%
