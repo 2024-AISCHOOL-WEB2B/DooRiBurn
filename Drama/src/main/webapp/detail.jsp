@@ -43,7 +43,6 @@
 
 </head>
 <body>
-<<<<<<< HEAD
 	<% 
 	
 		String index = request.getParameter("index");
@@ -58,8 +57,8 @@
 		String time = film_detail.get(0).getFTel();
 		String scene = film_detail.get(0).getFTime();
 	%>
-	<div class="fh5co-loader"></div>
-	<div id="page">
+	<div class="fh5co-loader">
+	<div id="page"></div>
 		<nav class="fh5co-nav" role="navigation">
 			<div class="container">
 				<div class="row">
@@ -96,14 +95,14 @@
 						</ul>
 					</div>
 				</div>
-=======
-
+				</div>
+				</nav>
+				</div>
 	<!-- 배너 -->
 	<header>
 		<div class="banner">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 
 	<!-- 메뉴 -->
 	<div id="mySidenav" class="sidenav">
@@ -145,11 +144,6 @@
 
 
 	<!-- 상세 페이지 -->
-	<div class="container">
-		<header class="header">
-			<img src="images/jeju_aquarium.png" alt="Aquarium" class="header-img">
-		</header>
-<<<<<<< HEAD
 
 		<!-- 추가 -->
 		<div class="container">
@@ -157,6 +151,7 @@
 				<img src="images/jeju_aquarium.png" alt="Aquarium"
 					class="header-img">
 			</header>
+			</div>
 			<section class="info">
 				<h1><%= place %></h1>
 				<p class="address"><%= addr %></p>
@@ -195,19 +190,6 @@
 						</div>
 					</div>
 				</div>
-=======
-		<section class="info">
-			<h1 style="font-weight: bold;">제주도 한림수족관</h1>
-			<p class="address">제주특별자치도 제주시 한림읍 한림리 935-3</p>
-			<p class="hours">영업시간: 오후 6:30 목 오전 10:00에 영업 시작</p>
-			<p class="phone">전화번호: 064-796-6389</p>
-			<div class="tags">
-				<span>#데이트</span> <span>#가족</span> <span>#선업튀</span> <span>#수족관</span>
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
-			</div>
-		</section>
-
-
 
 		<!-- 드라마 상세 줄거리 -->
 		<div class="drama">
