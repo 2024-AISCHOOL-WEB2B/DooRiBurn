@@ -161,8 +161,10 @@
 	                </tr>
 	                <tr>
 	                   <%--  <td colspan="4" ><%= dto.getC_img() %></td> --%>
-	                   <td><img src="<%= dto.getC_img() %>" alt="공모전 이미지"></td>
-	                </tr>
+	                   <td><img src="boarding/<%= dto.getC_img() %>" alt="공모전 이미지"></td>
+	                </tr> 
+
+
 	                <tr>
 	                    <td colspan="4" ><%= dto.getC_content() %></td>
 	                </tr>
@@ -229,7 +231,7 @@
 		<div class="container">
 			<div class="form-group">
 				<header>
-					<h3>공모전 응모를 위한 사진을 댓글로 올려주세요.</h3>
+					<h4>공모전 응모를 위한 사진을 댓글로 올려주세요.</h4>
 				</header>
 				<% CommentDTO commentDto = new CommentDTO();  %>
 				<form method="post" encType = "multipart/form-data" action="commentPostAction.jsp?cmt_num=<%= commentDto.getCmt_num() %>&c_num=<%= commentDto.getC_num()%>">
@@ -256,7 +258,7 @@
 									        </li>
 									<% } else { %>
 									    <li>
-									        <p><a href="login.jsp">로그인 후 공모전에 응모할 수 있습니다.</a></p>
+									        <p><a href="login.jsp" >로그인 후 공모전에 응모할 수 있습니다.</a></p>
 									    </li>
 									<% } %>
 								</ul> 
