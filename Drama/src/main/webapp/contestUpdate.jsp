@@ -135,7 +135,7 @@
 				<table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
 					<thead>
 						<tr>
-							<th style="background-color: #f9f9f9; text-align: center;">공모전 게시글 수정</th> 
+							<th colspan="2" style="background-color: #f9f9f9; text-align: center;">공모전 게시글 수정</th> 
 						</tr>
 					</thead>
 					<tbody style="background-color: #f9f9f9;"> 
@@ -145,11 +145,16 @@
 						<tr> 
 							<td><textarea class="form-control" placeholder="내용을 입력해주세요." name="contestContent" style="height: 350px; background-color: #f5f5f5;"><%=dto.getC_content() %></textarea></td>
 						</tr>   
-						<tr>
-							<td>기존 이미지 띄울 예정</td>	
-							<!-- <td><img src="   dto.getC_img_path() " alt="공모전 이미지"></td> -->					
+<%-- 						<tr>
+							<td style="width=5px;"><p>기존 이미지</p></td> 
 						</tr> 
-						<tr>
+						<tr>  
+							<td><img src="boardImg/<%= dto.getC_img() %>" alt="공모전 이미지" style="max-width: 100%; height: auto;"></td>			
+						</tr> 
+						<tr> --%>
+							<td><p>수정할 이미지를 업로드 하세요</p></td>
+						</tr>
+						<tr> 
 							<td>
 								<ul class="fh5co-social-icons">  
 		                            <label for="file">
@@ -157,33 +162,76 @@
 		                                    <i class="icon-camera"></i> 사진 업로드
 		                                </div>
 		                            </label>
-		                            <input type="file" name="contestImg" id="file" style="display: none;">
-								</ul>
-							</td>							
-						</tr> 
+									<input type="file" name="contestImg" id="file" style="display: none;" onchange="previewImage(this);">
+	                            </ul>
+	                        </td>                           
+	                    </tr> 
+	                    <tr>
+	                        <td>
+	                            <div id="imagePreview">
+	                                <%-- 이미지 미리보기를 표시할 공간 --%>
+	                                <img id="preview" src="" alt="이미지 미리보기" style="max-width: 100%; height: auto;">
+	                            </div>
+	                        </td>
+	                    </tr> 
 					</tbody>
 				</table>
 	            <input type="hidden" name="c_num" value="<%= dto.getC_num() %>">
 	            <input type="submit" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;" value="수정">
-	            <a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>
-			</form>  		  
+			</form>
+			<a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>  		
+			<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>  
 		</div> 
   
+  
+           
+        
+        
+        
 		
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>
 	
-	<!-- JavaScript Confirm 창 구현 -->
+	<!-- 삭제 버튼 클릭시 Confirm 창 구현 -->
 	<script>
 		function confirmUpdate(num) {
-			var result = confirm("정말로 삭제하시겠습니까?");
+			var result = confirm("삭제하시겠습니까?");
+			if (result) {
+				location.href = "ContestDeleteService?c_num=" + num;
+			}
+		}
+	</script>
+	
+	<!-- 수정 버튼 클릭시 Confirm 창 구현 -->
+	<script>
+		function confirmUpdate(num) {
+			var result = confirm("수정하시겠습니까?");
 			if (result) {
 				location.href = "ContestUpdateService?c_num=" + num;
 			}
 		}
 	</script>
-  
+	
+	 
+
+	<!-- 수정할 때 사진 업로드시 사진 볼 수 있게 구현 -->
+	<script>
+	function previewImage(input) {
+	    var file = input.files[0];
+	    var reader = new FileReader();
+	
+	    reader.onload = function(e) {
+	        $('#imagePreview').empty(); // 이미지 미리보기 엘리먼트 초기화
+	        $('#imagePreview').append($('<img>').attr('src', e.target.result).attr('id', 'preview').css({'max-width': '100%', 'height': 'auto'}));
+	    };
+	
+	    if (file) {
+	        reader.readAsDataURL(file);
+	    }
+	}
+	</script> 
+	  
  	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 				  

@@ -148,8 +148,14 @@
 	                                    <i class="icon-camera"></i> 사진 업로드
 	                                </div>
 	                            </label>
-	                            <input type="file" name="contestImg" id="file" style="display: none;" required>
-	                        </td>							
+	                            <input type="file" name="contestImg" id="file" style="display: none;" required onchange="previewImage(event);">
+	                        </td> 
+						</tr>
+						<tr>
+						    <td>
+						        <div id="imagePreview"></div>
+						    </td>
+						</tr>							
 	                    </tr> 
 	                </tbody>
 	            </table>
@@ -164,7 +170,23 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>
-
+	<!-- 업로드한 사진 미리보기 -->
+	<script>
+	function previewImage(event) {
+	    var input = event.target;
+	    var reader = new FileReader();
+	
+	    reader.onload = function() {
+	        var dataURL = reader.result;
+	        var imagePreview = document.getElementById('imagePreview');
+	        imagePreview.innerHTML = '<img src="' + dataURL + '" alt="이미지 미리보기" style="max-width: 100%; height: auto;">';
+	    };
+	
+	    if (input.files && input.files[0]) {
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	</script>
   
  	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">

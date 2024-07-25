@@ -141,7 +141,7 @@
 		    
 		%>
   
-	<!-- 공모전 게시글 작성 ┗|｀O′|┛ -->
+	<!-- 공모전 게시글 ┗|｀O′|┛ -->
 	<div class="container">
 		<div class="row"> 
 	        <table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
@@ -159,12 +159,9 @@
 	                    <td>공모일</td>
 	                    <td colspan="3"><%= dto.getC_create_date() %> ~ <%= dto.getC_delete_date() %></td>
 	                </tr>
-	                <tr>
-	                   <%--  <td colspan="4" ><%= dto.getC_img() %></td> --%>
-	                   <td><img src="boarding/<%= dto.getC_img() %>" alt="공모전 이미지"></td>
+	                <tr> 
+	                   <td colspan="4"><img src="boardImg/<%= dto.getC_img() %>" alt="공모전 이미지" style="max-width: 100%; height: auto;"></td>
 	                </tr> 
-
-
 	                <tr>
 	                    <td colspan="4" ><%= dto.getC_content() %></td>
 	                </tr>
@@ -239,7 +236,7 @@
  						<tr>
 							<td colspan="2" style="border-bottom:none; text-align: left;" valign="middle">
 								<%if (info == null){%>
-									<p>로그인 필요</p>
+									<p></p>
 								<% } else { %>
 									<%= info.getNick() %>
 								<%}%></td>
@@ -258,7 +255,7 @@
 									        </li>
 									<% } else { %>
 									    <li>
-									        <p><a href="login.jsp" >로그인 후 공모전에 응모할 수 있습니다.</a></p>
+									        <p><a href="login.jsp" style="color: #000">로그인 후 공모전에 응모할 수 있습니다.</a></p>
 									    </li>
 									<% } %>
 								</ul> 
