@@ -189,14 +189,17 @@
 					        out.println("작성자: " + comNick);
 					    %>
 						<tr> 
-							<td colspan=""><%= comDto.getCmt_img() %></td>
+							<td colspan="5" style="margin-left: 10px;"><%= comDto.getCmt_img() %></td>
 	                    </tr>
 	                    <tr>
-							<td><%= comNick %> %>
-							<td>♥ 아이콘 + 좋아요 수</td>
+							<td colspan="2" style="margin-left: 10px;" ><%= comNick %> %>
+							<td colspan="3" style="text-align: left; margin-right: 10px;">♥ 아이콘 + 좋아요 수</td>
 	                    </tr>
 	                    <tr>	                    	
-							<td><%= comDto.getCmt_date() %></td> 
+							<td colspan="5" style="text-align: center;"><%= comDto.getCmt_content() %></td> 
+	                    </tr> 
+	                    <tr>	                    	
+							<td colspan="5" style="text-align: left; margin-right: 10px; "><%= comDto.getCmt_date() %></td> 
 	                    </tr> 
 					<% } %>  
 				</table>
@@ -220,24 +223,20 @@
 						<tr>
 							<td>   
 								<ul class="fh5co-social-icons">
-								    <% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
-								        <li>
-								        	<p>관리자 계정입니다.</p><br>
-								        </li>
-								    <% } else if (info != null){ %>
-								        <li>
-								            <label for="file">
-								                <div class="btn btn-file">
-								                    <i class="icon-camera"></i> 공모전 사진 선택
-								                </div>
-								            </label>
-								            <input type="file" name="commentImg" id="file" style="display: none;">
-								        </li> 
-								    <% } else { %>
-								        <li>
-								        	<p><a href="login.jsp">로그인 후 공모전에 응모할 수 있습니다.</a></p> 
-								        </li>
-								    <% }  %>
+									<% if (info != null) { %>
+									        <li>
+									            <label for="file">
+									                <div class="btn btn-file">
+									                    <i class="icon-camera"></i> 공모전 사진 선택
+									                </div>
+									            </label>
+									            <input type="file" name="commentImg" id="file" style="display: none;">
+									        </li>
+									<% } else { %>
+									    <li>
+									        <p><a href="login.jsp">로그인 후 공모전에 응모할 수 있습니다.</a></p>
+									    </li>
+									<% } %>
 								</ul> 
 							</td>							
 						</tr> 
