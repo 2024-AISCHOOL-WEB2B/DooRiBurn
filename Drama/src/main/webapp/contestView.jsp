@@ -52,15 +52,35 @@
   
   
 	<script src="js/modernizr-2.6.2.min.js"></script> 
-	 <!-- 메뉴 위치 우상단으로 조정 -->
 	<style>
+	/* 메뉴 위치 우상단으로 조정 */
 	.menu-icon {
 	    position: absolute;
 	    top: 10px;  
 	    right: 20px; 
 	    cursor: pointer; 
 	}
-	</style> 
+ 
+	/* 사진 업로드 style*/
+	#uploadLabel .btn-file {
+	    background-color: #FFEEB9 !important;  
+	    border-color: #FFEEB9 !important;  
+	    color: #000 !important;
+		border: 1px solid; 
+        border-radius: 25px; 
+        box-shadow: none;
+        padding: 8px 15px; 
+	} 
+	/* 댓글 작성 style*/
+     #uploadInput {
+        background-color: #FFEEB9 !important;
+        border-color: #FFEEB9 !important; 
+        color: #000 !important; 
+        border: 1px solid; 
+        border-radius: 25px; 
+        box-shadow: none;
+        padding: 8px 15px; 
+	</style>  
 	
 	</head> 
 	<body>
@@ -279,13 +299,12 @@
 						</tr> 
 						<tr> 
 							<td><br><input type="submit" class="btn-primary pull" value="댓글 작성"></td>
-						</tr>  -->
-								
+						</tr>  --> 
 								
 <%-- 👋👋👋👋👋👋👋 찐 코드 !!!!!!!!!!!!!!!! --%>
 								<ul class="fh5co-social-icons">
  									<% if (info != null) { %>
-									<li><label for="file">
+									<li><label for="file" id="uploadLabel">
 											<div class="btn btn-file">
 												<i class="icon-camera"></i> 공모전 사진 선택
 											</div>
@@ -307,7 +326,7 @@
 							</td>							
 						</tr> 
 						<tr> 
-							<td><br><input type="submit" class="btn-primary pull" value="댓글 작성" onclick="checkLogin()"></td>
+							<td><br><input type="submit" id="uploadInput" value="댓글 작성" onclick="checkLogin()"></td>
 						</tr> 
 						 
 					</table>

@@ -56,13 +56,16 @@
 	    cursor: pointer; 
 	}
  
-	/* .btn-file 클래스에 대한 스타일 조정 */
+	/* 사진 업로드 style*/
 	#uploadLabel .btn-file {
 	    background-color: #FFEEB9 !important;  
 	    border-color: #FFEEB9 !important;  
 	    color: #000 !important;
-	} 
-	 
+		border: 1px solid; 
+        border-radius: 25px; 
+        box-shadow: none;
+        padding: 8px 15px; 
+	}  
 	</style> 
 	</head> 
 	<body>
