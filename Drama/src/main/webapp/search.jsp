@@ -49,9 +49,7 @@
 	content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 <meta name="author" content="FreeHTML5.co" />
 
-<meta property="og:title" content="" />
-<meta property="og:image" content="" />
-<meta property="og:url" content="" />
+
 <meta property="og:site_name" content="" />
 <meta property="og:description" content="" />
 <meta name="twitter:title" content="" />
@@ -101,8 +99,7 @@
 	HttpURLConnection conn = null;
 	try {
 		// Flask 서버의 URL 설정
-		URL url = new URL(
-		"http://localhost:5001/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
+		URL url = new URL("http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
 		conn = (HttpURLConnection) url.openConnection();
 		// 요청 방식 및 헤더 설정
 		conn.setRequestMethod("GET");
@@ -314,14 +311,14 @@
 			<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
 			<div class="row">
 				<div class="col-lg-4 col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="#"><img class="img-responsive"
+					<div class="fh5co-blog animate-box" >
+						<img class="img-responsive"
 							src="https://th.bing.com/th/id/OIP.FKwVfi4SsgnhqTDPMLoLTAHaE7?w=300&h=199&c=7&r=0&o=5&pid=1.7"
-							alt=""></a>
+							alt="">
 						<!-- 해당 장소 사진 -->
-						<div class="blog-text">
+						<div class="blog-text" onclick="goToAddress('http://localhost:8082/Drama/detail.jsp?index=<%= index.get(i)+1%>')">
 							<h3>
-								<a href="" #><%=places.get(i)%></a>
+								<%=places.get(i)%>
 							</h3>
 							<!-- 장소명 -->
 							<span class="posted_on"><%=titles.get(i)%></span>
@@ -329,8 +326,6 @@
 							<span class="favorites">⭐</span>
 							<!-- 즐겨찾기 -->
 							<p><%=seen%></p>
-							<!-- 상세줄거리 미리보기 -->
-							<a href="#" class="btn btn-primary">상세보기</a>
 						</div>
 					</div>
 				</div>
@@ -374,6 +369,12 @@
 	<script src="js/jquery.waypoints.min.js"></script>
 	<!-- Main -->
 	<script src="js/main.js"></script>
+	
+	 <script>
+        function goToAddress(url) {
+            location.href = url;
+        }
+    </script>
 
 </body>
 </html>
