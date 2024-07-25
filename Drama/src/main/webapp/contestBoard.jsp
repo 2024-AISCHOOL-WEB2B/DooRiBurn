@@ -151,9 +151,10 @@
 				</tbody>
 			</table>  
 		</div>
+<!-- 아래 글작성 a태그 제거 해야됨-->
 			<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a>
 			
-			<!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! 위 글작성 a태그 제거 해야됨-->
+<!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! -->
 			<% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
 				<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a>
 			<% } %>  
