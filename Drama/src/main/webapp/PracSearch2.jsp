@@ -36,6 +36,20 @@
 
 <link rel="stylesheet" href="css/PracSearch.css">
 
+
+<style>
+.box .image img {
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
+	margin: 0; /* 이미지의 여백 제거 */
+	display: block; /* 이미지 중앙 정렬 */
+	margin-left: 10px;
+	border-radius: 7px;
+}
+</style>
+
+
 </head>
 <body>
 	<%
