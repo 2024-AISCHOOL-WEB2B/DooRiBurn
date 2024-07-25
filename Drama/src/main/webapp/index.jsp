@@ -129,13 +129,15 @@
 								<br>
 								<div class="row">
 									<form class="form-inline" id="fh5co-header-subscribe"
-										action="SearchService">
+										action="search.jsp" method="get">
 										<div class="col-md-6 col-md-offset-3">
 											<div class="search-container"
 												style="display: flex; align-items: center;">
-												<select name="category" style="margin-right: 10px;">
-													<option value="0">  장소 및 지역</option>
-													<option value="1">드라마</option>
+												
+												<select name="s_option" style="margin-right: 10px;">
+													<option value="1">장소및 지역</option>
+													<option value="0">드라마</option>
+													
 												</select> <input name="search" type="text"
 													placeholder="지역 또는 드라마 명을 검색하세요."
 													style="flex-grow: 1; margin-right: 10px;">
