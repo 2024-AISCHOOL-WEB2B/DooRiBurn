@@ -295,9 +295,9 @@
 							<a href="#"><img class="img-responsive"
 								src="https://th.bing.com/th/id/OIP.FKwVfi4SsgnhqTDPMLoLTAHaE7?w=300&h=199&c=7&r=0&o=5&pid=1.7" alt=""></a>
 							<!-- 해당 장소 사진 -->
-							<div class="blog-text">
+							<div class="blog-text" OnClick="location.href ='http://localhost:8082/Drama/detail.jsp?index=<%=index.get(i) %>'"  style="cursor:pointer;">
 								<h3>
-									<a href="" #><%=places.get(i) %></a>
+									<a href=""><%=places.get(i) %></a>
 								</h3>
 								<!-- 장소명 -->
 								<span class="posted_on"><%=titles.get(i) %></span>

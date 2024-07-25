@@ -1,3 +1,8 @@
+<%@page import="com.model.DramaSearchDTO"%>
+<%@page import="com.model.DramaSearchDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.model.ContestDTO"%>
+<%@page import="com.model.ContestDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -79,7 +84,20 @@
 
 </head>
 <body>
-
+	<% 
+	
+		String index = request.getParameter("index");
+		DramaSearchDAO dao = new DramaSearchDAO();
+		ArrayList<DramaSearchDTO> film_detail = dao.film_detail(index);
+		String drama = film_detail.get(0).getDrama();
+		String place = film_detail.get(0).getFName();
+		String addr = film_detail.get(0).getFAddr();
+		double lat = film_detail.get(0).getLat();
+		double lon = film_detail.get(0).getLon();
+		String tel = film_detail.get(0).getScene();
+		String time = film_detail.get(0).getFTel();
+		String scene = film_detail.get(0).getFTime();
+	%>
 	<div class="fh5co-loader"></div>
 	<div id="page">
 		<nav class="fh5co-nav" role="navigation">
@@ -157,10 +175,11 @@
 					class="header-img">
 			</header>
 			<section class="info">
-				<h1>제주도 한림수족관</h1>
-				<p class="address">제주특별자치도 제주시 한림읍 한림리 935-3</p>
-				<p class="hours">영업시간: 곧 영업 종료: 오후 6:30 목 오전 10:00에 영업 시작</p>
-				<p class="phone">전화번호: 064-796-6389</p>
+				<h1><%= place %></h1>
+				<p class="address"><%= addr %></p>
+				<p class="hours">영업시간: <%= time %></p>
+				<p class="phone">전화번호: <%= tel %></p>
+				<p class="phone">촬영지속 드라마 장면 : <%=scene %></p>
 				<div class="tags">
 					<span>#데이트</span> <span>#가족</span> <span>#선암귀</span> <span>#수족관</span>
 				</div>

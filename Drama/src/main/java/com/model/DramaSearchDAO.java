@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DramaSearchDAO {
 	private Connection conn;
@@ -47,6 +48,46 @@ public class DramaSearchDAO {
 				
 			}
 	
-	
+public ArrayList<DramaSearchDTO> film_detail(String index) {
+		
+		ArrayList<DramaSearchDTO> detail_list = new ArrayList<DramaSearchDTO>();
+		
+		try {
+			getConnection();
+
+			String sql = "SELECT * FROM TB_FILM_LOCATION WHERE F_NUM = ?";
+
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1,index);
+
+			rs = psmt.executeQuery();
+
+			while(rs.next()) {
+				double f_num = rs.getDouble("F_NUM");
+				String drama =  rs.getString("DRAMA");
+				String f_addr = rs.getString("F_ADDR");
+				double lat = rs.getDouble("LAT");
+				double lon = rs.getDouble("LON");
+				String f_name = rs.getString("F_NAME");
+				String f_tel = rs.getString("F_TEL");
+				String f_time = rs.getString("F_TIME");
+				String scene = rs.getString("SCENE");
+
+				DramaSearchDTO dto = new DramaSearchDTO(f_num,drama, f_addr, lat, lon, f_name, f_tel, f_time, scene);
+				
+				detail_list.add(dto);
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("권한 확인 실패");
+
+		} finally {
+			close();
+		}
+		return detail_list;
+	}
 	
 }
