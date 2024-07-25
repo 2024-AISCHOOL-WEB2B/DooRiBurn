@@ -182,6 +182,9 @@
 			<% } %>
 		</div>
 		
+		
+		
+		
 		<!-- 해당 게시글에 작성된 댓글 리스트 가져오기!!!! ┗|｀O′|┛  수정 중~~~~~~~-->
 		<div class="container">
 			<div class="row">
@@ -229,10 +232,15 @@
 					<h3>공모전 응모를 위한 사진을 댓글로 올려주세요.</h3>
 				</header>
 				<% CommentDTO commentDto = new CommentDTO();  %>
-				<form method="post" encType = "multipart/form-data" action="CommentPostService?cmt_num=<%= commentDto.getCmt_num() %>&c_num=<%= commentDto.getC_num()%>">
+				<form method="post" encType = "multipart/form-data" action="commentPostAction.jsp?cmt_num=<%= commentDto.getCmt_num() %>&c_num=<%= commentDto.getC_num()%>">
 					<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-						<tr>
-							<td colspan="2" style="border-bottom:none; text-align: left;" valign="middle"><br><br><%= info.getNick() %></td>
+ 						<tr>
+							<td colspan="2" style="border-bottom:none; text-align: left;" valign="middle">
+								<%if (info == null){%>
+									<p>로그인 필요</p>
+								<% } else { %>
+									<%= info.getNick() %>
+								<%}%></td>
 						</tr>
 						<tr>
 							<td>   
