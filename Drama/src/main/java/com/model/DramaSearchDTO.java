@@ -14,7 +14,20 @@ public class DramaSearchDTO {
     // 주소 
     private String f_addr;
 
-    // 위도 
+    public DramaSearchDTO(Double f_num, String drama, String f_addr, Double lat, Double lon, String f_name,
+			String scene, String f_tel, String f_time) {
+		this.f_num = f_num;
+		this.drama = drama;
+		this.f_addr = f_addr;
+		this.lat = lat;
+		this.lon = lon;
+		this.f_name = f_name;
+		this.scene = scene;
+		this.f_tel = f_tel;
+		this.f_time = f_time;
+	}
+
+	// 위도 
     private Double lat;
 
     // 경도 
