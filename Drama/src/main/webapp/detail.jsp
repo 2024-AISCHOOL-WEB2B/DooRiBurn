@@ -1,3 +1,8 @@
+<%@page import="com.model.DramaSearchDTO"%>
+<%@page import="com.model.DramaSearchDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.model.ContestDTO"%>
+<%@page import="com.model.ContestDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,12 +35,67 @@
 
 </head>
 <body>
+<<<<<<< HEAD
+	<% 
+	
+		String index = request.getParameter("index");
+		DramaSearchDAO dao = new DramaSearchDAO();
+		ArrayList<DramaSearchDTO> film_detail = dao.film_detail(index);
+		String drama = film_detail.get(0).getDrama();
+		String place = film_detail.get(0).getFName();
+		String addr = film_detail.get(0).getFAddr();
+		double lat = film_detail.get(0).getLat();
+		double lon = film_detail.get(0).getLon();
+		String tel = film_detail.get(0).getScene();
+		String time = film_detail.get(0).getFTel();
+		String scene = film_detail.get(0).getFTime();
+	%>
+	<div class="fh5co-loader"></div>
+	<div id="page">
+		<nav class="fh5co-nav" role="navigation">
+			<div class="container">
+				<div class="row">
+					<div class="left-menu text-right menu-1">
+						<ul>
+							<li><a href="contact.jsp">회원가입</a></li>
+							<li><a href="about.html">로그인</a></li>
+							<li class="has-dropdown"><a href="services.html">마이페이지</a>
+								<ul class="dropdown">
+									<li><a href="#">관심 촬영지</a></li>
+									<li><a href="#">회원정보수정</a></li>
+									<li><a href="#">참여한 공모전</a></li>
+									<li><a href="#">API</a></li>
+								</ul></li>
+						</ul>
+					</div>
+					<div class="logo text-center">
+						<div id="fh5co-logo">
+							<a href="index.jsp">여</a>
+						</div>
+					</div>
+					<div class="right-menu text-left menu-1">
+						<ul>
+							<li><a href="blog.html">공모전</a></li>
+							<li class="has-dropdown"><a href="#">카테고리</a>
+								<ul class="dropdown">
+									<li><a href="#">HTML5</a></li>
+									<li><a href="#">CSS3</a></li>
+									<li><a href="#">Sass</a></li>
+									<li><a href="#">jQuery</a></li>
+								</ul></li>
+							<li><a href="contact.html">Contact</a></li>
+							<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li> -->
+						</ul>
+					</div>
+				</div>
+=======
 
 	<!-- 배너 -->
 	<header>
 		<div class="banner">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
+>>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 
 	<!-- 메뉴 -->
 	<div id="mySidenav" class="sidenav">
@@ -81,6 +141,53 @@
 		<header class="header">
 			<img src="images/jeju_aquarium.png" alt="Aquarium" class="header-img">
 		</header>
+<<<<<<< HEAD
+
+		<!-- 추가 -->
+		<div class="container">
+			<header class="header">
+				<img src="images/jeju_aquarium.png" alt="Aquarium"
+					class="header-img">
+			</header>
+			<section class="info">
+				<h1><%= place %></h1>
+				<p class="address"><%= addr %></p>
+				<p class="hours">영업시간: <%= time %></p>
+				<p class="phone">전화번호: <%= tel %></p>
+				<p class="phone">촬영지속 드라마 장면 : <%=scene %></p>
+				<div class="tags">
+					<span>#데이트</span> <span>#가족</span> <span>#선암귀</span> <span>#수족관</span>
+				</div>
+			</section>
+			<!-- 여기까지 -->
+
+			<div id="fh5co-blog" class="fh5co-bg-section">
+				<div class="container">
+					<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
+					<div class="row">
+						<div class="col-lg-4 col-md-4">
+							<div class="fh5co-blog animate-box">
+								<a href="#"><img class="img-responsive"
+									src="images/work-4.jpg" alt=""></a>
+								<!-- 해당 장소 사진 -->
+								<div class="blog-text">
+									<h3>
+										<a href="" #>수원 행궁동 행리단길</a>
+									</h3>
+									<!-- 장소명 -->
+									<span class="posted_on">선재 업고 튀어</span>
+									<!-- 드라마명 -->
+									<span class="favorites">⭐</span>
+									<!-- 즐겨찾기 -->
+									<p>'선재 업고 튀어' 9화에서 선재와 솔이가 첫 데이트를 하는 장소로..</p>
+									<!-- 상세줄거리 미리보기 -->
+									<a href="#" class="btn btn-primary">상세보기</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+=======
 		<section class="info">
 			<h1 style="font-weight: bold;">제주도 한림수족관</h1>
 			<p class="address">제주특별자치도 제주시 한림읍 한림리 935-3</p>
@@ -88,6 +195,7 @@
 			<p class="phone">전화번호: 064-796-6389</p>
 			<div class="tags">
 				<span>#데이트</span> <span>#가족</span> <span>#선업튀</span> <span>#수족관</span>
+>>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 			</div>
 		</section>
 

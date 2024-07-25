@@ -8,14 +8,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>contestPostAction.jsp</title>
+<title>commentPostAction.jsp</title>
 </head>
 <body>
 
 
 <!-- 댓글 작성 action  --> 
-
-
 	<%
 	request.setCharacterEncoding("UTF-8");
 	

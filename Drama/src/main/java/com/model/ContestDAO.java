@@ -57,8 +57,7 @@ public class ContestDAO {
 		try { 
 			String sql = "INSERT INTO TB_CONTEST (c_title, c_create_date, c_img, c_content, c_delete_date) VALUES (?, TO_DATE(TO_CHAR(SYSDATE)), ?, ?, TO_DATE(TO_CHAR(ADD_MONTHS(SYSDATE, 1))))"; 
 			psmt = conn.prepareStatement(sql);
-			
-			
+			 
 			psmt.setString(1, dto.getC_title());
 			psmt.setString(2, dto.getC_img());
 			psmt.setString(3, dto.getC_content());
