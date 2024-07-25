@@ -128,11 +128,16 @@ header {
 	width: 50%;
 }
 
+
 .search-container button {
 	background: none;
 	border: none;
 	cursor: pointer;
 	font-size: 20px;
+}
+
+.search-container img {
+	margin-top: 8px;
 }
 
 .ranking {
@@ -315,6 +320,8 @@ footer .btn {
 	border-radius: 50%;
 }
 
+
+
 @media ( max-width : 768px) {
 	.search-container {
 		width: 56%; /* 90%; */
@@ -358,4 +365,10 @@ footer .btn {
 	.menu-icon {
 		font-size: 25px;
 	}
+}
+
+
+/* .search-container img{
+	margin-top: 8px !important; */
+	
 }
