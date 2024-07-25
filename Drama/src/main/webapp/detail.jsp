@@ -8,18 +8,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- 폰트 -->
-<link href="https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700"
+	rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap"
+	rel="stylesheet">
 
 <!-- CSS 파일 연결 -->
 <link rel="stylesheet" href="css/detail.css">
 <link rel="stylesheet" href="css/Realstyle.css">
 
 <!-- 카카오 맵 API 스크립트 찾아서 연결해야 함!! -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f589bcfaff80d0ddfe6b7666abe62fea"></script>
+
+<!-- <style>
+@media ( max-width : 768px) {
+	.image {
+		width: 100px !important;
+	}
+}
+</style> -->
 
 </head>
 <body>
@@ -52,10 +67,22 @@
 		<div class="menu-section">
 			<h2>마이 페이지</h2>
 			<div class="menu-itemss">
-				<a href="#">회원정보 수정</a> <a href="#">관심 촬영지</a> <a href="#">참여한 공모전</a>
+				<a href="#">회원정보 수정</a> <a href="#">관심 촬영지</a> <a href="#">참여한
+					공모전</a>
 			</div>
 		</div>
 	</div>
+
+	<!-- 검색 입력 ????????? -->
+	<div>
+		<input type="text" id="searchQuery" placeholder="검색어 입력"> <select
+			id="searchOption">
+			<option value="0">제목</option>
+			<option value="1">장소</option>
+		</select>
+		<button onclick="search()">검색</button>
+	</div>
+
 
 	<!-- 상세 페이지 -->
 	<div class="container">
@@ -71,7 +98,9 @@
 				<span>#데이트</span> <span>#가족</span> <span>#선업튀</span> <span>#수족관</span>
 			</div>
 		</section>
-	
+
+
+
 		<!-- 드라마 상세 줄거리 -->
 		<div class="drama">
 			<!-- 왼쪽 사진 -->
@@ -79,16 +108,57 @@
 			<!-- 오른쪽 텍스트 -->
 			<div class="text">
 				<h1>선재 업고 튀어 6화</h1>
-				<p>태성의 사귀자는 고백의 내막을 알게 된 솔은 태성에게 이별을 고한다. 이후, 선재와 함께 수족관을 방문하는데... (중략) mp3에 녹음된 선재의 고백을 수족관에서 뒤늦게 듣게 된 솔. 그때부터 선재가 의식되고 가슴이 두근두근거린다.</p>
+				<p>태성의 사귀자는 고백의 내막을 알게 된 솔은 태성에게 이별을 고한다. 이후, 선재와 함께 수족관을
+					방문하는데... (중략) mp3에 녹음된 선재의 고백을 수족관에서 뒤늦게 듣게 된 솔. 그때부터 선재가 의식되고 가슴이
+					두근두근거린다.</p>
 			</div>
 		</div>
 
-		<!-- 카카오 맵 -->
-		<div id="map" style="width:100%;height:350px;"></div>
+		<!-- 카카오 맵 지도 연결 -->
+		<div id="map" style="width: 100%; height: 350px;"></div>
+
+		<div></div>
 	</div>
 
 	<!-- JavaScript 파일 연결 -->
 	<script src="js/menu.js"></script>
-	<script src="js/map.js"></script> <!-- 카카오 맵 초기화 스크립트 파일 연결 -->
+	<script src="js/map.js"></script>
+	<!-- 카카오 맵 초기화 스크립트 파일 연결 -->
+
+	<script>
+		function search() {
+			var query = document.getElementById('searchQuery').value;
+			var option = document.getElementById('searchOption').value;
+			fetch(`http://localhost:5002/search?search=${query}&s_option=${option}`)
+				.then(response => response.json())
+				.then(data => {
+					if (data !== "없는결과") {
+						displayResults(data);
+					} else {
+						alert("검색 결과가 없습니다.");
+					}
+				});
+		}
+		
+		
+		function displayResults(results) {
+			
+			let lat =  37.5290674
+			let lon =  126.936218
+			var mapContainer = document.getElementById('map');
+			var mapOption = { 
+				center: new kakao.maps.LatLng(lat, lon),
+				level: 3 
+			}; 
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			results.forEach(result => {
+				var markerPosition = new kakao.maps.LatLng(result.위도, result.경도);
+				var marker = new kakao.maps.Marker({
+					position: markerPosition
+				});
+				marker.setMap(map);
+			});
+		}
+	</script>
 </body>
 </html>

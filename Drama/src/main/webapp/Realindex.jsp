@@ -108,7 +108,7 @@
 			</div>
 		</div>
 
-		<div class="intro" style="height: 230px">
+		<div class="intro">
 			<h2 class="highlight">선재 업고 튀어에 나온 그 장소!</h2>
 			<h2 class="highlight">나도 가 볼까?</h2>
 
