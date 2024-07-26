@@ -74,17 +74,17 @@ h1, h2, h3, h4, h5, h6, figure {
 
 ::-webkit-selection {
   color: #fff;
-  background: #F36363;
+  background: #eea236;
 }
 
 ::-moz-selection {
   color: #fff;
-  background: #F36363;
+  background: #eea236;
 }
 
 ::selection {
   color: #fff;
-  background: #F36363;
+  background: #eea236;
 }
 
 .fh5co-nav {
@@ -96,12 +96,14 @@ h1, h2, h3, h4, h5, h6, figure {
   padding: 40px 0;
   z-index: 1001;
 }
+/*
 @media screen and (max-width: 768px) {
   .fh5co-nav {
     padding: 20px 0;
-    top: 0;
+    top: 0; 
   }
 }
+*/
 .fh5co-nav .left-menu, .fh5co-nav .right-menu, .fh5co-nav .logo {
   display: inline-block;
   width: 40%;
@@ -284,12 +286,12 @@ h1, h2, h3, h4, h5, h6, figure {
   position: relative;
   z-index: 10;
 }
-/* 상단 */
+/* 상단
 @media screen and (max-width: 768px) {
   .fh5co-cover {  
     height: 200px;
   }
-} 
+}  */
 
 /* @media screen and (max-width: 768px) {
   .fh5co-cover2 {  상단 프레임(검정)
@@ -305,13 +307,13 @@ h1, h2, h3, h4, h5, h6, figure {
   display: table;
   width: 100%;
 }
-/* 상단 */
+/* 상단  
  @media screen and (max-width: 768px) {
   .fh5co-cover .display-t,
   .fh5co-cover .display-tc {
     height: 200px;
   }
-} 
+}  */
 /*  @media screen and (max-width: 768px) {
   .fh5co-cover .display-t,
   .fh5co-cover .display-tc
@@ -323,25 +325,27 @@ h1, h2, h3, h4, h5, h6, figure {
 
 /* 상단 */
 .fh5co-cover.fh5co-cover-sm {
-  height: 200px;
-}
+  height: 100px;
+}  
+/*
 @media screen and (max-width: 768px) {
   .fh5co-cover.fh5co-cover-sm {
     height: 400px;
   }
-}
+}*/
 .fh5co-cover.fh5co-cover-sm .display-t,
 .fh5co-cover.fh5co-cover-sm .display-tc {
   height: 600px;
   display: table;
   width: 100%;
 }
+/*
 @media screen and (max-width: 600px) {
   .fh5co-cover.fh5co-cover-sm .display-t,
   .fh5co-cover.fh5co-cover-sm .display-tc {
     height: 400px;
   }
-}
+}*/
 
 #fh5co-header .display-tc,
 #fh5co-counter .display-tc,
@@ -525,7 +529,7 @@ h1, h2, h3, h4, h5, h6, figure {
   position: relative;
 }
 .fh5co-contact-info ul li:before {
-  color: #F36363;
+  color:#eea236;
   position: absolute;
   left: 0;
   top: .05em;
@@ -569,11 +573,13 @@ h1, h2, h3, h4, h5, h6, figure {
   border-radius: 4px;
   margin-bottom: 40px;
 }
+/*
 @media screen and (max-width: 768px) {
   .feature-center {
     margin-bottom: 50px;
   }
 }
+*/
 .feature-center .desc {
   padding-left: 180px;
 }
@@ -585,7 +591,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .feature-center .icon i {
   font-size: 40px;
-  color: #F36363;
+  color: #eea236;;
 }
 .feature-center p, .feature-center h3 {
   margin-bottom: 30px;
@@ -755,7 +761,7 @@ h1, h2, h3, h4, h5, h6, figure {
   color: rgba(0, 0, 0, 0.3);
 }
 .fh5co-blog .blog-text span.comment a i {
-  color: #F36363;
+  color: #eea236;;
   padding-left: 7px;
 }
 .fh5co-blog .blog-text h3 {
@@ -843,7 +849,7 @@ h1, h2, h3, h4, h5, h6, figure {
   width: 56px;
   height: 56px;
   margin-top: -30px;
-  background: #F36363;
+  background:  #eea236;;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
@@ -882,7 +888,7 @@ h1, h2, h3, h4, h5, h6, figure {
 #fh5co-started .btn {
   height: 54px;
   border: none !important;
-  background: #F36363;
+  background: #FFEEB9;
   color: #fff;
   font-size: 16px;
   text-transform: uppercase;
@@ -890,7 +896,7 @@ h1, h2, h3, h4, h5, h6, figure {
   padding-right: 30px;
 }
 #fh5co-started .btn:hover {
-  background: #f04242 !important;
+  background:  #eea236 !important;
   -webkit-box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75) !important;
   -moz-box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75) !important;
   box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75) !important;
@@ -910,11 +916,12 @@ h1, h2, h3, h4, h5, h6, figure {
   padding: 0;
   margin: 0;
 }
+/*
 @media screen and (max-width: 768px) {
   #fh5co-footer .fh5co-footer-links {
     margin-bottom: 30px;
   }
-}
+}*/
 #fh5co-footer .fh5co-footer-links li {
   padding: 0;
   margin: 0;
@@ -952,12 +959,13 @@ h1, h2, h3, h4, h5, h6, figure {
   height: 500px;
   position: relative;
 }
+/*
 @media screen and (max-width: 768px) {
   #map {
     height: 200px;
   }
 }
-
+*/
 #fh5co-offcanvas {
   position: absolute;
   z-index: 1901;
@@ -1091,7 +1099,7 @@ h1, h2, h3, h4, h5, h6, figure {
   width: 25px;
   height: 25px;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: none; 
 }
 .fh5co-nav-toggle.active i::before, .fh5co-nav-toggle.active i::after {
   background: #444;
@@ -1124,6 +1132,7 @@ h1, h2, h3, h4, h5, h6, figure {
 .fh5co-nav-toggle.fh5co-nav-white > i {
   color: #fff;
   background: #fff;
+  display: none;             /* 기존 메뉴 버튼 안 보이게 함!!!!!!!!!  */
 }
 .fh5co-nav-toggle.fh5co-nav-white > i::before, .fh5co-nav-toggle.fh5co-nav-white > i::after {
   background: #fff;
@@ -1311,21 +1320,21 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .btn-danger {
-  background: #d9534f;
+  background: #eea236;
   color: #fff;
-  border: 2px solid #d9534f;
+  border: 2px solid #eea236;
 }
 .btn-danger:hover, .btn-danger:focus, .btn-danger:active {
-  background: #d43f3a !important;
-  border-color: #d43f3a !important;
+  background:#eea236 !important;
+  border-color: #eea236 !important;
 }
 .btn-danger.btn-outline {
   background: transparent;
-  color: #d9534f;
-  border: 2px solid #d9534f;
+  color: #eea236;
+  border: 2px solid #eea236;
 }
 .btn-danger.btn-outline:hover, .btn-danger.btn-outline:focus, .btn-danger.btn-outline:active {
-  background: #d9534f;
+  background: #eea236;
   color: #fff;
 }
 
@@ -1378,7 +1387,7 @@ h1, h2, h3, h4, h5, h6, figure {
 .form-control:active, .form-control:focus {
   outline: none;
   box-shadow: none;
-  border-color: #F36363;
+  border-color: #eea236;
 }
 
 .row-pb-md {
@@ -1424,18 +1433,31 @@ h1, h2, h3, h4, h5, h6, figure {
     padding: 3px 8px; /* 버튼의 패딩 설정 */
     margin: 0 3px; /* 버튼 사이의 간격 설정 */
     text-decoration: none; /* 링크에 밑줄 제거 */
-    border: 1px solid #ffd964; /* 테두리 추가 */
+    border: 1px solid #FFEEB9; /* 테두리 추가 */
     /*background-color: #f0f0f0;*/ /* 배경색 설정 */
     color: #333; /* 글자색 설정 */
 }
 
 #page_control a:hover {
-    background-color: #ffd964; /* 호버 시 배경색 변경 */
+    background-color: #FFEEB9; /* 호버 시 배경색 변경 */
+}
+
+#page_control a:active {
+    background-color: #ffd964; /* 클릭 시 배경색 변경 */
 }
 
 #page_control .current {
     font-weight: bold; /* 현재 페이지 버튼의 글씨를 두껍게 설정 */
 }
 
+@media screen and (max-width: 768px) { 
+    #page_control a:hover {
+        background-color: #FFEEB9; 
+    }
+    #page_control a:focus {
+        background-color: #ffd964;  
+    }
+}
 
+ 
 /*# sourceMappingURL=style.css.map */
