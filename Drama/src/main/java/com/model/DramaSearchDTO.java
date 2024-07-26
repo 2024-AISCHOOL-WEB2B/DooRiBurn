@@ -13,12 +13,31 @@ public class DramaSearchDTO {
 
     // 주소 
     private String f_addr;
-
-    public DramaSearchDTO(Double f_num, String drama, String f_addr, Double lat, Double lon, String f_name,
-			String scene, String f_tel, String f_time) {
+    
+    private String f_img;
+    
+    
+//    public DramaSearchDTO(Double f_num, String drama, String f_addr, Double lat, Double lon, String f_name,
+//			String scene, String f_tel, String f_time, String f_img) {
+//		this.f_num = f_num;
+//		this.drama = drama;
+//		this.f_addr = f_addr;
+//		this.lat = lat;
+//		this.lon = lon;
+//		this.f_name = f_name;
+//		this.scene = scene;
+//		this.f_tel = f_tel;
+//		this.f_time = f_time;
+//		this.f_img = f_img;
+//	}
+    
+	public DramaSearchDTO (Double f_num, String drama, String f_addr,Double lat, Double lon, String f_name, String f_tel, String f_time, 
+			 String scene, String f_img) {
+		super();
 		this.f_num = f_num;
 		this.drama = drama;
 		this.f_addr = f_addr;
+		this.f_img = f_img;
 		this.lat = lat;
 		this.lon = lon;
 		this.f_name = f_name;
@@ -48,8 +67,22 @@ public class DramaSearchDTO {
     public Double getFNum() {
         return f_num;
     }
+    
+    
+    
+    public String getFimg() {
+		return f_img;
+	}
 
-    public void setFNum(Double fNum) {
+
+
+	public void setFimg(String f_img) {
+		this.f_img = f_img;
+	}
+
+
+
+	public void setFNum(Double fNum) {
         this.f_num = f_num;
     }
 

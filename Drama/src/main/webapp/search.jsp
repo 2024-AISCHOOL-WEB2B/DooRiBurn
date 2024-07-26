@@ -90,7 +90,8 @@
 	<%
 	String s_option = request.getParameter("s_option");
 	String search = request.getParameter("search");
-
+	
+	List<String> img_src = new ArrayList<>();
 	List<String> titles = new ArrayList<>();
 	List<String> places = new ArrayList<>();
 	List<String> scene = new ArrayList<>();
@@ -128,7 +129,8 @@
 		out.println("<ul>");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
+			
+			img_src.add(jsonObject.getString("img"));
 			titles.add(jsonObject.getString("제목"));
 			places.add(jsonObject.getString("장소명"));
 			scene.add(jsonObject.getString("장소설명"));
@@ -313,7 +315,7 @@
 				<div class="col-lg-4 col-md-4">
 					<div class="fh5co-blog animate-box" >
 						<img class="img-responsive"
-							src="https://th.bing.com/th/id/OIP.FKwVfi4SsgnhqTDPMLoLTAHaE7?w=300&h=199&c=7&r=0&o=5&pid=1.7"
+							src=<%=img_src.get(i) %>
 							alt="">
 						<!-- 해당 장소 사진 -->
 						<div class="blog-text" onclick="goToAddress('http://localhost:8082/Drama/detail.jsp?index=<%= index.get(i)+1%>')">

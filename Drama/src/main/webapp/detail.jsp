@@ -30,27 +30,27 @@
 <link rel="stylesheet" href="css/Realstyle.css">
 
 <!-- 카카오 맵 API 스크립트 찾아서 연결해야 함!! -->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f589bcfaff80d0ddfe6b7666abe62fea"></script>
 
 </head>
 <body>
-	<% 
+	<%
+	String index = request.getParameter("index");
 	
-		String index = request.getParameter("index");
-		DramaSearchDAO dao = new DramaSearchDAO();
-		ArrayList<DramaSearchDTO> film_detail = dao.film_detail(index);
-		String drama = film_detail.get(0).getDrama();
-		String place = film_detail.get(0).getFName();
-		String addr = film_detail.get(0).getFAddr();
-		double lat = film_detail.get(0).getLat();
-		double lon = film_detail.get(0).getLon();
-		String tel = film_detail.get(0).getScene();
-		String time = film_detail.get(0).getFTel();
-		String scene = film_detail.get(0).getFTime();
+	DramaSearchDAO dao = new DramaSearchDAO();
+	ArrayList<DramaSearchDTO> film_detail = dao.film_detail(index);
+	
+	String drama = film_detail.get(0).getDrama();
+	String place = film_detail.get(0).getFName();
+	String addr = film_detail.get(0).getFAddr();
+	double lat = film_detail.get(0).getLat();
+	double lon = film_detail.get(0).getLon();
+	String tel = film_detail.get(0).getScene();
+	String time = film_detail.get(0).getFTel();
+	String scene = film_detail.get(0).getFTime();
+	String img_src = film_detail.get(0).getFimg();
 	%>
 	<div class="fh5co-loader">
-	<div id="page"></div>
+		<div id="page"></div>
 		<nav class="fh5co-nav" role="navigation">
 			<div class="container">
 				<div class="row">
@@ -87,9 +87,9 @@
 						</ul>
 					</div>
 				</div>
-				</div>
-				</nav>
-				</div>
+			</div>
+		</nav>
+	</div>
 	<!-- 배너 -->
 	<header>
 		<div class="banner">여기가 거기여?</div>
@@ -137,51 +137,56 @@
 
 	<!-- 상세 페이지 -->
 
-		<!-- 추가 -->
-		<div class="container">
-			<header class="header">
-				<img src="images/jeju_aquarium.png" alt="Aquarium"
-					class="header-img">
-			</header>
-			</div>
-			<section class="info">
-				<h1><%= place %></h1>
-				<p class="address"><%= addr %></p>
-				<p class="hours">영업시간: <%= time %></p>
-				<p class="phone">전화번호: <%= tel %></p>
-				<p class="phone">촬영지속 드라마 장면 : <%=scene %></p>
-				<div class="tags">
-					<span>#데이트</span> <span>#가족</span> <span>#선암귀</span> <span>#수족관</span>
-				</div>
-			</section>
-			<!-- 여기까지 -->
+	<!-- 추가 -->
+	<div class="container">
+		<header class="header">
+			<img src=<%=img_src %> alt="Aquarium" class="header-img">
+		</header>
+	</div>
+	<section class="info">
+		<h1><%=place%></h1>
+		<p class="address"><%=addr%></p>
+		<p class="hours">
+			영업시간:
+			<%=time%></p>
+		<p class="phone">
+			전화번호:
+			<%=tel%></p>
+		<p class="phone">
+			촬영지속 드라마 장면 :
+			<%=scene%></p>
+		<div class="tags">
+			<span>#데이트</span> <span>#가족</span> <span>#선암귀</span> <span>#수족관</span>
+		</div>
+	</section>
+	<!-- 여기까지 -->
 
-			<div id="fh5co-blog" class="fh5co-bg-section">
-				<div class="container">
-					<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
-					<div class="row">
-						<div class="col-lg-4 col-md-4">
-							<div class="fh5co-blog animate-box">
-								<a href="#"><img class="img-responsive"
-									src="images/work-4.jpg" alt=""></a>
-								<!-- 해당 장소 사진 -->
-								<div class="blog-text">
-									<h3>
-										<a href="" #>수원 행궁동 행리단길</a>
-									</h3>
-									<!-- 장소명 -->
-									<span class="posted_on">선재 업고 튀어</span>
-									<!-- 드라마명 -->
-									<span class="favorites">⭐</span>
-									<!-- 즐겨찾기 -->
-									<p>'선재 업고 튀어' 9화에서 선재와 솔이가 첫 데이트를 하는 장소로..</p>
-									<!-- 상세줄거리 미리보기 -->
-									<a href="#" class="btn btn-primary">상세보기</a>
-								</div>
-							</div>
+	<div id="fh5co-blog" class="fh5co-bg-section">
+		<div class="container">
+			<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
+			<div class="row">
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#"><img class="img-responsive"
+							src="images/work-4.jpg" alt=""></a>
+						<!-- 해당 장소 사진 -->
+						<div class="blog-text">
+							<h3>
+								<a href="" #>수원 행궁동 행리단길</a>
+							</h3>
+							<!-- 장소명 -->
+							<span class="posted_on">선재 업고 튀어</span>
+							<!-- 드라마명 -->
+							<span class="favorites">⭐</span>
+							<!-- 즐겨찾기 -->
+							<p>'선재 업고 튀어' 9화에서 선재와 솔이가 첫 데이트를 하는 장소로..</p>
+							<!-- 상세줄거리 미리보기 -->
+							<a href="#" class="btn btn-primary">상세보기</a>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 
 
 		<!-- 드라마 상세 줄거리 -->
@@ -196,9 +201,15 @@
 					두근두근거린다.</p>
 			</div>
 		</div>
-
+		<div id="lat" style="display: none;"><%=lat%></div>
+		<div id="lon" style="display: none;"><%=lon%></div>
+		<div id="place" style="display: none;"><%=place%></div>
 		<!-- 카카오 맵 지도 연결 -->
-		<div id="map" style="width: 100%; height: 350px;"></div>
+		<div id="staticMap" style="width: 100%; height: 350px;"></div>
+		
+		<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1cac00685a32d9d2daf6b4bdb4fc80e"></script>
+		
 
 		<!-- 리뷰 섹션 -->
 		<div class="review">
@@ -220,52 +231,36 @@
 			</div>
 		</div>
 	</div>
-	</div>
-	</div>
+
 	<!-- JavaScript 파일 연결 -->
 	<script src="js/menu.js"></script>
 	<script src="js/map.js"></script>
 	<!-- 카카오 맵 초기화 스크립트 파일 연결 -->
 
 	<script>
-    function search() {
-        var query = document.getElementById('searchQuery').value;
-        var option = document.getElementById('searchOption').value;
-        fetch(`http://localhost:5002/search?search=${query}&s_option=${option}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data !== "없는결과") {
-                    displayResults(data);
-                } else {
-                    alert("검색 결과가 없습니다.");
-                }
-            });
-    }
+	
+	var lat = parseFloat(document.getElementById('lat').innerText);
+	var lon = parseFloat(document.getElementById('lon').innerText);
+	var place = document.getElementById('place').innerText;
+		// 이미지 지도에 표시할 마커입니다
+		var marker = {
+			position : new kakao.maps.LatLng(lat, lon),
+			text : place // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다
+		};
 
-    function displayResults(results) {
-        let lat =  37.5290674
-        let lon =  126.936218
-        var mapContainer = document.getElementById('map');
-        var mapOption = { 
-            center: new kakao.maps.LatLng(lat, lon),
-            level: 3 
-        }; 
-        var map = new kakao.maps.Map(mapContainer, mapOption); 
-        results.forEach(result => {
-            var markerPosition = new kakao.maps.LatLng(result.위도, result.경도);
-            var marker = new kakao.maps.Marker({
-                position: markerPosition
-            });
-            marker.setMap(map);
-        });
+		var staticMapContainer = document.getElementById('staticMap'), // 이미지 지도를 표시할 div
+		staticMapOption = {
+			center : new kakao.maps.LatLng(lat, lon), // 이미지 지도의 중심좌표
+			level : 3, // 이미지 지도의 확대 레벨
+			marker : marker
+		// 이미지 지도에 표시할 마커
+		};
 
-        // 반응형 지도 크기 조절
-        window.addEventListener('resize', function() {
-            map.relayout();
-            map.setCenter(new kakao.maps.LatLng(lat, lon));
-        });
-    }
-        
-    </script>
+		// 이미지 지도를 생성합니다
+		var staticMap = new kakao.maps.StaticMap(staticMapContainer,
+				staticMapOption);
+	</script>
+
+
 </body>
 </html>
