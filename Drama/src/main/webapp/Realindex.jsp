@@ -39,8 +39,8 @@
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
 
-	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	<div id="mySidenav" class="sidenav" style="width: 0;">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:black;">&times;</a>
 		<div class="menu-section">
 			<h2>지역별로 찾기</h2>
 			<div class="menu-items">
@@ -54,7 +54,7 @@
 		<div class="menu-section">
 			<h2>공모전</h2>
 			<div class="menu-items">
-				<a href="#">참여하기</a>
+				<a href="contestBoard.jsp">참여하기</a>
 			</div>
 		</div>
 		<%if(info != null){ %>
@@ -71,7 +71,7 @@
 
 
 	<div class="main-content">
-		<form action="search.jsp">
+		<form action="PracSearch2.jsp" method="get">
 			<div class="search-container" style="height: 30px;">
 				<select name="s_option" style="margin-right: 7px;"> <!-- name="category" -> s_option -->
 					<option value="1">장소 및 지역</option>
@@ -79,7 +79,7 @@
 				</select>
 				 <input name="search" type="text" placeholder="검색"
 					style="flex-grow: 1; margin-right: 5px;">
-				<button type="button">
+				<button type="submit">
 					<img src="images/search.png" style="width: 40px; height: 40px;" />
 				</button>
 			</div>
@@ -137,7 +137,7 @@
 	<!-- Side navigation script -->
 	<script>
 		function openNav() {
-			document.getElementById("mySidenav").style.width = "50%";
+			document.getElementById("mySidenav").style.width = "80%";
 		}
 
 		function closeNav() {

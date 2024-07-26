@@ -210,3 +210,9 @@
 
 
 }());
+
+
+$(document).ready(function() {
+    $('.js-fh5co-nav-toggle').remove(); // 햄버거 메뉴 버튼 제거
+});
+ 

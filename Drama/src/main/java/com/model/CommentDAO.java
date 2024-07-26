@@ -53,11 +53,11 @@ public class CommentDAO {
 		
 		try { 
 			
-			String sql = "INSERT INTO TB_C_COMMENT (cmt_num, cmt_img, cmt_date, c_num, email) VALUES (?, TO_DATE(TO_CHAR(SYSDATE)), ?, ?)"; 
+			String sql = "INSERT INTO TB_C_COMMENT (cmt_img, cmt_date, c_num, email) VALUES (?, TO_DATE(TO_CHAR(SYSDATE)), ?, ?)"; 
 			psmt = conn.prepareStatement(sql); 
-			psmt.setString(2, dto.getCmt_img());
-			psmt.setInt(3, dto.getC_num());
-			psmt.setString(4, dto.getEmail());
+			psmt.setString(1, dto.getCmt_img());
+			psmt.setInt(2, dto.getC_num());
+			psmt.setString(3, dto.getEmail());
 			
 			cnt = psmt.executeUpdate();
 			 
@@ -100,5 +100,25 @@ public class CommentDAO {
 	}
 
 
+	// 댓글 개별 삭제 
+	public int commentDelete(int num) { 
+		
+		int cnt = 0;
+		dbOpen();
+		 
+		try {
+			String sql = "DELETE FROM TB_C_COMMENT WHERE CMT_NUM = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, num);
+			cnt = psmt.executeUpdate();
+			
+		} catch (SQLException e) { 
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		} 
+		return cnt;
+	}
+	
 	
 }

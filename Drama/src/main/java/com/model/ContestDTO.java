@@ -18,6 +18,17 @@ public class ContestDTO {
 		this.c_num = c_num;
 		this.c_title = c_title;
 	}
+	
+	
+	
+	public ContestDTO(int c_num, String c_title, String c_img, String c_content) {
+		super();
+		this.c_num = c_num;
+		this.c_title = c_title;
+		this.c_img = c_img;
+		this.c_content = c_content;
+	}
+
 	public ContestDTO(String c_title, String c_img, String c_content) { 
 		this.c_title = c_title;
 		this.c_img = c_img;
