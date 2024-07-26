@@ -15,6 +15,10 @@
 	pageEncoding="UTF-8"%> --%>
 
 <!-- ------- 7/25 오후 7:17 위 주석 처리 -->
+
+
+
+<%@page import="java.net.URLDecoder"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 
@@ -78,10 +82,14 @@
 
 </head>
 <body>
+
+
 	<%
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
 	String s_option = request.getParameter("s_option");
 	String search = request.getParameter("search");
+	
+	System.out.println(search);
 
 	// 검색어가 null인 경우 빈 문자열로 설정
 	if (search == null) {
@@ -89,7 +97,12 @@
 	}
 
 	// 검색어를 URL 인코딩 처리
-	String encodedSearch = URLEncoder.encode(search, "UTF-8");
+	//String encodedSearch = URLEncoder.encode(search, "UTF-8");
+	// String encodedSearch = URLEncoder.encode(search, "EUC-KR");
+//	String encodedSearch = URLDecoder.decode(search, "EUC-KR");
+	String encodedSearch = URLDecoder.decode(search, "UTF-8");
+//	System.out.println(encodedSearch);
+//	System.out.println(encodedSearch2);
 
 	List<String> titles = new ArrayList<>();
 	List<String> places = new ArrayList<>();
@@ -98,8 +111,10 @@
 	// Flask 서버로 데이터를 전송합니다.
 	HttpURLConnection conn = null;
 	try {
-		// Flask 서버의 URL 설정
-		URL url = new URL("http://localhost:5002/search?s_option=" + s_option + "&search=" + encodedSearch);
+		
+		String va = URLDecoder.decode(encodedSearch, "UTF-8");
+		// Flask 서버의 URL 설정  encodedSearch
+		URL url = new URL("http://localhost:5002/search?s_option=" + s_option + "&search=" + va);
 
 		conn = (HttpURLConnection) url.openConnection();
 		// 요청 방식 및 헤더 설정
@@ -119,7 +134,7 @@
 
 			// 서버 응답 데이터 읽기
 			while ((inputLine = in.readLine()) != null) {
-		response_data.append(inputLine);
+				response_data.append(inputLine);
 			}
 			in.close();
 
@@ -128,15 +143,15 @@
 			JSONArray jsonArray = new JSONArray(response_data.toString());
 
 			if (jsonArray.length() > 0) {
-		System.out.println(jsonArray.length());
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
+				System.out.println(jsonArray.length());
+				for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			titles.add(jsonObject.getString("제목"));
-			places.add(jsonObject.getString("장소명"));
-			scene.add(jsonObject.getString("장소설명"));
-			index.add(jsonObject.getInt("index"));
-		}
+				titles.add(jsonObject.getString("제목"));
+				places.add(jsonObject.getString("장소명"));
+				scene.add(jsonObject.getString("장소설명"));
+				index.add(jsonObject.getInt("index"));
+			}
 
 		/* 7/25 오후 7:14 */
 		/* 		JSONArray jsonArray = new JSONArray(response_data.toString());

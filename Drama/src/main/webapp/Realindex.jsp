@@ -40,7 +40,7 @@
 	</header>
 
 	<div id="mySidenav" class="sidenav" style="width: 0;">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:black;">&times;</a>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#333333;">&times;</a>
 		<div class="menu-section">
 			<h2>지역별로 찾기</h2>
 			<div class="menu-items">
@@ -74,11 +74,11 @@
 		<form action="PracSearch2.jsp" method="get">
 			<div class="search-container" style="height: 30px;">
 				<select name="s_option" style="margin-right: 7px;"> <!-- name="category" -> s_option -->
-					<option value="1">장소 및 지역</option>
+					<option value="1">장소/지역</option>
 					<option value="0">드라마</option>
 				</select>
 				 <input name="search" type="text" placeholder="검색"
-					style="flex-grow: 1; margin-right: 5px;">
+					style="flex-grow: 1; margin-right: 5px; font-size: 13px;">
 				<button type="submit">
 					<img src="images/search.png" style="width: 40px; height: 40px;" />
 				</button>
