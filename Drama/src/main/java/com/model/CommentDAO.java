@@ -29,8 +29,7 @@ public class CommentDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	
+		
 	private void dbClose() {
 		try {
 			if (rs != null)
@@ -45,12 +44,10 @@ public class CommentDAO {
 	}
 
 	// 댓글 업로드
-	public int commentPost(CommentDTO dto) {
-		
+	public int commentPost(CommentDTO dto) {		
 		int cnt = 0; 
 		dbOpen();
-		
-		
+		 
 		try { 
 			
 			String sql = "INSERT INTO TB_C_COMMENT (cmt_img, cmt_date, c_num, email) VALUES (?, TO_DATE(TO_CHAR(SYSDATE)), ?, ?)"; 
@@ -72,7 +69,7 @@ public class CommentDAO {
 	
 	
 	
-	// 해당 게시글의 댓글 가져오기 😎  수정!!!!!!!!!!!!!! 
+	// 해당 게시글의 댓글 가져오기 ! 
 	public ArrayList<CommentDTO> getComment(int cNum) { 
 		ArrayList<CommentDTO> list = new ArrayList<CommentDTO>(); 
 		dbOpen(); 
@@ -101,8 +98,7 @@ public class CommentDAO {
 
 
 	// 댓글 개별 삭제 
-	public int commentDelete(int num) { 
-		
+	public int commentDelete(int num) { 		
 		int cnt = 0;
 		dbOpen();
 		 
