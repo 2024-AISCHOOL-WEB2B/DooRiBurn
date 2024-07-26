@@ -80,6 +80,14 @@
         border-radius: 25px; 
         box-shadow: none;
         padding: 8px 15px; 
+        
+	/* 버튼과 저작권 정보 사이에 여백 추가, 중간배열 */
+	.button-container {
+	    margin-bottom: 20px; 
+		display: flex; 
+		justify-content: center;
+	}
+	
 	</style>  
 	
 	</head> 
@@ -158,10 +166,9 @@
 	</div>
 	</nav>
 	 
-	<header id="fh5co-header" class="fh5co-cover" style="height: 100px;">
+	<header id="fh5co-header" class="fh5co-cover" style="height: 100px;"> 
 		<div class="overlay"></div>
-		<div class="container">  
-		</div>
+		<div class="container"></div>
 	</header>
 	
     
@@ -261,7 +268,7 @@
 			</div>
 		</div>
 		<br>
-		
+	</div>
 		
 		<!-- 댓글 작성란 ┗|｀O′|┛ --> <!-- 수정중!!!!!!!!!!!!!!!!!!! -->
 		<div class="container">
@@ -327,8 +334,7 @@
 						</tr> 
 						<tr> 
 							<td><br><input type="submit" id="uploadInput" value="댓글 작성" onclick="checkLogin()"></td>
-						</tr> 
-						 
+						</tr>  
 					</table>
 				</form>
 			</div>
@@ -338,17 +344,8 @@
 	
 	
  	<footer id="fh5co-footer" role="contentinfo">
-		<div class="container">
-				  
-			<div class="row copyright">
-				<div class="col-md-12 text-center">
-					<p>
-						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
-						<small class="block">Designed by DOORIBURN</small>
-					</p>
- 			
- 			
-<!-- 버튼 -->
+ 		<!-- 버튼 -->
+ 			<div class="button-container">
 			   	<div>    
 					<%if(info == null) {%>
 						<button class="btn" onclick="location.href='login.jsp'">로그인</button>
@@ -358,22 +355,25 @@
 					<%} %>
 						<button class="btn">한국어</button>
 						<button class="btn">English</button>   
-				</div>						
-					<p>
-						<ul class="fh5co-social-icons">  
-							<li><a href="#"><i class="icon-sun"></i></a></li>
-							<li><a href="#"><i class="icon-cloud"></i></a></li>
-						</ul> 
-					</p>
 				</div>
+			</div>				
+		<div class="container">
+			<div class="row copyright"> 
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
+						<small class="block">Designed by DOORIBURN</small>
+					</p>
+ 				</div>  
 			</div>
-		</div>
+		</div> 
 	</footer>
 	
-	</div>
-	<div class="gototop js-top">
+</div>
+	
+<!-- 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
+	</div> -->
 			<!-- Side navigation script -->
 	<script>
 		function openNav() {
@@ -457,8 +457,13 @@
 		}
 	</script> 
 	  
-	 
-	 
+<!-- 귀여운 아이콘
+ 					<p>
+						<ul class="fh5co-social-icons">  
+							<li><a href="#"><i class="icon-sun"></i></a></li>
+							<li><a href="#"><i class="icon-cloud"></i></a></li>
+						</ul>
+					</p> -->
 	 
 	</body>
 </html>

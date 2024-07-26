@@ -13,14 +13,12 @@
 <body>
 
 
-<!-- 게시글 작성 action  --> 
-
-
+<!-- 게시글 작성 action  -->  
 	<%
 	request.setCharacterEncoding("UTF-8");
 	
 	int maxFileSize = 1024 * 1024 * 1024;
-	String path = request.getRealPath("boardImg");
+	String path = request.getRealPath("/boardImg");
 	
     try { 
 		MultipartRequest multi = new MultipartRequest(request, path, maxFileSize, "UTF-8", new DefaultFileRenamePolicy());

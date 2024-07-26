@@ -22,7 +22,7 @@
 	request.setCharacterEncoding("UTF-8");
 	
 	int maxFileSize = 1024 * 1024 * 1024;
-	String path = request.getRealPath("commentImg");
+	String path = request.getRealPath("/commentImg");
 	 
 	MemberDTO info = (MemberDTO)session.getAttribute("info");
 	
@@ -51,8 +51,7 @@
         out.flush();
         e.printStackTrace();
     }
-    
-    
+     
 	%>
 </body>
 </html>

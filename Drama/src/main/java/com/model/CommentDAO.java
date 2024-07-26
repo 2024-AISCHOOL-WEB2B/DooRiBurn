@@ -120,5 +120,22 @@ public class CommentDAO {
 		return cnt;
 	}
 	
-	
+	// 댓글 전체 삭제
+	public int commentAllDelete(int num) {
+		int cnt = 0;
+		dbOpen();
+		 
+		try {
+			String sql = "DELETE FROM TB_C_COMMENT WHERE C_NUM = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, num);
+			cnt = psmt.executeUpdate();
+			
+		} catch (SQLException e) { 
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}  
+		return cnt;
+	}
 }
