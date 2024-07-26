@@ -13,7 +13,7 @@ import com.model.FilmLikeDTO;
 import java.util.List;
 
 @WebServlet("/FilmLike")
-public class FilmLike extends HttpServlet {
+public class FilmLikeService extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

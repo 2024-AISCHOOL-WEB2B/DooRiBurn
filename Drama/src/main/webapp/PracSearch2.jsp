@@ -98,8 +98,7 @@
 	HttpURLConnection conn = null;
 	try {
 		// Flask 서버의 URL 설정
-		URL url = new URL(
-		"http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
+		URL url = new URL("http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
 		conn = (HttpURLConnection) url.openConnection();
 		// 요청 방식 및 헤더 설정
 		conn.setRequestMethod("GET");
@@ -128,6 +127,7 @@
 		out.println("<ul>");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
+			
 			img_src.add(jsonObject.getString("img"));
 			titles.add(jsonObject.getString("제목"));
 			places.add(jsonObject.getString("장소명"));
