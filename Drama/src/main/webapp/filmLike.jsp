@@ -1,109 +1,118 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
+
+<%@page import="java.net.URLDecoder"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="org.json.JSONArray"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="java.io.InputStreamReader"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.net.HttpURLConnection"%>
+<%@page import="java.net.URL"%>
+<%@page import="java.net.URLEncoder"%>
+<!-- ì¶”ê°€ëœ ë¶€ë¶„ -->
+
+<%@page import="com.model.MemberDTO"%>
+
+<!-- 7/26 ì˜¤ì „ 11:23 ì¶”ê°€ -->
+<%@ page import="java.sql.*, javax.naming.*, javax.sql.*"%>
+<%@ page import="java.util.*"%>
+<%
+String email = (String) session.getAttribute("email"); // ì„¸ì…˜ì—ì„œ ì´ë©”ì¼ ê°’ ê°€ì ¸ì˜¤ê¸°
+int filmNum = Integer.parseInt(request.getParameter("filmNum")); // ì˜í™” ë²ˆí˜¸ ê°€ì ¸ì˜¤ê¸°
+
+boolean isLiked = false;
+
+try {
+	Context initContext = new InitialContext();
+	Context envContext = (Context) initContext.lookup("java:/comp/env");
+	DataSource ds = (DataSource) envContext.lookup("jdbc/YourDB");
+	Connection conn = ds.getConnection();
+
+	String query = "SELECT * FROM TB_FILM_LIKE WHERE EMAIL = ? AND F_NUM = ?";
+	PreparedStatement pstmt = conn.prepareStatement(query);
+	pstmt.setString(1, email);
+	pstmt.setInt(2, filmNum);
+	ResultSet rs = pstmt.executeQuery();
+
+	if (rs.next()) {
+		isLiked = true;
+	}
+
+	rs.close();
+	pstmt.close();
+	conn.close();
+} catch (Exception e) {
+	e.printStackTrace();
+}
+%>
+
+
+
+<!DOCTYPE HTML>
+<html lang="ko">
 <head>
-<meta charset="EUC-KR">
-<title>like</title>
+    <title>filmLike</title>
+    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-.heart {
-	font-size: 24px;
-	cursor: pointer;
-}
-
-.heart-liked {
-	color: red;
-}
-
-.heart-not-liked {
-	color: gray;
-}
-</style>
+<!-- í°íŠ¸ -->
+<link
+	href="https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700"
+	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap"
+	rel="stylesheet">
+	
+<!-- style css -->
+<link rel="stylesheet" href="css/PracSearch.css">
 
 </head>
 <body>
+    <div>
+        <form action="ToggleLikeServlet" method="post">
+            <input type="hidden" name="filmNum" value="<%= filmNum %>">
+            <%
+                if (isLiked) {
+            %>
+                <button type="submit" style="display: none;" id="likeButton">Like</button>
+                <button type="submit" style="background-color: red;" id="unlikeButton">Unlike</button>
+            <%
+                } else {
+            %>
+                <button type="submit" id="likeButton">Like</button>
+                <button type="submit" style="display: none;" id="unlikeButton">Unlike</button>
+            <%
+                }
+            %>
+        </form>
+    </div>
 
-	<%@ page
-		import="java.sql.*, javax.servlet.*, javax.servlet.http.*, javax.servlet.jsp.*"%>
-	<%
-	// ¼¼¼Ç¿¡¼­ ÀÌ¸ÞÀÏ °¡Á®¿À±â
-	HttpSession session = request.getSession();
-	String email = (String) session.getAttribute("email");
 
-	boolean liked = false;
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-
-	try {
-		// µ¥ÀÌÅÍº£ÀÌ½º ¿¬°á (DB ¿¬°á Á¤º¸´Â ½ÇÁ¦ Á¤º¸¸¦ »ç¿ëÇÏ¼¼¿ä)
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourdbname", "username", "password");
-
-		// ÁÁ¾Æ¿ä Å×ÀÌºí¿¡¼­ ÀÌ¸ÞÀÏ·Î Á¶È¸
-		String sql = "SELECT * FROM likes WHERE email = ?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, email);
-		rs = pstmt.executeQuery();
-
-		if (rs.next()) {
-			liked = true;
-		}
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
-		try {
-			if (rs != null)
-		rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			if (pstmt != null)
-		pstmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			if (conn != null)
-		conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	%>
-
-	<div>
-		<%
-		if (liked) {
-		%>
-		<span class="heart heart-liked" onclick="toggleLike()">¢¾</span>
-		<%
-		} else {
-		%>
-		<span class="heart heart-not-liked" onclick="toggleLike()">¢½</span>
-		<%
-		}
-		%>
-	</div>
-
+	<!-- Side navigation script -->
 	<script>
-		function toggleLike() {
-			// ÁÁ¾Æ¿ä »óÅÂ¸¦ ¼­¹ö¿¡ ¿äÃ»ÇÏ´Â AJAX ÄÚµå
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "toggleLike", true);
-			xhr.setRequestHeader("Content-Type",
-					"application/x-www-form-urlencoded");
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState === 4 && xhr.status === 200) {
-					location.reload(); // »óÅÂ º¯°æ ÈÄ ÆäÀÌÁö »õ·Î°íÄ§
-				}
-			};
-			xhr.send();
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "50%";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
 		}
 	</script>
-
-
 </body>
+
+
 </html>
+
