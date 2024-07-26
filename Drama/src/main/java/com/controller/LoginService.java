@@ -31,12 +31,12 @@ public class LoginService extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		if(info != null) {
-			
-			if(pw.equals(info.getPw())) {
-				System.out.println("로그인 성공");
+			System.out.println("로그인 성공");
 				session.setAttribute("info", info);
 				session.setMaxInactiveInterval(3600);
 				response.sendRedirect("Realindex.jsp");
+			if(pw.equals(info.getPw())) {
+				
 			}
 		}else {
 			System.out.println("로그인 실패");

@@ -122,7 +122,7 @@ public class MemberDAO {
 		
 		
 		try {
-			String sql = "SELECT * FROM TB_MEMBER WHERE EMAIL = ?";
+			String sql = "SELECT * FROM TB_MEMBER WHERE EMAIL = ? AND PW = ?";
 			psmt = conn.prepareStatement(sql);
 			
 			psmt.setString(1, dto.getEmail());

@@ -4,55 +4,44 @@ import java.util.Date;
 
 public class FilmLikeDTO {
 
-	private int likeNum; // PK
+	private int f_like_num; // PK
 	private String email;
-	private int filmNum;
-	private Date likeDate;
-
-	public FilmLikeDTO() {
+	private int f_num;
+	private Date f_like_date;
+	public int getF_like_num() {
+		return f_like_num;
 	}
-
-	public FilmLikeDTO(String email, int filmNum) {
-		this.email = email;
-		this.filmNum = filmNum;
+	public void setF_like_num(int f_like_num) {
+		this.f_like_num = f_like_num;
 	}
-
-	public FilmLikeDTO(int likeNum, String email, int filmNum, Date likeDate) {
-		this.likeNum = likeNum;
-		this.email = email;
-		this.filmNum = filmNum;
-		this.likeDate = likeDate;
-	}
-
-	public int getLikeNum() {
-		return likeNum;
-	}
-
-	public void setLikeNum(int likeNum) {
-		this.likeNum = likeNum;
-	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public int getFilmNum() {
-		return filmNum;
+	public int getF_num() {
+		return f_num;
+	}
+	public void setF_num(int f_num) {
+		this.f_num = f_num;
+	}
+	public Date getF_like_date() {
+		return f_like_date;
+	}
+	public void setF_like_date(Date f_like_date) {
+		this.f_like_date = f_like_date;
+	}
+	public FilmLikeDTO( String email, int f_num) {
+		this.email = email;
+		this.f_num = f_num;
+	}
+	
+	public FilmLikeDTO( String email, int f_num, Date f_like_date) {
+		this.email = email;
+		this.f_num = f_num;
+		this.f_like_date = f_like_date;
 	}
 
-	public void setFilmNum(int filmNum) {
-		this.filmNum = filmNum;
-	}
-
-	public Date getLikeDate() {
-		return likeDate;
-	}
-
-	public void setLikeDate(Date likeDate) {
-		this.likeDate = likeDate;
-	}
+	
 }

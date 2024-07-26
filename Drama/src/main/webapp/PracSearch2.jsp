@@ -51,7 +51,9 @@
 <title>PracSearch</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
 <!-- 폰트 -->
 <link
 	href="https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700"
@@ -78,6 +80,23 @@
 	margin-left: 10px;
 	border-radius: 7px;
 }
+
+.star-button {
+	background: none;
+	border: none;
+	font-size: 24px;
+	cursor: pointer;
+	color: black; /* 기본 별 색상 */
+	margin-bottom: 170px;
+}
+
+.star-button.liked {
+	color: gold; /* 좋아요 클릭 시 별 색상 */
+}
+
+.star-button:focus {
+	outline: none;
+}
 </style>
 
 
@@ -88,9 +107,9 @@
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
 	String s_option = request.getParameter("s_option");
 	String search = request.getParameter("search");
-	
-	List<String> img_src = new ArrayList<>();
+
 	List<String> titles = new ArrayList<>();
+	List<String> img_src = new ArrayList<>();
 	List<String> places = new ArrayList<>();
 	List<String> scene = new ArrayList<>();
 	List<Integer> index = new ArrayList<>();
@@ -98,7 +117,8 @@
 	HttpURLConnection conn = null;
 	try {
 		// Flask 서버의 URL 설정
-		URL url = new URL("http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
+		URL url = new URL(
+		"http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
 		conn = (HttpURLConnection) url.openConnection();
 		// 요청 방식 및 헤더 설정
 		conn.setRequestMethod("GET");
@@ -127,10 +147,11 @@
 		out.println("<ul>");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			
-			img_src.add(jsonObject.getString("img"));
+
 			titles.add(jsonObject.getString("제목"));
+
 			places.add(jsonObject.getString("장소명"));
+			// img_src.add(jsonObject.getString("img"));
 			scene.add(jsonObject.getString("장소설명"));
 			index.add(jsonObject.getInt("index"));
 		}
@@ -151,7 +172,7 @@
 	}
 	%>
 
-	
+
 
 
 	<header>
@@ -257,62 +278,30 @@
 	%>
 
 	<!-- 진짜 박스: 검색명에 대한 검색 결과! 촬영지 목록 -->
-	<div class="box" onclick="goToAddress('http://localhost:8082/Drama/detail.jsp?index=<%= index.get(i)+1%>')">
+	<div class="box">
 		<!-- 왼쪽의 이미지 -->
-		<div class="image">
-			<img src=<%=img_src.get(i) %>alt="서울숲"style="width: 200px">
+		<div class="image"
+			onclick="goToAddress('http://localhost:8082/Drama/detail.jsp?index=<%=index.get(i) + 1%>')">
+			<img src="" alt="서울숲" style="width: 200px">
 		</div>
 		<!-- 오른쪽의 텍스트 -->
-		<div class="content">
+		<div class="content"
+			onclick="goToAddress('http://localhost:8082/Drama/detail.jsp?index=<%=index.get(i) + 1%>')">
 			<h2 style="font-weight: bold;">
 				<%=places.get(i)%>
-				<span class="star">☆</span>
+
 			</h2>
 			<h3><%=titles.get(i)%></h3>
 			<p><%=seen%></p>
 		</div>
+		<button class="star-button"
+			onclick="handleLikeClick(<%=index.get(i)%>, '<%=info.getEmail()%>', this)">☆</button>
 	</div>
+	<%=info.getEmail()%>
+
 	<%
 	}
 	%>
-
-
-	<!-- 촬영지 리스트 -->
-	<!-- 첫 번째 박스 -->
-	<div class="box">
-		<!-- 왼쪽의 이미지 -->
-		<div class="image">
-			<img src="images/jeju_aquarium.png" alt="제주도 한림수족관">
-		</div>
-		<!-- 오른쪽의 텍스트 -->
-		<div class="content">
-			<h2 style="font-weight: bold;">
-				제주도 한림수족관 <span class="star">★</span>
-			</h2>
-			<h3>선재 업고 튀어</h3>
-			<p>태성의 사귀자는 고백의 내막을 알게 된 솔은 태성에게 이별을 고한다. 이후, 선재와 함께 수족관을
-				방문하는데...</p>
-		</div>
-	</div>
-
-	<!-- 두 번째 박스 -->
-	<div class="box">
-		<!-- 왼쪽의 이미지 -->
-		<div class="image">
-			<img src="images/seoulforest.jpeg" alt="서울숲">
-		</div>
-		<!-- 오른쪽의 텍스트 -->
-		<div class="content">
-			<h2 style="font-weight: bold;">
-				서울숲 <span class="star">☆</span>
-			</h2>
-			<h3>선재 업고 튀어</h3>
-			<p>음악을 접겠다고 가출한 인혁을 찾으러 솔, 선재, 태성은 인혁이 자주 가는 산책로를 뒤따라간다.</p>
-		</div>
-	</div>
-
-
-
 
 	<!-- Side navigation script -->
 	<script>
@@ -324,10 +313,42 @@
 			document.getElementById("mySidenav").style.width = "0";
 		}
 	</script>
-	 <script>
-        function goToAddress(url) {
-            location.href = url;
-        }
+	<script>
+		function goToAddress(url) {
+			location.href = url;
+		}
+	</script>
+
+	<script>
+    function handleLikeClick(filmId,email,button) {
+        $.ajax({
+            type: 'POST',
+            url: 'FilmLikeService',
+            data: { 
+            	f_num: filmId,
+            	email: email
+            },
+            success: function(response) {
+                console.log('좋아요 처리 성공:', response);
+                // 버튼의 색상을 변경하여 좋아요 상태를 나타냅니다.
+               /*  if (button.textContent === '★'){
+                	button.textContent = '☆';
+                } else {
+                	button.textContent = '★';
+                }
+                 */
+                
+                if (button.classList.contains('liked')) {
+                    button.classList.remove('liked');
+                } else {
+                    button.classList.add('liked');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('좋아요 처리 오류:', error);
+            }
+        });
+    }
     </script>
 </body>
 
