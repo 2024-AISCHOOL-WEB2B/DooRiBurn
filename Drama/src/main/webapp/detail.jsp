@@ -20,7 +20,7 @@
 	href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700"
 	rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://font.gstatic.com" crossorigin>
 <link
 	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap"
 	rel="stylesheet">
@@ -30,14 +30,6 @@
 <link rel="stylesheet" href="css/Realstyle.css">
 
 <!-- 카카오 맵 API 스크립트 찾아서 연결해야 함!! -->
-
-<!-- <style>
-@media ( max-width : 768px) {
-	.image {
-		width: 100px !important;
-	}
-}
-</style> -->
 
 </head>
 <body>
@@ -133,15 +125,15 @@
 	</div>
 
 	<!-- 검색 입력 ????????? -->
-	<div>
-		<input type="text" id="searchQuery" placeholder="검색어 입력"> <select
-			id="searchOption">
-			<option value="0">제목</option>
-			<option value="1">장소</option>
-		</select>
-		<button onclick="search()">검색</button>
-	</div>
-
+	<!-- <div>
+        <input type="text" id="searchQuery" placeholder="검색어 입력"> <select
+            id="searchOption">
+            <option value="0">제목</option>
+            <option value="1">장소</option>
+        </select>
+        <button onclick="search()">검색</button>
+    </div>
+ -->
 
 	<!-- 상세 페이지 -->
 
@@ -196,6 +188,7 @@
 			</div>
 		</div>
 
+
 		<!-- 드라마 상세 줄거리 -->
 		<div class="drama">
 			<!-- 왼쪽 사진 -->
@@ -218,6 +211,25 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1cac00685a32d9d2daf6b4bdb4fc80e"></script>
 		
 
+		<!-- 리뷰 섹션 -->
+		<div class="review">
+			<div class="review-header">
+				<h2 style="font-weight: bold;">Review</h2>
+				<button class="review-btn" onclick="window.location.href='pop.jsp';">리뷰
+					작성하기</button>
+			</div>
+			<div class="submitted-reviews">
+				<div class="review-item">
+					<div class="rating">
+						<span>⭐</span> <span>⭐</span> <span>⭐</span> <span>⭐</span> <span>⭐</span>
+					</div>
+					<h3>제주도 가시면 꼭 들러야 할 장소 1위!</h3>
+					<p>선재 업고 튀어 보고 방문했는데</p>
+					<p class="nickname">개나리</p>
+					<p class="date">2023. 04. 01</p>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- JavaScript 파일 연결 -->
@@ -248,6 +260,7 @@
 		var staticMap = new kakao.maps.StaticMap(staticMapContainer,
 				staticMapOption);
 	</script>
+
 
 </body>
 </html>
