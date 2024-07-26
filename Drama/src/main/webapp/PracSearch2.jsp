@@ -88,7 +88,8 @@
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
 	String s_option = request.getParameter("s_option");
 	String search = request.getParameter("search");
-
+	
+	List<String> img_src = new ArrayList<>();
 	List<String> titles = new ArrayList<>();
 	List<String> places = new ArrayList<>();
 	List<String> scene = new ArrayList<>();
@@ -127,7 +128,7 @@
 		out.println("<ul>");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
+			img_src.add(jsonObject.getString("img"));
 			titles.add(jsonObject.getString("제목"));
 			places.add(jsonObject.getString("장소명"));
 			scene.add(jsonObject.getString("장소설명"));
@@ -358,20 +359,19 @@
 	%>
 
 	<!-- 진짜 박스: 검색명에 대한 검색 결과! 촬영지 목록 -->
-	<div class="box">
+	<div class="box" onclick="goToAddress('http://localhost:8082/Drama/detail.jsp?index=<%= index.get(i)+1%>')">
 		<!-- 왼쪽의 이미지 -->
 		<div class="image">
-			<img src="images/seoulforest.jpeg" alt="서울숲">
+			<img src=<%=img_src.get(i) %>alt="서울숲"style="width: 200px">
 		</div>
 		<!-- 오른쪽의 텍스트 -->
 		<div class="content">
 			<h2 style="font-weight: bold;">
 				<%=places.get(i)%>
 				<span class="star">☆</span>
-				<p><%=seen%></p>
 			</h2>
 			<h3><%=titles.get(i)%></h3>
-			<p>음악을 접겠다고 가출한 인혁을 찾으러 솔, 선재, 태성은 인혁이 자주 가는 산책로를 뒤따라간다.</p>
+			<p><%=seen%></p>
 		</div>
 	</div>
 	<%
@@ -426,6 +426,11 @@
 			document.getElementById("mySidenav").style.width = "0";
 		}
 	</script>
+	 <script>
+        function goToAddress(url) {
+            location.href = url;
+        }
+    </script>
 </body>
 
 
