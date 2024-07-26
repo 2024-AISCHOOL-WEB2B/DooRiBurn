@@ -51,7 +51,7 @@ public class DramaSearchDAO {
 public ArrayList<DramaSearchDTO> film_detail(String index) {
 		
 		ArrayList<DramaSearchDTO> detail_list = new ArrayList<DramaSearchDTO>();
-		
+		int n_index = Integer.parseInt(index);
 		try {
 			getConnection();
 
@@ -59,7 +59,7 @@ public ArrayList<DramaSearchDTO> film_detail(String index) {
 
 			psmt = conn.prepareStatement(sql);
 
-			psmt.setString(1,index);
+			psmt.setInt(1,n_index);
 
 			rs = psmt.executeQuery();
 
@@ -73,10 +73,12 @@ public ArrayList<DramaSearchDTO> film_detail(String index) {
 				String f_tel = rs.getString("F_TEL");
 				String f_time = rs.getString("F_TIME");
 				String scene = rs.getString("SCENE");
-
-				DramaSearchDTO dto = new DramaSearchDTO(f_num,drama, f_addr, lat, lon, f_name, f_tel, f_time, scene);
+				String f_img = rs.getString("F_IMG");
+	
+				DramaSearchDTO dto = new DramaSearchDTO(f_num, drama, f_addr, lat, lon, f_name, f_tel, f_time, scene, f_img);
 				
 				detail_list.add(dto);
+				System.out.println(detail_list.get(0).getDrama()); 
 				
 			}
 
