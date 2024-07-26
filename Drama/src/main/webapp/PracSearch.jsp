@@ -374,11 +374,11 @@
 		<!-- 오른쪽의 텍스트 -->
 		<div class="content">
 			<h2 style="font-weight: bold;">
-				<%=titles.get(i)%>
+				<%=places.get(i)%>
 				<span class="star">☆</span>
 				<p><%=seen%></p>
 			</h2>
-			<h3>선재 업고 튀어</h3>
+			<h3><%=titles.get(i)%></h3>
 			<p>음악을 접겠다고 가출한 인혁을 찾으러 솔, 선재, 태성은 인혁이 자주 가는 산책로를 뒤따라간다.</p>
 		</div>
 	</div>
