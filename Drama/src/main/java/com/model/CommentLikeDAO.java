@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CommentLikeDAO {
 
@@ -43,7 +44,7 @@ public class CommentLikeDAO {
 		}
 	}
 	
-	// 댓글 좋아요 저장
+	// 댓글 좋아요 저장 insert
 	public int commentLike(CommentLikeDTO dto) {		
 		int cnt = 0; 
 		dbOpen();
@@ -66,7 +67,7 @@ public class CommentLikeDAO {
 	} 
 	
 	
-	// 댓글 좋아요 취소   cmt_like
+	// 댓글 좋아요 취소   cmt_like로 삭제
 	public int commentLikeDel(int num) { 		
 		int cnt = 0;
 		dbOpen();
@@ -85,8 +86,65 @@ public class CommentLikeDAO {
 		return cnt;
 	}
 	
-	// 댓글 좋아요 리스트  cmt_like 
- 
+	// 댓글 좋아요 리스트   email
+	public List<CommentLikeDTO> getCommentLike(String memEmail) {
+		List<CommentLikeDTO> list = new ArrayList<>();
+		dbOpen();
+		int cnt = 0;
+		try {
+			String sql = "SELECT * FROM TB_COMMENT_LIKE WHERE EMAIL=?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, memEmail);
+			rs = psmt.executeQuery();
+			
+	        while(rs.next()) {
+	            int cmt_like = rs.getInt("CMT_LIKE"); 
+	            String email = rs.getString("EMAIL");
+	            int cmt_num = rs.getInt("CMT_NUM");
+	            Date cmt_like_date = rs.getDate("CMT_LIKE_DATE");   
+	            
+	            CommentLikeDTO dto = new CommentLikeDTO(cmt_like, email, cmt_num, cmt_like_date);
+				list.add(dto);
+	        }	
+		}catch (SQLException e) { 
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		} 
+		return list;	 
+	}
+	
+	
+	
+	
+	
+	
+	// 댓글 좋아요 수 조회 
+	public int getCommentLikeCount(int cmt_num) {
+	    int count = 0;
+	    dbOpen();
+	    
+	    try {
+	        String sql = "SELECT COUNT(*) FROM TB_COMMENT_LIKE WHERE CMT_NUM = ?";
+	        psmt = conn.prepareStatement(sql);
+	        psmt.setInt(1, cmt_num);
+
+	        rs = psmt.executeQuery();
+
+	        if (rs.next()) {
+	            count = rs.getInt(1);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        dbClose();
+	    }
+
+	    return count;
+	}
+
+	
 	 
 	
 	

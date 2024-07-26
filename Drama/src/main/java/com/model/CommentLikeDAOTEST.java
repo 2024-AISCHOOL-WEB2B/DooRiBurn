@@ -1,21 +1,56 @@
 package com.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CommentLikeDAOTEST {
 
-	
 	private Connection conn;
 	private PreparedStatement psmt;
 	private ResultSet rs;
 	 
+	private void dbOpen() {		
+		try { 
+			Class.forName("oracle.jdbc.driver.OracleDriver");	  
+			String db_id = "Insa5_SpringB_hacksim_1";
+			String db_pw = "aishcool1";
+			String db_url = "jdbc:oracle:thin:@project-db-stu3.smhrd.com:1524:xe";
+ 
+			conn = DriverManager.getConnection(db_url, db_id, db_pw);			
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+		
+	private void dbClose() {
+		try {
+			if (rs != null)
+				rs.close();
+			if (psmt != null)
+				psmt.close();
+			if (conn != null)
+				conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace(); 
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 //	String b_idx= request.getParameter("b_idx");
 //	String userid = (String)session.getAttribute("userid"); 
 	
-	try{
-		conn = Dbconn.getConnection();
+	try{ 
 		if(conn != null){
 			int b_like=0;
 			
