@@ -48,7 +48,7 @@ public class MemberDAO {
 				
 			}
 	
-	public int Join(MemberDTO dto) {
+	public int join(MemberDTO dto) {
 		
 		int cnt = 0;
 		
@@ -122,7 +122,7 @@ public class MemberDAO {
 		
 		
 		try {
-			String sql = "SELECT * FROM TB_MEMBER WHERE EMAIL = ? AND PW = ?";
+			String sql = "SELECT * FROM TB_MEMBER WHERE EMAIL = ?";
 			psmt = conn.prepareStatement(sql);
 			
 			psmt.setString(1, dto.getEmail());

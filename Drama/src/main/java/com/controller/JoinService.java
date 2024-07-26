@@ -19,6 +19,8 @@ public class JoinService extends HttpServlet {
 		request.setCharacterEncoding("euc-kr");
 		String email = request.getParameter("email");
 		String pw = request.getParameter("pw");
+		// todo
+		
 		String nick = request.getParameter("nick");
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
@@ -28,7 +30,7 @@ public class JoinService extends HttpServlet {
 		MemberDTO dto = new MemberDTO(email, pw, nick, name, phone, addr);
 		MemberDAO dao = new MemberDAO();
 		
-		int cnt = dao.Join(dto);
+		int cnt = dao.join(dto);
 		
 		if(cnt > 0) {
 			System.out.println("회원가입 성공");
