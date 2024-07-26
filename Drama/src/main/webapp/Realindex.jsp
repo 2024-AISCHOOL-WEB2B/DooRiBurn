@@ -39,7 +39,7 @@
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
 
-	<div id="mySidenav" class="sidenav">
+	<div id="mySidenav" class="sidenav" style="width: 0;">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:black;">&times;</a>
 		<div class="menu-section">
 			<h2>지역별로 찾기</h2>
@@ -54,7 +54,7 @@
 		<div class="menu-section">
 			<h2>공모전</h2>
 			<div class="menu-items">
-				<a href="#">참여하기</a>
+				<a href="contestBoard.jsp">참여하기</a>
 			</div>
 		</div>
 		<%if(info != null){ %>
@@ -137,7 +137,7 @@
 	<!-- Side navigation script -->
 	<script>
 		function openNav() {
-			document.getElementById("mySidenav").style.width = "50%";
+			document.getElementById("mySidenav").style.width = "80%";
 		}
 
 		function closeNav() {

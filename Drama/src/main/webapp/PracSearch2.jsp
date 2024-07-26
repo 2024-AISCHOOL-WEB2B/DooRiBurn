@@ -15,6 +15,10 @@
 	pageEncoding="UTF-8"%> --%>
 
 <!-- ------- 7/25 오후 7:17 위 주석 처리 -->
+<%@ page contentType="text/html; charset=UTF-8" %>
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -25,9 +29,9 @@
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.net.HttpURLConnection"%>
 <%@page import="java.net.URL"%>
-<%@page import="java.net.URLEncoder"%> <!-- 추가된 부분 -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import="java.net.URLEncoder"%>
+<!-- 추가된 부분 -->
+
 <%@page import="com.model.MemberDTO"%>
 
 
@@ -79,6 +83,14 @@
 	String s_option = request.getParameter("s_option");
 	String search = request.getParameter("search");
 
+	// 검색어가 null인 경우 빈 문자열로 설정
+	if (search == null) {
+		search = "";
+	}
+
+	// 검색어를 URL 인코딩 처리
+	String encodedSearch = URLEncoder.encode(search, "UTF-8");
+
 	List<String> titles = new ArrayList<>();
 	List<String> places = new ArrayList<>();
 	List<String> scene = new ArrayList<>();
@@ -87,20 +99,21 @@
 	HttpURLConnection conn = null;
 	try {
 		// Flask 서버의 URL 설정
-		URL url = new URL(
-		"http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
+		URL url = new URL("http://localhost:5002/search?s_option=" + s_option + "&search=" + encodedSearch);
 
 		conn = (HttpURLConnection) url.openConnection();
 		// 요청 방식 및 헤더 설정
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Accept", "application/json");
+		conn.setRequestProperty("Accept-Charset", "UTF-8"); // 서버 응답의 문자 인코딩을 UTF-8로 설정 7/25 21:23 추가
+
 
 		// 서버 응답 확인
 		int responseCode = conn.getResponseCode();
 		System.out.println("GET Response Code :: " + responseCode);
 
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
-			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8")); // 서버 응답 데이터를 UTF-8로 읽기
 			String inputLine;
 			StringBuffer response_data = new StringBuffer();
 
@@ -159,11 +172,11 @@
 
 	<header>
 		<!-- 배너 및 메뉴 -->
-		<div class="banner">여기가 거기여?</div>
+		<button class="banner" onclick="location.href='Realindex.jsp'">여기가 거기여?</button>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
 
-	<div id="mySidenav" class="sidenav">
+	<div id="mySidenav" class="sidenav" style="width: 0;">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		<div class="menu-section">
 			<h2>지역별로 찾기</h2>
@@ -267,11 +280,11 @@
 		<!-- 오른쪽의 텍스트 -->
 		<div class="content">
 			<h2 style="font-weight: bold;">
-				<%=titles.get(i)%>
+				<%=places.get(i)%>
 				<span class="star">☆</span>
 				<p><%=seen%></p>
 			</h2>
-			<h3>선재 업고 튀어</h3>
+			<h3><%=titles.get(i)%></h3>
 			<p>음악을 접겠다고 가출한 인혁을 찾으러 솔, 선재, 태성은 인혁이 자주 가는 산책로를 뒤따라간다.</p>
 		</div>
 	</div>
