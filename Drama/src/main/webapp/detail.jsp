@@ -48,6 +48,7 @@
 	String time = film_detail.get(0).getFTel();
 	String scene = film_detail.get(0).getFTime();
 	String img_src = film_detail.get(0).getFimg();
+	
 	%>
 	<div class="fh5co-loader">
 		<div id="page"></div>
@@ -144,68 +145,38 @@
 		</header>
 	</div>
 	<section class="info">
-		<h1><%=place%></h1>
-		<p class="address"><%=addr%></p>
-		<p class="hours">
-			영업시간:
-			<%=time%></p>
-		<p class="phone">
-			전화번호:
-			<%=tel%></p>
-		<p class="phone">
-			촬영지속 드라마 장면 :
-			<%=scene%></p>
 		<div class="tags">
 			<span>#데이트</span> <span>#가족</span> <span>#선암귀</span> <span>#수족관</span>
 		</div>
+		<h1><%=place%></h1>
+		<p class="address"><%=addr%></p>
+		<p class="hours">
+			영업시간:<%= scene%>
+			</p>
+		<p class="phone">
+			전화번호: <%= time%>
+			</p>
+		<div class="tags">
+			
+			
+			<div class="drama">
+			<!-- 왼쪽 사진 -->
+			<img src="images/<%=drama %>.jpg" alt="선재 업고 튀어" class="image">
+			<!-- 오른쪽 텍스트 -->
+			<div class="text">
+				<h1><%=drama %></h1>
+				<p><%=tel%></p>
+			</div>
+		</div>
+		
+		</div>
+	
+	
+		
 	</section>
 	<!-- 여기까지 -->
 
-	<div id="fh5co-blog" class="fh5co-bg-section">
-		<div class="container">
-			<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
-			<div class="row">
-				<div class="col-lg-4 col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="#"><img class="img-responsive"
-							src="images/work-4.jpg" alt=""></a>
-						<!-- 해당 장소 사진 -->
-						<div class="blog-text">
-							<h3>
-								<a href="" #>수원 행궁동 행리단길</a>
-							</h3>
-							<!-- 장소명 -->
-							<span class="posted_on">선재 업고 튀어</span>
-							<!-- 드라마명 -->
-							<span class="favorites">⭐</span>
-							<!-- 즐겨찾기 -->
-							<p>'선재 업고 튀어' 9화에서 선재와 솔이가 첫 데이트를 하는 장소로..</p>
-							<!-- 상세줄거리 미리보기 -->
-							<a href="#" class="btn btn-primary">상세보기</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<!-- 드라마 상세 줄거리 -->
-		<div class="drama">
-			<!-- 왼쪽 사진 -->
-			<img src="images/cover.jpg" alt="선재 업고 튀어" class="image">
-			<!-- 오른쪽 텍스트 -->
-			<div class="text">
-				<h1>선재 업고 튀어 6화</h1>
-				<p>태성의 사귀자는 고백의 내막을 알게 된 솔은 태성에게 이별을 고한다. 이후, 선재와 함께 수족관을
-					방문하는데... (중략) mp3에 녹음된 선재의 고백을 수족관에서 뒤늦게 듣게 된 솔. 그때부터 선재가 의식되고 가슴이
-					두근두근거린다.</p>
-			</div>
-		</div>
-		<div id="lat" style="display: none;"><%=lat%></div>
-		<div id="lon" style="display: none;"><%=lon%></div>
-		<div id="place" style="display: none;"><%=place%></div>
-		<!-- 카카오 맵 지도 연결 -->
-		<div id="staticMap" style="width: 100%; height: 350px;"></div>
+	
 		
 		<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1cac00685a32d9d2daf6b4bdb4fc80e"></script>

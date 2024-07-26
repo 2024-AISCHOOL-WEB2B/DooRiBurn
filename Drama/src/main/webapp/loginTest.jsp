@@ -1,19 +1,16 @@
-<%@page import="com.model.ContestDAO"%>
-<%@page import="com.model.ContestDTO"%>
 <%@page import="com.model.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> 
+    pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>contestPost</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>loginTest.jsp</title>
+	<meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FreeHTML5.co" />
-  
+	<meta name="author" content="FreeHTML5.co" /> 
 	
 	<!-- realindex에서 가져온 것들 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" >
@@ -28,14 +25,13 @@
 	<link rel="stylesheet" href="css/Realstyle.css">
 	
 	<!-- 나머지 CSS 파일들 -->
+	
+	<link rel="stylesheet" href="css/loginTest.css">
 	<link rel="stylesheet" href="css/other-style1.css">
 	<link rel="stylesheet" href="css/other-style2.css">
-	
-	 
-	
+	  
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
-	
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> 
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -44,40 +40,60 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style2.css">
+
+		 
   
-	<script src="js/modernizr-2.6.2.min.js"></script>
- 
+	<script src="js/modernizr-2.6.2.min.js"></script> 
+	
+	
+	
+	
+	 <!-- 메뉴 위치 우상단으로 조정 -->
 	<style>
-	/* 메뉴 위치 우상단으로 조정 */
 	.menu-icon {
 	    position: absolute;
 	    top: 10px;  
 	    right: 20px; 
 	    cursor: pointer; 
-	}
- 
-	/* 사진 업로드 style*/
-	#uploadLabel .btn-file {
-	    background-color: #FFEEB9 !important;  
-	    border-color: #FFEEB9 !important;  
-	    color: #000 !important;
-		border: 1px solid; 
-        border-radius: 25px; 
-        box-shadow: none;
-        padding: 8px 15px; 
-	}  
+	} 
 	/* 버튼과 저작권 정보 사이에 여백 추가, 중간배열 */
 	.button-container {
 	    margin-bottom: 20px; 
 		display: flex; 
 		justify-content: center;
 	}
-	</style> 
-	</head> 
+	</style>
+	</head>
 	<body>
-		<%  
-			MemberDTO info = (MemberDTO)session.getAttribute("info"); 
-		 %>
+	
+	<% 
+		MemberDTO info = (MemberDTO)session.getAttribute("info");  
+		String error = (String)session.getAttribute("error");
+	%>
+	
+	<script>
+        function validateForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            if (email == "") {
+                alert("이메일 칸을 입력해 주세요.");
+                return false;
+            }
+            
+            if (password == "") {
+                alert("비밀번호 칸을 입력해 주세요.");
+                return false;
+            }
+            
+            if (email == "" || password == "") {
+                alert("모든 필드를 입력해 주세요.");
+                return false;
+            }
+            return true;
+        }
+    </script>   
+		
 	<header>
 		<div class="banner">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
@@ -114,64 +130,42 @@
 		</div>
 		<%} %>
 	</div>
-	</nav>
-	<header id="fh5co-header" class="fh5co-cover" style="height: 100px;"> 
-		<div class="overlay"></div>
-		<div class="container"></div>
-	</header>
-	 
-  		<%
-			// 글 번호 가져오기
-			int num = 0;
-			if (request.getParameter("num") != null){
-				num = Integer.parseInt(request.getParameter("num"));
-			} 
+	</nav> 
 
-			ContestDTO dto = new ContestDAO().getView(num); 
-		%>
-		
-	<!-- 공모전 게시글 작성 -->
-	<div class="container">
-	    <div class="row">
-	        <form method="post" action="contestPostAction.jsp" enctype="multipart/form-data">
-	            <table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
-	                <thead>
-	                    <tr>
-	                        <th style="background-color: #f9f9f9; text-align: center;">공모전 게시글 작성</th> 
-	                    </tr>
-	                </thead>
-	                <tbody style="background-color: #f9f9f9;"> 
-	                    <tr> 
-	                        <td><input type="text" class="form-control" placeholder="제목을 입력해주세요." name="contestTitle" required></td>
-	                    </tr> 
-	                    <tr> 
-	                        <td><textarea class="form-control" placeholder="내용을 입력해주세요." name="contestContent" style="height: 350px;" required></textarea></td>
-	                    </tr>
-	                    <tr>
-							<td>
-							    <label for="file" id="uploadLabel">
-							        <div class="btn btn-file">
-							            <i class="icon-camera"></i> 사진 업로드
-							        </div>
-							    </label>
-							    <input type="file" name="contestImg" id="file" style="display: none;" onchange="previewImage(event);">
-							</td>   
-						</tr>
-						<tr>
-						    <td>
-                            <div id="imagePreview"></div>
-                                <img id="preview" src="" alt="" style="max-width: 100%; height: auto;">
-						    </td>
-						</tr>	 
-	                </tbody>
-	            </table>
-	            <input type="submit" class="btn btn-primary pull-right" value="작성">
-	        </form>  
+	<div id="fh5co-contact" style="align-content: center;">
+	    <div class="container">
+	        <div class="row"> 
+	            <div class="col-md-6 animate-box" align="center" onsubmit="return validateForm()">
+	                <header>
+	                    <h2>Login</h2>
+	                </header>
+	                <form action="LoginService" method="post" name="JoinForm">
+	                    <div class="input-box">
+	                        <input id="email" type="text" name="email" class="form-control" placeholder="Email">
+	                        <label for="email">Email</label>
+	                    </div>
+	                    <div class="input-box">
+	                        <input id="password" type="password" name="pw" class="form-control" placeholder="비밀번호">
+	                        <label for="password">비밀번호</label>
+	                    </div>
+	                    <div class="row form-group">
+	                        <a href="contact.jsp">회원가입</a>
+	                    </div>
+	                    <% if(error != null){ %>
+	                    <div class="row form-group">
+	                        <span><%= error %></span>
+	                    </div>
+	                    <% }%>
+	                    <div class="row form-group">
+	                        <input type="submit" id="submit" value="로그인">
+	                    </div>
+	                </form>		
+	            </div>
+	        </div> 
 	    </div>
 	</div>
-		 
-	</div> <!-- page div -->
  
+	</div>
  	<footer id="fh5co-footer" role="contentinfo">
  		<!-- 버튼 -->
  			<div class="button-container">
@@ -197,32 +191,27 @@
 			</div>
 		</div> 
 	</footer>
-	
-	
-		
-	
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://bootstrap.js"></script>
- 
-	<!-- 업로드한 사진 미리보기 --> 
-	<script> 
-    function previewImage(event) {
-        var input = event.target; 
-        var reader = new FileReader();
 
-        reader.onload = function() {
-            var dataURL = reader.result; 
-            var imagePreview = document.getElementById('imagePreview'); 
- 
-            imagePreview.innerHTML = '<img src="' + dataURL + '" alt="이미지 미리보기" style="max-width: 100%; height: auto;">';
-        }
 
-        // 파일이 선택되었을 때만 FileReader를 통해 파일을 읽음
-        if (input.files && input.files[0]) {
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-	</script> 
+	
+
+
+	
+
+	
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Main -->
+	<!-- Google Map -->
+
+	<script src="js/main.js"></script>
 	
 	<!-- Side navigation script -->
 	<script>
@@ -234,16 +223,8 @@
 			document.getElementById("mySidenav").style.width = "0";
 		}
 	</script>
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
-
+	
+	
 	</body>
 </html>
+

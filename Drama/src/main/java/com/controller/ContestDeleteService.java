@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.model.CommentDAO;
 import com.model.ContestDAO; 
  
 @WebServlet("/ContestDeleteService")
@@ -15,13 +16,22 @@ public class ContestDeleteService extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ContestDAO dao = new ContestDAO(); 
+		CommentDAO comDao = new CommentDAO();
 		int num = Integer.parseInt(request.getParameter("c_num")); 
 		
-		int cnt = dao.contestDelete(num);
-		if (cnt > 0) {
+		int cnt1 = dao.contestDelete(num);
+		int cnt2 = comDao.commentAllDelete(num);
+		
+		if (cnt1 > 0) {
 			System.out.println("글 삭제 성공");
 		} else {
 			System.out.println("글 삭제 실패");
+		}
+		
+		if (cnt2 > 0) {
+			System.out.println("댓글 삭제 성공");
+		} else {
+			System.out.println("댓글 삭제 실패");
 		}
 		response.sendRedirect("contestBoard.jsp"); 
 		

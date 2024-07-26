@@ -32,12 +32,9 @@
 	<!-- 나머지 CSS 파일들 -->
 	<link rel="stylesheet" href="css/other-style1.css">
 	<link rel="stylesheet" href="css/other-style2.css">
-	
-	 
-	
+	  
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
-	
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> 
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -56,6 +53,12 @@
 	    top: 10px;  
 	    right: 20px; 
 	    cursor: pointer; 
+	} 
+	/* 버튼과 저작권 정보 사이에 여백 추가, 중간배열 */
+	.button-container {
+	    margin-bottom: 20px; 
+		display: flex; 
+		justify-content: center;
 	}
 	</style> 
 
@@ -126,62 +129,11 @@
 		</div>
 		<%} %>
 	</div>
-	</nav>
+	</nav> 
 	
-	
-		<!-- <div class="container">
-			<div class="row">
-				<div class="left-menu text-right menu-1">
-					<ul>
-						<li><a href="contact.jsp">회원가입</a></li>
-						<li><a href="about.html">로그인</a></li>
-						<li class="has-dropdown">
-							<a href="services.html">마이페이지</a>
-							<ul class="dropdown">
-								<li><a href="#">관심 촬영지</a></li>
-								<li><a href="#">회원정보수정</a></li>
-								<li><a href="#">참여한 공모전</a></li>
-								<li><a href="#">API</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				<div class="logo text-center">
-					<div id="fh5co-logo"><a href="index.jsp">여</a></div>
-				</div>
-				<div class="right-menu text-left menu-1">
-					<ul>
-						<li><a href="blog.html">공모전</a></li>
-						<li class="has-dropdown">
-							<a href="#">카테고리</a>
-							<ul class="dropdown">
-								<li><a href="#">HTML5</a></li>
-								<li><a href="#">CSS3</a></li>
-								<li><a href="#">Sass</a></li>
-								<li><a href="#">jQuery</a></li>
-							</ul>
-						</li>
-						<li><a href="contact.html">Contact</a></li> 
-					</ul>
-				</div>
-			</div>
-			
-		</div> 
-	</nav>-->
-	<header id="fh5co-header" class="fh5co-cover" style="height: 100px;"> <!--  style="background-image:url(images/img_bg_2.jpg);"> -->
+	<header id="fh5co-header" class="fh5co-cover" style="height: 100px;"> 
 		<div class="overlay"></div>
-		<div class="container">
-			<!-- <div class="row">
-				<div class="col-md-10 col-md-offset-1 text-center">
-					<div class="display-t" >
-						<div class="display-tc animate-box" data-animate-effect="fadeIn" > 
-							<div class="row"> 
-							</div>
-						</div>
-					</div> 
-				</div>-->
-			</div>
-		</div>
+		<div class="container"></div>
 	</header>
  
  
@@ -261,18 +213,9 @@
 	
 	
  	<footer id="fh5co-footer" role="contentinfo">
-		<div class="container">
-				  
-			<div class="row copyright">
-				<div class="col-md-12 text-center">
-					<p>
-						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
-						<small class="block">Designed by DOORIBURN</small>
-					</p>
- 			
- 			
-<!-- 버튼 -->
-			   	<div>  
+ 		<!-- 버튼 -->
+ 			<div class="button-container">
+			   	<div>    
 					<%if(info == null) {%>
 						<button class="btn" onclick="location.href='login.jsp'">로그인</button>
 						<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
@@ -280,17 +223,19 @@
 						<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
 					<%} %>
 						<button class="btn">한국어</button>
-						<button class="btn">English</button>  
-				</div>						
-					<p>
-						<ul class="fh5co-social-icons">  
-							<li><a href="#"><i class="icon-sun"></i></a></li>
-							<li><a href="#"><i class="icon-cloud"></i></a></li>
-						</ul> 
-					</p>
+						<button class="btn">English</button>   
 				</div>
+			</div>				
+		<div class="container">
+			<div class="row copyright"> 
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
+						<small class="block">Designed by DOORIBURN</small>
+					</p>
+ 				</div>  
 			</div>
-		</div>
+		</div> 
 	</footer>
  
 	
@@ -308,8 +253,7 @@
 	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>
-	
-	
+	 
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
