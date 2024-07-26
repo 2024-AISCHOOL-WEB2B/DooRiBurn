@@ -316,7 +316,7 @@
 					<div class="fh5co-blog animate-box" >
 						<img class="img-responsive"
 							src=<%=img_src.get(i) %>
-							alt="">
+							alt="" style="width: 200px">
 						<!-- 해당 장소 사진 -->
 						<div class="blog-text" onclick="goToAddress('http://localhost:8082/Drama/detail.jsp?index=<%= index.get(i)+1%>')">
 							<h3>
