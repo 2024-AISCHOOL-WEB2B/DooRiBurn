@@ -142,7 +142,7 @@ public class FilmLikeDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("찜 목록 조회 오류: " + e.getMessage()); // 찜 목록 조회 오류 메시지 출력
+			System.out.println("찜 목록 조회 오류: " + e.getMessage()); // 찜 목록 조회 오류 메시지 출력 // 안녕하세용
 		} finally {
 			dbClose();
 		}
