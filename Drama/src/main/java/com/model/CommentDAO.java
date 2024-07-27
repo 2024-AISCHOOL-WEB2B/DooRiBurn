@@ -13,7 +13,8 @@ public class CommentDAO {
 	private Connection conn;
 	private PreparedStatement psmt;
 	private ResultSet rs;
-
+	
+	// DBUtil로 DB연결하는 클래스만들어서 하시면 코드가짧아져서 가독성짱!!!
 	private void dbOpen() {		
 		try { 
 			Class.forName("oracle.jdbc.driver.OracleDriver");	  

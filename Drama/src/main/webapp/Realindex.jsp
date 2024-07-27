@@ -9,7 +9,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <!-- 폰트 -->
 <link
 	href="https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700"
@@ -67,8 +66,6 @@
 		</div>
 		<%} %>
 	</div>
-
-
 
 	<div class="main-content">
 		<form action="PracSearch2.jsp" method="get">
