@@ -9,7 +9,9 @@ public class CommentLikeDTO {
 	private int cmt_num;
 	private Date cmt_like_date;
 	 
-	
+	public CommentLikeDTO() {
+		 
+	}
 	public CommentLikeDTO(int cmt_like, String email, int cmt_num) { 
 		this.cmt_like = cmt_like;
 		this.email = email;
@@ -21,6 +23,7 @@ public class CommentLikeDTO {
 		this.cmt_num = cmt_num;
 		this.cmt_like_date = cmt_like_date;
 	}
+
 	public int getCmt_like() {
 		return cmt_like;
 	}

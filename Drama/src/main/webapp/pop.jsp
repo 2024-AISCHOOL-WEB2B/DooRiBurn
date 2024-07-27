@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 
 <link
@@ -18,7 +18,7 @@
 	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap"
 	rel="stylesheet">
 
-<!-- CSS ÆÄÀÏ ¿¬°á -->
+<!-- CSS íŒŒì¼ ì—°ê²° -->
 <link rel="stylesheet" href="css/Realstyle.css">
 
 <style>
@@ -46,7 +46,7 @@
   background-color: #ffffff;
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
   
-  /* ÀÓ½Ã ÁöÁ¤ */
+  /* ì„ì‹œ ì§€ì • */
   width: 90%;
   height: 70%;
 }
@@ -60,7 +60,7 @@
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1000;
   
-  /* ¼û±â±â */
+  /* ìˆ¨ê¸°ê¸° */
   z-index: -1;
   opacity: 0;
 }
@@ -79,11 +79,11 @@
   background-color: #ffffff;
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
   
-  /* ÀÓ½Ã ÁöÁ¤ */
+  /* ì„ì‹œ ì§€ì • */
   width: 500px;
   height: 500px;
   
-  /* ÃÊ±â¿¡ ¾à°£ ¾Æ·¡¿¡ ¹èÄ¡ */
+  /* ì´ˆê¸°ì— ì•½ê°„ ì•„ë˜ì— ë°°ì¹˜ */
   transform: translate(-50%, -40%);
 }
 
@@ -135,31 +135,31 @@
 </head>
 <body>
 	
-	<button id="show">ÆË¾÷¿­±â</button>
+	<button id="show">íŒì—…ì—´ê¸°</button>
     <div class="background">
       <div class="window">
         <div class="popup">
 	        <div align="right">
-				<button id="close">ÆË¾÷´İ±â</button>
+				<button id="close">íŒì—…ë‹«ê¸°</button>
         	</div>
         	<div style="margin: auto;">
         		<form class="mb-3" name="myform" id="myform" method="post">
 					<fieldset style="display: inline-block ; direction: rtl ; border:0 ;">
-						<span class="text-bold">º°Á¡À» ¼±ÅÃÇØÁÖ¼¼¿ä</span>
+						<span class="text-bold">ë³„ì ì„ ì„ íƒí•´ì£¼ì„¸ìš”</span>
 						<input type="radio" name="reviewStar" value="5" id="rate1"><label
-							for="rate1">¡Ú</label>
+							for="rate1">â˜…</label>
 						<input type="radio" name="reviewStar" value="4" id="rate2"><label
-							for="rate2">¡Ú</label>
+							for="rate2">â˜…</label>
 						<input type="radio" name="reviewStar" value="3" id="rate3"><label
-							for="rate3">¡Ú</label>
+							for="rate3">â˜…</label>
 						<input type="radio" name="reviewStar" value="2" id="rate4"><label
-							for="rate4">¡Ú</label>
+							for="rate4">â˜…</label>
 						<input type="radio" name="reviewStar" value="1" id="rate5"><label
-							for="rate5">¡Ú</label>
+							for="rate5">â˜…</label>
 					</fieldset>
 					<div>
 						<textarea class="col-auto form-control" type="text" id="reviewContents"
-						placeholder="ÁÁÀº ¸®ºäÀ» ³²°ÜÁÖ½Ã¸é Å« ÈûÀÌ µË´Ï´Ù!"></textarea>
+						placeholder="ì¢‹ì€ ë¦¬ë·°ì„ ë‚¨ê²¨ì£¼ì‹œë©´ í° í˜ì´ ë©ë‹ˆë‹¤!"></textarea>
 					</div>
 				</form>	
         	</div>

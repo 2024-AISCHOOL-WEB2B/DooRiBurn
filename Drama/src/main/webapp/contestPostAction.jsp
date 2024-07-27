@@ -17,7 +17,7 @@
 	<%
 	request.setCharacterEncoding("UTF-8");
 	
-	int maxFileSize = 1024 * 1024 * 1024;
+	int maxFileSize = 1024 * 1024 * 10;
 	String path = request.getRealPath("/boardImg");
 	
     try { 

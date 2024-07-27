@@ -50,7 +50,7 @@ public class CommentDAO {
 		 
 		try { 
 			
-			String sql = "INSERT INTO TB_C_COMMENT (cmt_img, cmt_date, c_num, email) VALUES (?, TO_DATE(TO_CHAR(SYSDATE)), ?, ?)"; 
+			String sql = "INSERT INTO TB_C_COMMENT (cmt_img, cmt_date, c_num, email) VALUES (?, SYSDATE, ?, ?)"; 
 			psmt = conn.prepareStatement(sql); 
 			psmt.setString(1, dto.getCmt_img());
 			psmt.setInt(2, dto.getC_num());

@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.model.CommentDAO;
- 
- 
+  
 @WebServlet("/CommentDeleteService")
 public class CommentDeleteService extends HttpServlet { 
 	

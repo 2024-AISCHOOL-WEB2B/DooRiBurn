@@ -49,9 +49,8 @@ public class CommentLikeDAO {
 		int cnt = 0; 
 		dbOpen();
 		 
-		try { 
-			
-			String sql = "INSERT INTO TB_COMMENT_LIKE (cmt_like, email, cmt_num, cmt_like_date) VALUES (?, ?, TO_DATE(TO_CHAR(SYSDATE)))"; 
+		try {  
+			String sql = "INSERT INTO TB_COMMENT_LIKE (EMAIL, CMT_NUM, CMT_LIKE_DATE) VALUES (?, ?, SYSDATE)"; 
 			psmt = conn.prepareStatement(sql); 
 			psmt.setString(1, dto.getEmail());
 			psmt.setInt(2, dto.getCmt_num()); 
@@ -67,15 +66,16 @@ public class CommentLikeDAO {
 	} 
 	
 	
-	// 댓글 좋아요 취소   cmt_like로 삭제
-	public int commentLikeDel(int num) { 		
+	// 댓글 좋아요 취소 
+	public int commentUnlike(String email, int cmt_num) { 		
 		int cnt = 0;
 		dbOpen();
 		 
 		try {
-			String sql = "DELETE FROM TB_COMMENT_LIKE WHERE CMT_LIKE = ?";
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, num);
+			String sql = "DELETE FROM TB_COMMENT_LIKE WHERE EMAIL = ? AND CMT_NUM = ?";
+			psmt = conn.prepareStatement(sql); 
+			psmt.setString(1, email);
+			psmt.setInt(2, cmt_num);
 			cnt = psmt.executeUpdate();
 			
 		} catch (SQLException e) { 
@@ -86,53 +86,74 @@ public class CommentLikeDAO {
 		return cnt;
 	}
 	
-	// 댓글 좋아요 리스트   email
+	// 사용자의 댓글 좋아요 리스트 
 	public List<CommentLikeDTO> getCommentLike(String memEmail) {
-		List<CommentLikeDTO> list = new ArrayList<>();
-		dbOpen();
-		int cnt = 0;
-		try {
-			String sql = "SELECT * FROM TB_COMMENT_LIKE WHERE EMAIL=?";
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, memEmail);
-			rs = psmt.executeQuery();
-			
-	        while(rs.next()) {
+	    List<CommentLikeDTO> list = new ArrayList<>();
+	    dbOpen(); 
+	    try {
+	        String sql = "SELECT * FROM TB_COMMENT_LIKE WHERE EMAIL=?";
+	        psmt = conn.prepareStatement(sql);
+	        psmt.setString(1, memEmail);
+	        rs = psmt.executeQuery();
+	        
+	        while (rs.next()) {
 	            int cmt_like = rs.getInt("CMT_LIKE"); 
 	            String email = rs.getString("EMAIL");
 	            int cmt_num = rs.getInt("CMT_NUM");
 	            Date cmt_like_date = rs.getDate("CMT_LIKE_DATE");   
 	            
 	            CommentLikeDTO dto = new CommentLikeDTO(cmt_like, email, cmt_num, cmt_like_date);
-				list.add(dto);
-	        }	
-		}catch (SQLException e) { 
-			e.printStackTrace();
-		} finally {
-			dbClose();
-		} 
-		return list;	 
+	            list.add(dto);
+	        }    
+	    } catch (SQLException e) { 
+	        e.printStackTrace();
+	    } finally {
+	        dbClose();
+	    } 
+	    return list;
 	}
+
 	
-	
-	
-	
-	
-	
-	// 댓글 좋아요 수 조회 
-	public int getCommentLikeCount(int cmt_num) {
-	    int count = 0;
+	 
+	// 댓글 좋아요 수 전체 조회 
+	public int commentLikeCount(int cmt_num) {
+	    int cnt = 0;
 	    dbOpen();
-	    
 	    try {
 	        String sql = "SELECT COUNT(*) FROM TB_COMMENT_LIKE WHERE CMT_NUM = ?";
 	        psmt = conn.prepareStatement(sql);
 	        psmt.setInt(1, cmt_num);
-
 	        rs = psmt.executeQuery();
 
 	        if (rs.next()) {
-	            count = rs.getInt(1);
+	            cnt = rs.getInt(1);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        dbClose();
+	    }
+	    return cnt;
+	}
+
+
+	
+ 
+
+	// 사용자가 댓글에 대해 좋아요를 눌렀는지 확인
+	public boolean userLiked(String email, int cmt_num) {
+	    boolean liked = false;
+	    dbOpen();
+
+	    try {
+	        String sql = "SELECT COUNT(*) FROM TB_COMMENT_LIKE WHERE EMAIL = ? AND CMT_NUM = ?";
+	        psmt = conn.prepareStatement(sql);
+	        psmt.setString(1, email);
+	        psmt.setInt(2, cmt_num);
+	        rs = psmt.executeQuery();
+
+	        if (rs.next()) {
+	            liked = rs.getInt(1) > 0;
 	        }
 
 	    } catch (SQLException e) {
@@ -140,13 +161,9 @@ public class CommentLikeDAO {
 	    } finally {
 	        dbClose();
 	    }
-
-	    return count;
+	    return liked;
 	}
 
-	
-	 
-	
-	
+ 
 	
 }
