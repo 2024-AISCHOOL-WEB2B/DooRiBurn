@@ -161,7 +161,7 @@
 			
 			<div class="drama">
 			<!-- 왼쪽 사진 -->
-			<img src="images/<%=drama %>.jpg" alt="선재 업고 튀어" class="image">
+			<img src="images/drama_imagessss/<%=drama %>.jpg" alt="선재 업고 튀어" class="image"style="width:200px; height: 300px;;">
 			<!-- 오른쪽 텍스트 -->
 			<div class="text">
 				<h1><%=drama %></h1>
