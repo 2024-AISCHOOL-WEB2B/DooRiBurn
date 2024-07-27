@@ -7,8 +7,15 @@ public class MemberDTO {
 	private String nick;
 	private String name;
 	private String phone;
-	private String addr;
+	private String addr; 
 	
+	public MemberDTO() { 
+	}
+
+	public MemberDTO(String email) { 
+		this.email = email;
+	}
+
 	public MemberDTO(String email, String pw, String nick, String name, String phone, String addr) {
 		super();
 		this.email = email;
@@ -26,6 +33,7 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+ 
 
 	public String getPw() {
 		return pw;
@@ -66,13 +74,7 @@ public class MemberDTO {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-
-	public MemberDTO(String email, String pw) {
-		super();
-		this.email = email;
-		this.pw = pw;
-	}
-	
+ 
 	
 	
 	
