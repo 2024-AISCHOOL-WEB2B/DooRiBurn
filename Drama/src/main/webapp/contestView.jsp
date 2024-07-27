@@ -184,7 +184,7 @@
 	                    <td colspan="3"><%= dto.getC_create_date() %> ~ <%= dto.getC_delete_date() %></td>
 	                </tr>
 	                <tr> 
-	                   <td colspan="4"><img src="boardImg/<%= dto.getC_img() %>" alt="공모전 이미지" style="max-width: 100%; height: auto;"></td>
+	                   <td colspan="4"><img src="boardImg/<%= dto.getC_img() %>" alt="공모전 이미지" style="display: block; margin: auto; max-width: 100%; height: auto;"></td>
 	                </tr> 
 	                <tr>
 	                    <td colspan="4" ><%= dto.getC_content() %></td>
@@ -216,8 +216,8 @@
 			<div class="row">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 					<% 
-				    MemberDAO memDAO = new MemberDAO(); // MemberDAO 인스턴스 생성 
-				    
+				    MemberDAO memDAO = new MemberDAO(); 
+					
 				    if (commentList != null && !commentList.isEmpty()) {
                         for (CommentDTO comDto : commentList) {
                             String comEmail = comDto.getEmail(); // 댓글의 이메일 가져오기
@@ -225,8 +225,7 @@
  
 	                      	// 이메일로 닉네임 가져오기
 	                      	String nick = null;
-///////닉네임 오류 고치기///////////////////  String nick = memDAO.findNickByEmail(comEmail); // DAO 메서드 호출
-	 
+///////닉네임 오류 고치기///////////////////  String nick = memDAO.findNickByEmail(comEmail); 
 	                        String comNick = (nick != null) ? nick : "Unknown";
 	                        System.out.println("Comment Nick: " + comNick);                     
 	    			%>
@@ -235,30 +234,36 @@
 				    	<td style="text-align: left; margin-left: 10px;"><%= comNick %></td>
 				    </tr>
 					<tr> 
-						<td><img src="commentImg/<%= comDto.getCmt_img() %>" alt="공모전 이미지" style="margin-left: 10px; max-width: 100%; height: auto;"></td>
+						<td><img src="commentImg/<%= comDto.getCmt_img() %>" alt="공모전 이미지" style="display: block; margin: auto; max-width: 100%; height: auto; "></td>
                     </tr>
-                    <tr>
                     
 <%-- 좋아요 //////////////////// --%>
+					<tr>
+					    <td style="text-align: left; margin-left: 10px;">
+					        <input type="hidden" id="cmt_num" value="<%= comDto.getCmt_num() %>">
+					        <% if (info != null) { %>
+					            <input type="hidden" class="userEmail" value="<%= info.getEmail() %>">
+					        <% } else { %>
+					            <input type="hidden" class="userEmail" value="">
+					        <% } %> 
+						    <button class="likeButton" id="likeButton-<%= comDto.getCmt_num() %>" data-cmt_num="<%= comDto.getCmt_num() %>">♡</button>
+						    <span id="likeCount-<%= comDto.getCmt_num() %>"></span>
+					    </td> 
+					</tr>
 
-						<td style="text-align: left; margin-left: 10px;">
-						    <input type="hidden" id="cmt_num" value="<%= request.getParameter("cmt_num") %>">
-						    <% if (info != null) { %>
-						        <input type="hidden" id="userEmail" value="<%= info.getEmail() %>">
-						    <% }  %>
-						    <button id="likeButton">♡</button> <!-- 기본 상태 --> 
-						    <span id="likeCount"></span><!-- 좋아요수 -->
-						</td> 
-						 	 
-                    </tr>
+
+
+
                     <tr>	                    	
-						<td style="text-align: left; margin-right: 10px; "><%= comDto.getCmt_date() %></td> 
+						<td style="text-align: left; margin-left: 10px; "><%= comDto.getCmt_date() %></td> 
                     </tr>
-                    <tr>
-                    <% if (info != null && info.getEmail().equals(comEmail)) {%>
-                    	<td><a href="javascript:;" onclick="confirmCommentDelete(<%= comDto.getCmt_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a></td>
-					</tr>   
-					<%} %>
+					<tr>
+					    <%  if (info != null && (info.getEmail().equals(comEmail) || info.getEmail().equals("admin@gmail.com"))) { %>
+						<td>
+							<a href="javascript:;" onclick="confirmCommentDelete(<%= comDto.getCmt_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
+						</td>
+					    <%} %>
+					</tr>
 					<%}
                     } else { %>
                     <tr>
@@ -382,50 +387,58 @@
 
 
 
-	
-	<!-- 아래 script 좋아요수 관련!!!!!!! -->
-
+	 
+<!-- 좋아요 여부 업데이트, 좋아요수 -->
 	<script>
-	    $(document).ready(function() {
-	        var cmtNum = $('#cmt_num').val();
-	        var userEmail = $('#userEmail').val();
-	
-	        function updateLikeStatus() {
-	            $.ajax({
-	                url: 'CommentLikeCountStatus',
-	                type: 'GET',
-	                data: { cmt_num: cmtNum, email: userEmail },
-	                dataType: 'json',
-	                success: function(data) {
-	                    $('#likeCount').text(data.likeCount);
-	                    if (data.userLiked) {
-	                        $('#likeButton').text('♥');
-	                    } else {
-	                        $('#likeButton').text('♡');
-	                    }
+	$(document).ready(function() {
+	    function updateLikeStatus(cmtNum, userEmail) {
+	        $.ajax({
+	            url: 'CommentLikeCountStatus',
+	            type: 'GET',
+	            data: { cmt_num: cmtNum, email: userEmail },
+	            dataType: 'json',
+	            success: function(data) {
+	                $('#likeCount-' + cmtNum).text(data.likeCount);
+	                if (data.userLiked) {
+	                    $('#likeButton-' + cmtNum).text('♥');
+	                } else {
+	                    $('#likeButton-' + cmtNum).text('♡');
 	                }
-	            });
-	        }
-	
-	        $('#likeButton').click(function() {
-	            $.ajax({
-	                url: 'CommentLikeResult',
-	                type: 'POST',
-	                data: { cmt_num: cmtNum, email: userEmail }, // email 추가
-	                dataType: 'json',
-	                success: function(data) {
-	                    $('#likeCount').text(data.likeCount);
-	                    if (data.userLiked) {
-	                        $('#likeButton').text('♥');
-	                    } else {
-	                        $('#likeButton').text('♡');
-	                    }
-	                }
-	            });
+	            }
 	        });
-	        updateLikeStatus(); // 페이지 로드 시 상태 초기화
+	    }
+	
+	    $('.likeButton').click(function() {
+	        var cmtNum = $(this).data('cmt_num');
+	        var userEmail = $('.userEmail').val();
+	        
+	        $.ajax({
+	            url: 'CommentLikeResult',
+	            type: 'POST',
+	            data: { cmt_num: cmtNum, email: userEmail },
+	            dataType: 'json',
+	            success: function(data) {
+	                $('#likeCount-' + cmtNum).text(data.likeCount);
+	                if (data.userLiked) {
+	                    $('#likeButton-' + cmtNum).text('♥');
+	                } else {
+	                    $('#likeButton-' + cmtNum).text('♡');
+	                }
+	            }
+	        });
 	    });
+	
+	    // 댓글 상태 업데이트 !
+	    $('.likeButton').each(function() {
+	        var cmtNum = $(this).data('cmt_num');
+	        var userEmail = $('.userEmail').val();
+	        updateLikeStatus(cmtNum, userEmail);
+	    });
+	});
+
 	</script>
+
+
 
 	<!-- 댓글 사진 업로드시 미리보기 -->
 	<script>

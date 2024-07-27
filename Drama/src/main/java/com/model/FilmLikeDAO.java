@@ -14,7 +14,7 @@ public class FilmLikeDAO {
 	private Connection conn;
 	private PreparedStatement psmt;
 	private ResultSet rs;
-
+	int cnt;
 	private void dbOpen() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -48,15 +48,16 @@ public class FilmLikeDAO {
 	}
 
 	// 좋아요 추가
-	public int addLike(FilmLikeDTO like) {
-		int cnt = 0;
+	public int addLike(FilmLikeDTO dto) {
+		
 		dbOpen();
 
 		try {
+			
 			String sql = "INSERT INTO TB_FILM_LIKE (EMAIL, F_NUM, F_LIKE_DATE) VALUES (?, ?, SYSDATE)";
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, like.getEmail());
-			psmt.setInt(2, like.getFilmNum());
+			psmt.setString(1, dto.getEmail());
+			psmt.setInt(2, dto.getF_num());
 
 			cnt = psmt.executeUpdate();
 
@@ -65,20 +66,22 @@ public class FilmLikeDAO {
 			// e.printStackTrace();
 		} finally {
 			dbClose();
-		}
-		return cnt;
+		
+		
 	}
+		return cnt;
+		}
 
-	// 좋아요 삭제
-	public int removeLike(String email, int filmNum) {
+// 좋아요 삭제
+	public int removeLike(FilmLikeDTO dto) {
 		int cnt = 0;
 		dbOpen();
 
 		try {
 			String sql = "DELETE FROM TB_FILM_LIKE WHERE EMAIL = ? AND F_NUM = ?";
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, email);
-			psmt.setInt(2, filmNum);
+			psmt.setString(1, dto.getEmail());
+			psmt.setInt(2, dto.getF_num());
 
 			cnt = psmt.executeUpdate();
 
@@ -92,15 +95,15 @@ public class FilmLikeDAO {
 	}
 
 	// 특정 사용자가 특정 드라마를 좋아요 했는지 확인
-	public boolean isLiked(String email, int filmNum) {
+	public boolean isLiked(FilmLikeDTO dto) {
 		boolean liked = false;
 		dbOpen();
 
 		try {
 			String sql = "SELECT * FROM TB_FILM_LIKE WHERE EMAIL = ? AND F_NUM = ?";
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, email);
-			psmt.setInt(2, filmNum);
+			psmt.setString(1, dto.getEmail());
+			psmt.setInt(2, dto.getF_num());
 
 			rs = psmt.executeQuery();
 
@@ -134,12 +137,12 @@ public class FilmLikeDAO {
 				int filmNum = rs.getInt("F_NUM");
 				Date likeDate = rs.getDate("F_LIKE_DATE");
 
-				FilmLikeDTO like = new FilmLikeDTO(likeNum, email, filmNum, likeDate);
+				FilmLikeDTO like = new FilmLikeDTO(email, filmNum, likeDate);
 				likes.add(like);
 			}
 
 		} catch (SQLException e) {
-			System.out.println("찜 목록 조회 오류: " + e.getMessage()); // 찜 목록 조회 오류 메시지 출력
+			System.out.println("찜 목록 조회 오류: " + e.getMessage()); // 찜 목록 조회 오류 메시지 출력 // 안녕하세용
 		} finally {
 			dbClose();
 		}

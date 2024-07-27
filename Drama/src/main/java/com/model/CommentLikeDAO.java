@@ -91,7 +91,7 @@ public class CommentLikeDAO {
 	    List<CommentLikeDTO> list = new ArrayList<>();
 	    dbOpen(); 
 	    try {
-	        String sql = "SELECT * FROM TB_COMMENT_LIKE WHERE EMAIL=?";
+	        String sql = "SELECT * FROM TB_COMMENT_LIKE WHERE EMAIL = ? ORDER BY CMT_LIKE_DATE DESC";
 	        psmt = conn.prepareStatement(sql);
 	        psmt.setString(1, memEmail);
 	        rs = psmt.executeQuery();
@@ -120,13 +120,13 @@ public class CommentLikeDAO {
 	    int cnt = 0;
 	    dbOpen();
 	    try {
-	        String sql = "SELECT COUNT(*) FROM TB_COMMENT_LIKE WHERE CMT_NUM = ?";
+	        String sql = "SELECT COUNT(*) AS likeCount FROM TB_COMMENT_LIKE WHERE CMT_NUM = ?";
 	        psmt = conn.prepareStatement(sql);
 	        psmt.setInt(1, cmt_num);
 	        rs = psmt.executeQuery();
 
 	        if (rs.next()) {
-	            cnt = rs.getInt(1);
+	            cnt = rs.getInt("likeCount");
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();

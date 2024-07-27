@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import com.model.CommentLikeDAO;
 
 @WebServlet("/CommentLikeCountStatus")
@@ -29,10 +31,16 @@ public class CommentLikeCountStatus extends HttpServlet {
 		int likeCount = dao.commentLikeCount(cmt_num); // 좋아요수
 		boolean userLiked = dao.userLiked(email, cmt_num); // 사용자의 좋아요 여부
 		 
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
-		out.print("{ \"likeCount\": " + likeCount + ", \"userLiked\": " + userLiked + " }");
-		out.flush();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        JSONObject json = new JSONObject();
+        json.put("likeCount", likeCount);
+        json.put("userLiked", userLiked);
+        
+        PrintWriter out = response.getWriter();
+        out.print(json);
+        out.flush();
     }
 	 
 	 
