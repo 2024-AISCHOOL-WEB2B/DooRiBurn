@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">z
+<meta charset="UTF-8">
 <title>Realindex</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,6 +28,16 @@
 <link rel="stylesheet" href="css/Realstyle.css">
 <style type="text/css">
 </style>
+
+<style>
+.menu-icon {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	cursor: pointer;
+	color: #545454;
+}
+</style>
 </head>
 <body>
 
@@ -43,7 +53,7 @@
 
 	<div id="mySidenav" class="sidenav" style="width: 0;">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-			style="color: #333333;">&times;</a>
+			style="color: #545454;">&times;</a>
 		<div class="menu-section">
 			<h2>지역별로 찾기</h2>
 			<div class="menu-items">
@@ -126,16 +136,31 @@
 			</div>
 		</div>
 
-		<div class="intro">
-			<h2 class="highlight">선재 업고 튀어에 나온 그 장소!</h2>
+		<!-- 후보 1. 오징어 게임
+			<div class="intro">
+			<h2 class="highlight">오징어 게임의 그 장소!</h2>
 			<h2 class="highlight">나도 가 볼까?</h2>
 
 			<div class="image-container">
-				<a href="detail.jsp"><img src="images/jeju_aquarium.png"
-					alt="Aquarium"></a> <a href="page2.html"><img
-					src="images/jeonju_hanok_village.jpg" alt="Forest Path"></a> <a
-					href="page3.html"><img src="images/seoulforest.jpeg"
-					alt="Traditional Village"></a>
+				<a href="detail.jsp?index=5038"><img src="images/hanriver.png"
+					alt="한강공원여의도지구"></a> <a href="detail.jsp?index=5043"><img
+					src="images/jeonju_hanok_village.jpg" alt="선갑도"></a> <a
+					href="detail.jsp?index=5035"><img src="detail.jsp?index=5035"
+					alt="양재시민의숲역"></a>
+			</div>
+		</div> 
+		후보 2. 그 해 우리는-->
+
+		<div class="intro">
+			<h2 class="highlight">그 해 우리는 그 장소!</h2>
+			<h2 class="highlight">나도 가 볼까?</h2>
+
+			<div class="image-container">
+				<a href="detail.jsp?index=5038"><img src="images/hanriver.png"
+					alt="한강공원여의도지구"></a> <a href="detail.jsp?index=5043"><img
+					src="images/jeonju_hanok_village.jpg" alt="선갑도"></a> <a
+					href="detail.jsp?index=5035"><img src="detail.jsp?index=5035"
+					alt="양재시민의숲역"></a>
 			</div>
 		</div>
 
