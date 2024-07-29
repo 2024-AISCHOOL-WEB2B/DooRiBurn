@@ -56,6 +56,12 @@
 	    display: grid;
 	    place-items: center; /* 요소를 수평 및 수직 중앙 정렬 */ 
 	}
+	
+	/* 최소 높이 설정 */
+	.contest-list-container {
+	    min-height: 400px; /* 필요에 따라 조정 가능 */
+		padding-bottom: 20px;
+	}
 	</style>
 </head>
 <body>
@@ -110,7 +116,7 @@
 		</div>
 	</div>
 	 
-	<header id="fh5co-header" class="fh5co-cover" style="height: 100px;"> 
+	<header id="fh5co-header" class="fh5co-cover" style="height: 50px;"> 
 		<div class="overlay"></div>
 		<div class="container"></div>
 	</header>
@@ -119,9 +125,9 @@
 	<!-- 공모전 목록 -->
 	<div style="clear: both; text-align: center; margin-top: 50px;"> 
  		<br>
- 		<h3 style="display: inline-block; ">참가한 공모전 목록</h3>
+ 		<h3 style="display: inline-block;">참가한 공모전 목록</h3>
  	</div> 
- 	<div class="container">
+ 	<div class="container contest-list-container">
 		<div class="row">
 			<table class="table table-striped" style="text-align: center; border:1px solid #dddddd">
 			<%

@@ -249,7 +249,7 @@ input[type="submit"]:hover {
 	                    <div class="row form-group">
 	                        <div class="col-md-6" style="text-align:left;">
 	                            <label for="password">비밀번호</label>
-	                            <input type="password" name="pw" id="password" class="form-control" value="<%=info.getPw() %>">
+	                            <input type="password" name="pw" id="password" class="form-control">
 	                        </div>
 		                </div> 
 	                    <div class="row form-group">

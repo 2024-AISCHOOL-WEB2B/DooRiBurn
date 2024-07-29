@@ -208,7 +208,7 @@
 	</div>
 	</nav>
 	 
-	<header id="fh5co-header" class="fh5co-cover" style="height: 100px;"> 
+	<header id="fh5co-header" class="fh5co-cover" style="height: 50px;"> 
 		<div class="overlay"></div>
 		<div class="container"></div>
 	</header>
@@ -220,7 +220,7 @@
 	        <table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9;">
 	            <thead style="background-color: #eeeeee">
 	                <tr>
-	                    <th colspan="4" style="clear: both; text-align: center; margin-top: 20px; color: black; ">지역여행 사진 공모전</th>
+	                    <th colspan="4" style="clear: both; text-align: center; margin-top: 20px; color: black; font-size: 20px;">지역여행 사진 공모전</th>
 	                </tr>
 	            </thead>
 	            <tbody style="background-color: #f9f9f9;">
