@@ -75,7 +75,7 @@ public class CommentDAO {
 		ArrayList<CommentDTO> list = new ArrayList<CommentDTO>(); 
 		dbOpen(); 
 		try {
-			String sql = "SELECT * FROM TB_C_COMMENT WHERE C_NUM = ?";
+			String sql = "SELECT * FROM TB_C_COMMENT WHERE C_NUM = ? ORDER BY CMT_NUM";
 			psmt = conn.prepareStatement(sql); 
 	        psmt.setInt(1, cNum);
 	        rs = psmt.executeQuery();
