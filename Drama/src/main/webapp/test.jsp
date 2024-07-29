@@ -87,16 +87,13 @@
 					<p>
 						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
 						<small class="block">Designed by DOORIBURN</small>
-					</p>
-					<p>
+					</p> 
 						<ul class="fh5co-social-icons">  
 							<li><a href="#"><i class="icon-sun"></i></a></li>
 							<li><a href="#"><i class="icon-cloud"></i></a></li>
-						</ul>
-					</p>
+						</ul> 
 				</div>
-			</div>
-
+			</div> 
 		</div>
 	</footer>
  
