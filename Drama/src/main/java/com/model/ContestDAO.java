@@ -237,4 +237,38 @@ public class ContestDAO {
 		return list; 
 	}
 	
+	
+	
+	
+	// email을 통해 사용자가 댓글 단 게시글 목록 가져오기
+	public ArrayList<ContestDTO> getContestsByUserComments(String email) {
+	    ArrayList<ContestDTO> list = new ArrayList<ContestDTO>();
+	    dbOpen();
+	    try {
+	        String sql = "SELECT DISTINCT c.C_NUM, c.C_TITLE, c.C_CREATE_DATE, c.C_DELETE_DATE " +
+	                     "FROM TB_CONTEST c " +
+	                     "JOIN TB_C_COMMENT cc ON c.C_NUM = cc.C_NUM " +
+	                     "WHERE cc.EMAIL = ?";
+	        psmt = conn.prepareStatement(sql);
+	        psmt.setString(1, email);
+	        rs = psmt.executeQuery();
+
+	        while (rs.next()) {
+	            int num = rs.getInt("C_NUM");
+	            String title = rs.getString("C_TITLE");
+	            Date cDate = rs.getDate("C_CREATE_DATE");
+	            Date dDate = rs.getDate("C_DELETE_DATE");
+
+	            ContestDTO dto = new ContestDTO(num, title, cDate, null, null, dDate);
+	            list.add(dto);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        dbClose();
+	    }
+	    return list;
+	}
+
 }
+	 

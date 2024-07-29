@@ -137,7 +137,7 @@
 	            <table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9">
 	                <thead>
 	                    <tr>
-	                        <th style="background-color: #f9f9f9; text-align: center;">공모전 게시글 작성</th> 
+	                        <th style="background-color: #f9f9f9; text-align: center; color:#000;">공모전 게시글 작성</th> 
 	                    </tr>
 	                </thead>
 	                <tbody style="background-color: #f9f9f9;"> 

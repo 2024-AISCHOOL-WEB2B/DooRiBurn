@@ -5,8 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.ArrayList; 
 import java.util.List;
 
 public class CommentLikeDAO {
@@ -50,11 +49,10 @@ public class CommentLikeDAO {
 		dbOpen();
 		 
 		try {  
-			String sql = "INSERT INTO TB_COMMENT_LIKE (EMAIL, CMT_NUM, CMT_LIKE_DATE) VALUES (?, ?, SYSDATE)"; 
+			String sql = "INSERT INTO TB_COMMENT_LIKE (EMAIL, CMT_NUM) VALUES (?, ?)"; 
 			psmt = conn.prepareStatement(sql); 
 			psmt.setString(1, dto.getEmail());
-			psmt.setInt(2, dto.getCmt_num()); 
-			
+			psmt.setInt(2, dto.getCmt_num());  
 			cnt = psmt.executeUpdate();
 			 
 		} catch (SQLException e) { 
@@ -91,18 +89,16 @@ public class CommentLikeDAO {
 	    List<CommentLikeDTO> list = new ArrayList<>();
 	    dbOpen(); 
 	    try {
-	        String sql = "SELECT * FROM TB_COMMENT_LIKE WHERE EMAIL = ? ORDER BY CMT_LIKE_DATE DESC";
+	        String sql = "SELECT * FROM TB_COMMENT_LIKE WHERE EMAIL = ?";
 	        psmt = conn.prepareStatement(sql);
 	        psmt.setString(1, memEmail);
 	        rs = psmt.executeQuery();
 	        
 	        while (rs.next()) {
-	            int cmt_like = rs.getInt("CMT_LIKE"); 
-	            String email = rs.getString("EMAIL");
-	            int cmt_num = rs.getInt("CMT_NUM");
-	            Date cmt_like_date = rs.getDate("CMT_LIKE_DATE");   
+	            int cmt_like = rs.getInt("CMT_LIKE");  
+	            int cmt_num = rs.getInt("CMT_NUM");;   
 	            
-	            CommentLikeDTO dto = new CommentLikeDTO(cmt_like, email, cmt_num, cmt_like_date);
+	            CommentLikeDTO dto = new CommentLikeDTO(cmt_like, memEmail, cmt_num);
 	            list.add(dto);
 	        }    
 	    } catch (SQLException e) { 

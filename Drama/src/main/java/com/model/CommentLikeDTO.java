@@ -1,28 +1,36 @@
-package com.model;
-
-import java.util.Date;
+package com.model; 
 
 public class CommentLikeDTO {
 
 	private int cmt_like;
 	private String email;
-	private int cmt_num;
-	private Date cmt_like_date;
+	private int cmt_num; 
 	 
 	public CommentLikeDTO() {
 		 
 	}
+	
+	
+	public CommentLikeDTO(String email, int cmt_num) {
+		super();
+		this.email = email;
+		this.cmt_num = cmt_num;
+	}
+
+	
+
+	public CommentLikeDTO(int cmt_like, int cmt_num) {
+		super();
+		this.cmt_like = cmt_like;
+		this.cmt_num = cmt_num;
+	}
+
+
 	public CommentLikeDTO(int cmt_like, String email, int cmt_num) { 
 		this.cmt_like = cmt_like;
 		this.email = email;
 		this.cmt_num = cmt_num;
-	}
-	public CommentLikeDTO(int cmt_like, String email, int cmt_num, Date cmt_like_date) { 
-		this.cmt_like = cmt_like;
-		this.email = email;
-		this.cmt_num = cmt_num;
-		this.cmt_like_date = cmt_like_date;
-	}
+	} 
 
 	public int getCmt_like() {
 		return cmt_like;
@@ -41,16 +49,7 @@ public class CommentLikeDTO {
 	}
 	public void setCmt_num(int cmt_num) {
 		this.cmt_num = cmt_num;
-	}
-	public Date getCmt_like_date() {
-		return cmt_like_date;
-	}
-	public void setCmt_like_date(Date cmt_like_date) {
-		this.cmt_like_date = cmt_like_date;
-	}
-	
-	
-	
-	
+	} 
+	 
 	
 }

@@ -12,10 +12,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>contestBoard</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FreeHTML5.co" />
-  
+	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" /> 
 	
 	<!-- realindex에서 가져온 것들 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" >
@@ -24,26 +21,19 @@
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
-	
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet"> 
 	<!-- Realstyle.css를 가장 먼저 연결 -->
-	<link rel="stylesheet" href="css/Realstyle.css">
-	
+	<link rel="stylesheet" href="css/Realstyle.css"> 
 	<!-- 나머지 CSS 파일들 -->
 	<link rel="stylesheet" href="css/other-style1.css">
 	<link rel="stylesheet" href="css/other-style2.css">
 	  
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> 
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style2.css">
-  
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">  
+	<link rel="stylesheet" href="css/animate.css"> 
+	<link rel="stylesheet" href="css/icomoon.css"> 
+	<link rel="stylesheet" href="css/bootstrap.css"> 
+	<link rel="stylesheet" href="css/style2.css"> 
 	<script src="js/modernizr-2.6.2.min.js"></script> 
 	
 	 <!-- 메뉴 위치 우상단으로 조정 -->
@@ -66,7 +56,7 @@
 	<body>
 		<% 
 		// 로그인 정보 가져오기  
-		MemberDTO info = (MemberDTO) session.getAttribute("userInfo"); 
+		MemberDTO info = (MemberDTO) session.getAttribute("info");
 
 		// BoardDAO 객체 생성
 		ContestDAO dao = new ContestDAO();
@@ -91,6 +81,8 @@
 		// 게시글 목록 가져오기
         ArrayList<ContestDTO> list = dao.getBoardList(startRow, pageSize);
 		%>  
+		
+		
  
 		 
 	<header>
@@ -137,17 +129,18 @@
 	</header>
  
  
- 	<div style="clear: both; text-align: center; margin-top: 20px;">
- 		<h4 style="display: inline-block;">공모전 게시판</h4>
+ 	<div style="clear: both; text-align: center; margin-top: 50px;"> 
+ 	<br>
+ 		<h3 style="display: inline-block; ">공모전 게시판</h3>
  	</div>
  	<div class="container">
 		<div class="row">
 			<table class="table table-striped" style="text-align: center; border:1px solid #dddddd">
 				<thead>
-					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">번호</th>
-						<th style="background-color: #eeeeee; text-align: center;">제목</th> 
-						<th style="background-color: #eeeeee; text-align: center;">공모일</th>
+					<tr style="background-color: #eeeeee; clear: both;">
+						<th style="white-space: nowrap;">번호</th>
+						<th style="text-align: center;">제목</th> 
+						<th style="text-align: center;">공모일</th> 
 					</tr>
 				</thead>
 				<tbody>
@@ -160,13 +153,15 @@
 					<% } %> 
 				</tbody>
 			</table>  
-		</div>  
-		<!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! -->
+		</div> 
+		<% if (info != null) { %>
+			<a href="contestList.jsp" class="btn btn-primary pull-left">참가 목록</a>
+		<% } %>
 		<% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
-			<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a>
+			<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a> 
 		<% } %>  
 	</div>
-	
+	 
 	<!-- 페이징 처리 -->
 	<div id="page_control">
 		<% if(cnt != 0){  
@@ -216,7 +211,7 @@
 					<%if(info == null) {%>
 						<button class="btn" onclick="location.href='login.jsp'">로그인</button>
 						<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
-					<%}else{ %>
+					<%} else { %>
 						<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
 					<%} %>
 						<button class="btn">한국어</button>
@@ -247,19 +242,14 @@
 		}
 	</script>
 	
-	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>
 	 
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Main -->
+	<script src="js/jquery.min.js"></script> 
+	<script src="js/jquery.easing.1.3.js"></script> 
+	<script src="js/bootstrap.min.js"></script> 
+	<script src="js/jquery.waypoints.min.js"></script> 
 	<script src="js/main.js"></script>
 
 	</body>
