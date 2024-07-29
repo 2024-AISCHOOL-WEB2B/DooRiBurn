@@ -123,7 +123,7 @@
 				<h2>마이 페이지</h2>
 				<div class="menu-itemss">
 					<a href="login.jsp">로그인</a> 
-					<a href="contact.jsp">회원가입</a>  
+					<a href="join.jsp">회원가입</a>  
 			<%}%>
 				</div>
 			</div>
@@ -212,7 +212,7 @@
 			   	<div>    
 					<%if(info == null) {%>
 						<button class="btn" onclick="location.href='login.jsp?from=/Drama/contestBoard.jsp'">로그인</button>
-						<button class="btn" onclick="location.href='contact.jsp?from=/Drama/contestBoard.jsp'">회원가입</button>
+						<button class="btn" onclick="location.href='join.jsp?from=/Drama/contestBoard.jsp'">회원가입</button>
 					<%} else { %>
 						<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
 					<%} %>

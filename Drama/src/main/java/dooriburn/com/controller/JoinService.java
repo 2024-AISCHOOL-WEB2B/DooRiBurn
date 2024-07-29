@@ -45,9 +45,9 @@ public class JoinService extends HttpServlet {
 		} else {
 			// 회원가입 실패
 			if (recentURI != null) {
-				response.sendRedirect("contact.jsp?from="+recentURI);
+				response.sendRedirect("join.jsp?from="+recentURI);
 			} else {
-				response.sendRedirect("contact.jsp"); 
+				response.sendRedirect("join.jsp"); 
 			} 
 		}
 		    
