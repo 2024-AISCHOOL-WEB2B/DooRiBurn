@@ -91,16 +91,13 @@ public class MemberDAO {
 
 			rs = psmt.executeQuery();
 
-			if (rs.next() || email.equals("")) {
-				System.out.println("맞음");
+			if (rs.next() || email.equals("")) { 
 				cnt = 0;
-			} else {
-				System.out.println("틀림");
+			} else { 
 				cnt = 1;
 			}
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException e) { 
 			e.printStackTrace();
 		} finally {
 			close();
@@ -135,8 +132,7 @@ public class MemberDAO {
 				info = new MemberDTO(email, pw, nick, name, phone, addr);
 			}
 
-		} catch (SQLException e) {
-			System.out.println("오라클 오류");
+		} catch (SQLException e) { 
 			e.printStackTrace();
 		} finally {
 			close();
@@ -164,5 +160,30 @@ public class MemberDAO {
 		}
 		return nick;
 	}
+	
+	
+	public int update(MemberDTO dto) {
+		int cnt = 0;
+		getConnection();
+
+		String sql = "UPDATE MEMBER SET PW = ?, NICK = ?, PHONE = ?, ADDR = ? WHERE EMAIL = ?";
+		try {
+			psmt = conn.prepareStatement(sql); 
+			psmt.setString(1, dto.getPw());
+			psmt.setString(2, dto.getNick());
+			psmt.setString(3, dto.getPhone());
+			psmt.setString(4, dto.getAddr());
+			psmt.setString(5, dto.getEmail());
+			cnt = psmt.executeUpdate(); 
+			
+		} catch (SQLException e) { 
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return cnt;
+		
+	}
+	
 
 }

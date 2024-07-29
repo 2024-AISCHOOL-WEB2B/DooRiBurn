@@ -19,28 +19,28 @@ import dooriburn.com.model.MemberDTO;
 public class CommentLikeService extends HttpServlet {
  
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String email = request.getParameter("email");
-		int cmt_num = Integer.parseInt(request.getParameter("cmt_num"));
-		 
-		CommentLikeDTO dto = new CommentLikeDTO(cmt_num, email);
-		CommentLikeDAO dao = new CommentLikeDAO();
-		String message;
+       String email = request.getParameter("email");
+      int cmt_num = Integer.parseInt(request.getParameter("cmt_num"));
+       
+      CommentLikeDTO dto = new CommentLikeDTO(cmt_num, email);
+      CommentLikeDAO dao = new CommentLikeDAO();
+      String message;
         if (dao.userLiked(email, cmt_num)) {
-        	
-        	int cnt = dao.removeLike(cmt_num, email);
-        	if(cnt>0) {
-        		message = "좋아요가 취소성공";
-        	}else {
-        		message = "좋아요가 취소ㅅㅍ";
-			}
+           
+           int cnt = dao.removeLike(cmt_num, email);
+           if(cnt>0) {
+              message = "좋아요가 취소성공";
+           }else {
+              message = "좋아요가 취소ㅅㅍ";
+         }
             
         } else {
-        	int cnt =dao.addLike(cmt_num, email);
-        	if(cnt>0) {
-        		message = "좋아요가 추가성공";
-        	}else {
-        		message = "좋아요가 ㅊㄱㅅㅍ";
-			}
+           int cnt =dao.addLike(cmt_num, email);
+           if(cnt>0) {
+              message = "좋아요가 추가성공";
+           }else {
+              message = "좋아요가 ㅊㄱㅅㅍ";
+         }
            
         }
 

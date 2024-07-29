@@ -23,6 +23,16 @@ public class MemberDTO {
 		this.pw = pw;
 	}
 
+	 
+	public MemberDTO(String email, String pw, String nick, String phone, String addr) {
+		super();
+		this.email = email;
+		this.pw = pw;
+		this.nick = nick;
+		this.phone = phone;
+		this.addr = addr;
+	}
+
 	public MemberDTO(String email, String pw, String nick, String name, String phone, String addr) {
 		super();
 		this.email = email;
