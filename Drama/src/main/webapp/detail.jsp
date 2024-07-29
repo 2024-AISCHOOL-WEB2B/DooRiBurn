@@ -1,3 +1,4 @@
+<%@page import="dooriburn.com.model.ReviewDTO"%>
 <%@page import="dooriburn.com.model.ReviewDAO"%>
 <%@page import="dooriburn.com.model.RankingDAO"%>
 <%@page import="dooriburn.com.model.DramaSearchDTO"%>
@@ -58,13 +59,11 @@
 	position: relative;
 	width: 100%;
 	height: 100%;
-}
-
-<!-- 좋아요 버튼 스타일 추가 -->
+} 
 </style>
-<style>
-.star-button { 
-	background: none;
+<style> 
+.star-button {
+	background : none;
 	border: none;
 	font-size: 24px;
 	cursor: pointer;
@@ -89,23 +88,22 @@
 	margin: 0; /* h1 요소의 기본 여백 제거 */
 }
 </style>
-<<<<<<< HEAD
 <!-- pop스타일 -->
 <style>
 .backgroundpop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 1000;
 }
 
 .windowpop {
-  position: relative;
-  width: 100%;
-  height: 100%;
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 .popup {
@@ -121,19 +119,18 @@
 }
 
 .backgroundpop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  
-  /* 숨기기 */
-  z-index: -1;
-  opacity: 0;
-  }
-  
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 1000;
+	/* 숨기기 */
+	z-index: -1;
+	opacity: 0;
+}
+
 .show {
 	opacity: 1;
 	z-index: 1000;
@@ -180,6 +177,17 @@
 
 .star-button:focus {
 	outline: none;
+}
+/*  리뷰별*/
+<
+style>.rating .filled {
+	color: gold;
+}
+
+.rating .empty {
+	color: transparent;
+	-webkit-text-stroke: 1px gold; /* Chrome, Safari */
+	text-stroke: 1px gold; /* Firefox, IE */
 }
 </style>
 
@@ -233,6 +241,9 @@
 <body>
 	<%
 	String index = request.getParameter("index");
+	// 리뷰데이터뽑기
+	ReviewDAO rv_dao = new ReviewDAO();
+	ArrayList<ReviewDTO> rv_list = rv_dao.selectReview(index);
 
 	DramaSearchDAO dao = new DramaSearchDAO();
 	ArrayList<DramaSearchDTO> film_detail = dao.film_detail(index);
@@ -246,17 +257,15 @@
 	String time = film_detail.get(0).getFTel();
 	String scene = film_detail.get(0).getFTime();
 	String img_src = film_detail.get(0).getFimg();
-	
+
 	// 랭킹 누적하기
 	RankingDAO rdao = new RankingDAO();
 	rdao.Update(index);
-
 
 	// 세션에서 사용자 정보 가져오기
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
 
 	// 좋아요 상태 확인
-
 	%>
 
 	<!-- 배너 -->
@@ -304,6 +313,7 @@
 	</div>
 	<section class="info">
 		<div class="tags">
+
 			<% ReviewDAO reviewdao = new ReviewDAO();
 		     ArrayList<String> mood = reviewdao.moodRanking(Integer.parseInt(index));
 		     for(int i = 0; i < mood.size(); i++){%>
@@ -313,7 +323,34 @@
 		<!-- 장소 이름과 좋아요 버튼을 감싸는 컨테이너 추가 -->
 		<div class="place-container">
 			<h1><%=place%></h1>
-			<%
+			
+		</div>
+		<p class="address"><%=addr%></p>
+		<p class="hours">
+			영업시간:
+			<%=scene%>
+		</p>
+		<p class="phone">
+			전화번호:
+			<%=time%>
+		</p>
+		<div class="tags">
+			<div class="drama">
+				<!-- 왼쪽 사진 -->
+				<img src="images/drama_imagessss/<%=drama%>.jpg" alt="드라마 표지"
+					class="image" style="width: 200px; height: 300px;">
+				<!-- 오른쪽 텍스트 -->
+				<div class="text">
+					<h1><%=drama%></h1>
+					<p><%=tel%></p>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<!-- 여기까지 -->
+
+<%
 			// 촬영지 관심 등록 미등록
 			if (info == null) {
 			%>
@@ -344,122 +381,125 @@
 			<%
 			}
 			%>
-		</div>
-		<p class="address"><%=addr%></p>
-		<p class="hours">
-			영업시간:
-			<%=scene%>
-		</p>
-		<p class="phone">
-			전화번호:
-			<%=time%>
-		</p>
-		<div class="tags">
-			<div class="drama">
-				<!-- 왼쪽 사진 -->
-				<img src="images/drama_imagessss/<%=drama%>.jpg" alt="드라마 표지"
-					class="image" style="width: 200px; height: 300px;">
-				<!-- 오른쪽 텍스트 -->
-				<div class="text">
-					<h1><%=drama%></h1>
-					<p><%=tel%></p>
-				</div>
-			</div>
-		</div>
 
-	</section>
-	<!-- 여기까지 -->
+	<div id="staticMap" style="width: 400 px; height: 400px;"></div>
 
-	<!-- 카카오 맵 표시할 div -->
-	<div id="map" data-lat="<%=lat%>" data-lon="<%=lon%>"
-		style="width: 100%; height: 350px;"></div>
+	<!-- 리뷰 섹션 -->
+	<div class="review">
+		<div class="review-header">
+			<h2 style="font-weight: bold;">Review</h2>
+			<div>
+				<%
+				if (info == null) {
+				%>
+				<button class="review-btn" onclick="reviewLogin()">리뷰 작성하기</button>
+				<%
+				} else {
+				%>
+				<button class="review-btn" id="showpop" onclick="">리뷰 작성하기</button>
+				<%
+				}
+				%>
+				<div class="backgroundpop">
+					<div class="windowpop">
+						<div class="popup">
+							<div align="right">
+								<button id="closepop">닫기</button>
+							</div>
 
-	
-	<div id="staticMap" style="width:400 px; height: 400px;"></div>
-	
-		<!-- 리뷰 섹션 -->
-		<div class="review">
-			<div class="review-header">
-				<h2 style="font-weight: bold;">Review</h2>
-					 <div>
-					 <%if(info == null){ %>
-					 <button class="review-btn" onclick="reviewLogin()">리뷰
-					작성하기</button>
-					<%}else { %>
-					<button class="review-btn" id="showpop" onclick="">리뷰
-					작성하기</button>
-					<%} %>
-				    <div class="backgroundpop">
-					      <div class="windowpop">
-					        <div class="popup">
-						        <div align="right">
-									<button id="closepop">닫기</button>
-					        	</div>
-					        
-					        	<div style="margin: auto;">
-					        		<form class="mb-3" name="myform" id="myform" method="post" action="ReviewUpdateService">
-										<input type="text" name="index" style="display: none;" value="<%=index %>">
-										<fieldset style="display: inline-block ; direction: rtl ; border:0 ;">
-											<span class="text-bold">별점을 선택해주세요</span>
-											<input type="radio" name="reviewStar" value="5" id="rate1"><label
-												for="rate1">★</label>
-											<input type="radio" name="reviewStar" value="4" id="rate2"><label
-												for="rate2">★</label>
-											<input type="radio" name="reviewStar" value="3" id="rate3"><label
-												for="rate3">★</label>
-											<input type="radio" name="reviewStar" value="2" id="rate4"><label
-												for="rate4">★</label>
-											<input type="radio" name="reviewStar" value="1" id="rate5"><label
-												for="rate5">★</label>
-										</fieldset>
-										<div>
-											<input type="checkbox" value="가족" name="mood"><span>#가족</span>
-											<input type="checkbox" value="데이트" name="mood"><span>#데이트</span>
-											<input type="checkbox" value="야경" name="mood"><span>#야경</span>
-											<input type="checkbox" value="친구" name="mood"><span>#친구</span>
-											<input type="checkbox" value="맛집" name="mood"><span>#맛집</span>
-											<input type="checkbox" value="사진 명소" name="mood"><span>#사진 명소</span>
-											<input type="checkbox" value="산책" name="mood"><span>#산책</span>
-											<input type="checkbox" value="비오는날" name="mood"><span>#비오는날</span>
-											<input type="checkbox" value="애견동반" name="mood"><span>#애견동반</span>
-											<input type="checkbox" value="파티" name="mood"><span>#파티</span>
-										</div>
-										<div>
-											<textarea class="col-auto form-control" name="content"  id="reviewContents"
-											placeholder="좋은 리뷰을 남겨주시면 큰 힘이 됩니다!"></textarea>
-										</div>
-										<div align="center">
-											<input type="submit" value="리뷰올리기" id="Post_a_review">
-										</div>
-									</form>	
-					        	</div>
-					        </div>
-					      </div>
+							<div style="margin: auto;">
+								<form class="mb-3" name="myform" id="myform" method="post"
+									action="ReviewUpdateService">
+									<input type="text" name="index" style="display: none;"
+										value="<%=index%>">
+									<fieldset
+										style="display: inline-block; direction: rtl; border: 0;">
+										<span class="text-bold">별점을 선택해주세요</span> <input type="radio"
+											name="reviewStar" value="5" id="rate1"><label
+											for="rate1">★</label> <input type="radio" name="reviewStar"
+											value="4" id="rate2"><label for="rate2">★</label> <input
+											type="radio" name="reviewStar" value="3" id="rate3"><label
+											for="rate3">★</label> <input type="radio" name="reviewStar"
+											value="2" id="rate4"><label for="rate4">★</label> <input
+											type="radio" name="reviewStar" value="1" id="rate5"><label
+											for="rate5">★</label>
+									</fieldset>
+									<div>
+										<input type="checkbox" value="가족" name="mood"><span>#가족</span>
+										<input type="checkbox" value="데이트" name="mood"><span>#데이트</span>
+										<input type="checkbox" value="야경" name="mood"><span>#야경</span>
+										<input type="checkbox" value="친구" name="mood"><span>#친구</span>
+										<input type="checkbox" value="맛집" name="mood"><span>#맛집</span>
+										<input type="checkbox" value="사진 명소" name="mood"><span>#사진
+											명소</span> <input type="checkbox" value="산책" name="mood"><span>#산책</span>
+										<input type="checkbox" value="비오는날" name="mood"><span>#비오는날</span>
+										<input type="checkbox" value="애견동반" name="mood"><span>#애견동반</span>
+										<input type="checkbox" value="파티" name="mood"><span>#파티</span>
+									</div>
+									<div>
+										<textarea class="col-auto form-control" name="content"
+											id="reviewContents" placeholder="좋은 리뷰을 남겨주시면 큰 힘이 됩니다!"></textarea>
+									</div>
+									<div align="center">
+										<input type="submit" value="리뷰올리기" id="Post_a_review">
+									</div>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+		<!-- 리뷰리스트뽑기 -->
+
+		<%
+		for (int i = 0; i < rv_list.size(); i++) {
+		%>
 		<div class="review-item">
 			<div class="rating">
-				<span>⭐</span> <span>⭐</span> <span>⭐</span> <span>⭐</span> <span>⭐</span>
+				<%
+				int rating = rv_list.get(i).getRating();
+				for (int star = 1; star <= 5; star++) {
+					if (star <= rating) {
+				%>
+				<span class="filled">★</span>
+				<%
+				} else {
+				%>
+				<span class="empty">☆</span>
+				<%
+				}
+				}
+				%>
 			</div>
-			<h3>제주도 가시면 꼭 들러야 할 장소 1위!</h3>
-			<p>선재 업고 튀어 보고 방문했는데</p>
-			<p class="nickname">개나리</p>
-			<p class="date">2023. 04. 01</p>
+			<%
+			String[] moods = rv_list.get(i).getMood();
+			for (int j = 0; j < moods.length; j++) {
+			%>
+			<b>#<%=moods[j]%> </b>
+			<%
+			}
+			%>
+			<h3><%=rv_list.get(i).getContent()%></h3>
+			<p class="nickname"><%=rv_list.get(i).getNick()%></p>
+			<p class="date"><%=rv_list.get(i).getDate()%></p>
 		</div>
-		</div>
-	
+		<%
+		}
+		%>
+	</div>
+
 	<div id="lat" style="display: none;"><%=lat%></div>
-	<div id="lon"  style="display: none;"><%=lon%></div>
-	<div id="place"  style="display: none;"><%=place%></div>
-			
+	<div id="lon" style="display: none;"><%=lon%></div>
+	<div id="place" style="display: none;"><%=place%></div>
+
 
 
 	<!-- JavaScript 파일 연결 -->
 	<script src="js/menu.js"></script>
 	<script src="js/map.js"></script>
 	<!-- 리뷰pop버튼  -->
-	 <script>
+	<script>
 	      function show() {
 		    document.querySelector(".backgroundpop").className = "backgroundpop show";
 	      }
@@ -480,54 +520,12 @@
     </script>
 
 	<!-- 좋아요 기능 JavaScript 추가 -->
-	<script>
-        // 좋아요 기능 처리
-        function handleLikeClick(filmId, email, button) {
-            if (!email) {
-                alert("로그인이 필요합니다.");
-                return;
-            }
-            $.ajax({
-                type: 'POST',
-                url: '<%=request.getContextPath()%>/FilmLikeService',
-                data: { 
-                    f_num: filmId,
-                    email: email
-                },
-                success: function(response) {
-                    console.log('좋아요 처리 성공:', response);
-                    if (button.textContent === '★'){
-                        button.textContent = '☆';
-                        button.classList.remove('liked');
-                    } else {
-                        button.textContent = '★';
-                        button.classList.add('liked');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('좋아요 처리 오류:', error);
-                }
-            });
-        }
-
-        // 지도 초기화
-        function initializeMap(lat, lon) {
-            var mapContainer = document.getElementById('map');
-            var mapOption = {
-                center: new kakao.maps.LatLng(lat, lon),
-                level: 3
-            };
-            var map = new kakao.maps.Map(mapContainer, mapOption);
-
-		// 이미지 지도를 생성합니다
-		var staticMap = new kakao.maps.StaticMap(staticMapContainer,
-				staticMapOption);
-	</script>
-		<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1cac00685a32d9d2daf6b4bdb4fc80e"></script>
 	
-    
-   
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1cac00685a32d9d2daf6b4bdb4fc80e"></script>
+
+
+
 	<script type="text/javascript">
 				  function handleLikeClick(filmId, email, button) {
 			            if (!email) {
@@ -558,7 +556,7 @@
 			        }
 				</script>
 
-				<script>
+	<script>
 				// 이미지 지도에 표시할 마커입니다
 				var lat = parseFloat(document.getElementById('lat').innerText);
    				 var lon = parseFloat(document.getElementById('lon').innerText);

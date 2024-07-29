@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -90,6 +90,54 @@ public class ReviewDAO {
 		return cnt;
 	}
 	
+public ArrayList<ReviewDTO> selectReview(String index) {
+		
+		ArrayList<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
+		int n_index = Integer.parseInt(index);
+		try {
+			getConnection();
+
+			String sql = "SELECT l.*, m.nick FROM TB_REVIEW l JOIN TB_MEMBER m ON l.email = m.email WHERE l.F_NUM = ?";
+
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1,n_index);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				
+	            int rating = rs.getInt("R_RATING");
+	            String content = rs.getString("R_CONTENT");
+	            String date = rs.getString("R_DATE");
+	            String moodStr = rs.getString("MOOD");
+	            String nick = rs.getString("NICK");
+	            
+
+	            // mood를 배열로 변환 (쉼표로 구분된 문자열을 배열로 변환)
+	            
+	            
+	            String[] moodArray = moodStr.replace("[", "").replace("]", "").split(", ");
+
+	            // ReviewDTO 객체 생성
+	            ReviewDTO dto = new ReviewDTO(rating, content, date, moodArray, nick);
+
+	            reviewList.add(dto);
+	            System.out.println(reviewList.get(0).getContent());
+	        }
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("권한 확인 실패");
+
+		} finally {
+			close();
+		}
+		return reviewList;
+	}
+
+
 	// 상세페이지 태그 상위top3
 	public  ArrayList<String> moodRanking(int f_num) {
 		

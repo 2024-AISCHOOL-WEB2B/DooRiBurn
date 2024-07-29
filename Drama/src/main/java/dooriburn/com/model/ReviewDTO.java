@@ -12,6 +12,8 @@ public class ReviewDTO {
 	private int rating;
 	private String content;
 	private String[] mood;
+	private String nick;
+	private String date;
 	
 	public ReviewDTO(String email, Double f_num, int rating, String content, String[] mood) {
 		super();
@@ -21,6 +23,32 @@ public class ReviewDTO {
 		this.content = content;
 		this.mood = mood;
 		
+	}
+	
+	// 생성자
+    public ReviewDTO(int rating, String content, String date, String[] mood, String nick) {
+        this.rating = rating;
+        this.content = content;
+        this.date = date;
+        this.mood = mood;
+        this.nick = nick;
+    }
+
+    	
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public String getEmail() {
