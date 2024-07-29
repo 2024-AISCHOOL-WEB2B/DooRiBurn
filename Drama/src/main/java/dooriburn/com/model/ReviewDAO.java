@@ -139,7 +139,7 @@ public class ReviewDAO {
          sortedMoods.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
 		 
          ArrayList<String> moodtop = new ArrayList<String>();
-		 for (int i = 0; i < Math.min(3, sortedMoods.size()); i++) {
+		 for (int i = 0; i < Math.min(4, sortedMoods.size()); i++) {
              Map.Entry<String, Integer> entry = sortedMoods.get(i);
              moodtop.add(entry.getKey());
          }
