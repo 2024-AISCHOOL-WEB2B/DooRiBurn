@@ -22,7 +22,7 @@
 
 <!-- 카카오 맵 API 스크립트 -->
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f589bcfaff80d0ddfe6b7666abe62fea"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1cac00685a32d9d2daf6b4bdb4fc80e"></script>
 
 <!-- 폰트 -->
 <link
@@ -53,13 +53,11 @@
   z-index: 1000;
 }
 
-<<<<<<< HEAD
 .window {
   position: relative;
   width: 100%;
   height: 100%;
 }
-=======
 <!-- 좋아요 버튼 스타일 추가 -->
 <style>
 .star-button {
