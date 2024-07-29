@@ -256,26 +256,24 @@
 						<td style="text-align: left; margin-left: 10px;">
 						    <input type="hidden" id="cmt_num" value="<%= request.getParameter("cmt_num") %>">
 						    
-						    
+						    <% int like_cnt = likeDao.commentLikeCount(comDto.getCmt_num()); %>
 						    <% if (info != null) { %>
 						        <input type="hidden" id="userEmail" value="<%= info.getEmail() %>">
 						        <% if(likeDao.userLiked(info.getEmail(), comDto.getCmt_num())) { %>
 						        	<button class="star-button"
-									onclick="CommnetLikeClick(<%=comDto.getCmt_num()%>, '<%=info != null ? info.getEmail() : ""%>', this)">♥</button>		
+									oWnclick="CommnetLikeClick(<%=comDto.getCmt_num()%>, '<%=info != null ? info.getEmail() : ""%>', this)">♥</button>		
 						        <%}else{ %>
 						        	<button class="star-button"
 									onclick="CommnetLikeClick(<%=comDto.getCmt_num()%>, '<%=info != null ? info.getEmail() : ""%>', this)">♡</button>
 						        	<% }  %>
 						    <% }else{  %>
-						   		 <button id="likeButton">♡</button> <!-- 기본 상태 --> 
+						   		 <button id="likeButton">♡  <%=like_cnt %></button> <!-- 기본 상태 --> 
 						    <% }  %>
-						    <span id="likeCount"></span><!-- 좋아요수 --> 
+						    
 						</td>  
 						 	 
                     </tr>
-                    <tr>	                    	
-						<td style="text-align: left; margin-right: 10px; "><%= comDto.getCmt_date() %></td> 
-                    </tr>
+
                     <tr>
                     <% if (info != null && info.getEmail().equals(comEmail)) {%>
                     	<td><a href="javascript:;" onclick="confirmCommentDelete(<%= comDto.getCmt_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a></td>
