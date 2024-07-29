@@ -9,7 +9,7 @@
 <%@ page
 import="java.io.*, java.net.*, org.json.JSONArray, org.json.JSONObject"%>
 	
-<%@page import="com.model.MemberDTO"%>
+<%@page import="dooriburn.com.model.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>

@@ -1,8 +1,8 @@
-<%@page import="com.model.MemberDTO"%>
-<%@page import="com.model.CommentDAO"%>
-<%@page import="com.model.CommentDTO"%>
-<%@page import="com.model.ContestDAO"%>
-<%@page import="com.model.ContestDTO"%>
+<%@page import="dooriburn.com.model.MemberDTO"%>
+<%@page import="dooriburn.com.model.CommentDAO"%>
+<%@page import="dooriburn.com.model.CommentDTO"%>
+<%@page import="dooriburn.com.model.ContestDAO"%>
+<%@page import="dooriburn.com.model.ContestDTO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

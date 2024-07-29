@@ -1,4 +1,4 @@
-package com.controller;
+package dooriburn.com.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.model.CommentDAO;
+import dooriburn.com.model.CommentDAO;
   
 @WebServlet("/CommentDeleteService")
 public class CommentDeleteService extends HttpServlet { 

@@ -1,4 +1,4 @@
-package com.controller;
+package dooriburn.com.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,10 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
-import com.model.MemberDAO;
-import com.model.MemberDTO;
+import dooriburn.com.model.MemberDAO;
+import dooriburn.com.model.MemberDTO;
 
 @WebServlet("/LoginService")
 public class LoginService extends HttpServlet {
@@ -35,23 +34,10 @@ public class LoginService extends HttpServlet {
 				session.setAttribute("info", info);
 				session.setMaxInactiveInterval(3600);
 				response.sendRedirect("Realindex.jsp");
-<<<<<<< HEAD
-			}else {
-=======
-			} else {
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
-				System.out.println("로그인 실패");
-				session.setAttribute("error", "비밀번호가 이메일과 일치하지 않습니다.");
-				session.setMaxInactiveInterval(3);
-				response.sendRedirect("login.jsp");
-			}
-<<<<<<< HEAD
 			
-		}else {
-=======
+		}
 
 		} else {
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 			System.out.println("로그인 실패");
 			session.setAttribute("error", "존재 하지 않는 이메일입니다.");
 			session.setMaxInactiveInterval(3);

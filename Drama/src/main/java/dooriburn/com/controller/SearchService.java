@@ -1,4 +1,4 @@
-package com.controller;
+package dooriburn.com.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;

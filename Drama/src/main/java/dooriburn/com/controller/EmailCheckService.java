@@ -1,4 +1,4 @@
-package com.controller;
+package dooriburn.com.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.model.MemberDAO;
+import dooriburn.com.model.MemberDAO;
 
 
 @WebServlet("/EmailCheckService")

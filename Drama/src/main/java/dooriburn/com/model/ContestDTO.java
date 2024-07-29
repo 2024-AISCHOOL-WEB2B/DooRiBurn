@@ -1,4 +1,4 @@
-package com.model;
+package dooriburn.com.model;
 
 import java.util.Date;
 

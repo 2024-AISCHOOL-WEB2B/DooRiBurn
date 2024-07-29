@@ -1,9 +1,9 @@
-package com.model;
+package dooriburn.com.model;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import com.controller.EmailCheckService;
+import dooriburn.com.controller.EmailCheckService;
 
 public class ReviewDTO {
 

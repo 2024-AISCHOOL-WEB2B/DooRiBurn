@@ -11,7 +11,7 @@
 <%@page import="java.net.HttpURLConnection"%>
 <%@page import="java.net.URL"%>
 <%@page import="java.net.URLEncoder"%>
-<%@page import="com.model.MemberDTO"%>
+<%@page import="dooriburn.com.model.MemberDTO"%>
 
 <!DOCTYPE HTML>
 <html lang="ko">

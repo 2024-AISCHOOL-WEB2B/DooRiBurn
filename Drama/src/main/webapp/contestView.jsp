@@ -1,11 +1,11 @@
-<%@page import="com.model.MemberDAO"%>
+<%@page import="dooriburn.com.model.MemberDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.model.CommentDTO"%>
-<%@page import="com.model.CommentDAO"%>
+<%@page import="dooriburn.com.model.CommentDTO"%>
+<%@page import="dooriburn.com.model.CommentDAO"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page import="com.model.ContestDTO"%>
-<%@page import="com.model.MemberDTO"%>
-<%@page import="com.model.ContestDAO"%>
+<%@page import="dooriburn.com.model.ContestDTO"%>
+<%@page import="dooriburn.com.model.MemberDTO"%>
+<%@page import="dooriburn.com.model.ContestDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 <!DOCTYPE HTML>

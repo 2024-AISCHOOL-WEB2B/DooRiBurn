@@ -1,4 +1,4 @@
-package com.controller;
+package dooriburn.com.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.DramaSearchDAO;
-import com.model.DramaSearchDTO;
-import com.model.MemberDAO;
-import com.model.MemberDTO;
-import com.model.ReviewDAO;
-import com.model.ReviewDTO;
+import dooriburn.com.model.DramaSearchDAO;
+import dooriburn.com.model.DramaSearchDTO;
+import dooriburn.com.model.MemberDAO;
+import dooriburn.com.model.MemberDTO;
+import dooriburn.com.model.ReviewDAO;
+import dooriburn.com.model.ReviewDTO;
 
 
 @WebServlet("/ReviewUpdateService")

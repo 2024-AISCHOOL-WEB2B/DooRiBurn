@@ -1,4 +1,4 @@
-package com.model;
+package dooriburn.com.model;
 
 public class MemberDTO {
 

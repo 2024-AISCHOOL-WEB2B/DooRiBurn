@@ -1,4 +1,4 @@
-package com.controller;
+package dooriburn.com.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.CommentDAO;
-import com.model.CommentLikeDAO;
-import com.model.CommentLikeDTO;
-import com.model.MemberDTO;
+import dooriburn.com.model.CommentDAO;
+import dooriburn.com.model.CommentLikeDAO;
+import dooriburn.com.model.CommentLikeDTO;
+import dooriburn.com.model.MemberDTO;
  
 @WebServlet("/CommentLikeService")
 public class CommentLikeService extends HttpServlet {

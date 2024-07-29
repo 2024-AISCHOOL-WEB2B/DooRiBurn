@@ -1,5 +1,5 @@
-<%@page import="com.model.ContestDAO"%>
-<%@page import="com.model.ContestDTO"%>
+<%@page import="dooriburn.com.model.ContestDAO"%>
+<%@page import="dooriburn.com.model.ContestDTO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"

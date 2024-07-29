@@ -1,6 +1,6 @@
-<%@page import="com.model.MemberDTO"%>
+<%@page import="dooriburn.com.model.MemberDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.model.RankingDAO"%>
+<%@page import="dooriburn.com.model.RankingDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>

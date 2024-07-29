@@ -1,12 +1,12 @@
-<%@page import="com.model.RankingDAO"%>
-<%@page import="com.model.DramaSearchDTO"%>
-<%@page import="com.model.DramaSearchDAO"%>
+<%@page import="dooriburn.com.model.RankingDAO"%>
+<%@page import="dooriburn.com.model.DramaSearchDTO"%>
+<%@page import="dooriburn.com.model.DramaSearchDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.model.ContestDTO"%>
-<%@page import="com.model.ContestDAO"%>
-<%@page import="com.model.MemberDTO"%>
-<%@page import="com.model.FilmLikeDAO"%>
-<%@page import="com.model.FilmLikeDTO"%>
+<%@page import="dooriburn.com.model.ContestDTO"%>
+<%@page import="dooriburn.com.model.ContestDAO"%>
+<%@page import="dooriburn.com.model.MemberDTO"%>
+<%@page import="dooriburn.com.model.FilmLikeDAO"%>
+<%@page import="dooriburn.com.model.FilmLikeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -88,8 +88,7 @@
 	margin: 0; /* h1 요소의 기본 여백 제거 */
 }
 </style>
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
-
+<style type="text/css">
 .popup {
   position: absolute;
   top: 50%;
@@ -206,10 +205,8 @@
 	String time = film_detail.get(0).getFTel();
 	String scene = film_detail.get(0).getFTime();
 	String img_src = film_detail.get(0).getFimg();
-<<<<<<< HEAD
 	RankingDAO rdao = new RankingDAO();
 	rdao.Update(index);
-=======
 
 	// 세션에서 사용자 정보 가져오기
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
@@ -222,7 +219,6 @@
 		FilmLikeDTO likeDTO = new FilmLikeDTO(email, Integer.parseInt(index));
 		isLiked = likeDAO.isLiked(likeDTO);
 	}
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 	%>
 
 	<!-- 배너 -->
@@ -306,7 +302,6 @@
 	<div id="map" data-lat="<%=lat%>" data-lon="<%=lon%>"
 		style="width: 100%; height: 350px;"></div>
 
-<<<<<<< HEAD
 		<!-- 리뷰 섹션 -->
 		<div class="review">
 			<div class="review-header">
@@ -374,7 +369,6 @@
 					<p>선재 업고 튀어 보고 방문했는데</p>
 					<p class="nickname">개나리</p>
 					<p class="date">2023. 04. 01</p>
-=======
 	<!-- 리뷰 섹션 -->
 	<div class="review">
 		<div class="review-header">
@@ -386,7 +380,6 @@
 			<div class="review-item">
 				<div class="rating">
 					<span>⭐</span> <span>⭐</span> <span>⭐</span> <span>⭐</span> <span>⭐</span>
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 				</div>
 				<h3>제주도 가시면 꼭 들러야 할 장소 1위!</h3>
 				<p>선재 업고 튀어 보고 방문했는데</p>
@@ -439,7 +432,6 @@
             };
             var map = new kakao.maps.Map(mapContainer, mapOption);
 
-<<<<<<< HEAD
 		// 이미지 지도를 생성합니다
 		var staticMap = new kakao.maps.StaticMap(staticMapContainer,
 				staticMapOption);
@@ -485,23 +477,19 @@
       function show() {
         document.querySelector(".background").className = "background show";
       }
-=======
             var markerPosition = new kakao.maps.LatLng(lat, lon);
             var marker = new kakao.maps.Marker({
                 position: markerPosition
             });
             marker.setMap(map);
         }
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 
-<<<<<<< HEAD
       function close() {
         document.querySelector(".background").className = "background";
       }
 
       document.querySelector("#show").addEventListener("click", show);
       document.querySelector("#close").addEventListener("click", close);
-=======
         // 페이지 로드 후 지도 초기화
         $(document).ready(function() {
             var lat = parseFloat('<%=lat%>');
@@ -545,7 +533,6 @@
                 }
             });
         }
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
     </script>
 
 </body>

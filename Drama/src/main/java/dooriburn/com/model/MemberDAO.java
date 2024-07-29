@@ -1,4 +1,4 @@
-package com.model;
+package dooriburn.com.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -120,11 +120,8 @@ public class MemberDAO {
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setString(1, dto.getEmail());
-<<<<<<< HEAD
 			
-=======
 
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 			rs = psmt.executeQuery();
 
 			if (rs.next()) {
