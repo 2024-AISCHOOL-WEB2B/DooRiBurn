@@ -1,3 +1,5 @@
+<%@page import="dooriburn.com.model.FilmLikeDTO"%>
+<%@page import="dooriburn.com.model.FilmLikeDAO"%>
 <%@page import="java.net.URLDecoder"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -64,6 +66,7 @@
 <body>
 	<%
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
+	FilmLikeDAO dao = new FilmLikeDAO();
 	String s_option = request.getParameter("s_option");
 	String search = request.getParameter("search");
 
@@ -151,9 +154,7 @@
 
 	<%
 	for (int i = 0; i < index.size(); i++) {
-	%>
-	<%
-	String seen = scene.get(i).length() > 50 ? scene.get(i).substring(0, 40) + "..." : scene.get(i);
+		String seen = scene.get(i).length() > 50 ? scene.get(i).substring(0, 40) + "..." : scene.get(i);
 	%>
 	<div class="box">
 		<div class="image"
@@ -167,8 +168,40 @@
 			<h3><%=titles.get(i)%></h3>
 			<p><%=seen%></p>
 		</div>
+		
+		<%
+		// 촬영지 관심 등록 미등록
+		if (info == null) {
+		%>
 		<button class="star-button"
 			onclick="handleLikeClick(<%=index.get(i)%>, '<%=info != null ? info.getEmail() : ""%>', this)">☆</button>
+
+		<%
+		} else {
+			FilmLikeDTO dto = new FilmLikeDTO(info.getEmail(),index.get(i));
+		%>
+		
+		<%
+		if (dao.isLiked(dto)) {
+		%>
+		<button class="star-button"
+			onclick="handleLikeClick(<%=index.get(i)%>, '<%=info != null ? info.getEmail() : ""%>', this)">★</button>
+		<%
+		} else {
+		%>
+		<button class="star-button"
+			onclick="handleLikeClick(<%=index.get(i)%>, '<%=info != null ? info.getEmail() : ""%>', this)">☆</button>
+
+		<%
+		}
+		%>
+
+		<%
+		}
+		%>
+
+
+
 	</div>
 	<%
 	}
