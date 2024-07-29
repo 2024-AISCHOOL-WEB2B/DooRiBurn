@@ -63,12 +63,7 @@
 <!-- 좋아요 버튼 스타일 추가 -->
 </style>
 <style>
-.star-button {
-
-
-<!--
-좋아요 버튼 스타일 추가 --> <style>.star-button {
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
+.star-button { 
 	background: none;
 	border: none;
 	font-size: 24px;

@@ -35,7 +35,8 @@ public class UpdateService extends HttpServlet {
 			System.out.println("회원정보 수정");
 		} else { 
 			System.out.println("수정 실패");
-		}  
+		} 
+		response.sendRedirect("Realindex.jsp");
 	}
  
 

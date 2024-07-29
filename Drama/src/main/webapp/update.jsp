@@ -167,7 +167,8 @@ input[type="submit"]:hover {
 <body>
 	<%
 		MemberDTO info = (MemberDTO)session.getAttribute("info"); 
-		String exUrl = "http://localhost:8081/Drama/PracSearch2.jsp?s_option=1&search=";  
+		String exUrl = "http://localhost:8081/Drama/PracSearch2.jsp?s_option=1&search=";   
+		String recentURI = request.getParameter("from");
 	%>	
 	<header>
 		<div class="banner">여기가 거기여?</div>
@@ -257,13 +258,8 @@ input[type="submit"]:hover {
 	 	<footer id="fh5co-footer" role="contentinfo">
 	 		<!-- 버튼 -->
 	 			<div class="button-container">
-				   	<div>    
-						<%if(info == null) {%>
-							<button class="btn" onclick="location.href='login.jsp'">로그인</button>
-							<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
-						<%}else{ %>
-							<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
-						<%} %>
+				   	<div>  
+						<button class="btn" onclick="location.href='LogoutService'">로그아웃</button> 
 							<button class="btn">한국어</button>
 							<button class="btn">English</button>  
 					</div>

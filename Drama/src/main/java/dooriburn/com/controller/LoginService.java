@@ -27,24 +27,24 @@ public class LoginService extends HttpServlet {
 		MemberDTO info = dao.login(dto);
 
 		HttpSession session = request.getSession(); 
-		if (info != null) {
-
-			if (pw.equals(info.getPw())) {
-				System.out.println("로그인 성공");
-				session.setAttribute("info", info);
-				session.setMaxInactiveInterval(3600); 
-				response.sendRedirect("Realindex.jsp"); // 기본 리다이렉트 페이지 
-		}
-
-		} else {
-			System.out.println("로그인 실패");
-			session.setAttribute("error", "존재 하지 않는 이메일입니다.");
-			session.setMaxInactiveInterval(3);
-			response.sendRedirect("login.jsp");
-		}
- 
+		String recentURI = request.getParameter("from");
 		
-
+		if (info != null) {
+			if (email.equals(info.getEmail()) && pw.equals(info.getPw())) {
+				session.setAttribute("info", info); 
+				if (recentURI != null) {
+					response.sendRedirect(recentURI); 
+				} else {
+					response.sendRedirect("Realindex.jsp"); 
+				} 
+			} else { 
+				if (recentURI != null) {
+					response.sendRedirect("login.jsp?from="+recentURI);
+				} else {
+					response.sendRedirect("Realindex.jsp"); 
+				} 
+			}
+		}
 	}
-
 }
+ 
