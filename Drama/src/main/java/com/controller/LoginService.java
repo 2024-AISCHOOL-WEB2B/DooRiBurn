@@ -35,12 +35,14 @@ public class LoginService extends HttpServlet {
 				session.setAttribute("info", info);
 				session.setMaxInactiveInterval(3600);
 				response.sendRedirect("Realindex.jsp");
+
 			} else {
 				System.out.println("로그인 실패");
 				session.setAttribute("error", "비밀번호가 이메일과 일치하지 않습니다.");
 				session.setMaxInactiveInterval(3);
 				response.sendRedirect("login.jsp");
 			}
+
 
 		} else {
 			System.out.println("로그인 실패");

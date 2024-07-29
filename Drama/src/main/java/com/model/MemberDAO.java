@@ -120,7 +120,6 @@ public class MemberDAO {
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setString(1, dto.getEmail());
-
 			rs = psmt.executeQuery();
 
 			if (rs.next()) {

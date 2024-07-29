@@ -136,6 +136,7 @@
 <body>
 	
 	<button id="show">팝업열기</button>
+	
     <div class="background">
       <div class="window">
         <div class="popup">
