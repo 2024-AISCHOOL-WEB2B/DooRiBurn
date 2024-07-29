@@ -193,10 +193,11 @@
 			document.getElementById("mySidenav").style.width = "0";
 		}
 	</script>
-
+	
 	<!-- JavaScript 파일 연결 -->
 	<!-- 여기서는 없어도 되긴 함 detail에서 먼저 js 만들고 여기도 연결해 봄 -->
 	<!-- <script src="js/menu.js"></script> -->
+	
 
 </body>
 </html>

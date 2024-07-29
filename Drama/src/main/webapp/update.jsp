@@ -227,23 +227,23 @@ input[type="submit"]:hover {
 								<font id="checkEmail" size = "2"></font>
 							</div>
 							<div class="col-md-6">
-								<input type="password" name="pw" id="password" class="form-control" placeholder="비밀번호">
+								<input type="password" name="pw" id="password" class="form-control" value="<%=info.getPw() %>">
 							</div>	
 						</div>
 						<div class="row form-group">
 							<div class="col-md-6">
-								<input type="text" name="nick" id="nick" class="form-control" placeholder="닉네임">
+								<input type="text" name="nick" id="nick" class="form-control" value="<%=info.getNick() %>">
 							</div>
 						</div>
 						<div class="row form-group">
 							<div class="col-md-6">
-								<input type="text" name="name" id="name" class="form-control" placeholder="이름">
+								<input type="text" name="name" id="name" class="form-control" value="<%=info.getName() %>">
 							</div>
 							<div class="col-md-6">
-								<input type="text" name="phone" id="phone" class="form-control" placeholder="전화번호">
+								<input type="text" name="phone" id="phone" class="form-control" value="<%=info.getPhone() %>">
 							</div>
 							<div class="col-md-6">
-								<input type="text" name="addr" id="addr" class="form-control" placeholder="주소">
+								<input type="text" name="addr" id="addr" class="form-control" value="<%=info.getAddr() %>">
 							</div>
 						</div>
 						<div class="row form-group">
