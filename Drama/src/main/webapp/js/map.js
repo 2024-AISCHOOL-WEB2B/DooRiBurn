@@ -33,7 +33,6 @@ function initializeMap() {
 
         marker.setMap(map);
     } else {
-        console.error("Map container is not defined.");
     }
 }
 

@@ -174,23 +174,23 @@
 		if (info == null) {
 		%>
 		<button class="star-button"
-			onclick="handleLikeClick(<%=index.get(i)%>, '<%=info != null ? info.getEmail() : ""%>', this)">☆</button>
+			onclick="handleLikeClick(<%=index.get(i)+1%>, '<%=info != null ? info.getEmail() : ""%>', this)">☆</button>
 
 		<%
 		} else {
-			FilmLikeDTO dto = new FilmLikeDTO(info.getEmail(),index.get(i));
+			FilmLikeDTO dto = new FilmLikeDTO(info.getEmail(),index.get(i)+1);
 		%>
 		
 		<%
 		if (dao.isLiked(dto)) {
 		%>
 		<button class="star-button"
-			onclick="handleLikeClick(<%=index.get(i)%>, '<%=info != null ? info.getEmail() : ""%>', this)">★</button>
+			onclick="handleLikeClick(<%=index.get(i)+1%>, '<%=info != null ? info.getEmail() : ""%>', this)">★</button>
 		<%
 		} else {
 		%>
 		<button class="star-button"
-			onclick="handleLikeClick(<%=index.get(i)%>, '<%=info != null ? info.getEmail() : ""%>', this)">☆</button>
+			onclick="handleLikeClick(<%=index.get(i)+1%>, '<%=info != null ? info.getEmail() : ""%>', this)">☆</button>
 
 		<%
 		}

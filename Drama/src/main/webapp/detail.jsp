@@ -45,7 +45,8 @@
  -->
 <!-- 카카오 맵 API 스크립트 찾아서 연결해야 함!! -->
 <style>
-.background {
+/* 배경 및 팝업 스타일 */
+.background, .backgroundpop {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -53,49 +54,41 @@
 	height: 100vh;
 	background-color: rgba(0, 0, 0, 0.3);
 	z-index: 1000;
+	display: none; /* 숨기기 */
 }
 
-.window {
+.show {
+	display: block; /* 보이기 */
+	transition: all .5s;
+}
+
+.window, .windowpop {
 	position: relative;
 	width: 100%;
 	height: 100%;
 }
-<!--
-좋아요
 
+.popup {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #ffffff;
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	width: 500px;
+	height: 400px;
+	transition: all .5s;
+}
 
- 
-
-
-버튼
-
-
- 
-
-
-스타일
-
-
- 
-
-
-추가
-
-
- 
-
-
--->
-</style>
-<style>
-.star-button {<!--좋아요 버튼 스타일 추가 --> <style>.star-button { >>>>>>> branch
-	'main' of https:// github.com/ 2024-AISCHOOL-WEB2B/
-	dooRiBurn.gitbackground : none;
+/* 좋아요 버튼 스타일 */
+.star-button {
+	background: none;
 	border: none;
 	font-size: 24px;
 	cursor: pointer;
 	color: black;
-	margin-left: 10px; /* 좋아요 버튼을 제목 옆에 적절히 배치하기 위해 여백 설정 */
+	margin-left: 10px;
 }
 
 .star-button.liked {
@@ -108,119 +101,25 @@
 
 .place-container {
 	display: flex;
-	align-items: center; /* 수평 정렬 */
+	align-items: center;
 }
 
 .place-container h1 {
-	margin: 0; /* h1 요소의 기본 여백 제거 */
-}
-</style>
-<!-- pop스타일 -->
-<style>
-.backgroundpop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.3);
-	z-index: 1000;
+	margin: 0;
 }
 
-.windowpop {
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
-
-.popup {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: #ffffff;
-	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-	/* 임시 지정 */
-	width: 90%;
-	height: 70%;
-}
-
-.backgroundpop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.3);
-	z-index: 1000;
-	/* 숨기기 */
-	z-index: -1;
-	opacity: 0;
-}
-
-.show {
-	opacity: 1;
-	z-index: 1000;
-	transition: all .5s;
-}
-
-.popup {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: #ffffff;
-	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-	border-radius: 10px;
-	/* 임시 지정 */
-	width: 500px;
-	height: 400px;
-	/* 초기에 약간 아래에 배치 */
-	transform: translate(-50%, -40%);
-}
-
-.show .popup {
-	transform: translate(-50%, -50%);
-	transition: all .5s;
-}
-
-#Post_a_review {
-	padding: 5px 15px;
-	border-radius: 5px;
-}
-
-.star-button {
-	background: none;
-	border: none;
-	font-size: 24px;
-	cursor: pointer;
-	color: black;
-	margin-bottom: 170px;
-}
-
-.star-button.liked {
-	color: gold;
-}
-
-.star-button:focus {
-	outline: none;
-}
-/*  리뷰별*/
-<
-style>.rating .filled {
+/* 리뷰 별점 스타일 */
+.rating .filled {
 	color: gold;
 }
 
 .rating .empty {
 	color: transparent;
-	-webkit-text-stroke: 1px gold; /* Chrome, Safari */
-	text-stroke: 1px gold; /* Firefox, IE */
+	-webkit-text-stroke: 1px gold;
+	text-stroke: 1px gold;
 }
-</style>
 
-
-
-<style>
+/* 폼 스타일 */
 #myform fieldset {
 	display: inline-block;
 	direction: rtl;
@@ -341,16 +240,47 @@ style>.rating .filled {
 	<section class="info">
 		<div class="tags">
 
-			<% ReviewDAO reviewdao = new ReviewDAO();
-		     ArrayList<String> mood = reviewdao.moodRanking(Integer.parseInt(index));
-		     for(int i = 0; i < mood.size(); i++){%>
-			<span>#<%=mood.get(i) %></span> 
-			<%} %>
+			<%
+			ReviewDAO reviewdao = new ReviewDAO();
+			ArrayList<String> mood = reviewdao.moodRanking(Integer.parseInt(index));
+			for (int i = 0; i < mood.size(); i++) {
+			%>
+			<span>#<%=mood.get(i)%></span>
+			<%
+			}
+			%>
 		</div>
 		<!-- 장소 이름과 좋아요 버튼을 감싸는 컨테이너 추가 -->
 		<div class="place-container">
-			<h1><%=place%></h1>
-			
+			<h1>
+				<%=place%>
+				<%
+				// 촬영지 관심 등록 미등록
+				if (info == null) {
+				%>
+				<button class="star-button"
+					onclick="handleLikeClick(<%=index%>, '', this)">☆</button>
+				<%
+				} else {
+				int n_index = Integer.parseInt(index);
+				FilmLikeDTO dto = new FilmLikeDTO(info.getEmail(), n_index);
+
+				if (f_dao.isLiked(dto)) {
+				%>
+				<button class="star-button"
+					onclick="handleLikeClick(<%=index%>, '<%=info.getEmail()%>', this)">★</button>
+				<%
+				} else {
+				%>
+				<button class="star-button"
+					onclick="handleLikeClick(<%=index%>, '<%=info.getEmail()%>', this)">☆</button>
+				<%
+				}
+				}
+				%>
+			</h1>
+
+
 		</div>
 		<p class="address"><%=addr%></p>
 		<p class="hours">
@@ -377,37 +307,7 @@ style>.rating .filled {
 	</section>
 	<!-- 여기까지 -->
 
-<%
-			// 촬영지 관심 등록 미등록
-			if (info == null) {
-			%>
-			<button class="star-button"
-				onclick="handleLikeClick(<%=index%>, '<%=info != null ? info.getEmail() : ""%>', this)">☆</button>
 
-			<%
-			} else {
-			int n_index = Integer.parseInt(index);
-			FilmLikeDTO dto = new FilmLikeDTO(info.getEmail(), n_index);
-			%>
-
-			<%
-			if (f_dao.isLiked(dto)) {
-			%>
-			<button class="star-button"
-				onclick="handleLikeClick(<%=index%>, '<%=info != null ? info.getEmail() : ""%>', this)">★</button>
-			<%
-			} else {
-			%>
-			<button class="star-button"
-				onclick="handleLikeClick(<%=index%>, '<%=info != null ? info.getEmail() : ""%>', this)">☆</button>
-
-			<%
-			}
-			%>
-
-			<%
-			}
-			%>
 
 	<div id="staticMap" style="width: 400 px; height: 400px;"></div>
 
@@ -503,7 +403,8 @@ style>.rating .filled {
 			String[] moods = rv_list.get(i).getMood();
 			for (int j = 0; j < moods.length; j++) {
 			%>
-			<b>#<%=moods[j]%> </b>
+			<b>#<%=moods[j]%>
+			</b>
 			<%
 			}
 			%>
@@ -547,7 +448,7 @@ style>.rating .filled {
     </script>
 
 	<!-- 좋아요 기능 JavaScript 추가 -->
-	
+
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1cac00685a32d9d2daf6b4bdb4fc80e"></script>
 
