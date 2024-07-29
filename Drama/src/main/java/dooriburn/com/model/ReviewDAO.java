@@ -9,6 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.lang.model.element.Element;
 
 public class ReviewDAO {
 
@@ -51,7 +57,7 @@ public class ReviewDAO {
 			
 		}
 
-	
+	// 리뷰 db insert
 	public int Insert(ReviewDTO dto) {
 
 		int cnt = 0;
@@ -131,4 +137,62 @@ public ArrayList<ReviewDTO> selectReview(String index) {
 		return reviewList;
 	}
 
+
+	// 상세페이지 태그 상위top3
+	public  ArrayList<String> moodRanking(int f_num) {
+		
+		List<String> moodList = new ArrayList<String>();
+		
+		Map<String, Integer> moodMap = new HashMap<String, Integer>();
+		
+		getConnection();
+		
+		try {
+			String sql ="SELECT SUBSTR(MOOD,2,LENGTH(MOOD)-2) AS MOOD FROM tb_review WHERE f_num = ?";
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, f_num);
+			
+			rs = psmt.executeQuery();
+			while(rs.next()){
+				String moods = rs.getString("MOOD");
+				String[] moodsArray = moods.split(",");
+				
+				for(int i = 0; i < moodsArray.length; i++) {
+					moodList.add(moodsArray[i]);
+				}		
+			}
+			
+			for(String str : moodList) {
+				Integer cnt = moodMap.get(str);
+				if(cnt == null) {
+					moodMap.put(str, 1);
+				}else {
+					 moodMap.put(str, cnt+1);
+				}
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+//		List<String> newList = moodList.stream().distinct().collect(Collectors.toList());
+//		List<Integer> moodMapList = new ArrayList<>(moodMap.values());
+//		 moodMapList.sort((o1, o2) -> moodMapList.get(o2).compareTo(moodMapList.get(o1)));
+
+		 List<Map.Entry<String, Integer>> sortedMoods = new ArrayList<>(moodMap.entrySet());
+         sortedMoods.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+		 
+         ArrayList<String> moodtop = new ArrayList<String>();
+		 for (int i = 0; i < Math.min(4, sortedMoods.size()); i++) {
+             Map.Entry<String, Integer> entry = sortedMoods.get(i);
+             moodtop.add(entry.getKey());
+         }
+		 return moodtop;
+	}
+
+	
 }

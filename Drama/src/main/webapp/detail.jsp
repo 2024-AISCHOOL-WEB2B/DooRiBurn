@@ -340,7 +340,12 @@ style>.rating .filled {
 	</div>
 	<section class="info">
 		<div class="tags">
-			<span>#데이트</span> <span>#가족</span> <span>#선업튀</span> <span>#수족관</span>
+
+			<% ReviewDAO reviewdao = new ReviewDAO();
+		     ArrayList<String> mood = reviewdao.moodRanking(Integer.parseInt(index));
+		     for(int i = 0; i < mood.size(); i++){%>
+			<span>#<%=mood.get(i) %></span> 
+			<%} %>
 		</div>
 		<!-- 장소 이름과 좋아요 버튼을 감싸는 컨테이너 추가 -->
 		<div class="place-container">
@@ -542,49 +547,7 @@ style>.rating .filled {
     </script>
 
 	<!-- 좋아요 기능 JavaScript 추가 -->
-	<script>
-        // 좋아요 기능 처리
-        function handleLikeClick(filmId, email, button) {
-            if (!email) {
-                alert("로그인이 필요합니다.");
-                return;
-            }
-            $.ajax({
-                type: 'POST',
-                url: '<%=request.getContextPath()%>/FilmLikeService',
-                data: { 
-                    f_num: filmId,
-                    email: email
-                },
-                success: function(response) {
-                    console.log('좋아요 처리 성공:', response);
-                    if (button.textContent === '★'){
-                        button.textContent = '☆';
-                        button.classList.remove('liked');
-                    } else {
-                        button.textContent = '★';
-                        button.classList.add('liked');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('좋아요 처리 오류:', error);
-                }
-            });
-        }
-
-        // 지도 초기화
-        function initializeMap(lat, lon) {
-            var mapContainer = document.getElementById('map');
-            var mapOption = {
-                center: new kakao.maps.LatLng(lat, lon),
-                level: 3
-            };
-            var map = new kakao.maps.Map(mapContainer, mapOption);
-
-		// 이미지 지도를 생성합니다
-		var staticMap = new kakao.maps.StaticMap(staticMapContainer,
-				staticMapOption);
-	</script>
+	
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1cac00685a32d9d2daf6b4bdb4fc80e"></script>
 
