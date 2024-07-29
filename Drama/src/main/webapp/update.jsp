@@ -200,17 +200,17 @@ input[type="submit"]:hover {
 					<a href="update.jsp">회원정보 수정</a> 
 					<a href="likeList.jsp">관심 촬영지</a> 
 					<a href="contestList.jsp">공모전 참가내역</a> 
+				</div>
 			<%} else { %>
 			<div class="menu-section">
 				<h2>마이 페이지</h2>
 				<div class="menu-itemss">
 					<a href="login.jsp">로그인</a> 
 					<a href="contact.jsp">회원가입</a>  
-			<%}%>
 				</div>
 			</div>
+			<%}%>  
 		</div>
-	</div>
 	</div>
 	
 	
@@ -221,7 +221,7 @@ input[type="submit"]:hover {
 
 				<div class="col-md-6 animate-box" align="center" onsubmit="return validateForm()">
 					<h3>회원정보 수정</h3>
-					<form action="JoinService" method="post" name="JoinForm">
+					<form action="UpdateService" method="post" name="JoinForm">
 						<div class="row form-group">
 							<div class="col-md-6" >
 								<h4><%= info.getEmail() %></h4>
@@ -258,22 +258,7 @@ input[type="submit"]:hover {
 	<% } else { 
 			response.sendRedirect("login.jsp");
 	} %>
-	
-	
-<%-- 	<div class="col-md-6 animate-box" align="center" onsubmit="return validateForm()">
-	<ul>
-		<li><h5>회원정보수정</h5></li>
-		
-			<form action="UpdateService" method="post">
-				<li>Email : <%= info.getEmail() %></li>
-				<li><input type="password" name="pw" placeholder="비밀번호를 입력하세요" style="width: 500px; margin: 0 auto;"></li>
-				<li><input type="text" name="nick" placeholder="닉네임을 입력하세요" style="width: 500px; margin: 0 auto;"></li>
-				<li><input type="text" name="phone" placeholder="전화번호를 입력하세요" style="width: 500px; margin: 0 auto;"></li>
-				<li><input type="text" name="addr" placeholder="집주소를 입력하세요" style="width: 500px; margin: 0 auto;"></li>
-				<li><input type="submit" value="Update" class="button fit" style="width: 500px; margin: 0 auto;"></li>
-			</form> 
-	</ul> 	
-	</div> --%>
+	 
 	 	<footer id="fh5co-footer" role="contentinfo">
 	 		<!-- 버튼 -->
 	 			<div class="button-container">

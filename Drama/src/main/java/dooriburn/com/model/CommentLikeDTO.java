@@ -1,7 +1,5 @@
 package dooriburn.com.model;
-
-import java.util.Date;
-
+ 
 public class CommentLikeDTO {
 
    private int cmt_like;
