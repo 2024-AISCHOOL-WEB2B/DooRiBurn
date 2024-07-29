@@ -48,7 +48,7 @@
 	    cursor: pointer; 
 	} 
  
-	/* 사진 업로드 style*/
+	/* 사진 업로드 style */
 	#uploadLabel .btn-file {
 	    background-color: #FFEEB9 !important;  
 	    border-color: #FFEEB9 !important;  
