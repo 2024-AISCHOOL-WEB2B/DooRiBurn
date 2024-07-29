@@ -166,7 +166,7 @@ public class MemberDAO {
 		int cnt = 0;
 		getConnection();
 
-		String sql = "UPDATE MEMBER SET PW = ?, NICK = ?, NAME =?, PHONE = ?, ADDR = ? WHERE EMAIL = ?";
+		String sql = "UPDATE TB_MEMBER SET PW = ?, NICK = ?, NAME =?, PHONE = ?, ADDR = ? WHERE EMAIL = ?";
 		try {
 			psmt = conn.prepareStatement(sql); 
 			psmt.setString(1, dto.getPw());

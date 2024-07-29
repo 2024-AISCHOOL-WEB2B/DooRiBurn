@@ -36,14 +36,7 @@ public class UpdateService extends HttpServlet {
 		} else { 
 			System.out.println("수정 실패");
 		}  
-		
-		
-		// 이전 페이지로 리다이렉트
-	    String previousPage = (String) session.getAttribute("previousPage");
-	    if (previousPage != null) {
-	        response.sendRedirect(previousPage);
-	    } else {
-	        response.sendRedirect("Realindex.jsp"); // 기본 리다이렉트 페이지
-	    }
-	} 
+	}
+ 
+
 }

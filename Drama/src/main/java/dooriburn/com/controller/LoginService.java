@@ -26,21 +26,14 @@ public class LoginService extends HttpServlet {
 
 		MemberDTO info = dao.login(dto);
 
-		HttpSession session = request.getSession();
-		// 이전 페이지로 리다이렉트
-	    String previousPage = (String) session.getAttribute("previousPage");
+		HttpSession session = request.getSession(); 
 		if (info != null) {
 
 			if (pw.equals(info.getPw())) {
 				System.out.println("로그인 성공");
 				session.setAttribute("info", info);
-				session.setMaxInactiveInterval(3600);
-			    if (previousPage != null) {
-			        response.sendRedirect(previousPage);
-			    } else {
-			        response.sendRedirect("Realindex.jsp"); // 기본 리다이렉트 페이지
-			    }
-
+				session.setMaxInactiveInterval(3600); 
+				response.sendRedirect("Realindex.jsp"); // 기본 리다이렉트 페이지 
 		}
 
 		} else {
@@ -49,7 +42,7 @@ public class LoginService extends HttpServlet {
 			session.setMaxInactiveInterval(3);
 			response.sendRedirect("login.jsp");
 		}
-		
+ 
 		
 
 	}

@@ -122,16 +122,17 @@ public class CommentLikeDAO {
     
    // 댓글 좋아요 수 전체 조회 
    public int commentLikeCount(int cmt_num) {
-       int cnt = 0;
+	   int cnt = 0;
        dbOpen();
        try {
            String sql = "SELECT COUNT(*) FROM TB_COMMENT_LIKE WHERE CMT_NUM = ?";
            psmt = conn.prepareStatement(sql);
            psmt.setInt(1, cmt_num);
            rs = psmt.executeQuery();
-
+ 
            if (rs.next()) {
                cnt = rs.getInt(1);
+               
            }
        } catch (SQLException e) {
            e.printStackTrace();

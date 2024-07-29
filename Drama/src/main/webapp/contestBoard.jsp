@@ -54,7 +54,7 @@
 
 	</head>  
 	<body>
-		<% 
+		<%   
 		// 로그인 정보 가져오기  
 		MemberDTO info = (MemberDTO) session.getAttribute("info");
 
@@ -209,8 +209,8 @@
  			<div class="button-container">
 			   	<div>    
 					<%if(info == null) {%>
-						<button class="btn" onclick="location.href='login.jsp'">로그인</button>
-						<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
+						<button class="btn" onclick="location.href='login.jsp?from=/contestBoard.jsp'">로그인</button>
+						<button class="btn" onclick="location.href='contact.jsp?from=/contestBoard.jsp'">회원가입</button>
 					<%} else { %>
 						<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
 					<%} %>
@@ -244,8 +244,7 @@
 	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://bootstrap.js"></script>
-	 
+	<script src="https://bootstrap.js"></script> 
 	<script src="js/jquery.min.js"></script> 
 	<script src="js/jquery.easing.1.3.js"></script> 
 	<script src="js/bootstrap.min.js"></script> 

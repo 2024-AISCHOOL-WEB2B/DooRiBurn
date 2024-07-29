@@ -108,15 +108,14 @@
 	    color: white;
 	}
    </style>
-   
-   
-   
+    
    </head>
    <body>
    
    <% 
       MemberDTO info = (MemberDTO)session.getAttribute("info");  
       String error = (String)session.getAttribute("error");
+      String currentPage = request.getRequestURI(); 
    %>
    
    <script>
