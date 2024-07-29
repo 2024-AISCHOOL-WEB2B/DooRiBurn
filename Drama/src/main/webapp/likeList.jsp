@@ -23,7 +23,6 @@
 <title>좋아요 누른 촬영지 목록</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/PracSearch.css">
-<!-- 하이.. -->
 
 <style>
 body {
@@ -44,34 +43,7 @@ a {
 	color: #333;
 }
 
-.box .image img {
-	width: 150px;
-	height: 150px;
-	object-fit: cover;
-	margin: 0;
-	display: block;
-	margin-left: 10px;
-	border-radius: 7px;
-}
-
-.star-button {
-	background: none;
-	border: none;
-	font-size: 24px;
-	cursor: pointer;
-	color: black;
-	margin-bottom: 170px;
-}
-
-.star-button.liked {
-	color: gold;
-}
-
-.star-button:focus {
-	outline: none;
-}
-
-a {
+a.custom-link {
 	display: block;
 	padding: 10px;
 	background: #fff;
@@ -83,25 +55,30 @@ a {
 	transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-a:hover {
+a.custom-link:hover {
 	background-color: #f4f4f9;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-h2 {
-	text-align: center;
+.custom-link h2 {
 	font-weight: bold;
-	color: #444;
+	text-align: left;
+	margin: 0;
+	width: 100%;
 }
 
+.custom-link h3 {
+	margin-left: 30px;
+}
 
-@media (max-width: 768px) {
-	a {
-		width: 95%;
+@media ( max-width : 768px) {
+	a.custom-link {
+		width: 50%;
+		padding-left: 100px;
 	}
-	h2, h3 {
+	.custom-link h2, .custom-link h3 {
 		font-size: 16px;
-		margin-left: 60px;
+		margin-left: 20px;
 	}
 }
 </style>
@@ -164,21 +141,20 @@ h2 {
 	<%
 	} else {
 	%>
-	<!-- <h1>좋아요 누른 촬영지 목록</h1> ⭐ -->
 	<br>
 	<br>
 	<%
 	for (DramaSearchDTO like : likes) {
 	%>
-	
-	<a
-		style="color: #000; text-decoration: none; display: block; width: 100%;" href="detail.jsp?index=<%=like.getFNum()%>">
-		<br>
-		<h2 style="font-weight: bold; text-align: left; margin: 0; width: 100%;"> 📍 <%=like.getFName()%> </h2>
-		<h3 style="margin-left: 30px;"><%=like.getDrama()%></h3>
+
+	<a class="custom-link" href="detail.jsp?index=<%=like.getFNum()%>">
+		<h2>
+			📍
+			<%=like.getFName()%>
+		</h2>
+		<h3><%=like.getDrama()%></h3>
 	</a>
-	<br> 
-	
+	<br>
 
 	<%
 	}

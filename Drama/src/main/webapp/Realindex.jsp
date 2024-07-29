@@ -30,6 +30,7 @@
 </style>
 </head>
 <body>
+<!-- 하이.. -->
 	
 	<%
 		MemberDTO info = (MemberDTO)session.getAttribute("info");
