@@ -156,10 +156,10 @@
 			<h2 class="highlight">나도 가 볼까?</h2>
 
 			<div class="image-container">
-				<a href="detail.jsp?index=5038"><img src="images/hanriver.png"
-					alt="한강공원여의도지구"></a> <a href="detail.jsp?index=5043"><img
-					src="images/jeonju_hanok_village.jpg" alt="선갑도"></a> <a
-					href="detail.jsp?index=5035"><img src="detail.jsp?index=5035"
+				<a href="detail.jsp?index=712"><img src="images/lotteworld.png"
+					alt="롯데월드"></a> <a href="detail.jsp?index=5043"><img
+					src="images/musiclib.png" alt="의정부음악도서관"></a> <a
+					href="detail.jsp?index=714"><img src="images/sbridge.png"
 					alt="양재시민의숲역"></a>
 			</div>
 		</div>
