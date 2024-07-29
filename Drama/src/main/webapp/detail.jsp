@@ -1,3 +1,4 @@
+<%@page import="dooriburn.com.model.ReviewDAO"%>
 <%@page import="dooriburn.com.model.RankingDAO"%>
 <%@page import="dooriburn.com.model.DramaSearchDTO"%>
 <%@page import="dooriburn.com.model.DramaSearchDAO"%>
@@ -308,7 +309,11 @@
 	</div>
 	<section class="info">
 		<div class="tags">
-			<span>#데이트</span> <span>#가족</span> <span>#선업튀</span> <span>#수족관</span> 
+			<% ReviewDAO reviewdao = new ReviewDAO();
+		     ArrayList<String> mood = reviewdao.moodRanking(Integer.parseInt(index));
+		     for(int i = 0; i < mood.size(); i++){%>
+			<span>#<%=mood.get(i) %></span> 
+			<%} %>
 		</div>
 		<!-- 장소 이름과 좋아요 버튼을 감싸는 컨테이너 추가 -->
 		<div class="place-container">
