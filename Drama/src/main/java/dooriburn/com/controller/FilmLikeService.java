@@ -19,53 +19,38 @@ public class FilmLikeService extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
+
 		String email = request.getParameter("email");
 		int f_num = Integer.parseInt(request.getParameter("f_num"));
-		 
-			
+
 		FilmLikeDTO dto = new FilmLikeDTO(email, f_num);
 		FilmLikeDAO dao = new FilmLikeDAO();
-		
+
 		System.out.println(email);
 		System.out.println(f_num);
 		String message;
 
-        if (dao.isLiked(dto)) {
-        	int cnt = dao.removeLike(dto);
-        	if(cnt>0) {
-        		message = "좋아요가 취소성공";
-        	}else {
-        		message = "좋아요가 취소ㅅㅍ";
+		if (dao.isLiked(dto)) {
+			int cnt = dao.removeLike(dto);
+			if (cnt > 0) {
+				message = "좋아요 취소성공";
+			} else {
+				message = "좋아요 취소실패";
 			}
-            
-        } else {
-        	int cnt =dao.addLike(dto);
-        	if(cnt>0) {
-        		message = "좋아요가 추가성공";
-        	}else {
-        		message = "좋아요가 ㅊㄱㅅㅍ";
+
+		} else {
+			int cnt = dao.addLike(dto);
+			if (cnt > 0) {
+				message = "좋아요 추가성공";
+			} else {
+				message = "좋아요 추가실패";
 			}
-           
-        }
 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{\"message\":\"" + message + "\"}");
-    }
+		}
 
-	// 7/26 14:23 찜 목록 조회하는 기능 추가
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write("{\"message\":\"" + message + "\"}");
+	}
 
-	/*protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String email = (String) request.getSession().getAttribute("email");
-
-		FilmLikeDAO likeDAO = new FilmLikeDAO();
-		List<FilmLikeDTO> likes = likeDAO.getLikes(email);
-
-		request.setAttribute("likes", likes);
-		request.getRequestDispatcher("likeList.jsp").forward(request, response);
-	}*/
 }
-

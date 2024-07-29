@@ -63,7 +63,7 @@
 		<div class="menu-section">
 			<h2>마이 페이지</h2>
 			<div class="menu-itemss">
-				<a href="#">회원정보 수정</a> <a href="#">관심 촬영지</a> <a href="#">참여한
+				<a href="#">회원정보 수정</a> <a href="likeList.jsp">관심 촬영지</a> <a href="#">참여한
 					공모전</a>
 			</div>
 		</div>
