@@ -108,15 +108,14 @@
 	    color: white;
 	}
    </style>
-   
-   
-   
+    
    </head>
    <body>
    
    <% 
-      MemberDTO info = (MemberDTO)session.getAttribute("info");  
-      String error = (String)session.getAttribute("error");
+	MemberDTO info = (MemberDTO)session.getAttribute("info");  
+	String error = (String)session.getAttribute("error"); 
+	String recentURI = request.getParameter("from");
    %>
    
    <script>
@@ -186,7 +185,11 @@
 
             <div class="col-md-6 animate-box" align="center" onsubmit="return validateForm()">
                <h2 align="left" style ="text-align:center;">Login</h2>
-               <form action="LoginService" method="post" name="JoinForm">
+               <% if (recentURI != null){ %>
+               		<form action="LoginService?from=<%=recentURI%>" method="post" name="JoinForm">
+               <% } else {%>
+               		<form action="LoginService" method="post" name="JoinForm">
+               <% } %>
                   <div class="row form-group">
                      <div class="col-md-6" >
                         <input type="email" name="email" id="email" class="form-control" placeholder="Email">
@@ -218,13 +221,7 @@
     <footer id="fh5co-footer" role="contentinfo">
        <!-- 버튼 -->
           <div class="button-container">
-               <div>    
-               <%if(info == null) {%>
-                  <button class="btn" onclick="location.href='login.jsp'">로그인</button>
-                  <button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
-               <%}else{ %>
-                  <button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
-               <%} %>
+               <div>     
                   <button class="btn">한국어</button>
                   <button class="btn">English</button>   
             </div>

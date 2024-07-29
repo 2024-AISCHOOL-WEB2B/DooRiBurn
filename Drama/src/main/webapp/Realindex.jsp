@@ -28,65 +28,84 @@
 <link rel="stylesheet" href="css/Realstyle.css">
 <style type="text/css">
 </style>
+
+<style>
+.menu-icon {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	cursor: pointer;
+	color: #545454;
+}
+</style>
 </head>
 <body>
-	
+
 	<%
-		MemberDTO info = (MemberDTO)session.getAttribute("info");
-		ArrayList<String> ranking = new RankingDAO().Ranking();
-		String exUrl = "http://localhost:8081/Drama/PracSearch2.jsp?s_option=1&search=";
-	%>	
+	MemberDTO info = (MemberDTO) session.getAttribute("info");
+	ArrayList<String> ranking = new RankingDAO().Ranking();
+	String exUrl = "http://localhost:8081/Drama/PracSearch2.jsp?s_option=1&search=";
+	%>
 	<header>
 		<div class="banner">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
 
 	<div id="mySidenav" class="sidenav" style="width: 0;">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#333333;">&times;</a>
-			<div class="menu-section">
-				<h2>지역별로 찾기</h2>
-				<div class="menu-items">
-					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
-					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
-					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
-					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
-					<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
-				</div>
-			</div>
-			<div class="menu-section">
-				<h2>여행사진 공모전</h2>
-				<div class="menu-items">
-					<a href="contestBoard.jsp">참가하기</a>
-				</div>
-			</div>
-			<%if(info != null){ %>
-			<div class="menu-section">
-				<h2>마이 페이지</h2>
-				<div class="menu-itemss">
-					<a href="update.jsp">회원정보 수정</a> 
-					<a href="likeList.jsp">관심 촬영지</a> 
-					<a href="contestList.jsp">공모전 참가내역</a> 
-			<%} else { %>
-			<div class="menu-section">
-				<h2>마이 페이지</h2>
-				<div class="menu-itemss">
-					<a href="login.jsp">로그인</a> 
-					<a href="contact.jsp">회원가입</a>  
-			<%}%>
-				</div>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+			style="color: #545454;">&times;</a>
+		<div class="menu-section">
+			<h2>지역별로 찾기</h2>
+			<div class="menu-items">
+				<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a
+					href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a> <a
+					href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a
+					href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a> <a
+					href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a
+					href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a> <a
+					href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a
+					href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a> <a
+					href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
 			</div>
 		</div>
+		<div class="menu-section">
+			<h2>여행사진 공모전</h2>
+			<div class="menu-items">
+				<a href="contestBoard.jsp">참가하기</a>
+			</div>
+		</div>
+		<%
+		if (info != null) {
+		%>
+		<div class="menu-section">
+			<h2>마이 페이지</h2>
+			<div class="menu-itemss">
+				<a href="update.jsp">회원정보 수정</a> <a href="likeList.jsp">관심 촬영지</a> <a
+					href="contestList.jsp">공모전 참가내역</a>
+				<%
+				} else {
+				%>
+				<div class="menu-section">
+					<h2>마이 페이지</h2>
+					<div class="menu-itemss">
+						<a href="login.jsp">로그인</a> <a href="contact.jsp">회원가입</a>
+						<%
+						}
+						%>
+					</div>
+				</div>
+			</div>
 	</div>
 	</div>
 
 	<div class="main-content">
 		<form action="PracSearch2.jsp" method="get">
 			<div class="search-container" style="height: 30px;">
-				<select name="s_option" style="margin-right: 7px;"> <!-- name="category" -> s_option -->
+				<select name="s_option" style="margin-right: 7px;">
+					<!-- name="category" -> s_option -->
 					<option value="1">장소/지역</option>
 					<option value="0">드라마</option>
-				</select>
-				 <input name="search" type="text" placeholder="검색"
+				</select> <input name="search" type="text" placeholder="검색"
 					style="flex-grow: 1; margin-right: 5px; font-size: 13px;">
 				<button type="submit">
 					<img src="images/search.png" style="width: 40px; height: 40px;" />
@@ -97,46 +116,67 @@
 		<div class="ranking">
 			<div class="rank-item">
 				<div class="rank-num">1</div>
-				<div class="rank-text"><%=ranking.get(0) %></div>
+				<div class="rank-text"><%=ranking.get(0)%></div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">2</div>
-				<div class="rank-text"><%=ranking.get(1) %></div>
+				<div class="rank-text"><%=ranking.get(1)%></div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">3</div>
-				<div class="rank-text"><%=ranking.get(2) %></div>
+				<div class="rank-text"><%=ranking.get(2)%></div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">4</div>
-				<div class="rank-text"><%=ranking.get(3) %></div>
+				<div class="rank-text"><%=ranking.get(3)%></div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">5</div>
-				<div class="rank-text"><%=ranking.get(4) %></div>
+				<div class="rank-text"><%=ranking.get(4)%></div>
 			</div>
 		</div>
 
-		<div class="intro">
-			<h2 class="highlight">선재 업고 튀어에 나온 그 장소!</h2>
+		<!-- 후보 1. 오징어 게임
+			<div class="intro">
+			<h2 class="highlight">오징어 게임의 그 장소!</h2>
 			<h2 class="highlight">나도 가 볼까?</h2>
 
 			<div class="image-container">
-				<a href="detail.jsp"><img src="images/jeju_aquarium.png"
-					alt="Aquarium"></a> <a href="page2.html"><img
-					src="images/jeonju_hanok_village.jpg" alt="Forest Path"></a> <a
-					href="page3.html"><img src="images/seoulforest.jpeg"
-					alt="Traditional Village"></a>
+				<a href="detail.jsp?index=5038"><img src="images/hanriver.png"
+					alt="한강공원여의도지구"></a> <a href="detail.jsp?index=5043"><img
+					src="images/jeonju_hanok_village.jpg" alt="선갑도"></a> <a
+					href="detail.jsp?index=5035"><img src="detail.jsp?index=5035"
+					alt="양재시민의숲역"></a>
+			</div>
+		</div> 
+		후보 2. 그 해 우리는-->
+
+		<div class="intro">
+			<h2 class="highlight">그 해 우리는 그 장소!</h2>
+			<h2 class="highlight">나도 가 볼까?</h2>
+
+			<div class="image-container">
+				<a href="detail.jsp?index=712"><img src="images/lotteworld.png"
+					alt="롯데월드"></a> <a href="detail.jsp?index=5043"><img
+					src="images/musiclib.png" alt="의정부음악도서관"></a> <a
+					href="detail.jsp?index=714"><img src="images/sbridge.png"
+					alt="양재시민의숲역"></a>
 			</div>
 		</div>
 
 		<footer>
-			<%if(info == null) {%>
+			<%
+			if (info == null) {
+			%>
 			<button class="btn" onclick="location.href='login.jsp'">로그인</button>
 			<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
-			<%}else{ %>
+			<%
+			} else {
+			%>
 			<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
-			<%} %>
+			<%
+			}
+			%>
 			<button class="btn">한국어</button>
 			<button class="btn">English</button>
 			<br>
@@ -153,10 +193,11 @@
 			document.getElementById("mySidenav").style.width = "0";
 		}
 	</script>
-
+	
 	<!-- JavaScript 파일 연결 -->
 	<!-- 여기서는 없어도 되긴 함 detail에서 먼저 js 만들고 여기도 연결해 봄 -->
 	<!-- <script src="js/menu.js"></script> -->
+	
 
 </body>
 </html>

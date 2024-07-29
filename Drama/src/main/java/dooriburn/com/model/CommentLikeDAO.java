@@ -105,10 +105,9 @@ public class CommentLikeDAO {
            while (rs.next()) {
                int cmt_like = rs.getInt("CMT_LIKE"); 
                String email = rs.getString("EMAIL");
-               int cmt_num = rs.getInt("CMT_NUM");
-               Date cmt_like_date = rs.getDate("CMT_LIKE_DATE");   
+               int cmt_num = rs.getInt("CMT_NUM"); 
                
-               CommentLikeDTO dto = new CommentLikeDTO(cmt_like, email, cmt_num, cmt_like_date);
+               CommentLikeDTO dto = new CommentLikeDTO(cmt_like, email, cmt_num);
                list.add(dto);
            }    
        } catch (SQLException e) { 

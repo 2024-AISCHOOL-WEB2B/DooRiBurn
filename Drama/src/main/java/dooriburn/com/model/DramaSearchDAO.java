@@ -1,11 +1,13 @@
 package dooriburn.com.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DramaSearchDAO {
 	private Connection conn;
@@ -92,4 +94,43 @@ public ArrayList<DramaSearchDTO> film_detail(String index) {
 		return detail_list;
 	}
 	
+
+
+
+
+	// 찜 목록 조회
+	public List<DramaSearchDTO> getLikes(String email) {
+		List<DramaSearchDTO> likes = new ArrayList<>();
+		getConnection();
+	
+		try { 
+			
+	        String sql = "SELECT DISTINCT li.F_LIKE_NUM, li.F_NUM, li.F_LIKE_DATE, l.DRAMA, l.F_NAME " +
+                    "FROM TB_FILM_LOCATION l " +
+                    "JOIN TB_FILM_LIKE li ON l.F_NUM = li.F_NUM " +
+                    "WHERE li.EMAIL = ?";
+	        
+	        
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, email);
+	
+			rs = psmt.executeQuery();
+	
+			while (rs.next()) {
+				Double f_num = rs.getDouble("F_NUM");
+				String drama = rs.getString("DRAMA");
+				String f_name = rs.getString("F_NAME");
+			
+	
+				DramaSearchDTO like = new DramaSearchDTO(f_num, drama, null, null, null, f_name, null, null, null, null);
+				likes.add(like);
+			}
+	
+		} catch (SQLException e) {
+			System.out.println("찜 목록 조회 오류: " + e.getMessage());
+		} finally {
+			close();
+		}
+		return likes;
+	}
 }

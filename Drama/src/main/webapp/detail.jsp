@@ -84,6 +84,11 @@
 /* 좋아요 버튼 스타일 */
 .star-button {
 	background: none;
+} 
+</style>
+<style> 
+.star-button {
+	background : none;
 	border: none;
 	font-size: 24px;
 	cursor: pointer;

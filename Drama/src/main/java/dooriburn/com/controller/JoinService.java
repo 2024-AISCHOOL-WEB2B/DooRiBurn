@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dooriburn.com.model.MemberDAO;
 import dooriburn.com.model.MemberDTO;
@@ -29,18 +30,27 @@ public class JoinService extends HttpServlet {
 		
 		MemberDTO dto = new MemberDTO(email, pw, nick, name, phone, addr);
 		MemberDAO dao = new MemberDAO();
+
+		HttpSession session = request.getSession(); 
+		String recentURI = request.getParameter("from");
 		
 		int cnt = dao.join(dto);
 		
-		if(cnt > 0) {
-			System.out.println("회원가입 성공");
-			response.sendRedirect("Realindex.jsp");
-		}else {
-			System.out.println("회원가입 실패");
-			response.sendRedirect("contact.jsp");
+		if(cnt > 0) { 
+			if (recentURI != null) {
+				response.sendRedirect(recentURI); 
+			} else {
+				response.sendRedirect("Realindex.jsp"); 
+			} 
+		} else {
+			// 회원가입 실패
+			if (recentURI != null) {
+				response.sendRedirect("join.jsp?from="+recentURI);
+			} else {
+				response.sendRedirect("join.jsp"); 
+			} 
 		}
-		
-		
+		    
 	}
 
 }

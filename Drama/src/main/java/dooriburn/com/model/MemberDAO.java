@@ -166,14 +166,15 @@ public class MemberDAO {
 		int cnt = 0;
 		getConnection();
 
-		String sql = "UPDATE MEMBER SET PW = ?, NICK = ?, PHONE = ?, ADDR = ? WHERE EMAIL = ?";
+		String sql = "UPDATE TB_MEMBER SET PW = ?, NICK = ?, NAME =?, PHONE = ?, ADDR = ? WHERE EMAIL = ?";
 		try {
 			psmt = conn.prepareStatement(sql); 
 			psmt.setString(1, dto.getPw());
 			psmt.setString(2, dto.getNick());
-			psmt.setString(3, dto.getPhone());
-			psmt.setString(4, dto.getAddr());
-			psmt.setString(5, dto.getEmail());
+			psmt.setString(3, dto.getName());
+			psmt.setString(4, dto.getPhone());
+			psmt.setString(5, dto.getAddr());
+			psmt.setString(6, dto.getEmail());
 			cnt = psmt.executeUpdate(); 
 			
 		} catch (SQLException e) { 

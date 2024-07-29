@@ -21,22 +21,23 @@ public class UpdateService extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String email = info.getEmail();
 		String pw = request.getParameter("pw");
+		String name = info.getName();
 		String nick = request.getParameter("nick");
 		String phone = request.getParameter("phone");
 		String addr = request.getParameter("addr");
 		  
-		MemberDTO dto = new MemberDTO(email, pw, nick, phone, addr);
+		MemberDTO dto = new MemberDTO(email, pw, name, nick, phone, addr);
 		MemberDAO dao = new MemberDAO();
 		
 		int cnt = dao.update(dto);
 		if (cnt > 0) { 
 			session.setAttribute("info", dto); 
+			System.out.println("회원정보 수정");
 		} else { 
-			
+			System.out.println("수정 실패");
 		} 
 		response.sendRedirect("Realindex.jsp");
 	}
-
-	
+ 
 
 }

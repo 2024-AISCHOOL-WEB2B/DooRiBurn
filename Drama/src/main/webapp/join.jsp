@@ -6,7 +6,7 @@
    <head>
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>contact.jsp</title>
+   <title>join.jsp</title>
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
    <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -174,8 +174,9 @@
     </script>
     
    <% 
-      MemberDTO info = (MemberDTO)session.getAttribute("info");  
-      String error = (String)session.getAttribute("error");
+	MemberDTO info = (MemberDTO)session.getAttribute("info");  
+	String error = (String)session.getAttribute("error"); 
+	String recentURI = request.getParameter("from");
    %>
 		 
 	 
@@ -224,7 +225,11 @@
 
 				<div class="col-md-6 animate-box" align="center" onsubmit="return validateForm()">
 					<h3>회원가입</h3>
-					<form action="JoinService" method="post" name="JoinForm">
+               <% if (recentURI != null){ %>
+               		<form action="JoinService?from=<%=recentURI%>" method="post" name="JoinForm">
+               <% } else {%>
+               		<form action="JoinService" method="post" name="JoinForm">
+               <% } %> 
 						<div class="row form-group">
 							<div class="col-md-6" >
 								<input type="email" name="email" id="email" class="form-control" placeholder="아이디(이메일)" >
