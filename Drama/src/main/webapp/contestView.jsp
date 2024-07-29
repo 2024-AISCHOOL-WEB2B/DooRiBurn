@@ -1,3 +1,5 @@
+<%@page import="dooriburn.com.model.CommentLikeDTO"%>
+<%@page import="dooriburn.com.model.CommentLikeDAO"%>
 <%@page import="dooriburn.com.model.MemberDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dooriburn.com.model.CommentDTO"%>
@@ -130,6 +132,7 @@
 	    }	
 	    ContestDTO dto = new ContestDAO().getView(num);
 	    CommentDAO comDao = new CommentDAO();
+	    CommentLikeDAO likeDao = new CommentLikeDAO();
 	    ArrayList<CommentDTO> commentList = comDao.getComment(num);
 	%>
 
@@ -248,20 +251,36 @@
 					<tr> 
 						<td colspan="2"><img src="commentImg/<%= comDto.getCmt_img() %>" alt="공모전 이미지" style="display: block; margin: auto; max-width: 100%; height: auto; "></td>
                     </tr>
-                    
-<%-- 좋아요 /////// 수정 필요///////////// --%>
-					<tr>
-					    <td style="text-align: left; margin-left: 10px;">
-					        <input type="hidden" id="cmt_num" value="<%= comDto.getCmt_num() %>">
-					        <% if (info != null) { %>
-					            <input type="hidden" class="userEmail" value="<%= info.getEmail() %>">
-					        <% } else { %>
-					            <input type="hidden" class="userEmail" value="">
-					        <% } %> 
-						    <button class="likeButton" id="likeButton-<%= comDto.getCmt_num() %>" data-cmt_num="<%= comDto.getCmt_num() %>">♡</button>
-						    <span id="likeCount-<%= comDto.getCmt_num() %>"></span>likes 
-					    </td> 
-					</tr> 
+                    <tr> 
+<%-- 좋아요 //////////////////// --%> 
+						<td style="text-align: left; margin-left: 10px;">
+						    <input type="hidden" id="cmt_num" value="<%= request.getParameter("cmt_num") %>">
+						    
+						    
+						    <% if (info != null) { %>
+						        <input type="hidden" id="userEmail" value="<%= info.getEmail() %>">
+						        <% if(likeDao.userLiked(info.getEmail(), comDto.getCmt_num())) { %>
+						        	<button class="star-button"
+									onclick="CommnetLikeClick(<%=comDto.getCmt_num()%>, '<%=info != null ? info.getEmail() : ""%>', this)">♥</button>		
+						        <%}else{ %>
+						        	<button class="star-button"
+									onclick="CommnetLikeClick(<%=comDto.getCmt_num()%>, '<%=info != null ? info.getEmail() : ""%>', this)">♡</button>
+						        	<% }  %>
+						    <% }else{  %>
+						   		 <button id="likeButton">♡</button> <!-- 기본 상태 --> 
+						    <% }  %>
+						    <span id="likeCount"></span><!-- 좋아요수 --> 
+						</td>  
+						 	 
+                    </tr>
+                    <tr>	                    	
+						<td style="text-align: left; margin-right: 10px; "><%= comDto.getCmt_date() %></td> 
+                    </tr>
+                    <tr>
+                    <% if (info != null && info.getEmail().equals(comEmail)) {%>
+                    	<td><a href="javascript:;" onclick="confirmCommentDelete(<%= comDto.getCmt_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a></td>
+					</tr>   
+					<%} %>
 					<%}
                     } else { %>
                     <tr>
@@ -365,47 +384,36 @@
 	  
  <!--  댓글 좋아요 //////////////////////////////////////////////////////////-->
 	<script>
-	// 좋아요 버튼 클릭 시 좋아요 상태를 토글
-	$('.likeButton').click(function() {
-	    var cmtNum = $(this).data('cmt_num');
-	    $.ajax({
-	        url: 'CommentLikeToggleService',
-	        type: 'POST',
-	        data: { cmt_num: cmtNum, action: 'toggle' },
-	        dataType: 'json',
-	        success: function(data) {
-	            $('#likeCount-' + cmtNum).text(data.likeCount);
-	            $('#likeButton-' + cmtNum).text(data.userLiked ? '♥' : '♡');
-	        },
-	        error: function(xhr, status, error) {
-	            console.error('AJAX request failed. Status:', status, 'Error:', error);
-	        }
-	    });
-	});
-
-	// 페이지 로드 시 각 댓글의 좋아요 상태 업데이트
-	$(document).ready(function() {
-	    $('.likeButton').each(function() {
-	        var cmtNum = $(this).data('cmt_num');
-	        updateLikeStatus(cmtNum);
-	    });
-	});
-
-	function updateLikeStatus(cmtNum) {
-	    $.ajax({
-	        url: 'CommentLikeToggleService',
-	        type: 'GET',
-	        data: { cmt_num: cmtNum },
-	        dataType: 'json',
-	        success: function(data) {
-	            $('#likeCount-' + cmtNum).text(data.likeCount);
-	            $('#likeButton-' + cmtNum).text(data.userLiked ? '♥' : '♡');
-	        },
-	        error: function(xhr, status, error) {
-	            console.error('AJAX request failed. Status:', status, 'Error:', error);
-	        }
-	    });
-	}
+ 
+	 function CommnetLikeClick(cmt_num, email, button) {
+         if (!email) {
+             alert("로그인이 필요합니다.");
+             return;
+         }
+         $.ajax({
+             type: 'POST',
+             url: '<%=request.getContextPath()%>/CommentLikeService',
+             data: { 
+            	 cmt_num: cmt_num,
+                 email: email
+             },
+             success: function(response) {
+                 console.log('ㄷ좋아요 처리 성공:', response);
+                 console.log(cmt_num);
+                 if (button.textContent === '♥'){
+                     button.textContent = '🤍';
+                     button.classList.remove('liked');
+                 } else {
+                     button.textContent = '♥';
+                     button.classList.add('liked');
+                 }
+             },
+             error: function(xhr, status, error) {
+                 console.error('ㅈ좋아요 처리 오류:', error);
+             }
+         });
+     }
+	  
 	</script>
 
   

@@ -43,39 +43,40 @@
 
 	<div id="mySidenav" class="sidenav" style="width: 0;">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#333333;">&times;</a>
-		<div class="menu-section">
-			<h2>지역별로 찾기</h2>
-			<div class="menu-items">
-				<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
-				<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
-				<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
-				<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
-				<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
+			<div class="menu-section">
+				<h2>지역별로 찾기</h2>
+				<div class="menu-items">
+					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
+					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
+					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
+					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
+					<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
+				</div>
+			</div>
+			<div class="menu-section">
+				<h2>여행사진 공모전</h2>
+				<div class="menu-items">
+					<a href="contestBoard.jsp">참가하기</a>
+				</div>
+			</div>
+			<%if(info != null){ %>
+			<div class="menu-section">
+				<h2>마이 페이지</h2>
+				<div class="menu-itemss">
+					<a href="update.jsp">회원정보 수정</a> 
+					<a href="likeList.jsp">관심 촬영지</a> 
+					<a href="contestList.jsp">공모전 참가내역</a> 
+			<%} else { %>
+			<div class="menu-section">
+				<h2>마이 페이지</h2>
+				<div class="menu-itemss">
+					<a href="login.jsp">로그인</a> 
+					<a href="contact.jsp">회원가입</a>  
+			<%}%>
+				</div>
 			</div>
 		</div>
-		<div class="menu-section">
-			<h2>여행사진 공모전</h2>
-			<div class="menu-items">
-				<a href="contestBoard.jsp">참가하기</a>
-			</div>
-		</div>
-		<%if(info != null){ %>
-		<div class="menu-section">
-			<h2>마이 페이지</h2>
-			<div class="menu-itemss">
-				<a href="update.jsp">회원정보 수정</a> 
-				<a href="likeList.jsp">관심 촬영지</a> 
-				<a href="contestList.jsp">공모전 참가내역</a> 
-		<%} else { %>
-		<div class="menu-section">
-			<h2>마이 페이지</h2>
-			<div class="menu-itemss">
-				<a href="login.jsp">로그인</a> 
-				<a href="contact.jsp">회원가입</a>  
-		<%}%>
-			</div>
-		</div>
-
+	</div>
 	</div>
 
 	<div class="main-content">

@@ -38,9 +38,9 @@ public class CommentLikeToggleService extends HttpServlet {
             boolean alreadyLiked = dao.userLiked(email, cmt_num);
             int cnt;
             if (alreadyLiked) {
-                cnt = dao.commentUnlike(email, cmt_num);
+                cnt = dao.addLike(cmt_num, email);
             } else {
-                cnt = dao.commentLike(new CommentLikeDTO(email, cmt_num));
+                cnt = dao.removeLike(cmt_num, email);
             }
 
             if (cnt > 0) {
