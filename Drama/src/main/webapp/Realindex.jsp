@@ -1,4 +1,6 @@
 <%@page import="com.model.MemberDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.model.RankingDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,6 +34,7 @@
 	
 	<%
 		MemberDTO info = (MemberDTO)session.getAttribute("info");
+		ArrayList<String> ranking = new RankingDAO().Ranking();
 	%>
 	
 	<header>
@@ -88,23 +91,23 @@
 		<div class="ranking">
 			<div class="rank-item">
 				<div class="rank-num">1</div>
-				<div class="rank-text">선재 업고 튀어</div>
+				<div class="rank-text"><%=ranking.get(0) %></div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">2</div>
-				<div class="rank-text">광주</div>
+				<div class="rank-text"><%=ranking.get(1) %></div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">3</div>
-				<div class="rank-text">눈물의 여왕</div>
+				<div class="rank-text"><%=ranking.get(2) %></div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">4</div>
-				<div class="rank-text">제주도</div>
+				<div class="rank-text"><%=ranking.get(3) %></div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">5</div>
-				<div class="rank-text">전주</div>
+				<div class="rank-text"><%=ranking.get(4) %></div>
 			</div>
 		</div>
 

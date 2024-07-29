@@ -7,8 +7,8 @@
 <%@page import="java.net.HttpURLConnection"%>
 <%@page import="java.net.URL"%>
 <%@ page
-	import="java.io.*, java.net.*, org.json.JSONArray, org.json.JSONObject"%>
-
+import="java.io.*, java.net.*, org.json.JSONArray, org.json.JSONObject"%>
+	
 <%@page import="com.model.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -24,12 +24,12 @@
 <!-- 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description"
-	content="Free HTML5 Website Template by FreeHTML5.co" />
-<meta name="keywords"
-	content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-<meta name="author" content="FreeHTML5.co" />
-<meta property="og:title" content="" />
-<meta property="og:image" content="" />
+	="Free HTML5 Website Template by FreeHTML5.co" />
+<meta name"frcontne=="keywords"
+	contehor" content="FreeHTML5.co" />
+<meta proper"oty="og:title" content="" />
+<meta property=nttee website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+<meta name="autg:image" content="" />
 <meta property="og:url" content="" />
 <meta property="og:site_name" content="" />
 <meta property="og:description" content="" />
