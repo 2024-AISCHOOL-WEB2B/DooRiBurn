@@ -1,7 +1,7 @@
 <%@page import="java.util.ArrayList"%> 
-<%@page import="com.model.ContestDAO"%>
-<%@page import="com.model.ContestDTO"%>
-<%@page import="com.model.MemberDTO"%>
+<%@page import="dooriburn.com.model.ContestDAO"%>
+<%@page import="dooriburn.com.model.ContestDTO"%>
+<%@page import="dooriburn.com.model.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
