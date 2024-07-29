@@ -11,29 +11,41 @@ import javax.servlet.http.HttpSession;
 import dooriburn.com.model.CommentDAO;
 import dooriburn.com.model.CommentLikeDAO;
 import dooriburn.com.model.CommentLikeDTO;
+import dooriburn.com.model.FilmLikeDAO;
+import dooriburn.com.model.FilmLikeDTO;
 import dooriburn.com.model.MemberDTO;
  
 @WebServlet("/CommentLikeService")
 public class CommentLikeService extends HttpServlet {
  
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        int cmt_num = Integer.parseInt(request.getParameter("cmt_num"));
-
-        CommentLikeDAO dao = new CommentLikeDAO();
-        CommentLikeDTO dto = new CommentLikeDTO();
-        dto.setEmail(email);
-        dto.setCmt_num(cmt_num);
-
-        int cnt = dao.commentLike(dto);
-        if (cnt > 0) {
-            response.setContentType("application/json");
-            response.getWriter().write("{\"status\":\"success\",\"message\":\"댓글 좋아요 성공\"}");
+    	String email = request.getParameter("email");
+		int cmt_num = Integer.parseInt(request.getParameter("cmt_num"));
+		 
+		CommentLikeDTO dto = new CommentLikeDTO(cmt_num, email);
+		CommentLikeDAO dao = new CommentLikeDAO();
+		String message;
+        if (dao.userLiked(email, cmt_num)) {
+        	
+        	int cnt = dao.removeLike(cmt_num, email);
+        	if(cnt>0) {
+        		message = "좋아요가 취소성공";
+        	}else {
+        		message = "좋아요가 취소ㅅㅍ";
+			}
+            
         } else {
-            response.setContentType("application/json");
-            response.getWriter().write("{\"status\":\"error\",\"message\":\"댓글 좋아요 실패\"}"); 
+        	int cnt =dao.addLike(cmt_num, email);
+        	if(cnt>0) {
+        		message = "좋아요가 추가성공";
+        	}else {
+        		message = "좋아요가 ㅊㄱㅅㅍ";
+			}
+           
         }
 
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"message\":\"" + message + "\"}");
     }
 }

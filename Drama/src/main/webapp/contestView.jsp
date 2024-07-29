@@ -1,3 +1,5 @@
+<%@page import="dooriburn.com.model.CommentLikeDTO"%>
+<%@page import="dooriburn.com.model.CommentLikeDAO"%>
 <%@page import="dooriburn.com.model.MemberDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dooriburn.com.model.CommentDTO"%>
@@ -116,6 +118,7 @@
 	    }	
 	    ContestDTO dto = new ContestDAO().getView(num);
 	    CommentDAO comDao = new CommentDAO();
+	    CommentLikeDAO likeDao = new CommentLikeDAO();
 	    ArrayList<CommentDTO> commentList = comDao.getComment(num);
 	%>
 
@@ -241,14 +244,34 @@
                     
 <%-- 좋아요 //////////////////// --%>
 
+
+
+
 						<td style="text-align: left; margin-left: 10px;">
 						    <input type="hidden" id="cmt_num" value="<%= request.getParameter("cmt_num") %>">
+						    
+						    
 						    <% if (info != null) { %>
 						        <input type="hidden" id="userEmail" value="<%= info.getEmail() %>">
+						        <% if(likeDao.userLiked(info.getEmail(), comDto.getCmt_num())) { %>
+						        	<button class="star-button"
+									onclick="CommnetLikeClick(<%=comDto.getCmt_num()%>, '<%=info != null ? info.getEmail() : ""%>', this)">♥</button>		
+						        <%}else{ %>
+						        	<button class="star-button"
+									onclick="CommnetLikeClick(<%=comDto.getCmt_num()%>, '<%=info != null ? info.getEmail() : ""%>', this)">♡</button>
+						        	<% }  %>
+						    <% }else{  %>
+						   		 <button id="likeButton">♡</button> <!-- 기본 상태 --> 
 						    <% }  %>
-						    <button id="likeButton">♡</button> <!-- 기본 상태 --> 
 						    <span id="likeCount"></span><!-- 좋아요수 -->
+						    
+						    
 						</td> 
+						 	 
+						 	 
+						 	 
+						 	 
+						 	 
 						 	 
                     </tr>
                     <tr>	                    	
@@ -386,7 +409,36 @@
 	<!-- 아래 script 좋아요수 관련!!!!!!! -->
 
 	<script>
-	    $(document).ready(function() {
+	 function CommnetLikeClick(cmt_num, email, button) {
+         if (!email) {
+             alert("로그인이 필요합니다.");
+             return;
+         }
+         $.ajax({
+             type: 'POST',
+             url: '<%=request.getContextPath()%>/CommentLikeService',
+             data: { 
+            	 cmt_num: cmt_num,
+                 email: email
+             },
+             success: function(response) {
+                 console.log('ㄷ좋아요 처리 성공:', response);
+                 console.log(cmt_num);
+                 if (button.textContent === '♥'){
+                     button.textContent = '🤍';
+                     button.classList.remove('liked');
+                 } else {
+                     button.textContent = '♥';
+                     button.classList.add('liked');
+                 }
+             },
+             error: function(xhr, status, error) {
+                 console.error('ㅈ좋아요 처리 오류:', error);
+             }
+         });
+     }
+	
+	  /*   $(document).ready(function() {
 	        var cmtNum = $('#cmt_num').val();
 	        var userEmail = $('#userEmail').val();
 	
@@ -424,7 +476,7 @@
 	            });
 	        });
 	        updateLikeStatus(); // 페이지 로드 시 상태 초기화
-	    });
+	    }); */
 	</script>
 
 	<!-- 댓글 사진 업로드시 미리보기 -->
