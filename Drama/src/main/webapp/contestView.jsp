@@ -52,6 +52,7 @@
   
   
 	<script src="js/modernizr-2.6.2.min.js"></script> 
+
 	<style>
 	/* 메뉴 위치 우상단으로 조정 */
 	.menu-icon {
@@ -80,54 +81,44 @@
         border-radius: 25px; 
         box-shadow: none;
         padding: 8px 15px; 
-        
+    }
 	/* 버튼과 저작권 정보 사이에 여백 추가, 중간배열 */
-	.button-container {
+	.button-container { 
 	    margin-bottom: 20px; 
 		display: flex; 
 		justify-content: center;
 	}
-	
-	</style>  
-	
+	</style>   
 	</head> 
 	<body>
-		<%  
-			MemberDTO info = (MemberDTO)session.getAttribute("info"); 
-		 
-		int num = 0;
-		try {
-		    if (request.getParameter("c_num") != null){
-		        num = Integer.parseInt(request.getParameter("c_num"));
-		    }
-		} catch (NumberFormatException e) {
-		    // 숫자로 변환할 수 없는 경우 처리
-		    PrintWriter script = response.getWriter();
-		    script.println("<script>");
-		    script.println("alert('유효하지 않은 글 번호입니다.');");
-		    script.println("location.href = 'contestBoard.jsp';");
-		    script.println("</script>");
-		    return;  
-		}
+	<%
+	    // 로그인 정보 가져오기
+	    MemberDTO info = (MemberDTO) session.getAttribute("info");
 
-		if (num == 0) {
-		    // 유효하지 않은 글 번호 처리
-		    PrintWriter script = response.getWriter();
-		    script.println("<script>");
-		    script.println("alert('유효하지 않은 글입니다.');");
-		    script.println("location.href = 'contestBoard.jsp';");
-		    script.println("</script>");
-		    return;  
-		}
-			ContestDTO dto = new ContestDAO().getView(num);
-			 		
-			MemberDAO memDAO = new MemberDAO();
-			  
-			// 댓글 작성
-		    CommentDAO comDao = new CommentDAO();
-		    ArrayList<CommentDTO> commentList = comDao.getComment(num); 
-		
-		%>
+	    // 디버깅을 위한 로그 출력
+	    String cNumParam = request.getParameter("c_num"); 
+	
+	    int num = 0;
+	    try {
+	        if (cNumParam != null && !cNumParam.isEmpty()) {
+	            num = Integer.parseInt(cNumParam);
+	        }
+	    } catch (NumberFormatException e) {
+	        // 숫자로 변환할 수 없는 경우 처리 
+	        response.getWriter().println("<script>alert('유효하지 않은 글 번호입니다.');location.href = 'contestBoard.jsp';</script>");
+	        return;
+	    }
+	
+	    if (num == 0) {
+	        // 유효하지 않은 글 번호 처리 
+	        response.getWriter().println("<script>alert('유효하지 않은 글입니다.');location.href = 'contestBoard.jsp';</script>");
+	        return;
+	    }	
+	    ContestDTO dto = new ContestDAO().getView(num);
+	    CommentDAO comDao = new CommentDAO();
+	    ArrayList<CommentDTO> commentList = comDao.getComment(num);
+	%>
+
 	<header>
 		<div class="banner">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
@@ -205,12 +196,9 @@
 		<div>
 <%-- 목록 / 작성 / 삭제 --%>
 		    <a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>
-        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
-			<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
-<%--👨‍🍳👨‍🍳👨‍🍳👨‍🍳👨‍🍳👨‍🍳 관리자만 글 작성 버튼 뜨게 만듦!!!! 위 삭제/수정 a태그 제거 해야됨--%>
 	        <% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
-	        	<a href="javascript:;" onclick="confirmDelete(<%= dto.getC_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
-				<a href="contestUpdate.jsp?c_num=<%= dto.getC_num() %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
+				<a href="javascript:;" onclick="confirmDelete(<%= cNumParam %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a>
+				<a href="contestUpdate.jsp?c_num=<%= cNumParam %>" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">수정</a>
 			<% } %>
 		</div>
 		<br>
@@ -220,50 +208,63 @@
 		        <h4 style="display: inline-block;  padding: 10px;">공모전 응모를 위해 댓글에 사진을 첨부해주세요.</h4>
 		    </header>
 		</div> 
+		
+		
+		
 		<!-- 해당 게시글에 작성된 댓글 리스트 가져오기!!!! ┗|｀O′|┛  수정 중~~~~~~~-->
 		<div class="container">
 			<div class="row">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-					<% for (CommentDTO comDto : commentList) { %>
-					    <%
-					        // 이메일로  MemberDTO의 nick 가져오기
-					        String comEmail = comDto.getEmail();  
-					        MemberDTO memDto = memDAO.getMemberByEmail(comEmail); 
-					        String comNick = (memDto != null) ? memDto.getNick() : "Unknown";
-					  
-					    %>
-					    <tr>
-					    	<td style="text-align: left; margin-left: 10px;"><%= comNick %></td>
-					    </tr>
-						<tr> 
-							<td><img src="commentImg/<%= comDto.getCmt_img() %>" alt="공모전 이미지" style="margin-left: 10px; max-width: 100%; height: auto;"></td>
-	                    </tr>
-	                    <tr>
-	                    
-	<%-- 좋아요 테이블 필요 --%>
-							<td style="text-align: left; margin-left: 10px;">♥ 아이콘 + 좋아요 수</td>
-					 
-	                    </tr>
-	                    <tr>	                    	
-							<td style="text-align: left; margin-right: 10px; "><%= comDto.getCmt_date() %></td> 
-	                    </tr>
-	                     <tr>
-	                    <% if (info != null && info.getEmail().equals(comEmail)) {%>
-	                    	<td><a href="javascript:;" onclick="confirmCommentDelete(<%= comDto.getCmt_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a></td>
-						<%} %>
-	                    </tr> 
-<%-- 아래는 지워야함 test용 --%>
-						<tr>
-	                    	<td><a href="javascript:;" onclick="confirmCommentDelete(<%= comDto.getCmt_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a></td>
-						</tr>  
-<%-- 댓글 작성자만 자율 수 있게 해야 함!!!!  수정하기 아래가 찐 코드
- 	                    <% if (info != null && info.getEmail().equals(comEmail)) {%>
-						<tr>
-	                    	<td><a href="javascript:;" onclick="confirmCommentDelete(<%= comDto.getCmt_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a></td>
-						</tr>
-						<% } %>  --%> 
-	                    
-					<% } %>
+					<% 
+				    MemberDAO memDAO = new MemberDAO(); // MemberDAO 인스턴스 생성 
+				    
+				    if (commentList != null && !commentList.isEmpty()) {
+                        for (CommentDTO comDto : commentList) {
+                            String comEmail = comDto.getEmail(); // 댓글의 이메일 가져오기
+                            System.out.println("Comment email: " + comEmail);  
+ 
+	                      	// 이메일로 닉네임 가져오기
+	                      	String nick = null;
+///////닉네임 오류 고치기///////////////////  String nick = memDAO.findNickByEmail(comEmail); // DAO 메서드 호출
+	 
+	                        String comNick = (nick != null) ? nick : "Unknown";
+	                        System.out.println("Comment Nick: " + comNick);                     
+	    			%>
+					    
+				    <tr>
+				    	<td style="text-align: left; margin-left: 10px;"><%= comNick %></td>
+				    </tr>
+					<tr> 
+						<td><img src="commentImg/<%= comDto.getCmt_img() %>" alt="공모전 이미지" style="margin-left: 10px; max-width: 100%; height: auto;"></td>
+                    </tr>
+                    <tr>
+                    
+<%-- 좋아요 //////////////////// --%>
+
+						<td style="text-align: left; margin-left: 10px;">
+						    <input type="hidden" id="cmt_num" value="<%= request.getParameter("cmt_num") %>">
+						    <% if (info != null) { %>
+						        <input type="hidden" id="userEmail" value="<%= info.getEmail() %>">
+						    <% }  %>
+						    <button id="likeButton">♡</button> <!-- 기본 상태 --> 
+						    <span id="likeCount"></span><!-- 좋아요수 -->
+						</td> 
+						 	 
+                    </tr>
+                    <tr>	                    	
+						<td style="text-align: left; margin-right: 10px; "><%= comDto.getCmt_date() %></td> 
+                    </tr>
+                    <tr>
+                    <% if (info != null && info.getEmail().equals(comEmail)) {%>
+                    	<td><a href="javascript:;" onclick="confirmCommentDelete(<%= comDto.getCmt_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a></td>
+					</tr>   
+					<%} %>
+					<%}
+                    } else { %>
+                    <tr>
+                        <td colspan="3">등록된 댓글이 없습니다.</td>
+                    </tr>
+                   <% } %>
 				</table>
 			</div>
 		</div>
@@ -273,8 +274,8 @@
 		<!-- 댓글 작성란 ┗|｀O′|┛ --> <!-- 수정중!!!!!!!!!!!!!!!!!!! -->
 		<div class="container">
 			<div class="form-group"> 
-				<% CommentDTO commentDto = new CommentDTO();  %>
-				<form method="post" encType = "multipart/form-data" action="commentPostAction.jsp?cmt_num=<%= commentDto.getCmt_num() %>&c_num=<%= commentDto.getC_num()%>">
+				<% CommentDTO userComDto = new CommentDTO();  %>
+				<form action="commentPostAction.jsp" method="post" encType = "multipart/form-data">
 					<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
  						<tr>
 							<td colspan="2" style="border-bottom:none; text-align: left;" valign="middle">
@@ -285,55 +286,33 @@
 								<%}%></td>
 						</tr>
 						<tr>
-							<td>   
-							
-							
-<%-- 👋👋👋👋👋👋👋  test용임 아래 코드는 지워야 됨 --%>
-<!-- 								<ul class="fh5co-social-icons">
-										<li><label for="file">
-												<div class="btn btn-file">
-													<i class="icon-camera"></i> 공모전 사진 선택
-												</div>
-										</label> <input type="file" name="commentImg" id="file"
-											style="display: none;" onchange="previewImage(this);">
-										</li> 미리보기 영역
-										<div id="imagePreview">
-											<img id="preview" src="" alt=""
-												style="max-width: 100%; height: auto;">
-										</div>
-						        </ul> 
-							</td>							
+							<td>
+							    <ul class="fh5co-social-icons">
+							        <% if (info != null) { %>
+							            <li>
+							                <label for="file" id="uploadLabel">
+							                    <div class="btn btn-file">
+							                        <i class="icon-camera"></i> 공모전 사진 선택
+							                    </div>
+							                </label>
+							                <input type="file" name="commentImg" id="file" style="display: none;" onchange="previewImage(this);">
+							            </li>
+							            <div id="imagePreview">
+							                <img id="preview" src="" alt="" style="max-width: 100%; height: auto;">
+							            </div>
+							        <% } else { %>
+							            <li>
+							                <p><a href="login.jsp" style="color: #000">로그인 후 공모전에 응모할 수 있습니다.</a></p>
+							            </li>
+							        <% } %>
+							    </ul>
+							</td>	 					
 						</tr> 
-						<tr> 
-							<td><br><input type="submit" class="btn-primary pull" value="댓글 작성"></td>
-						</tr>  --> 
-								
-<%-- 👋👋👋👋👋👋👋 찐 코드 !!!!!!!!!!!!!!!! --%>
-								<ul class="fh5co-social-icons">
- 									<% if (info != null) { %>
-									<li><label for="file" id="uploadLabel">
-											<div class="btn btn-file">
-												<i class="icon-camera"></i> 공모전 사진 선택
-											</div>
-									</label> <input type="file" name="commentImg" id="file"
-										style="display: none;" onchange="previewImage(this);">
-									</li>
-									<div id="imagePreview">
-										<img id="preview" src="" alt=""
-											style="max-width: 100%; height: auto;">
-									</div>
-									<%
-									} else {
-									%>
-									    <li>
-									        <p><a href="login.jsp" style="color: #000">로그인 후 공모전에 응모할 수 있습니다.</a></p>
-									    </li>
-									<% } %>
-								</ul> 
-							</td>							
-						</tr> 
-						<tr> 
-							<td><br><input type="submit" id="uploadInput" value="댓글 작성" onclick="checkLogin()"></td>
+						<tr>  
+							<td>
+								<input type="hidden" name="c_num" value="<%= cNumParam %>">
+								<br>
+								<input type="submit" id="uploadInput" value="댓글 작성" onclick="checkLogin()"></td>
 						</tr>  
 					</table>
 				</form>
@@ -385,7 +364,7 @@
 		}
 	</script>
 	
-	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>
 	
@@ -404,7 +383,50 @@
 
 
 	
-	 
+	<!-- 아래 script 좋아요수 관련!!!!!!! -->
+
+	<script>
+	    $(document).ready(function() {
+	        var cmtNum = $('#cmt_num').val();
+	        var userEmail = $('#userEmail').val();
+	
+	        function updateLikeStatus() {
+	            $.ajax({
+	                url: 'CommentLikeCountStatus',
+	                type: 'GET',
+	                data: { cmt_num: cmtNum, email: userEmail },
+	                dataType: 'json',
+	                success: function(data) {
+	                    $('#likeCount').text(data.likeCount);
+	                    if (data.userLiked) {
+	                        $('#likeButton').text('♥');
+	                    } else {
+	                        $('#likeButton').text('♡');
+	                    }
+	                }
+	            });
+	        }
+	
+	        $('#likeButton').click(function() {
+	            $.ajax({
+	                url: 'CommentLikeResult',
+	                type: 'POST',
+	                data: { cmt_num: cmtNum, email: userEmail }, // email 추가
+	                dataType: 'json',
+	                success: function(data) {
+	                    $('#likeCount').text(data.likeCount);
+	                    if (data.userLiked) {
+	                        $('#likeButton').text('♥');
+	                    } else {
+	                        $('#likeButton').text('♡');
+	                    }
+	                }
+	            });
+	        });
+	        updateLikeStatus(); // 페이지 로드 시 상태 초기화
+	    });
+	</script>
+
 	<!-- 댓글 사진 업로드시 미리보기 -->
 	<script>
 	    function previewImage(input) {
@@ -420,43 +442,46 @@
 	        }
 	    }	     
 	</script>
-	
-	<!-- 댓글 작성 버튼 눌렀을 때 로그인 여부 확인하기 -->
- 	<script>
-    function checkLogin() {
-        var loggedIn = <%= (info != null) %>;  
-        if (!loggedIn) {
-            var confirmLogin = confirm("로그인 후에 댓글을 작성할 수 있습니다. 로그인 페이지로 이동하시겠습니까?");
-            if (confirmLogin) {
-                window.location.href = "login.jsp"; 
-            }
-        } else {
-        	location.reload();
+	 
+	 
+	<script>
+	function checkLogin() {
+    var loggedIn = <%= info != null ? "true" : "false" %>;
+    if (!loggedIn) {
+        var confirmLogin = confirm("로그인 후에 댓글을 작성할 수 있습니다. 로그인 페이지로 이동하시겠습니까?");
+        if (confirmLogin) {
+            window.location.href = "login.jsp"; 
         }
+    } else {
+        // 로그인된 경우 폼 제출
+        document.querySelector("form").submit();
     }
-	</script> -
+	}
+	</script>
+
 	
 
 	<!-- 해당 글 삭제시 Confirm 창 -->
 	<script>
-		function confirmDelete(c_num) {
+		function confirmDelete(cNumParam) {
 			var result = confirm("글을 삭제하시겠습니까?");
 			if (result) {
-	            location.href = "ContestDeleteService?c_num=" + c_num;  
+	            location.href = "ContestDeleteService?c_num=" + cNumParam;  
 			}
 		}
-	</script>
 
 	<!-- 댓글 삭제시 Confirm 창 -->
-	<script>
 		function confirmCommentDelete(cmt_num) {
 			var result = confirm("댓글을 삭제하시겠습니까?");
 			if (result) {
-				location.href = "CommentDeleteService?c_num=<%= dto.getC_num() %>&cmt_num=" + cmt_num;  
+				location.href = "CommentDeleteService?c_num=<%= cNumParam %>&cmt_num=" + cmt_num;  
 			}
 		}
 	</script> 
-	  
+	
+
+    
+    
 <!-- 귀여운 아이콘
  					<p>
 						<ul class="fh5co-social-icons">  

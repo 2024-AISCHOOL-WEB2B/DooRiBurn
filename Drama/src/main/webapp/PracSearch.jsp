@@ -24,12 +24,21 @@ import="java.io.*, java.net.*, org.json.JSONArray, org.json.JSONObject"%>
 <!-- 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description"
+<<<<<<< HEAD
 	="Free HTML5 Website Template by FreeHTML5.co" />
 <meta name"frcontne=="keywords"
 	contehor" content="FreeHTML5.co" />
 <meta proper"oty="og:title" content="" />
 <meta property=nttee website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 <meta name="autg:image" content="" />
+=======
+   content="Free HTML5 Website Template by FreeHTML5.co" />
+<meta name="keywords"
+   content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+<meta name="author" content="FreeHTML5.co" />
+<meta property="og:title" content="" />
+<meta property="og:image" content="" />
+>>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/dooRiBurn.git
 <meta property="og:url" content="" />
 <meta property="og:site_name" content="" />
 <meta property="og:description" content="" />
@@ -179,20 +188,20 @@ import="java.io.*, java.net.*, org.json.JSONArray, org.json.JSONObject"%>
 
 
 	<!-- 소영 -->
-	<!-- 	<div class="main-content">
-		<form action="search.jsp">
-			<div class="search-container" style="height: 30px;">
-				<select name="s_option" style="margin-right: 7px;">
-					name="category" -> s_option
-					<option value="1">장소 및 지역</option>
-					<option value="0">드라마</option>
-				</select> <input name="search" type="text" placeholder="검색"
-					style="flex-grow: 1; margin-right: 5px;">
-				<button type="button">
-					<img src="images/search.png" style="width: 40px; height: 40px;" />
-				</button>
-			</div>
-		</form> -->
+	<!--    <div class="main-content">
+      <form action="search.jsp">
+         <div class="search-container" style="height: 30px;">
+            <select name="s_option" style="margin-right: 7px;">
+               name="category" -> s_option
+               <option value="1">장소 및 지역</option>
+               <option value="0">드라마</option>
+            </select> <input name="search" type="text" placeholder="검색"
+               style="flex-grow: 1; margin-right: 5px;">
+            <button type="button">
+               <img src="images/search.png" style="width: 40px; height: 40px;" />
+            </button>
+         </div>
+      </form> -->
 
 	<!-- 소영 세진 -->
 	<div class="main-content">
@@ -244,71 +253,71 @@ import="java.io.*, java.net.*, org.json.JSONArray, org.json.JSONObject"%>
 
 	<!-- 세진  -->
 	<%-- <div class="container">
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1 text-center">
-						<div class="display-t">
-							<div class="display-tc animate-box" data-animate-effect="fadeIn">
-								<div class="row">
-									<form class="form-inline" id="fh5co-header-subscribe"
-										action="search.jsp" method="get">
-										<div class="col-md-6 col-md-offset-3">
-											<div class="search-container"
-												style="display: flex; align-items: center;">
+            <div class="row">
+               <div class="col-md-10 col-md-offset-1 text-center">
+                  <div class="display-t">
+                     <div class="display-tc animate-box" data-animate-effect="fadeIn">
+                        <div class="row">
+                           <form class="form-inline" id="fh5co-header-subscribe"
+                              action="search.jsp" method="get">
+                              <div class="col-md-6 col-md-offset-3">
+                                 <div class="search-container"
+                                    style="display: flex; align-items: center;">
 
-												<select name="s_option" style="margin-right: 10px;">
-													<%
-													try {
-														if ("0".equals(s_option)) {
-													%>
-													<option value="0">드라마</option>
-													<option value="1">장소및 지역</option>
-													<%
-													} else {
-													%>
-													<option value="1">장소및 지역</option>
-													<option value="0">드라마</option>
-													<%
-													}
-													} catch (Exception e) {
-													%>
-													<option value="0">드라마</option>
-													<option value="1">장소및 지역</option>
-													<%
-													}
-													%>
+                                    <select name="s_option" style="margin-right: 10px;">
+                                       <%
+                                       try {
+                                          if ("0".equals(s_option)) {
+                                       %>
+                                       <option value="0">드라마</option>
+                                       <option value="1">장소및 지역</option>
+                                       <%
+                                       } else {
+                                       %>
+                                       <option value="1">장소및 지역</option>
+                                       <option value="0">드라마</option>
+                                       <%
+                                       }
+                                       } catch (Exception e) {
+                                       %>
+                                       <option value="0">드라마</option>
+                                       <option value="1">장소및 지역</option>
+                                       <%
+                                       }
+                                       %>
 
-												</select>
-												<%
-												if (search == null) {
-												%>
-												<input name="search" type="text"
-													placeholder="지역 또는 드라마 명을 검색하세요."
-													style="flex-grow: 1; margin-right: 10px;">
-												<%
-												} else {
-												%>
-												<input name="search" type="text" class="form-control"
-													placeholder="지역 또는 드라마 명을 검색하세요." value="<%=search%>"
-													style="flex-grow: 1; margin-right: 10px;">
-												<%
-												}
-												%>
+                                    </select>
+                                    <%
+                                    if (search == null) {
+                                    %>
+                                    <input name="search" type="text"
+                                       placeholder="지역 또는 드라마 명을 검색하세요."
+                                       style="flex-grow: 1; margin-right: 10px;">
+                                    <%
+                                    } else {
+                                    %>
+                                    <input name="search" type="text" class="form-control"
+                                       placeholder="지역 또는 드라마 명을 검색하세요." value="<%=search%>"
+                                       style="flex-grow: 1; margin-right: 10px;">
+                                    <%
+                                    }
+                                    %>
 
-												<button type="submit" id="search-button">
-													<i class="search-icon">&#128269;</i>
-												</button>
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                                    <button type="submit" id="search-button">
+                                       <i class="search-icon">&#128269;</i>
+                                    </button>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
 
-			</div>
-			</header>
-	</div>
+         </div>
+         </header>
+   </div>
  --%>
 
 
@@ -393,37 +402,37 @@ import="java.io.*, java.net.*, org.json.JSONArray, org.json.JSONObject"%>
 
 	<!-- 팀장님 -->
 	<%-- <div class="container">
-			<!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
-			<div class="row">
-				<div class="col-lg-4 col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="#"><img class="img-responsive"
-							src="https://th.bing.com/th/id/OIP.FKwVfi4SsgnhqTDPMLoLTAHaE7?w=300&h=199&c=7&r=0&o=5&pid=1.7"
-							alt=""></a>
-							
-							
-							
-						<!-- 해당 장소 사진 -->
-						<div class="blog-text">
-							<h3>
-								<a href="" #><%=places.get(i)%></a>
-							</h3>
-							<!-- 장소명 -->
-							<span class="posted_on"><%=titles.get(i)%></span>
-							<!-- 드라마명 -->
-							<span class="favorites">⭐</span>
-							<!-- 즐겨찾기 -->
-							<p><%=seen%></p>
-							<!-- 상세줄거리 미리보기 -->
-							<a href="#" class="btn btn-primary">상세보기</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<%
-		}
-		%>
+         <!-- 검색명에 대한 검색 결과! 촬영지 목록 -->
+         <div class="row">
+            <div class="col-lg-4 col-md-4">
+               <div class="fh5co-blog animate-box">
+                  <a href="#"><img class="img-responsive"
+                     src="https://th.bing.com/th/id/OIP.FKwVfi4SsgnhqTDPMLoLTAHaE7?w=300&h=199&c=7&r=0&o=5&pid=1.7"
+                     alt=""></a>
+                     
+                     
+                     
+                  <!-- 해당 장소 사진 -->
+                  <div class="blog-text">
+                     <h3>
+                        <a href="" #><%=places.get(i)%></a>
+                     </h3>
+                     <!-- 장소명 -->
+                     <span class="posted_on"><%=titles.get(i)%></span>
+                     <!-- 드라마명 -->
+                     <span class="favorites">⭐</span>
+                     <!-- 즐겨찾기 -->
+                     <p><%=seen%></p>
+                     <!-- 상세줄거리 미리보기 -->
+                     <a href="#" class="btn btn-primary">상세보기</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <%
+      }
+      %>
  --%>
 
 

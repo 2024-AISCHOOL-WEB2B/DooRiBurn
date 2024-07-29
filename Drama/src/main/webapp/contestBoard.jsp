@@ -65,8 +65,8 @@
 	</head>  
 	<body>
 		<% 
-		// 로그인 정보 가져오기 
-		MemberDTO info = (MemberDTO)session.getAttribute("info");
+		// 로그인 정보 가져오기  
+		MemberDTO info = (MemberDTO) session.getAttribute("userInfo"); 
 
 		// BoardDAO 객체 생성
 		ContestDAO dao = new ContestDAO();
@@ -154,20 +154,17 @@
 					<% for (ContestDTO dto : list) { %>
 						<tr>
 							<td><%= dto.getC_num() %></td>
-							<td><a stlyle="color:#ffd964" href="contestView.jsp?c_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
+							<td><a style="color:#000" href="contestView.jsp?c_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
 							<td><%= dto.getC_create_date() %> ~ <%= dto.getC_delete_date() %></td>
 					 	</tr>
 					<% } %> 
 				</tbody>
 			</table>  
-		</div>
-<!-- 아래 글작성 a태그 제거 해야됨-->
+		</div>  
+		<!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! -->
+		<% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
 			<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a>
-			
-<!-- 관리자만 글 작성 버튼 뜨게 만듦!!!! -->
-			<% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
-				<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a>
-			<% } %>  
+		<% } %>  
 	</div>
 	
 	<!-- 페이징 처리 -->
@@ -188,7 +185,7 @@
 					endPage = pageCount;
 				}
 				if(startPage > pageBlock) { %>
-					<a href="contestBoard.jsp?pageNum=<%=startPage - pageBlock%>">prev</a>
+					<a href="contestBoard.jsp?pageNum=<%=startPage - pageBlock%>">◀</a>
 				<%} %>
 			    
 				<% for(int i=startPage ; i <= endPage ; i++) { %>
@@ -196,7 +193,7 @@
 				<%} %>
 			    
 				<% if(endPage < pageCount){ %>
-					<a href="contestBoard.jsp?pageNum=<%=startPage + pageBlock%>">next</a>
+					<a href="contestBoard.jsp?pageNum=<%=startPage + pageBlock%>">▶</a>
 				<%} %>
 			<%} %>
 	</div>

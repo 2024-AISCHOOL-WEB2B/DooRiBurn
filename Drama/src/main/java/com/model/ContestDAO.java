@@ -208,7 +208,7 @@ public class ContestDAO {
 	
 	 
 
-	// 공모전 글 가져오기 !!!😎😎 필수
+	// 공모전 글 가져오기  
 	public ArrayList<ContestDTO> getContests(ContestDTO dto) { 
 		ArrayList<ContestDTO> list = new ArrayList<ContestDTO>();
 		ContestDTO dtoTest = null;
