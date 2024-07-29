@@ -28,15 +28,23 @@ public class UpdateService extends HttpServlet {
 		  
 		MemberDTO dto = new MemberDTO(email, pw, name, nick, phone, addr);
 		MemberDAO dao = new MemberDAO();
-		
+		 
+		String recentURI = request.getParameter("from");
 		int cnt = dao.update(dto);
 		if (cnt > 0) { 
-			session.setAttribute("info", dto); 
-			System.out.println("회원정보 수정");
-		} else { 
-			System.out.println("수정 실패");
-		} 
-		response.sendRedirect("Realindex.jsp");
+			session.setAttribute("info", dto);  
+			if (recentURI != null) {
+				response.sendRedirect(recentURI); 
+			} else {
+				response.sendRedirect("Realindex.jsp"); 
+			} 
+		} else {  
+			if (recentURI != null) {
+				response.sendRedirect("update.jsp?from="+recentURI);
+			} else {
+				response.sendRedirect("update.jsp"); 
+			} 
+		}  
 	}
  
 

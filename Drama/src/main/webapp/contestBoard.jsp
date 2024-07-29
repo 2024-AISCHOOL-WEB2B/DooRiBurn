@@ -35,15 +35,19 @@
 	<link rel="stylesheet" href="css/bootstrap.css"> 
 	<link rel="stylesheet" href="css/style2.css"> 
 	<script src="js/modernizr-2.6.2.min.js"></script> 
-	
-	 <!-- 메뉴 위치 우상단으로 조정 -->
-	<style>
+
+	<style> 
+	 /* 메뉴 위치 우상단으로 조정 */
 	.menu-icon {
-	    position: absolute;
-	    top: 10px;  
-	    right: 20px; 
-	    cursor: pointer; 
-	} 
+		position: absolute;
+		top: 10px;
+		right: 20px;
+		cursor: pointer;
+		color: #545454;
+	}
+	.sidenav .menu-items a:hover {
+	    font-weight: bold !important;
+	}
 	/* 버튼과 저작권 정보 사이에 여백 추가, 중간배열 */
 	.button-container {
 	    margin-bottom: 20px; 
@@ -54,54 +58,46 @@
 
 	</head>  
 	<body>
-		<%   
-		// 로그인 정보 가져오기  
-		MemberDTO info = (MemberDTO) session.getAttribute("info");
-
-		// BoardDAO 객체 생성
+		<%    
+		MemberDTO info = (MemberDTO) session.getAttribute("info"); 
 		ContestDAO dao = new ContestDAO();
 		
-		// 게시판 DB에 있는 글 개수를 확인
+		// 게시판 DB에 있는 글 개수 확인
 		int cnt = dao.getCount();  
-		//////////////////////////////////////////////////////////////////////////////////////////
-		// 페이징 처리
+		// 페이징 처리 ////////////////////////////////////////////////////////////// 
 		
-		// 한 페이지에 출력될 글 수 
-		int pageSize = 5;
-		
-		// 현 페이지 정보 설정
-		int pageNum = 1;
+		int pageSize = 5; // 한 페이지에 출력될 글 수 
+		 
+		int pageNum = 1; // 현 페이지 정보 설정
 		if (request.getParameter("pageNum") != null){
 			pageNum = Integer.parseInt(request.getParameter("pageNum"));
-		} 
+		}  
 		
-		// 첫행번호를 계산 
-		int startRow = (pageNum - 1) * pageSize + 1; 
+		int startRow = (pageNum - 1) * pageSize + 1;  // 첫행번호를 계산 
 		
 		// 게시글 목록 가져오기
-        ArrayList<ContestDTO> list = dao.getBoardList(startRow, pageSize);
-		%>  
+        ArrayList<ContestDTO> list = dao.getBoardList(startRow, pageSize); 
 		
-		
- 
-		 
-	<% 
-		String exUrl = "http://localhost:8081/Drama/PracSearch2.jsp?s_option=1&search=";
+		String exUrl = "PracSearch2.jsp?s_option=1&search=";
 	%>	
 	<header>
-		<div class="banner">여기가 거기여?</div>
+		<div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
 
 	<div id="mySidenav" class="sidenav" style="width: 0;">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#333333;">&times;</a>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#545454;">&times;</a>
 			<div class="menu-section">
 				<h2>지역별로 찾기</h2>
 				<div class="menu-items">
-					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
-					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
-					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
-					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
+					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a>
+					<a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
+					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a>
+					<a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
+					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a>
+					<a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
+					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a>
+					<a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
 					<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
 				</div>
 			</div>
@@ -115,25 +111,26 @@
 			<div class="menu-section">
 				<h2>마이 페이지</h2>
 				<div class="menu-itemss">
-					<a href="update.jsp">회원정보 수정</a> 
+					<a href="update.jsp?from=/Drama/contestBoard.jsp">회원정보 수정</a> 
 					<a href="likeList.jsp">관심 촬영지</a> 
 					<a href="contestList.jsp">공모전 참가내역</a> 
-			<%} else { %>
-			<div class="menu-section">
-				<h2>마이 페이지</h2>
-				<div class="menu-itemss">
-					<a href="login.jsp">로그인</a> 
-					<a href="join.jsp">회원가입</a>  
-			<%}%>
 				</div>
-			</div>
-	</div>
-	</div>
+			<%} else { %>
+				<div class="menu-section">
+					<h2>마이 페이지</h2>
+					<div class="menu-itemss">
+						<a href="login.jsp?from=/Drama/contestBoard.jsp">로그인</a> 
+						<a href="join.jsp?from=/Drama/contestBoard.jsp">회원가입</a>  
+					</div>
+				</div>
+			<%}%> 
+		</div>
 	</div>
  
  	<div style="clear: both; text-align: center; margin-top: 50px;"> 
  	<br>
- 		<h3 style="display: inline-block; ">공모전 게시판</h3>
+ 		<h3 style="display: inline-block;">지역여행 사진 공모전</h3>
+ 		<h5>드라마 주인공이 된 내 사진을 자랑해서 상품도 타가자!</h5>
  	</div>
  	<div class="container">
 		<div class="row">
@@ -172,11 +169,9 @@
 				
 				// 한 페이지에 보여줄 페이지 블럭
 				int pageBlock = 5;
-				
-				// 한 페이지에 보여줄 페이지 블럭 시작번호 계산
+				 
 				int startPage = ((pageNum-1)/pageBlock)*pageBlock+1;
-				
-				// 한 페이지에 보여줄 페이지 블럭 끝 번호 계산
+				 
 				int endPage = startPage + pageBlock-1;
 				if(endPage > pageCount){
 					endPage = pageCount;
@@ -195,26 +190,17 @@
 			<%} %>
 	</div>
 
-
-            
-            
-            
-
  
-
 	
 	
-	
-	
- 	<footer id="fh5co-footer" role="contentinfo">
- 		<!-- 버튼 -->
+ 	<footer id="fh5co-footer" role="contentinfo"> 
  			<div class="button-container">
 			   	<div>    
 					<%if(info == null) {%>
 						<button class="btn" onclick="location.href='login.jsp?from=/Drama/contestBoard.jsp'">로그인</button>
 						<button class="btn" onclick="location.href='join.jsp?from=/Drama/contestBoard.jsp'">회원가입</button>
 					<%} else { %>
-						<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
+						<button class="btn" onclick="location.href='LogoutService?from=/Drama/contestBoard.jsp'">로그아웃</button>
 					<%} %>
 						<button class="btn">한국어</button>
 						<button class="btn">English</button>   
@@ -234,7 +220,10 @@
  
 	
 	<!-- Side navigation script -->
-	<script>
+	<script> 
+	    function redirectToPage() {
+	        window.location.href = 'Realindex.jsp';
+	    }
 		function openNav() {
 			document.getElementById("mySidenav").style.width = "80%";
 		}

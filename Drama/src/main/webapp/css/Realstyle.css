@@ -93,13 +93,9 @@ header {
 
 /* 추가: 마이 페이지 하위 목록 세로 정렬을 위해 */
 .sidenav .menu-itemss a:hover {
-	color: #ffeba8;
-}
-
-.sidenav .menu-items a:hover {
-	color: #ffeba8;
-}
-
+	color: #333;
+	font-weight: bold !important;
+} 
 .main-content {
 	transition: margin-right 0.5s;
 	padding: 10px; /* 16px */

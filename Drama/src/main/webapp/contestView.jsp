@@ -42,14 +42,16 @@
 	<script src="js/modernizr-2.6.2.min.js"></script> 
 
 	<style>
- 	/* 메뉴 위치 우상단으로 조정 */
 	.menu-icon {
-	    position: absolute;
-	    top: 10px;  
-	    right: 20px; 
-	    cursor: pointer; 
-	} 
- 
+		position: absolute;
+		top: 10px;
+		right: 20px;
+		cursor: pointer;
+		color: #545454;
+	}
+	.sidenav .menu-items a:hover {
+	    font-weight: bold !important;
+	}
 	/* 사진 업로드 style */
 	#uploadLabel .btn-file {
 	    background-color: #FFEEB9 !important;  
@@ -98,13 +100,31 @@
 	.table .content-row td {
 	  border-top: none; /* 콘텐츠와 이미지 사이의 경계 숨기기 */
 	}
-  
-	.likeButton {
-	  border: none;
-	  background: none; /* 선택사항: 배경도 없애고 싶을 때 */
-	  cursor: pointer; /* 선택사항: 버튼처럼 보이도록 커서 변경 */
+   
+	.star-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 16px;
+    color: inherit;
+    cursor: pointer;
+    outline: none;
+    color: #f53f82;
 	}
-
+	
+	.star-button:hover {
+		color: #ff005e
+	}
+	.star-button:active {
+		color: #ff0029
+	}
+	.star-button:focus {
+	    outline: none;
+	} 
+	.star-button .like-count {
+	    margin-left: 5px;
+	}
+	
 	</style>   
 	</head> 
 	<body>
@@ -134,43 +154,57 @@
 	    CommentDAO comDao = new CommentDAO();
 	    CommentLikeDAO likeDao = new CommentLikeDAO();
 	    ArrayList<CommentDTO> commentList = comDao.getComment(num);
+
+		String exUrl = "PracSearch2.jsp?s_option=1&search=";
 	%>
 
 	<header>
-		<div class="banner">여기가 거기여?</div>
+		<div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
 	<div class="fh5co-loader"></div> 
 	<div id="page">
-	<nav class="fh5co-nav" role="navigation">
-	 
+	<nav class="fh5co-nav" role="navigation"> 
 	<div id="mySidenav" class="sidenav" style="width: 0;">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<div class="menu-section">
-			<h2>지역별로 찾기</h2>
-			<div class="menu-items">
-				<a href="#">서울</a> <a href="#">부산</a> <a href="#">인천</a> <a href="#">대구</a>
-				<a href="#">대전</a> <a href="#">광주</a> <a href="#">울산</a> <a href="#">세종</a>
-				<a href="#">경기</a> <a href="#">충북</a> <a href="#">충남</a> <a href="#">전북</a>
-				<a href="#">전남</a> <a href="#">경북</a> <a href="#">경남</a> <a href="#">강원</a>
-				<a href="#">제주</a> <a href="#">-</a>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#545454;">&times;</a>
+			<div class="menu-section">
+				<h2>지역별로 찾기</h2>
+				<div class="menu-items">
+					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a>
+					<a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
+					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a>
+					<a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
+					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a>
+					<a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
+					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a>
+					<a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
+					<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
+				</div>
 			</div>
-		</div>
-		<div class="menu-section">
-			<h2>공모전</h2>
-			<div class="menu-items">
-				<a href="#">참여하기</a>
+			<div class="menu-section">
+				<h2>여행사진 공모전</h2>
+				<div class="menu-items">
+					<a href="contestBoard.jsp">참가하기</a>
+				</div>
 			</div>
+			<%if(info != null){ %>
+			<div class="menu-section">
+				<h2>마이 페이지</h2>
+				<div class="menu-itemss">
+					<a href="update.jsp?from=/Drama/contestView.jsp?c_num=<%=cNumParam%>">회원정보 수정</a> 
+					<a href="likeList.jsp">관심 촬영지</a> 
+					<a href="contestList.jsp">공모전 참가내역</a> 
+				</div>
+			<%} else { %>
+				<div class="menu-section">
+					<h2>마이 페이지</h2>
+					<div class="menu-itemss">
+						<a href="login.jsp?from=/Drama/contestView.jsp?c_num=<%=cNumParam%>">로그인</a> 
+						<a href="join.jsp?from=/Drama/contestView.jsp?c_num=<%=cNumParam%>">회원가입</a>  
+					</div>
+				</div>
+			<%}%> 
 		</div>
-		<%if(info != null){ %>
-		<div class="menu-section">
-			<h2>마이 페이지</h2>
-			<div class="menu-itemss">
-				<a href="#">회원정보 수정</a> <a href="#">관심 촬영지</a> <a href="#">참여한
-					공모전</a>
-			</div>
-		</div>
-		<%} %>
 	</div>
 	</nav>
 	 
@@ -186,7 +220,7 @@
 	        <table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9;">
 	            <thead style="background-color: #eeeeee">
 	                <tr>
-	                    <th colspan="4" style="clear: both; text-align: center; margin-top: 20px; color: black; ">공모전</th>
+	                    <th colspan="4" style="clear: both; text-align: center; margin-top: 20px; color: black; ">지역여행 사진 공모전</th>
 	                </tr>
 	            </thead>
 	            <tbody style="background-color: #f9f9f9;">
@@ -226,7 +260,7 @@
 		
 		
 		
-		<!-- 해당 게시글에 작성된 댓글 리스트  -->
+		<%-- 해당 게시글에 작성된 댓글 목록 --%> 
 		<div class="container">
 			<div class="row">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
@@ -251,11 +285,10 @@
 					<tr> 
 						<td colspan="2"><img src="commentImg/<%= comDto.getCmt_img() %>" alt="공모전 이미지" style="display: block; margin: auto; max-width: 100%; height: auto; "></td>
                     </tr>
-                    <tr> 
-<%-- 좋아요 //////////////////// --%> 
-						<td style="text-align: left; margin-left: 10px;">
-						    <input type="hidden" id="cmt_num" value="<%= request.getParameter("cmt_num") %>">
-						    
+ 		<%-- 좋아요 --%> 
+                    <tr>  
+						<td colspan="3" style="text-align: left; margin-left: 10px;">
+						    <input type="hidden" id="cmt_num" value="<%= request.getParameter("cmt_num") %>"> 
 						    <% 
 							int like_cnt = likeDao.commentLikeCount(comDto.getCmt_num()); 
 							%>
@@ -266,28 +299,19 @@
 							        onclick="CommentLikeClick(<%=comDto.getCmt_num()%>, '<%=info != null ? info.getEmail() : ""%>', this, <%=like_cnt%>)">♥ <span class="like-count"><%=like_cnt %></span></button>		
 							    <%} else { %>
 							        <button class="star-button"
-							        onclick="CommentLikeClick(<%=comDto.getCmt_num()%>, '<%=info != null ? info.getEmail() : ""%>', this, <%=like_cnt%>)">♡ <span class="like-count"><%=like_cnt %></span></button>
+							        onclick="CommentLikeClick(<%=comDto.getCmt_num()%>, '<%=info != null ? info.getEmail() : ""%>', this, <%=like_cnt%>)">♡  <span class="like-count"><%=like_cnt %></span></button>
 							    <% } %>
-							<% } else { %>
-							    <!-- 기본 상태 --> 
-							    <button id="likeButton">♡ <span class="like-count"><%=like_cnt %> </span></button> 
-							<% } %>
-						    
-						</td>  
-						 	 
-                    </tr>
-
-                    <tr>
-                    <% if (info != null && info.getEmail().equals(comEmail)) {%>
-                    	<td><a href="javascript:;" onclick="confirmCommentDelete(<%= comDto.getCmt_num() %>)" class="btn btn-primary pull-right" style="margin-right: 10px; padding: 10px 20px;">삭제</a></td>
-					</tr>   
-					<%} %>
-					<%}
-                    } else { %>
-                    <tr>
-                        <td colspan="3">등록된 댓글이 없습니다.</td>
-                    </tr>
-                   <% } %>
+							<% } else { %> 
+									<button class="star-button" onclick="showLoginPrompt()">♡ <span class="like-count"><%=like_cnt %></span></button> 
+							<% } %> 
+						</td>    
+                    </tr>  
+					<% } %> <!-- for문 닫기 -->
+					<% } else { %>
+	                    <tr>
+	                        <td colspan="3">등록된 댓글이 없습니다.</td>
+	                    </tr>
+                   	<% } %> 
 				</table>
 			</div>
 		</div>
@@ -342,50 +366,40 @@
 			</div>
 		</div> 
 		 
-  
-	
-	
-	 	<footer id="fh5co-footer" role="contentinfo">
-	 		<!-- 버튼 -->
-	 			<div class="button-container">
-				   	<div>    
-						<%if(info == null) {%>
-							<button class="btn" onclick="location.href='login.jsp'">로그인</button>
-							<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
-						<%}else{ %>
-							<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
-						<%} %>
-							<button class="btn">한국어</button>
-							<button class="btn">English</button>   
-					</div>
-				</div>				
-			<div class="container">
-				<div class="row copyright"> 
-					<div class="col-md-12 text-center">
-						<p>
-							<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
-							<small class="block">Designed by DOORIBURN</small>
-						</p>
-	 				</div>  
+ 	<footer id="fh5co-footer" role="contentinfo"> 
+ 			<div class="button-container">
+			   	<div>    
+					<%if(info == null) {%>
+						<button class="btn" onclick="location.href='login.jsp?from=/Drama/contestView.jsp?c_num=<%=cNumParam%>'">로그인</button>
+						<button class="btn" onclick="location.href='join.jsp?from=/Drama/contestView.jsp?c_num=<%=cNumParam%>'">회원가입</button>
+					<%} else { %>
+						<button class="btn" onclick="location.href='LogoutService?from=/Drama/contestView.jsp?c_num=<%=cNumParam%>'">로그아웃</button>
+					<%} %>
+						<button class="btn">한국어</button>
+						<button class="btn">English</button>   
 				</div>
-			</div> 
-		</footer> 
-	</div>
-	 
-<!-- Side navigation script -->
-	<script>
-		function openNav() {
-			document.getElementById("mySidenav").style.width = "80%";
-		}
-
-		function closeNav() {
-			document.getElementById("mySidenav").style.width = "0";
-		}
-	</script>
-	  
- <!--  댓글 좋아요 //////////////////////////////////////////////////////////-->
-	<script>
+			</div>				
+		<div class="container">
+			<div class="row copyright"> 
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
+						<small class="block">Designed by DOORIBURN</small>
+					</p>
+ 				</div>  
+			</div>
+		</div> 
+	</footer>
  
+	</div>
+	   
+ <!--  댓글 좋아요 ♡♥ -->
+	<script> 
+    function showLoginPrompt() { 
+        if (confirm('로그인 후 댓글 좋아요를 할 수 있습니다. 로그인하시겠습니까?')) { 
+            window.location.href = 'login.jsp';
+        }
+    }
 	function CommentLikeClick(cmt_num, email, button, like_cnt) {
 	    if (!email) {
 	        alert("로그인이 필요합니다.");
@@ -419,8 +433,7 @@
 	    });
 	}
 	</script>
-
-  
+ 
 	<!-- 댓글 사진 업로드시 미리보기 -->
 	<script>
 	    function previewImage(input) {
@@ -435,9 +448,8 @@
 	            preview.src = "";  
 	        }
 	    }	     
-	</script>
-	 
-	 
+	</script> 
+	<!-- 로그인시 댓글 작성할 수 있게 confirm -->
 	<script>
 	function checkLogin() {
 	    var loggedIn = <%= info != null ? "true" : "false" %>;
@@ -460,8 +472,7 @@
 			if (result) {
 	            location.href = "ContestDeleteService?c_num=" + cNumParam;  
 			}
-		}
-
+		} 
 	<!-- 댓글 삭제시 Confirm 창 -->
 		function confirmCommentDelete(cmt_num) {
 			var result = confirm("댓글을 삭제하시겠습니까?");
@@ -470,12 +481,23 @@
 			}
 		}
 	</script> 
-	
+	<!-- Side navigation script -->
+	<script> 
+	    function redirectToPage() {
+	        window.location.href = 'Realindex.jsp';
+	    }
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "80%";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+		}
+	</script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://bootstrap.js"></script>
-	 
 	<script src="js/jquery.min.js"></script> 
 	<script src="js/jquery.easing.1.3.js"></script> 
 	<script src="js/bootstrap.min.js"></script> 

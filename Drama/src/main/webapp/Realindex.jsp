@@ -26,9 +26,7 @@
 
 <!-- CSS 파일 연결 -->
 <link rel="stylesheet" href="css/Realstyle.css">
-<style type="text/css">
-</style>
-
+<style type="text/css"></style>
 <style>
 .menu-icon {
 	position: absolute;
@@ -37,6 +35,25 @@
 	cursor: pointer;
 	color: #545454;
 }
+.sidenav .menu-items a:hover {
+    font-weight: bold !important;
+}
+footer {
+    margin-bottom: 50px;
+}
+ 
+footer div {
+    display: block !important;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px; 
+} 
+@media (max-width: 600px) {
+    footer div {
+        margin-bottom: 100px !important;  
+    }
+}
+
 </style>
 </head>
 <body>
@@ -44,10 +61,10 @@
 	<%
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
 	ArrayList<String> ranking = new RankingDAO().Ranking();
-	String exUrl = "http://localhost:8081/Drama/PracSearch2.jsp?s_option=1&search=";
+	String exUrl = "PracSearch2.jsp?s_option=1&search=";
 	%>
 	<header>
-		<div class="banner">여기가 거기여?</div>
+		<div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
 
@@ -74,28 +91,24 @@
 				<a href="contestBoard.jsp">참가하기</a>
 			</div>
 		</div>
-		<%
-		if (info != null) {
-		%>
-		<div class="menu-section">
-			<h2>마이 페이지</h2>
-			<div class="menu-itemss">
-				<a href="update.jsp">회원정보 수정</a> <a href="likeList.jsp">관심 촬영지</a> <a
-					href="contestList.jsp">공모전 참가내역</a>
-				<%
-				} else {
-				%>
+			<%if(info != null){ %>
+			<div class="menu-section">
+				<h2>마이 페이지</h2>
+				<div class="menu-itemss">
+					<a href="update.jsp">회원정보 수정</a> 
+					<a href="likeList.jsp">관심 촬영지</a> 
+					<a href="contestList.jsp">공모전 참가내역</a> 
+				</div>
+			<%} else { %>
 				<div class="menu-section">
 					<h2>마이 페이지</h2>
 					<div class="menu-itemss">
-						<a href="login.jsp">로그인</a> <a href="contact.jsp">회원가입</a>
-						<%
-						}
-						%>
+						<a href="login.jsp">로그인</a> 
+						<a href="join.jsp">회원가입</a>  
 					</div>
 				</div>
-			</div>
-	</div>
+			<%}%> 
+		</div>
 	</div>
 
 	<div class="main-content">
@@ -163,28 +176,25 @@
 					alt="양재시민의숲역"></a>
 			</div>
 		</div>
-
-		<footer>
-			<%
-			if (info == null) {
-			%>
-			<button class="btn" onclick="location.href='login.jsp'">로그인</button>
-			<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
-			<%
-			} else {
-			%>
-			<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
-			<%
-			}
-			%>
-			<button class="btn">한국어</button>
-			<button class="btn">English</button>
-			<br>
-		</footer>
 	</div>
-
+	
+	<footer>
+			<div style="display: block !important; width: 100%; text-align: center; margin-bottom: 10px;">    
+				<%if(info == null) {%>
+					<button class="btn" onclick="location.href='login.jsp'">로그인</button>
+					<button class="btn" onclick="location.href='join.jsp'">회원가입</button>
+				<%} else { %>
+					<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
+				<%} %>
+					<button class="btn">한국어</button>
+					<button class="btn">English</button>   
+			</div>     
+	 </footer>  
 	<!-- Side navigation script -->
-	<script>
+	<script> 
+	    function redirectToPage() {
+	        window.location.href = 'Realindex.jsp';
+	    }
 		function openNav() {
 			document.getElementById("mySidenav").style.width = "80%";
 		}

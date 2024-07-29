@@ -16,9 +16,14 @@ public class LogoutService extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); 
+		String recentURI = request.getParameter("from");
 		session.invalidate();
-		response.sendRedirect("Realindex.jsp");
+		if (recentURI != null) {
+			response.sendRedirect(recentURI); 
+		} else {
+			response.sendRedirect("Realindex.jsp"); 
+		} 
 	}
 
 }

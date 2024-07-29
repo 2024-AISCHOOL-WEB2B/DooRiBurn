@@ -84,9 +84,7 @@
 /* 좋아요 버튼 스타일 */
 .star-button {
 	background: none;
-} 
-</style>
-<style> 
+}  
 .star-button {
 	background : none;
 	border: none;
@@ -166,6 +164,17 @@
 	border-radius: 5px;
 	font-size: 16px;
 	resize: none;
+	 /* 메뉴 위치 우상단으로 조정 */
+	.menu-icon {
+		position: absolute;
+		top: 10px;
+		right: 20px;
+		cursor: pointer;
+		color: #545454;
+	}
+	.sidenav .menu-items a:hover {
+	    font-weight: bold !important;
+	}
 }
 </style>
 </head>
@@ -196,42 +205,55 @@
 	// 세션에서 사용자 정보 가져오기
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
 
-	// 좋아요 상태 확인
+	String exUrl = "PracSearch2.jsp?s_option=1&search=";
 	%>
 
 	<!-- 배너 -->
 	<header>
-		<div class="banner" onclick="location.href='Realindex.jsp'">여기가
-			거기여?</div>
+		<div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
 
 	<!-- 메뉴 -->
-	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-			style="color: #333333;">&times;</a>
-		<div class="menu-section">
-			<h2>지역별로 찾기</h2>
-			<div class="menu-items">
-				<a href="#">서울</a> <a href="#">부산</a> <a href="#">인천</a> <a href="#">대구</a>
-				<a href="#">대전</a> <a href="#">광주</a> <a href="#">울산</a> <a href="#">세종</a>
-				<a href="#">경기</a> <a href="#">충북</a> <a href="#">충남</a> <a href="#">전북</a>
-				<a href="#">전남</a> <a href="#">경북</a> <a href="#">경남</a> <a href="#">강원</a>
-				<a href="#">제주</a> <a href="#">-</a>
+	<div id="mySidenav" class="sidenav" style="width: 0;">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#545454;">&times;</a>
+			<div class="menu-section">
+				<h2>지역별로 찾기</h2>
+				<div class="menu-items">
+					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a>
+					<a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
+					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a>
+					<a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
+					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a>
+					<a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
+					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a>
+					<a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
+					<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
+				</div>
 			</div>
-		</div>
-		<div class="menu-section">
-			<h2>공모전</h2>
-			<div class="menu-items">
-				<a href="#">참여하기</a>
+			<div class="menu-section">
+				<h2>여행사진 공모전</h2>
+				<div class="menu-items">
+					<a href="contestBoard.jsp">참가하기</a>
+				</div>
 			</div>
-		</div>
-		<div class="menu-section">
-			<h2>마이 페이지</h2>
-			<div class="menu-itemss">
-				<a href="#">회원정보 수정</a> <a href="#">관심 촬영지</a> <a href="#">참여한
-					공모전</a>
-			</div>
+			<%if(info != null){ %>
+			<div class="menu-section">
+				<h2>마이 페이지</h2>
+				<div class="menu-itemss">
+					<a href="update.jsp?from=/Drama/detail.jsp?index=<%=index%>">회원정보 수정</a> 
+					<a href="likeList.jsp">관심 촬영지</a> 
+					<a href="contestList.jsp">공모전 참가내역</a> 
+				</div>
+			<%} else { %>
+				<div class="menu-section">
+					<h2>마이 페이지</h2>
+					<div class="menu-itemss">
+						<a href="login.jsp?from=/Drama/detail.jsp?index=<%=index%>">로그인</a> 
+						<a href="join.jsp?from=/Drama/detail.jsp?index=<%=index%>">회원가입</a>  
+					</div>
+				</div>
+			<%}%> 
 		</div>
 	</div>
 
@@ -426,7 +448,18 @@
 	<div id="lon" style="display: none;"><%=lon%></div>
 	<div id="place" style="display: none;"><%=place%></div>
 
-
+<%-- 	<footer>
+			<div style="display: block !important; width: 100%; text-align: center; margin-bottom: 10px;">    
+				<%if(info == null) {%>
+					<button class="btn" onclick="location.href='login.jsp?from=/Drama/detail.jsp?index=<%=index%>'">로그인</button>
+					<button class="btn" onclick="location.href='join.jsp?from=/Drama/detail.jsp?index=<%=index%>'">회원가입</button>
+				<%} else { %>
+					<button class="btn" onclick="location.href='LogoutService?from=/Drama/detail.jsp?index=<%=index%>'">로그아웃</button>
+				<%} %>
+					<button class="btn">한국어</button>
+					<button class="btn">English</button>   
+			</div>     
+	 </footer>   --%>
 
 	<!-- JavaScript 파일 연결 -->
 	<script src="js/menu.js"></script>
@@ -446,10 +479,7 @@
 	    	}
 	      
 	      document.querySelector("#showpop").addEventListener("click", show);
-	      document.querySelector("#closepop").addEventListener("click", close);
-	      
-	      
-
+	      document.querySelector("#closepop").addEventListener("click", close); 
     </script>
 
 	<!-- 좋아요 기능 JavaScript 추가 -->
@@ -460,54 +490,67 @@
 
 
 	<script type="text/javascript">
-				  function handleLikeClick(filmId, email, button) {
-			            if (!email) {
-			                alert("로그인이 필요합니다.");
-			                return;
-			            }
-			            $.ajax({
-			                type: 'POST',
-			                url: '<%=request.getContextPath()%>/FilmLikeService',
-			                data: { 
-			                    f_num: filmId,
-			                    email: email
-			                },
-			                success: function(response) {
-			                    console.log('좋아요 처리 성공:', response);
-			                    if (button.textContent === '★'){
-			                        button.textContent = '☆';
-			                        button.classList.remove('liked');
-			                    } else {
-			                        button.textContent = '★';
-			                        button.classList.add('liked');
-			                    }
-			                },
-			                error: function(xhr, status, error) {
-			                    console.error('좋아요 처리 오류:', error);
-			                }
-			            });
-			        }
-				</script>
+	  function handleLikeClick(filmId, email, button) {
+	           if (!email) {
+	               alert("로그인이 필요합니다.");
+	               return;
+	           }
+	           $.ajax({
+	               type: 'POST',
+	               url: '<%=request.getContextPath()%>/FilmLikeService',
+	               data: { 
+	                   f_num: filmId,
+	                   email: email
+	               },
+	               success: function(response) {
+	                   console.log('좋아요 처리 성공:', response);
+	                   if (button.textContent === '★'){
+	                       button.textContent = '☆';
+	                       button.classList.remove('liked');
+	                   } else {
+	                       button.textContent = '★';
+	                       button.classList.add('liked');
+	                   }
+	               },
+	               error: function(xhr, status, error) {
+	                   console.error('좋아요 처리 오류:', error);
+	               }
+	           });
+	       }
+	</script>
 
 	<script>
-				// 이미지 지도에 표시할 마커입니다
-				var lat = parseFloat(document.getElementById('lat').innerText);
-   				 var lon = parseFloat(document.getElementById('lon').innerText);
-				var place = document.getElementById('place').innerText;
-				var marker = {
-				    position: new kakao.maps.LatLng(lat, lon), 
-				    text: place // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다
-				};
-				
-				var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div
-				    staticMapOption = { 
-				        center: new kakao.maps.LatLng(lat, lon), // 이미지 지도의 중심좌표
-				        level: 3, // 이미지 지도의 확대 레벨
-				        marker: marker // 이미지 지도에 표시할 마커
-				    };
-				
-				// 이미지 지도를 생성합니다
-				var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
-				</script>
+		// 이미지 지도에 표시할 마커입니다
+		var lat = parseFloat(document.getElementById('lat').innerText);
+					 var lon = parseFloat(document.getElementById('lon').innerText);
+		var place = document.getElementById('place').innerText;
+		var marker = {
+		    position: new kakao.maps.LatLng(lat, lon), 
+		    text: place // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다
+		};
+		
+		var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div
+		    staticMapOption = { 
+		        center: new kakao.maps.LatLng(lat, lon), // 이미지 지도의 중심좌표
+		        level: 3, // 이미지 지도의 확대 레벨
+		        marker: marker // 이미지 지도에 표시할 마커
+		    };
+		
+		// 이미지 지도를 생성합니다
+		var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+	</script>
+	<!-- Side navigation script -->
+	<script> 
+	    function redirectToPage() {
+	        window.location.href = 'Realindex.jsp';
+	    }
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "80%";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+		}
+	</script>
 </body>
 </html>

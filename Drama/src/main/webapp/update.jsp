@@ -37,7 +37,21 @@
    <link rel="stylesheet" href="css/style2.css">
   
    <script src="js/modernizr-2.6.2.min.js"></script> 
-   
+<script>
+       function validateForm() { 
+           var password = document.getElementById("password").value;
+           var nick = document.getElementById("nick").value;
+           var name = document.getElementById("name").value;
+           var phone = document.getElementById("phone").value;
+           var addr = document.getElementById("addr").value;
+
+           if (password == "" || nick == "" || name == "" || phone == "" || addr == "") {
+               alert("모든 필드를 입력해 주세요.");
+               return false;
+           }
+           return true;
+       }
+</script>
 
 <style type="text/css">
 	*{
@@ -46,12 +60,16 @@
  			font-style: normal;
 	}
 
-  .menu-icon {
-      position: absolute;
-      top: 10px;  
-      right: 20px; 
-      cursor: pointer; 
-  } 
+.menu-icon {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	cursor: pointer;
+	color: #545454;
+}
+.sidenav .menu-items a:hover {
+    font-weight: bold !important;
+}
   /* 버튼과 저작권 정보 사이에 여백 추가, 중간배열 */
   .button-container {
       margin-bottom: 20px; 
@@ -155,26 +173,12 @@ input[type="submit"]:hover {
     color: white;
 } 
 </style> 
-<script>
-       function validateForm() { 
-           var password = document.getElementById("password").value;
-           var nick = document.getElementById("nick").value;
-           var name = document.getElementById("name").value;
-           var phone = document.getElementById("phone").value;
-           var addr = document.getElementById("addr").value;
 
-           if (password == "" || nick == "" || name == "" || phone == "" || addr == "") {
-               alert("모든 필드를 입력해 주세요.");
-               return false;
-           }
-           return true;
-       }
-</script>
 </head>
 <body>
 	<%
 		MemberDTO info = (MemberDTO)session.getAttribute("info"); 
-		String exUrl = "http://localhost:8081/Drama/PracSearch2.jsp?s_option=1&search=";   
+		String exUrl = "PracSearch2.jsp?s_option=1&search=";
 		String recentURI = request.getParameter("from");
 	%>	
 	<header>
@@ -183,45 +187,53 @@ input[type="submit"]:hover {
 	</header>
 
 	<div id="mySidenav" class="sidenav" style="width: 0;">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#333333;">&times;</a>
-			<div class="menu-section">
-				<h2>지역별로 찾기</h2>
-				<div class="menu-items">
-					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
-					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
-					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
-					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
-					<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
-				</div>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+			style="color: #545454;">&times;</a>
+		<div class="menu-section">
+			<h2>지역별로 찾기</h2>
+			<div class="menu-items">
+				<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a
+					href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a> <a
+					href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a
+					href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a> <a
+					href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a
+					href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a> <a
+					href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a
+					href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a> <a
+					href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
 			</div>
-			<div class="menu-section">
-				<h2>여행사진 공모전</h2>
-				<div class="menu-items">
-					<a href="contestBoard.jsp">참가하기</a>
-				</div>
-			</div>
-			<%if(info != null){ %>
-			<div class="menu-section">
-				<h2>마이 페이지</h2>
-				<div class="menu-itemss">
-					<a href="update.jsp">회원정보 수정</a> 
-					<a href="likeList.jsp">관심 촬영지</a> 
-					<a href="contestList.jsp">공모전 참가내역</a> 
-				</div>
-			<%} else { %>
-			<div class="menu-section">
-				<h2>마이 페이지</h2>
-				<div class="menu-itemss">
-					<a href="login.jsp">로그인</a> 
-					<a href="contact.jsp">회원가입</a>  
-				</div>
-			</div>
-			<%}%>  
 		</div>
+		<div class="menu-section">
+			<h2>여행사진 공모전</h2>
+			<div class="menu-items">
+				<a href="contestBoard.jsp">참가하기</a>
+			</div>
+		</div>
+		<%
+		if (info != null) {
+		%>
+		<div class="menu-section">
+			<h2>마이 페이지</h2>
+			<div class="menu-itemss">
+				<a href="update.jsp">회원정보 수정</a> <a href="likeList.jsp">관심 촬영지</a> <a
+					href="contestList.jsp">공모전 참가내역</a>
+				<%
+				} else {
+				%>
+				<div class="menu-section">
+					<h2>마이 페이지</h2>
+					<div class="menu-itemss">
+						<a href="login.jsp">로그인</a> <a href="contact.jsp">회원가입</a>
+						<%
+						}
+						%>
+					</div>
+				</div>
+			</div>
+	</div>
 	</div>
 	
-	
-	
+	<% if (info != null){ %>
 		<div id="fh5co-contact">
 		<div class="container">
 			<div class="row"> 
@@ -230,8 +242,8 @@ input[type="submit"]:hover {
 					<form action="UpdateService" method="post" name="JoinForm">
 						<div class="row form-group">
 						    <div class="col-md-6">
-						        <label for="emailDisplay">이메일 (수정 불가)</label>
-						        <div class="form-control email-display" id="emailDisplay"><%= info.getEmail() %></div>
+						        <label for="emailDisplay">이메일</label>
+						        <div class="form-control email-display" id="emailDisplay"  style="background-color: #e9e9e9;"><%= info.getEmail() %></div>
 						    </div>
 						</div> 
 	                    <div class="row form-group">
@@ -275,9 +287,10 @@ input[type="submit"]:hover {
 			</div> 
 		</div>
 	</div> 
-	 
-	 	<footer id="fh5co-footer" role="contentinfo">
-	 		<!-- 버튼 -->
+	<% } else { 
+		response.sendRedirect("login.jsp"); 
+	} %>
+	 	<footer id="fh5co-footer" role="contentinfo"> 
 	 			<div class="button-container">
 				   	<div>  
 						<button class="btn" onclick="location.href='LogoutService'">로그아웃</button> 
@@ -296,17 +309,22 @@ input[type="submit"]:hover {
 				</div>
 			</div> 
 		</footer>  
+		
+		 
 	
-	<!-- Side navigation script -->
-   <script>
-      function openNav() {
-         document.getElementById("mySidenav").style.width = "80%";
-      }
+	<!-- Side navigation script --> 
+	<script> 
+	    function redirectToPage() {
+	        window.location.href = 'Realindex.jsp';
+	    }
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "80%";
+		}
 
-      function closeNav() {
-         document.getElementById("mySidenav").style.width = "0";
-      }
-   </script>
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+		}
+	</script>
     
 	<script src="js/jquery.min.js"></script> 
 	<script src="js/jquery.easing.1.3.js"></script> 

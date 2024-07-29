@@ -14,8 +14,7 @@
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FreeHTML5.co" />
-  
-	 
+   
 	<!-- realindex에서 가져온 것들 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" >
  	<!-- 폰트 -->
@@ -30,32 +29,27 @@
 	
 	<!-- 나머지 CSS 파일들 -->
 	<link rel="stylesheet" href="css/other-style1.css">
-	<link rel="stylesheet" href="css/other-style2.css">
-	
-	 
-	
+	<link rel="stylesheet" href="css/other-style2.css"> 
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 	
-	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
 	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style2.css">
-  
 	<script src="js/modernizr-2.6.2.min.js"></script> 
 	<style>
-	/* 메뉴 위치 우상단으로 조정 */
+	 /* 메뉴 위치 우상단으로 조정 */
 	.menu-icon {
-	    position: absolute;
-	    top: 10px;  
-	    right: 20px; 
-	    cursor: pointer; 
+		position: absolute;
+		top: 10px;
+		right: 20px;
+		cursor: pointer;
+		color: #545454;
 	}
- 
+	.sidenav .menu-items a:hover {
+	    font-weight: bold !important;
+	}
 	/* .btn-file 클래스에 대한 스타일 조정 */
 	#uploadLabel .btn-file {
 	    background-color: #FFEEB9 !important;  
@@ -73,45 +67,56 @@
 	</head> 
 	<body>
 		<%  
-			MemberDTO info = (MemberDTO)session.getAttribute("info"); 		 
+			MemberDTO info = (MemberDTO)session.getAttribute("info");  
+			String exUrl = "PracSearch2.jsp?s_option=1&search=";
 		%>
 	<header>
-		<div class="banner">여기가 거기여?</div>
+		<div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
-	<div class="fh5co-loader"></div> 
-	<div id="page">
-	<nav class="fh5co-nav" role="navigation">
-	 
+
 	<div id="mySidenav" class="sidenav" style="width: 0;">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<div class="menu-section">
-			<h2>지역별로 찾기</h2>
-			<div class="menu-items">
-				<a href="#">서울</a> <a href="#">부산</a> <a href="#">인천</a> <a href="#">대구</a>
-				<a href="#">대전</a> <a href="#">광주</a> <a href="#">울산</a> <a href="#">세종</a>
-				<a href="#">경기</a> <a href="#">충북</a> <a href="#">충남</a> <a href="#">전북</a>
-				<a href="#">전남</a> <a href="#">경북</a> <a href="#">경남</a> <a href="#">강원</a>
-				<a href="#">제주</a> <a href="#">-</a>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#545454;">&times;</a>
+			<div class="menu-section">
+				<h2>지역별로 찾기</h2>
+				<div class="menu-items">
+					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a>
+					<a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
+					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a>
+					<a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
+					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a>
+					<a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
+					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a>
+					<a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
+					<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
+				</div>
 			</div>
-		</div>
-		<div class="menu-section">
-			<h2>공모전</h2>
-			<div class="menu-items">
-				<a href="#">참여하기</a>
+			<div class="menu-section">
+				<h2>여행사진 공모전</h2>
+				<div class="menu-items">
+					<a href="contestBoard.jsp">참가하기</a>
+				</div>
 			</div>
+			<%if(info != null){ %>
+			<div class="menu-section">
+				<h2>마이 페이지</h2>
+				<div class="menu-itemss">
+					<a href="update.jsp?">회원정보 수정</a> 
+					<a href="likeList.jsp">관심 촬영지</a> 
+					<a href="contestList.jsp">공모전 참가내역</a> 
+				</div>
+			<%} else { %>
+				<div class="menu-section">
+					<h2>마이 페이지</h2>
+					<div class="menu-itemss">
+						<a href="login.jsp">로그인</a> 
+						<a href="join.jsp?">회원가입</a>  
+					</div>
+				</div>
+			<%}%> 
 		</div>
-		<%if(info != null){ %>
-		<div class="menu-section">
-			<h2>마이 페이지</h2>
-			<div class="menu-itemss">
-				<a href="#">회원정보 수정</a> <a href="#">관심 촬영지</a> <a href="#">참여한
-					공모전</a>
-			</div>
-		</div>
-		<%} %>
 	</div>
-	</nav>
+ 
 	 
 	<header id="fh5co-header" class="fh5co-cover" style="height: 100px;"> 
 		<div class="overlay"></div>
@@ -174,11 +179,34 @@
             <a href="contestBoard.jsp" class="btn btn-primary pull-left" style="margin-left: 10px; padding: 10px 20px;">목록</a>
         </form>        
     </div> 
-</div>
-	</div>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://bootstrap.js"></script>
+</div> 
 	
+ 	<footer id="fh5co-footer" role="contentinfo">
+ 		<!-- 버튼 -->
+ 			<div class="button-container">
+			   	<div>    
+					<%if(info == null) {%>
+						<button class="btn" onclick="location.href='login.jsp'">로그인</button>
+						<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
+					<%}else{ %>
+						<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
+					<%} %>
+						<button class="btn">한국어</button>
+						<button class="btn">English</button>   
+				</div>
+			</div>				
+		<div class="container">
+			<div class="row copyright"> 
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
+						<small class="block">Designed by DOORIBURN</small>
+					</p>
+ 				</div>  
+			</div>
+		</div> 
+	</footer>
+
 	<!-- 삭제 버튼 클릭시 Confirm 창 -->
 	<script>
 		function confirmUpdate(num) {
@@ -229,42 +257,14 @@
 	        var preview = document.getElementById('imagePreview');
 	        preview.innerHTML = ''; // 이미지 미리보기 영역 비우기
 	    }
-	</script>
 	</script> 
 	  
 	
- 	<footer id="fh5co-footer" role="contentinfo">
- 		<!-- 버튼 -->
- 			<div class="button-container">
-			   	<div>    
-					<%if(info == null) {%>
-						<button class="btn" onclick="location.href='login.jsp'">로그인</button>
-						<button class="btn" onclick="location.href='contact.jsp'">회원가입</button>
-					<%}else{ %>
-						<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
-					<%} %>
-						<button class="btn">한국어</button>
-						<button class="btn">English</button>   
-				</div>
-			</div>				
-		<div class="container">
-			<div class="row copyright"> 
-				<div class="col-md-12 text-center">
-					<p>
-						<small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
-						<small class="block">Designed by DOORIBURN</small>
-					</p>
- 				</div>  
-			</div>
-		</div> 
-	</footer>
-	
-	</div>
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-			<!-- Side navigation script -->
-	<script>
+	<!-- Side navigation script -->
+	<script> 
+	    function redirectToPage() {
+	        window.location.href = 'Realindex.jsp';
+	    }
 		function openNav() {
 			document.getElementById("mySidenav").style.width = "80%";
 		}
@@ -273,25 +273,14 @@
 			document.getElementById("mySidenav").style.width = "0";
 		}
 	</script>
-	
-	
+	 
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://bootstrap.js"></script>
-	
-	</div>
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-	
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Main -->
+	<script src="https://bootstrap.js"></script> 
+	<script src="js/jquery.min.js"></script> 
+	<script src="js/jquery.easing.1.3.js"></script> 
+	<script src="js/bootstrap.min.js"></script> 
+	<script src="js/jquery.waypoints.min.js"></script> 
 	<script src="js/main.js"></script>
 
 	</body>
