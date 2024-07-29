@@ -395,8 +395,10 @@
 						        <div align="right">
 									<button id="closepop">닫기</button>
 					        	</div>
+					        
 					        	<div style="margin: auto;">
 					        		<form class="mb-3" name="myform" id="myform" method="post" action="ReviewUpdateService">
+										<input type="text" name="index" style="display: none;" value="<%=index %>">
 										<fieldset style="display: inline-block ; direction: rtl ; border:0 ;">
 											<span class="text-bold">별점을 선택해주세요</span>
 											<input type="radio" name="reviewStar" value="5" id="rate1"><label
