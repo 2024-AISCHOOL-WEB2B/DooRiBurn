@@ -30,7 +30,9 @@ public class DramaSearchDTO {
 //		this.f_time = f_time;
 //		this.f_img = f_img;
 //	}
-    
+    public DramaSearchDTO() {
+		 
+	}
 	public DramaSearchDTO (Double f_num, String drama, String f_addr,Double lat, Double lon, String f_name, String f_tel, String f_time, 
 			 String scene, String f_img) {
 		super();

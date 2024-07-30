@@ -134,47 +134,88 @@ public ArrayList<DramaSearchDTO> film_detail(String index) {
 		return likes;
 	} 
 
-	public List<DramaSearchDTO> getList(int pageNum, int amount){ 
-		List<DramaSearchDTO> list = new ArrayList<>();
-
-	    getConnection();
-		String sql = "SELECT * "
-				+	"FROM ( SELECT ROWNUM RN,"
-				+				" A.* "
-				+			"FROM ( SELECT *"
-				+					" FROM TB_FILM_LOCATION ORDER BY F_NUM DESC ) A ) "
-				+ 	"WHERE RN > ? AND RN <= ?";
-		
-		try {
-	        psmt = conn.prepareStatement(sql); 
-			psmt.setInt(1, (pageNum - 1) * amount);
-			psmt.setInt(2, pageNum * amount); 
-			rs = psmt.executeQuery();  
-			
-			while(rs.next()) {
-				// 한바퀴 회전당 VO를 하나씩 생성
-				DramaSearchDTO dto = new DramaSearchDTO( 
-                rs.getDouble("F_NUM"),  
-                rs.getString("DRAMA"),
-                rs.getString("F_ADDR"),
-                rs.getDouble("LAT"),
-                rs.getDouble("LON"),
-                rs.getString("F_NAME"),
-                rs.getString("F_TEL"),
-                rs.getString("F_TIME"),
-                rs.getString("SCENE"),
-                rs.getString("F_IMG")
-               ); 
-				list.add(dto);
+//	public List<DramaSearchDTO> getList(int pageNum, int amount){ 
+//		List<DramaSearchDTO> list = new ArrayList<>();
+//
+//	    getConnection();
+//		String sql = "SELECT * "
+//				+	"FROM ( SELECT ROWNUM RN,"
+//				+				" A.* "
+//				+			"FROM ( SELECT *"
+//				+					" FROM TB_FILM_LOCATION ORDER BY F_NUM DESC ) A ) "
+//				+ 	"WHERE RN > ? AND RN <= ?";
+//		
+//		try {
+//	        psmt = conn.prepareStatement(sql); 
+//			psmt.setInt(1, (pageNum - 1) * amount);
+//			psmt.setInt(2, pageNum * amount); 
+//			rs = psmt.executeQuery();  
+//			
+//			while(rs.next()) {
+//				// 한바퀴 회전당 VO를 하나씩 생성
+//				DramaSearchDTO dto = new DramaSearchDTO( 
+//                rs.getDouble("F_NUM"),  
+//                rs.getString("DRAMA"),
+//                rs.getString("F_ADDR"),
+//                rs.getDouble("LAT"),
+//                rs.getDouble("LON"),
+//                rs.getString("F_NAME"),
+//                rs.getString("F_TEL"),
+//                rs.getString("F_TIME"),
+//                rs.getString("SCENE"),
+//                rs.getString("F_IMG")
+//               ); 
+//				list.add(dto);
+//			} 
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close();
+//		} 
+//		return list;
+//	}
+	
+	
+	// 공모전 게시판 페이징 위한 List 생성
+	public List<DramaSearchDTO> getSearchList(int startRow, int pageSize){
+		List<DramaSearchDTO> SearchList= new ArrayList<>();
+	    
+		getConnection();
+		try { 
+			// 글 re_ref 최신글 위쪽(내림차순), re_seq (오름차순)
+			// DB 데이터를 원하는만큼씩 잘라내기 : 
+	        String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, F_NUM, DRAMA, F_ADDR, LAT, LON, F_NAME, F_TEL, F_TIME, SCENE, F_IMG, F_CLICK " +
+                    "FROM (SELECT * FROM TB_FILM_LOCATION ORDER BY F_NUM DESC)) " +
+                    "WHERE RNUM BETWEEN ? AND ?";
+	        
+			psmt = conn.prepareStatement(sql); 
+			psmt.setInt(1, startRow); //시작행 (시작 row 인덱스 번호)
+			psmt.setInt(2, startRow + pageSize - 1); // 끝행
+				 
+			rs = psmt.executeQuery(); 
+			while(rs.next()) { 
+				DramaSearchDTO dto = new DramaSearchDTO();
+					
+				dto.setFNum(rs.getDouble("F_NUM"));  
+				dto.setDrama(rs.getString("DRAMA"));  
+				dto.setFAddr(rs.getString("F_ADDR"));  
+				dto.setLat(rs.getDouble("LAT"));  
+				dto.setLon(rs.getDouble("LON"));  
+				dto.setFName(rs.getString("F_NAME"));  
+				dto.setFTel(rs.getString("F_TEL"));  
+				dto.setFTime(rs.getString("F_TIME"));  
+				dto.setScene(rs.getString("SCENE"));  
+				dto.setFimg(rs.getString("F_IMG"));  
+ 
+				SearchList.add(dto);				
 			} 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close();
-		} 
-		return list;
+		}		
+		return SearchList;
 	}
-	
 	
 		
 }

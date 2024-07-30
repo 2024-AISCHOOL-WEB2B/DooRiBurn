@@ -88,6 +88,7 @@
 
 	HttpURLConnection conn = null;
 	String exUrl = "PracSearch2.jsp?s_option=1&search=";
+	int cnt = 0; // 검색결과 개수 
 	try {
 		URL url = new URL(
 		"http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
@@ -109,18 +110,18 @@
 			in.close();
 
 			JSONArray jsonArray = new JSONArray(response_data.toString());
-
+			cnt = jsonArray.length();
 			if (jsonArray.length() > 0) {
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			titles.add(jsonObject.optString("제목", ""));
-			places.add(jsonObject.optString("장소명", ""));
-			img_src.add(jsonObject.optString("img", ""));
-			scene.add(jsonObject.optString("장소설명", ""));
-			index.add(jsonObject.optInt("index", -1));
-		}
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+					titles.add(jsonObject.optString("제목", ""));
+					places.add(jsonObject.optString("장소명", ""));
+					img_src.add(jsonObject.optString("img", ""));
+					scene.add(jsonObject.optString("장소설명", ""));
+					index.add(jsonObject.optInt("index", -1));
+				}
 			} else {
-		out.println("No results found.");
+				out.println("No results found.");
 			}
 		} else {
 			out.println("GET request not worked");
