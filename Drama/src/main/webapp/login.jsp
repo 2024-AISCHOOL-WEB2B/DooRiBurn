@@ -256,29 +256,32 @@ input[type="submit"]:hover {
 							<button class="api-btn" onclick="requestUserInfo()"
 								style="visibility: hidden">사용자 정보 가져오기</button>
 						</form>
+						
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<footer id="fh5co-footer" role="contentinfo">
-		<div class="button-container">
-			<div>
-				<button class="btn">한국어</button>
-				<button class="btn">English</button>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row copyright">
-				<div class="col-md-12 text-center">
-					<p>
-						<small class="block">&copy; 2024 DOORIBURN. All Rights
-							Reserved.</small> <small class="block">Designed by DOORIBURN</small>
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
+  
+    <footer id="fh5co-footer" role="contentinfo"> 
+          <div class="button-container">
+               <div>     
+                  <button class="btn">한국어</button>
+                  <button class="btn">English</button>   
+            </div>
+         </div>            
+      <div class="container">
+         <div class="row copyright"> 
+            <div class="col-md-12 text-center">
+               <p>
+                  <small class="block">&copy; 2024 DOORIBURN. All Rights Reserved.</small> 
+                  <small class="block">Designed by DOORIBURN</small>
+               </p>
+             </div>  
+         </div>
+      </div> 
+   </footer>
+
 
 
 	<!-- Side navigation script -->
