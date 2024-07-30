@@ -125,7 +125,6 @@ input[type="submit"]:hover {
 
 	<%
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
-	String error = (String) session.getAttribute("error");
 	String recentURI = request.getParameter("from");
 	String exUrl = "PracSearch2.jsp?s_option=1&search=";
 	%>
@@ -234,18 +233,19 @@ input[type="submit"]:hover {
 										class="form-control" placeholder="비밀번호">
 								</div>
 							</div>
+							<%
+						        String error = request.getParameter("error");
+						        if (error != null && error.equals("true")) {
+						    %>
+						    <div class="col-md-6">
+						        <p style="color:red;">이메일 또는 비밀번호가 잘못 되었습니다. 이메일와 비밀번호를 정확히 입력해 주세요</p>
+						    </div>
+						    <%
+						        }
+						    %>	
 							<div class="row form-group">
 								<a href="contact.jsp" style="color: #eea236;">회원가입</a>
 							</div>
-							<%
-							if (error != null) {
-							%>
-							<div class="row form-group">
-								<span><%=error%></span>
-							</div>
-							<%
-							}
-							%>
 							<div class="row form-group">
 								<input type="submit" id="submit" value="로그인">
 							</div>
@@ -256,7 +256,7 @@ input[type="submit"]:hover {
 							<button class="api-btn" onclick="requestUserInfo()"
 								style="visibility: hidden">사용자 정보 가져오기</button>
 						</form>
-						
+						    					
 				</div>
 			</div>
 		</div>
