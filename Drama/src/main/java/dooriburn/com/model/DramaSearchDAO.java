@@ -134,48 +134,6 @@ public ArrayList<DramaSearchDTO> film_detail(String index) {
 		return likes;
 	} 
 
-//	public List<DramaSearchDTO> getList(int pageNum, int amount){ 
-//		List<DramaSearchDTO> list = new ArrayList<>();
-//
-//	    getConnection();
-//		String sql = "SELECT * "
-//				+	"FROM ( SELECT ROWNUM RN,"
-//				+				" A.* "
-//				+			"FROM ( SELECT *"
-//				+					" FROM TB_FILM_LOCATION ORDER BY F_NUM DESC ) A ) "
-//				+ 	"WHERE RN > ? AND RN <= ?";
-//		
-//		try {
-//	        psmt = conn.prepareStatement(sql); 
-//			psmt.setInt(1, (pageNum - 1) * amount);
-//			psmt.setInt(2, pageNum * amount); 
-//			rs = psmt.executeQuery();  
-//			
-//			while(rs.next()) {
-//				// 한바퀴 회전당 VO를 하나씩 생성
-//				DramaSearchDTO dto = new DramaSearchDTO( 
-//                rs.getDouble("F_NUM"),  
-//                rs.getString("DRAMA"),
-//                rs.getString("F_ADDR"),
-//                rs.getDouble("LAT"),
-//                rs.getDouble("LON"),
-//                rs.getString("F_NAME"),
-//                rs.getString("F_TEL"),
-//                rs.getString("F_TIME"),
-//                rs.getString("SCENE"),
-//                rs.getString("F_IMG")
-//               ); 
-//				list.add(dto);
-//			} 
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close();
-//		} 
-//		return list;
-//	}
-	
-	
 	// 공모전 게시판 페이징 위한 List 생성
 	public List<DramaSearchDTO> getSearchList(int startRow, int pageSize){
 		List<DramaSearchDTO> SearchList= new ArrayList<>();

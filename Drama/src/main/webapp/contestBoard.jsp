@@ -63,7 +63,7 @@
 		ContestDAO dao = new ContestDAO();
 		
 		// 게시판 DB에 있는 글 개수 확인
-		int cnt = dao.getCount();  
+		int cnt = dao.getCount();
 		// 페이징 처리 ////////////////////////////////////////////////////////////// 
 		
 		int pageSize = 2; // 한 페이지에 출력될 글 수 
@@ -166,7 +166,6 @@
 			<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a> 
 		<% } %>  
 	</div>
-	 
 	<!-- 페이징 처리 -->
 	<div id="page_control">
 		<% if(cnt != 0){  
@@ -197,8 +196,6 @@
 	</div>
 
  
-	
-	
  	<footer id="fh5co-footer" role="contentinfo"> 
  			<div class="button-container">
 			   	<div>    

@@ -63,6 +63,7 @@
 .star-button:focus {
 	outline: none;
 }
+
 .menu-icon {
 	position: absolute;
 	top: 10px;
@@ -70,8 +71,9 @@
 	cursor: pointer;
 	color: #545454;
 }
+
 .sidenav .menu-items a:hover {
-    font-weight: bold !important;
+	font-weight: bold !important;
 }
 </style>
 </head>
@@ -79,131 +81,77 @@
 	<%
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
 	FilmLikeDAO dao = new FilmLikeDAO();
+
+	String exUrl = "PracSearch2.jsp?s_option=1&search=";
+
 	String s_option = request.getParameter("s_option");
 	String search = request.getParameter("search");
 
-	List<String> titles = new ArrayList<>();
-	List<String> img_src = new ArrayList<>();
-	List<String> places = new ArrayList<>();
-	List<String> scene = new ArrayList<>();
-	List<Integer> index = new ArrayList<>();
+	int cnt = (Integer) request.getAttribute("cnt");
+	int pageNum = (Integer) request.getAttribute("pageNum");
+	int pageSize = (Integer) request.getAttribute("pageSize");
 
-	HttpURLConnection conn = null;
-	String exUrl = "PracSearch2.jsp?s_option=1&search=";
-	
-	// 페이징 처리 ////////////////////////////////////////////////////////////// 
-	int cnt = 0; // 검색결과 개수 
-	
-	DramaSearchDAO DSdao = new DramaSearchDAO();
-	  
-	int pageSize = 5; // 한 페이지에 출력될 글 수 
-	 
-	int pageNum = 1; // 현 페이지 정보 설정
-	if (request.getParameter("pageNum") != null){
-		pageNum = Integer.parseInt(request.getParameter("pageNum"));
-	}  
-	
-	int startRow = (pageNum - 1) * pageSize + 1;  // 첫행번호를 계산 
-	
-	// 게시글 목록 가져오기
-    List<DramaSearchDTO> list = DSdao.getSearchList(startRow, pageSize); 
-	 
-	try {
-		URL url = new URL(
-		"http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
-		conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Accept", "application/json");
-
-		int responseCode = conn.getResponseCode();
-		System.out.println("GET Response Code :: " + responseCode);
-
-		if (responseCode == HttpURLConnection.HTTP_OK) {
-			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-			String inputLine;
-			StringBuilder response_data = new StringBuilder();
-
-			while ((inputLine = in.readLine()) != null) {
-				response_data.append(inputLine);
-			}
-			in.close();
-
-			JSONArray jsonArray = new JSONArray(response_data.toString());
-			cnt = jsonArray.length();
-			if (jsonArray.length() > 0) {
-				for (int i = 0; i < jsonArray.length(); i++) {
-					JSONObject jsonObject = jsonArray.getJSONObject(i);
-					titles.add(jsonObject.optString("제목", ""));
-					places.add(jsonObject.optString("장소명", ""));
-					img_src.add(jsonObject.optString("img", ""));
-					scene.add(jsonObject.optString("장소설명", ""));
-					index.add(jsonObject.optInt("index", -1));
-				}
-			} else {
-				out.println("No results found.");
-			}
-		} else {
-			out.println("GET request not worked");
-		}
-	} catch (Exception e) {
-		e.printStackTrace();
-		out.println("Error: " + e.getMessage());
-	} finally {
-		if (conn != null) {
-			conn.disconnect();
-		}
-	}
+	ArrayList<String> titles = (ArrayList<String>) request.getAttribute("titles");
+	ArrayList<String> places = (ArrayList<String>) request.getAttribute("places");
+	ArrayList<String> img_src = (ArrayList<String>) request.getAttribute("img_src");
+	ArrayList<String> scene = (ArrayList<String>) request.getAttribute("scene");
+	ArrayList<Integer> index = (ArrayList<Integer>) request.getAttribute("index");
 	%>
- 
 	<header>
 		<div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
-
-	<div id="mySidenav" class="sidenav" style="width: 0;"> 
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#545454;">&times;</a>
-			<div class="menu-section">
-				<h2>지역별로 찾기</h2>
-				<div class="menu-items">
-					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a>
-					<a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
-					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a>
-					<a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
-					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a>
-					<a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
-					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a>
-					<a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
-					<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
-				</div>
+	<div id="mySidenav" class="sidenav" style="width: 0;">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+			style="color: #545454;">&times;</a>
+		<div class="menu-section">
+			<h2>지역별로 찾기</h2>
+			<div class="menu-items">
+				<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a
+					href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a> <a
+					href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a
+					href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a> <a
+					href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a
+					href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a> <a
+					href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a
+					href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a> <a
+					href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
 			</div>
-			<div class="menu-section">
-				<h2>여행사진 공모전</h2>
-				<div class="menu-items">
-					<a href="contestBoard.jsp">참가하기</a>
-				</div>
+		</div>
+		<div class="menu-section">
+			<h2>여행사진 공모전</h2>
+			<div class="menu-items">
+				<a href="contestBoard.jsp">참가하기</a>
 			</div>
-			<%if(info != null){ %>
+		</div>
+		<%
+		if (info != null) {
+		%>
+		<div class="menu-section">
+			<h2>마이 페이지</h2>
+			<div class="menu-itemss">
+				<a href="update.jsp?from=/Drama/PracSearch2.jsp">회원정보 수정</a> <a
+					href="likeList.jsp">관심 촬영지</a> <a href="contestList.jsp">공모전
+					참가내역</a>
+			</div>
+			<%
+			} else {
+			%>
 			<div class="menu-section">
 				<h2>마이 페이지</h2>
 				<div class="menu-itemss">
-					<a href="update.jsp?from=/Drama/PracSearch2.jsp">회원정보 수정</a> 
-					<a href="likeList.jsp">관심 촬영지</a> 
-					<a href="contestList.jsp">공모전 참가내역</a> 
+					<a href="login.jsp?from=/Drama/PracSearch2.jsp">로그인</a> <a
+						href="join.jsp?from=/Drama/PracSearch2.jsp">회원가입</a>
 				</div>
-			<%} else { %>
-				<div class="menu-section">
-					<h2>마이 페이지</h2>
-					<div class="menu-itemss">
-						<a href="login.jsp?from=/Drama/PracSearch2.jsp">로그인</a> 
-						<a href="join.jsp?from=/Drama/PracSearch2.jsp">회원가입</a>  
-					</div>
-				</div>
-			<%}%> 
-		</div> 
+			</div>
+			<%
+			}
+			%>
+		</div>
 	</div>
 
 	<div class="main-content">
-		<form action="PracSearch2.jsp" method="get">
+		<form action="SearchService" method="get">
 			<div class="search-container" style="height: 30px;">
 				<select name="s_option" style="margin-right: 7px;">
 					<option value="0" <%="0".equals(s_option) ? "selected" : ""%>>드라마</option>
@@ -236,80 +184,65 @@
 			<h3><%=titles.get(i)%></h3>
 			<p><%=seen%></p>
 		</div>
-		
+
 		<%
-		// 촬영지 관심 등록 미등록
 		if (info == null) {
 		%>
 		<button class="star-button"
-			onclick="handleLikeClick(<%=index.get(i)+1%>, '<%=info != null ? info.getEmail() : ""%>', this)">☆</button>
-
+			onclick="handleLikeClick(<%=index.get(i) + 1%>, '', this)">☆</button>
 		<%
 		} else {
-			FilmLikeDTO dto = new FilmLikeDTO(info.getEmail(),index.get(i)+1);
-		%>
-		
-		<%
+		FilmLikeDTO dto = new FilmLikeDTO(info.getEmail(), index.get(i) + 1);
 		if (dao.isLiked(dto)) {
 		%>
 		<button class="star-button"
-			onclick="handleLikeClick(<%=index.get(i)+1%>, '<%=info != null ? info.getEmail() : ""%>', this)">★</button>
+			onclick="handleLikeClick(<%=index.get(i) + 1%>, '<%=info.getEmail()%>', this)">★</button>
 		<%
 		} else {
 		%>
 		<button class="star-button"
-			onclick="handleLikeClick(<%=index.get(i)+1%>, '<%=info != null ? info.getEmail() : ""%>', this)">☆</button>
-
+			onclick="handleLikeClick(<%=index.get(i) + 1%>, '<%=info.getEmail()%>', this)">☆</button>
 		<%
+		}
 		}
 		%>
-
-		<%
-		}
-		%> 
 	</div>
 	<%
 	}
 	%>
-	
-	
-	
+
 	<!-- 페이징 처리 -->
 	<div id="page_control">
-		<% if(cnt != 0){  
-				// 전체 페이지수 계산
-				int pageCount = cnt / pageSize + (cnt%pageSize==0?0:1);
-				
-				// 한 페이지에 보여줄 페이지 블럭
-				int pageBlock = 5;
-				 
-				int startPage = ((pageNum-1)/pageBlock)*pageBlock+1;
-				 
-				int endPage = startPage + pageBlock-1;
-				if(endPage > pageCount){
-					endPage = pageCount;
-				}
-				if(startPage > pageBlock) { %>
-					<a href="PracSearch2.jsp?s_option=<%=s_option%>&search=<%=search%>?pageNum=<%=startPage - pageBlock%>">◀</a>
-				<%} %>
-			    
-				<% for(int i=startPage ; i <= endPage ; i++) { %>
-					<a href="PracSearch2.jsp?s_option=<%=s_option%>&search=<%=search%>?pageNum=<%=i%>"><%=i %></a>
-				<%} %>
-			    
-				<% if(endPage < pageCount){ %>
-					<a href="PracSearch2.jsp?s_option=<%=s_option%>&search=<%=search%>?pageNum=<%=startPage + pageBlock%>">▶</a>
-				<%} %>
-			<%} %>
+		<%
+		if (cnt != 0) {
+			int pageCount = cnt / pageSize + (cnt % pageSize == 0 ? 0 : 1);
+			int pageBlock = 5;
+			int startPage = ((pageNum - 1) / pageBlock) * pageBlock + 1;
+			int endPage = startPage + pageBlock - 1;
+			if (endPage > pageCount) {
+				endPage = pageCount;
+			}
+			if (startPage > pageBlock) {
+		%>
+		<a
+			href="SearchService?s_option=<%=s_option%>&search=<%=search%>&pageNum=<%=startPage - pageBlock%>">◀</a>
+		<%
+		}
+		for (int i = startPage; i <= endPage; i++) {
+		%>
+		<a
+			href="SearchService?s_option=<%=s_option%>&search=<%=search%>&pageNum=<%=i%>"><%=i%></a>
+		<%
+		}
+		if (endPage < pageCount) {
+		%>
+		<a
+			href="SearchService?s_option=<%=s_option%>&search=<%=search%>&pageNum=<%=startPage + pageBlock%>">▶</a>
+		<%
+		}
+		}
+		%>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
 	<!-- Side navigation script -->
 	<script> 
 	    function redirectToPage() {
@@ -363,4 +296,4 @@
         }
     </script>
 </body>
-</html> 
+</html>

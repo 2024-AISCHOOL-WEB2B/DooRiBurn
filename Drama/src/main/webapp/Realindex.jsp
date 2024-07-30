@@ -114,7 +114,7 @@ footer div {
 	</div>
 
 	<div class="main-content">
-		<form action="PracSearch2.jsp" method="get">
+		<form action="SearchService" method="get">
 			<div class="search-container" style="height: 30px;">
 				<select name="s_option" style="margin-right: 7px;">
 					<!-- name="category" -> s_option -->
@@ -125,6 +125,7 @@ footer div {
 				<button type="submit">
 					<img src="images/search.png" style="width: 40px; height: 40px;" />
 				</button>
+				<input name="pageNum" value="1" style="display: none">
 			</div>
 		</form>
 
