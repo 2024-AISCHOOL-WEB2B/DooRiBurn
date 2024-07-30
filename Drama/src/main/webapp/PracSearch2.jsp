@@ -80,15 +80,6 @@
 	String s_option = request.getParameter("s_option");
 	String search = request.getParameter("search");
 
-    // 페이지네이션 관련 파라미터
-    int pageSize = 10; // 한 페이지에 표시할 항목 수
-    int pageNumber = 1; // 현재 페이지 번호
-    String pageStr = request.getParameter("page");
-    if (pageStr != null && !pageStr.isEmpty()) {
-        pageNumber = Integer.parseInt(pageStr);
-    }
-    int startIndex = (pageNumber - 1) * pageSize;
-    
 	List<String> titles = new ArrayList<>();
 	List<String> img_src = new ArrayList<>();
 	List<String> places = new ArrayList<>();
@@ -113,34 +104,35 @@
 			StringBuilder response_data = new StringBuilder();
 
 			while ((inputLine = in.readLine()) != null) {
-				response_data.append(inputLine);
+		response_data.append(inputLine);
 			}
 			in.close();
 
 			JSONArray jsonArray = new JSONArray(response_data.toString());
-            int totalItems = jsonArray.length(); // 총 항목 수
-            int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 총 페이지 수
 
-            // 페이지에 해당하는 데이터만 추출
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject jsonObject = jsonArray.getJSONObject(i);
-				titles.add(jsonObject.optString("제목", ""));
-				places.add(jsonObject.optString("장소명", ""));
-				img_src.add(jsonObject.optString("img", ""));
-				scene.add(jsonObject.optString("장소설명", ""));
-				index.add(jsonObject.optInt("index", -1));
+			if (jsonArray.length() > 0) {
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+			titles.add(jsonObject.optString("제목", ""));
+			places.add(jsonObject.optString("장소명", ""));
+			img_src.add(jsonObject.optString("img", ""));
+			scene.add(jsonObject.optString("장소설명", ""));
+			index.add(jsonObject.optInt("index", -1));
+		}
+			} else {
+		out.println("No results found.");
 			}
-        } else {
-            out.println("GET request not worked");
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        out.println("Error: " + e.getMessage());
-    } finally {
-        if (conn != null) {
-            conn.disconnect();
-        }
-    }
+		} else {
+			out.println("GET request not worked");
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+		out.println("Error: " + e.getMessage());
+	} finally {
+		if (conn != null) {
+			conn.disconnect();
+		}
+	}
 	%>
  
 	<header>
@@ -209,13 +201,8 @@
 	</div>
 
 	<%
-    // JSP 내에서 필요한 변수만 선언 
-    int totalPages = (int) request.getAttribute("totalPages");
-    int currentPage = (int) request.getAttribute("currentPage");
-    
 	for (int i = 0; i < index.size(); i++) {
 		String seen = scene.get(i).length() > 50 ? scene.get(i).substring(0, 40) + "..." : scene.get(i);
-		
 	%>
 	<div class="box">
 		<div class="image"
@@ -260,17 +247,13 @@
 		<%
 		}
 		%>
-		
-		
-    <!-- 페이지네이션 -->
-    <div class="pagination">
-        <% for (int x = 1; x <= totalPages; x++) { %>
-        <a href="PracSearch2.jsp?s_option=<%=s_option%>&search=<%=URLEncoder.encode(search, "UTF-8")%>&page=<%=x%>" class="<%=x == currentPage ? "active" : ""%>"><%=x%></a>
-        <% } %>
-    </div>
-    
- 	<%} %>
+
+
+
 	</div>
+	<%
+	}
+	%>
 	<!-- Side navigation script -->
 	<script> 
 	    function redirectToPage() {
