@@ -84,9 +84,10 @@
 /* 좋아요 버튼 스타일 */
 .star-button {
 	background: none;
-}  
+}
+
 .star-button {
-	background : none;
+	background: none;
 	border: none;
 	font-size: 24px;
 	cursor: pointer;
@@ -164,17 +165,16 @@
 	border-radius: 5px;
 	font-size: 16px;
 	resize: none;
-	 /* 메뉴 위치 우상단으로 조정 */
-	.menu-icon {
-		position: absolute;
-		top: 10px;
-		right: 20px;
-		cursor: pointer;
-		color: #545454;
-	}
-	.sidenav .menu-items a:hover {
-	    font-weight: bold !important;
-	}
+	/* 메뉴 위치 우상단으로 조정 */ . menu-icon { position : absolute;
+	top: 10px;
+	right: 20px;
+	cursor: pointer;
+	color: #545454;
+}
+
+.sidenav .menu-items a:hover {
+	font-weight: bold !important;
+}
 }
 </style>
 </head>
@@ -216,44 +216,51 @@
 
 	<!-- 메뉴 -->
 	<div id="mySidenav" class="sidenav" style="width: 0;">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#545454;">&times;</a>
-			<div class="menu-section">
-				<h2>지역별로 찾기</h2>
-				<div class="menu-items">
-					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a>
-					<a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
-					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a>
-					<a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
-					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a>
-					<a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
-					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a>
-					<a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
-					<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
-				</div>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+			style="color: #545454;">&times;</a>
+		<div class="menu-section">
+			<h2>지역별로 찾기</h2>
+			<div class="menu-items">
+				<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a
+					href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a> <a
+					href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a
+					href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a> <a
+					href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a
+					href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a> <a
+					href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a
+					href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a> <a
+					href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
 			</div>
-			<div class="menu-section">
-				<h2>여행사진 공모전</h2>
-				<div class="menu-items">
-					<a href="contestBoard.jsp">참가하기</a>
-				</div>
+		</div>
+		<div class="menu-section">
+			<h2>여행사진 공모전</h2>
+			<div class="menu-items">
+				<a href="contestBoard.jsp">참가하기</a>
 			</div>
-			<%if(info != null){ %>
+		</div>
+		<%
+		if (info != null) {
+		%>
+		<div class="menu-section">
+			<h2>마이 페이지</h2>
+			<div class="menu-itemss">
+				<a href="update.jsp?from=/Drama/detail.jsp?index=<%=index%>">회원정보
+					수정</a> <a href="likeList.jsp">관심 촬영지</a> <a href="contestList.jsp">공모전
+					참가내역</a>
+			</div>
+			<%
+			} else {
+			%>
 			<div class="menu-section">
 				<h2>마이 페이지</h2>
 				<div class="menu-itemss">
-					<a href="update.jsp?from=/Drama/detail.jsp?index=<%=index%>">회원정보 수정</a> 
-					<a href="likeList.jsp">관심 촬영지</a> 
-					<a href="contestList.jsp">공모전 참가내역</a> 
+					<a href="login.jsp?from=/Drama/detail.jsp?index=<%=index%>">로그인</a>
+					<a href="join.jsp?from=/Drama/detail.jsp?index=<%=index%>">회원가입</a>
 				</div>
-			<%} else { %>
-				<div class="menu-section">
-					<h2>마이 페이지</h2>
-					<div class="menu-itemss">
-						<a href="login.jsp?from=/Drama/detail.jsp?index=<%=index%>">로그인</a> 
-						<a href="join.jsp?from=/Drama/detail.jsp?index=<%=index%>">회원가입</a>  
-					</div>
-				</div>
-			<%}%> 
+			</div>
+			<%
+			}
+			%>
 		</div>
 	</div>
 
@@ -306,8 +313,6 @@
 				}
 				%>
 			</h1>
-
-
 		</div>
 		<p class="address"><%=addr%></p>
 		<p class="hours">
@@ -318,7 +323,10 @@
 			전화번호:
 			<%=time%>
 		</p>
-		<div class="tags">
+
+
+
+		<%-- <div class="tags">
 			<div class="drama">
 				<!-- 왼쪽 사진 -->
 				<img src="images/drama_imagessss/<%=drama%>.jpg" alt="드라마 표지"
@@ -329,7 +337,61 @@
 					<p><%=tel%></p>
 				</div>
 			</div>
+		</div> --%>
+
+		<%
+		boolean isSpecialVideo712 = "712".equals(index);
+		boolean isSpecialVideo714 = "714".equals(index);
+		boolean isSpecialVideo698 = "698".equals(index);
+		%>
+
+		<div class="tags">
+			<div class="drama">
+				<!-- 왼쪽 사진 또는 동영상 -->
+				<%
+				if (isSpecialVideo712) {
+				%>
+				<iframe width="560" height="315"
+					src="https://www.youtube.com/embed/-TlMJbalKS4?si=smqQ2Y8j9xM5SFmb"
+					title="YouTube video player" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+				</iframe>
+				<%
+				} else if (isSpecialVideo714) {
+				%>
+				<iframe width="560" height="315"
+					src="https://www.youtube.com/embed/rbB9Ejl5Xfg?si=TbuLdvtkXimc1QJL"
+					title="YouTube video player" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+				</iframe>
+				<%
+				} else if (isSpecialVideo698) {
+				%>
+				<iframe width="560" height="315"
+					src="https://www.youtube.com/embed/cy0oJypViEw?si=UbE2x0hkKe1e8vQm"
+					title="YouTube video player" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+				<%
+				} else {
+				%>
+				<img src="images/drama_imagessss/<%=drama%>.jpg" alt="드라마 표지"
+					class="image" style="width: 43%; height: 90%;">
+				<%
+				}
+				%>
+				<!-- 오른쪽 텍스트 -->
+				<div class="text">
+					<h1><%=drama%></h1>
+					<p><%=tel%></p>
+				</div>
+			</div>
 		</div>
+
+
+
 
 	</section>
 	<!-- 여기까지 -->
@@ -448,7 +510,7 @@
 	<div id="lon" style="display: none;"><%=lon%></div>
 	<div id="place" style="display: none;"><%=place%></div>
 
-<%-- 	<footer>
+	<%-- 	<footer>
 			<div style="display: block !important; width: 100%; text-align: center; margin-bottom: 10px;">    
 				<%if(info == null) {%>
 					<button class="btn" onclick="location.href='login.jsp?from=/Drama/detail.jsp?index=<%=index%>'">로그인</button>
