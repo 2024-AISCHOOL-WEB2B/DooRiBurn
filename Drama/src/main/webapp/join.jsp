@@ -168,8 +168,7 @@
     </script>
     
    <% 
-	MemberDTO info = (MemberDTO)session.getAttribute("info");  
-	String error = (String)session.getAttribute("error"); 
+	MemberDTO info = (MemberDTO)session.getAttribute("info");   
 	String recentURI = request.getParameter("from");
 	String exUrl = "PracSearch2.jsp?s_option=1&search=";
    %>

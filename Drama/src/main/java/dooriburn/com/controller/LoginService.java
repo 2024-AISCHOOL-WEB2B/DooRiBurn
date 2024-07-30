@@ -30,20 +30,26 @@ public class LoginService extends HttpServlet {
 		String recentURI = request.getParameter("from");
 		
 		if (info != null) {
-			if (email.equals(info.getEmail()) && pw.equals(info.getPw())) {
+			if (pw.equals(info.getPw())) {
 				session.setAttribute("info", info); 
 				if (recentURI != null) {
 					response.sendRedirect(recentURI); 
 				} else {
 					response.sendRedirect("Realindex.jsp"); 
 				} 
-			} else { 
+			}else {
 				if (recentURI != null) {
-					response.sendRedirect("login.jsp?from="+recentURI);
+					response.sendRedirect("login.jsp?from="+recentURI+"&error=true");
 				} else {
-					response.sendRedirect("login.jsp"); 
-				} 
+					response.sendRedirect("login.jsp?&error=true"); 
+				}
 			}
+		}else { 
+				if (recentURI != null) {
+					response.sendRedirect("login.jsp?from="+recentURI+"&error=true");
+				} else {
+					response.sendRedirect("login.jsp?error=true"); 
+				}
 		}
 	}
 }
