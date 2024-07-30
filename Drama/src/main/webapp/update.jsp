@@ -54,11 +54,13 @@
 </script>
 
 <style type="text/css">
-	*{
-		font-family: "IBM Plex Sans KR", sans-serif;
- 			font-weight: 400;
- 			font-style: normal;
-	}
+*{
+	font-family: "IBM Plex Sans KR", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+</style>
+<style>
 
 .menu-icon {
 	position: absolute;
@@ -150,8 +152,7 @@ form {
     box-sizing: border-box;
     margin-bottom: 15px; /* 아래쪽 여백 추가 */
 } 
-
-
+ 
 
 /* 버튼 스타일 조정 */
 input[type="submit"] {
@@ -239,7 +240,7 @@ input[type="submit"]:hover {
 			<div class="row"> 
 				<div class="col-md-6 animate-box" align="center" onsubmit="return validateForm()">
 					<h3 id="h3">회원정보 수정</h3>
-					<form action="UpdateService" method="post" name="JoinForm">
+					<form action="UpdateService" method="post" name="JoinForm"> 					
 						<div class="row form-group">
 						    <div class="col-md-6">
 						        <label for="emailDisplay">이메일</label>
@@ -254,25 +255,22 @@ input[type="submit"]:hover {
 		                </div> 
 	                    <div class="row form-group">
 	                        <div class="col-md-6">
+	                            <label for="name">이름</label>
+	                            <input type="text" name="name" id="name" class="form-control" value="<%=info.getName() %>">
+	                        </div>
+	                    </div> 
+	                    <div class="row form-group">
+	                        <div class="col-md-6">
 	                            <label for="nick">닉네임</label>
 	                            <input type="text" name="nick" id="nick" class="form-control" value="<%=info.getNick() %>">
 	                        </div>
 	                    </div> 
 	                    <div class="row form-group">
 	                        <div class="col-md-6">
-	                            <label for="name">이름</label>
-	                            <input type="text" name="name" id="name" class="form-control" value="<%=info.getName() %>">
-	                        </div>
-	                    </div>
-	 
-	                    <div class="row form-group">
-	                        <div class="col-md-6">
 	                            <label for="phone">전화번호</label>
 	                            <input type="text" name="phone" id="phone" class="form-control" value="<%=info.getPhone() %>">
 	                        </div>
-	                    </div>
-	
-	                    <!-- 주소 -->
+	                    </div> 
 	                    <div class="row form-group">
 	                        <div class="col-md-6">
 	                            <label for="addr">주소</label>
@@ -282,7 +280,7 @@ input[type="submit"]:hover {
 	                    <div class="row form-group">
 	                        <input type="submit" id="submit" value="회원정보 수정">
 	                    </div>
-                </form>   
+                	</form>   
 				</div>
 			</div> 
 		</div>

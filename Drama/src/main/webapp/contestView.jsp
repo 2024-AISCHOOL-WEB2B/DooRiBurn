@@ -163,8 +163,7 @@
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
 	<div class="fh5co-loader"></div> 
-	<div id="page">
-	<nav class="fh5co-nav" role="navigation"> 
+	<div id="page"> 
 	<div id="mySidenav" class="sidenav" style="width: 0;">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#545454;">&times;</a>
 			<div class="menu-section">
@@ -205,8 +204,7 @@
 				</div>
 			<%}%> 
 		</div>
-	</div>
-	</nav>
+	</div> 
 	 
 	<header id="fh5co-header" class="fh5co-cover" style="height: 50px;"> 
 		<div class="overlay"></div>
@@ -219,8 +217,8 @@
 		<div class="row">  
 	        <table class="table table-striped" style="text-align: center; border:1px solid #f9f9f9;">
 	            <thead style="background-color: #eeeeee">
-	                <tr>
-	                    <th colspan="4" style="clear: both; text-align: center; margin-top: 20px; color: black; font-size: 20px;">지역여행 사진 공모전</th>
+	                <tr onclick="redirectToContest()">
+	                    <th colspan="4" style="clear: both; text-align: center; margin-top: 20px; color: black; font-size: 20px;">관광사진 공모전</th>
 	                </tr>
 	            </thead>
 	            <tbody style="background-color: #f9f9f9;">
@@ -349,7 +347,7 @@
 							            </div>
 							        <% } else { %>
 							            <li>
-							                <p><a href="login.jsp" style="color: #000">로그인 후 공모전에 응모할 수 있습니다.</a></p>
+							                <p><a href="login.jsp?from=/Drama/contestView.jsp?c_num=<%=cNumParam%>" style="color: #000">로그인 후 공모전에 응모할 수 있습니다.</a></p>
 							            </li>
 							        <% } %>
 							    </ul>
@@ -434,6 +432,12 @@
 	}
 	</script>
  
+ 	<!-- 목록으로 돌아가기 -->
+ 	<script>
+    function redirectToContest() {
+        window.location.href = 'contestBoard.jsp';
+    }	 
+ 	</script>
 	<!-- 댓글 사진 업로드시 미리보기 -->
 	<script>
 	    function previewImage(input) {
@@ -456,7 +460,7 @@
 	    if (!loggedIn) {
 	        var confirmLogin = confirm("로그인 후에 댓글을 작성할 수 있습니다. 로그인 페이지로 이동하시겠습니까?");
 	        if (confirmLogin) {
-	            window.location.href = "login.jsp"; 
+	            window.location.href = "login.jsp?from=/Drama/contestView.jsp?c_num=<%=cNumParam%>"; 
 	        }
 	    } else { 
 	        document.querySelector("form").submit();

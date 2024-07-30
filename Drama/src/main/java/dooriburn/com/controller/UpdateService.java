@@ -21,24 +21,24 @@ public class UpdateService extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String email = info.getEmail();
 		String pw = request.getParameter("pw");
-		String name = info.getName();
-		String nick = request.getParameter("nick");
+		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
-		String addr = request.getParameter("addr");
+		String addr = request.getParameter("addr"); 
+		String nick = request.getParameter("nick");
 		  
-		MemberDTO dto = new MemberDTO(email, pw, name, nick, phone, addr);
+		MemberDTO dto = new MemberDTO(email, pw, nick, name, phone, addr);
 		MemberDAO dao = new MemberDAO();
 		 
 		String recentURI = request.getParameter("from");
 		int cnt = dao.update(dto);
 		if (cnt > 0) { 
-			session.setAttribute("info", dto);  
+			session.setAttribute("info", dto);   
 			if (recentURI != null) {
 				response.sendRedirect(recentURI); 
 			} else {
 				response.sendRedirect("Realindex.jsp"); 
 			} 
-		} else {  
+		} else {   
 			if (recentURI != null) {
 				response.sendRedirect("update.jsp?from="+recentURI);
 			} else {

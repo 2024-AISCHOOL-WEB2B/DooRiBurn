@@ -50,18 +50,22 @@
 	.sidenav .menu-items a:hover {
 	    font-weight: bold !important;
 	}
-	/* .btn-file 클래스에 대한 스타일 조정 */
+	/* 사진 업로드 style*/
 	#uploadLabel .btn-file {
 	    background-color: #FFEEB9 !important;  
 	    border-color: #FFEEB9 !important;  
 	    color: #000 !important;
-	} 
+		border: 1px solid; 
+        border-radius: 25px; 
+        box-shadow: none;
+        padding: 8px 15px; 
+	}  
 	/* 버튼과 저작권 정보 사이에 여백 추가, 중간배열 */
 	.button-container {
 	    margin-bottom: 20px; 
 		display: flex; 
 		justify-content: center;
-	}
+	} 
 	</style> 
 	
 	</head> 
@@ -157,7 +161,7 @@
                     </tr>   
                     <tr> 
 						<td>
-						    <label for="file">
+						    <label for="file" id="uploadLabel">
 						        <div class="btn btn-file">
 						            <i class="icon-camera"></i> 사진 업로드
 						        </div>

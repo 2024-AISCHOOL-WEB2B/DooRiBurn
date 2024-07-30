@@ -66,7 +66,7 @@
 		int cnt = dao.getCount();
 		// 페이징 처리 ////////////////////////////////////////////////////////////// 
 		
-		int pageSize = 2; // 한 페이지에 출력될 글 수 
+		int pageSize = 5; // 한 페이지에 출력될 글 수 
 		 
 		int pageNum = 1; // 현 페이지 정보 설정
 		if (request.getParameter("pageNum") != null){
@@ -135,8 +135,8 @@
 	
  	<div style="clear: both; text-align: center; margin-top: 20px;"> 
  	<br>
- 		<h3 style="display: inline-block;">지역여행 사진 공모전</h3>
- 		<h5>드라마 주인공이 된 나를 자랑하고 상품도 타가자!</h5>
+ 		<h3 style="display: inline-block;">관광사진 공모전</h3>
+ 		<h5>드라마 주인공이 된 나를 뽐내고 상품도 받아가자!</h5>
  	</div>
  	<div class="container">
 		<div class="row">
@@ -223,7 +223,7 @@
  
 	
 	<!-- Side navigation script -->
-	<script> 
+	<script>  
 	    function redirectToPage() {
 	        window.location.href = 'Realindex.jsp';
 	    }

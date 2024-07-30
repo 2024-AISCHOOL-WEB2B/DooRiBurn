@@ -35,7 +35,7 @@ public class LoginService extends HttpServlet {
 				if (recentURI != null) {
 					response.sendRedirect(recentURI); 
 				} else {
-					response.sendRedirect("Realindex.jsp"); 
+					response.sendRedirect("Realindex.jsp");  
 				} 
 			}else {
 				if (recentURI != null) {
