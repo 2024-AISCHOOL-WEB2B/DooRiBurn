@@ -10,7 +10,7 @@
 <%@page import="dooriburn.com.model.FilmLikeDAO"%>
 <%@page import="dooriburn.com.model.FilmLikeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,23 +20,23 @@
 
 <!-- jQuery 라이브러리 추가 -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- 카카오 맵 API 스크립트 -->
 
 
 <!-- 폰트 -->
 <link
-	href="https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700"
-	rel="stylesheet" type="text/css">
+   href="https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700"
+   rel="stylesheet" type="text/css">
 <link
-	href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700"
-	rel="stylesheet">
+   href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700"
+   rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap"
-	rel="stylesheet">
+   href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap"
+   rel="stylesheet">
 
 <!-- CSS 파일 연결 -->
 <link rel="stylesheet" href="css/detail.css">
@@ -47,572 +47,681 @@
 <style>
 /* 배경 및 팝업 스타일 */
 .background, .backgroundpop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.3);
-	z-index: 1000;
-	display: none; /* 숨기기 */
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100vh;
+   background-color: rgba(0, 0, 0, 0.3);
+   z-index: 1000;
+   display: none; /* 숨기기 */
 }
 
 .show {
-	display: block; /* 보이기 */
-	transition: all .5s;
+   display: block; /* 보이기 */
+   transition: all .5s;
 }
 
 .window, .windowpop {
-	position: relative;
-	width: 100%;
-	height: 100%;
+   position: relative;
+   width: 100%;
+   height: 100%;
 }
 
 .popup {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: #ffffff;
-	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-	border-radius: 10px;
-	width: 500px;
-	height: 400px;
-	transition: all .5s;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: #ffffff;
+   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+   border-radius: 10px;
+   width: 450px;
+   height: 400px;
+   transition: all .5s;  
+}
+
+/* 모바일 화면에 대한 스타일 */
+@media (max-width: 768px) {
+	.popup {
+		width: 90%;
+		max-width: 500px; /* 필요에 따라 최대 너비를 조정하세요 */
+		height: 420px; /* 콘텐츠에 따라 높이를 조정합니다 */
+		margin-bottom: 200px;
+	}
 }
 
 /* 좋아요 버튼 스타일 */
 .star-button {
-	background: none;
+   background: none;
 }
 
 .star-button {
-	background: none;
-	border: none;
-	font-size: 24px;
-	cursor: pointer;
-	color: black;
-	margin-left: 10px;
+   background: none;
+   border: none;
+   font-size: 24px;
+   cursor: pointer;
+   color: black;
+   margin-left: 10px;
 }
 
 .star-button.liked {
-	color: gold;
+   color: gold;
 }
 
 .star-button:focus {
-	outline: none;
+   outline: none;
 }
 
 .place-container {
-	display: flex;
-	align-items: center;
+   display: flex;
+   align-items: center;
 }
 
 .place-container h1 {
-	margin: 0;
+   margin: 0;
 }
 
 /* 리뷰 별점 스타일 */
 .rating .filled {
-	color: gold;
+   color: gold;
 }
 
 .rating .empty {
-	color: transparent;
-	-webkit-text-stroke: 1px gold;
-	text-stroke: 1px gold;
+   color: transparent;
+   -webkit-text-stroke: 1px gold;
+   text-stroke: 1px gold;
 }
 
 /* 폼 스타일 */
 #myform fieldset {
-	display: inline-block;
-	direction: rtl;
-	border: 0;
+   display: inline-block;
+   direction: rtl;
+   border: 0;
 }
 
 #myform fieldset legend {
-	text-align: right;
+   text-align: right;
 }
 
 #myform input[type=radio] {
-	display: none;
+   display: none;
 }
 
 #myform label {
-	font-size: 2em;
-	color: transparent;
-	text-shadow: 0 0 0 #f0f0f0;
+   font-size: 2em;
+   color: transparent;
+   text-shadow: 0 0 0 #f0f0f0;
 }
 
 #myform label:hover {
-	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+   text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
 
 #myform label:hover ~ label {
-	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+   text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
 
 #myform input[type=radio]:checked ~ label {
-	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+   text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
 
-#reviewContents {
-	width: 100%;
-	height: 150px;
-	padding: 10px;
-	box-sizing: border-box;
-	border: solid 1.5px #D3D3D3;
-	border-radius: 5px;
-	font-size: 16px;
-	resize: none;
-	/* 메뉴 위치 우상단으로 조정 */ . menu-icon { position : absolute;
-	top: 10px;
-	right: 20px;
-	cursor: pointer;
-	color: #545454;
+#reviewContents { 
+	margin: 0 20px 0 20px; 
+   width: 90%;
+   height: 150px;
+   padding: 10px;
+   box-sizing: border-box;
+   border: solid 1.5px #D3D3D3;
+   border-radius: 5px;
+   font-size: 16px;
+   resize: none;
+}
+   /* 메뉴 위치 우상단으로 조정 */ 
+   . menu-icon { 
+   position : absolute;
+   top: 10px;
+   right: 20px;
+   cursor: pointer;
+   color: #545454; 
 }
 
 .sidenav .menu-items a:hover {
-	font-weight: bold !important;
+   font-weight: bold !important; 
 }
+
+
+/* footer */
+.footer {
+	background-color: #efefef; 
 }
+#footerbutton {
+	display: block !important; 
+	width: 100%; 
+	text-align: center;
+	margin-top: 30px;  
+	margin-bottom: 50px;
+}
+@media (max-width: 768px) {
+	#footerbutton { 
+		margin-top: 40px;
+		margin-bottom: 140px;
+	}
+}
+
+/* 드라마 제목 위에 여백 */
+.text h1 {
+    margin-top: 15px;  
+    margin-bottom: 10px;  
+}
+
+.text p {
+    margin: 0;  
+}
+
+#Post_a_review {
+	    background-color: #FFEEB9 !important;  
+	    border-color: #FFEEB9 !important;  
+	    color: #000 !important;
+		border: 1px solid; 
+        border-radius: 25px; 
+        box-shadow: none;
+        padding: 8px 15px; 
+	}  
+.review-btn {
+		background-color: #FFEEB9 !important;  
+	    border-color: #FFEEB9 !important;  
+	    color: #000 !important;
+		border: 1px solid; 
+        border-radius: 25px; 
+        box-shadow: none;
+        padding: 8px 15px;
+	}
+#closepop { 
+    background-color: #f9f9f9;
+    border: none;  
+    color: #000 !important;  
+    border-radius: 10px;  
+    padding: 7px 13px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */ 
+    cursor: pointer; /* 버튼처럼 보이게 하기 위해 포인터 커서 사용 */
+    transition: box-shadow 0.3s ease; /* 호버 시 그림자 효과의 부드러운 전환 */
+}
+
+#closepop:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 효과 변경 */
+} 
+	
+/* CSS */
+.rating-container {
+    margin: 0; /* 전체 여백 제거 */
+    padding: 0; /* 전체 여백 제거 */
+}
+
+.rating-header {
+    margin-bottom: 10px; /* 별점 선택란과의 간격 조정 */
+}
+
+.text-bold {
+    display: block; /* 블록 요소로 만들어 전체 너비를 차지하게 함 */
+    text-align: left; /* 왼쪽 정렬 */
+    margin: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.rating-options {
+    display: flex; /* 별점을 수평으로 나열 */
+    gap: 5px; /* 별점 간의 간격 설정 */
+}
+
+.input_checkbox {
+	margin: 0 20px 10px 20px; 
+} 
 </style>
 </head>
 <body>
-	<%
-	String index = request.getParameter("index");
-	// 리뷰데이터뽑기
-	ReviewDAO rv_dao = new ReviewDAO();
-	ArrayList<ReviewDTO> rv_list = rv_dao.selectReview(index);
+   <%
+   String index = request.getParameter("index");
+   // 리뷰데이터뽑기
+   ReviewDAO rv_dao = new ReviewDAO();
+   ArrayList<ReviewDTO> rv_list = rv_dao.selectReview(index);
 
-	DramaSearchDAO dao = new DramaSearchDAO();
-	ArrayList<DramaSearchDTO> film_detail = dao.film_detail(index);
-	FilmLikeDAO f_dao = new FilmLikeDAO();
-	String drama = film_detail.get(0).getDrama();
-	String place = film_detail.get(0).getFName();
-	String addr = film_detail.get(0).getFAddr();
-	double lat = film_detail.get(0).getLat();
-	double lon = film_detail.get(0).getLon();
-	String tel = film_detail.get(0).getScene();
-	String time = film_detail.get(0).getFTel();
-	String scene = film_detail.get(0).getFTime();
-	String img_src = film_detail.get(0).getFimg();
+   DramaSearchDAO dao = new DramaSearchDAO();
+   ArrayList<DramaSearchDTO> film_detail = dao.film_detail(index);
+   FilmLikeDAO f_dao = new FilmLikeDAO();
+   String drama = film_detail.get(0).getDrama();
+   String place = film_detail.get(0).getFName();
+   String addr = film_detail.get(0).getFAddr();
+   double lat = film_detail.get(0).getLat();
+   double lon = film_detail.get(0).getLon();
+   String tel = film_detail.get(0).getScene();
+   String time = film_detail.get(0).getFTel();
+   String scene = film_detail.get(0).getFTime();
+   String img_src = film_detail.get(0).getFimg();
 
-	// 랭킹 누적하기
-	RankingDAO rdao = new RankingDAO();
-	rdao.Update(index);
+   // 랭킹 누적하기
+   RankingDAO rdao = new RankingDAO();
+   rdao.Update(index);
 
-	// 세션에서 사용자 정보 가져오기
-	MemberDTO info = (MemberDTO) session.getAttribute("info");
+   // 세션에서 사용자 정보 가져오기
+   MemberDTO info = (MemberDTO) session.getAttribute("info");
 
-	String exUrl = "PracSearch2.jsp?s_option=1&search=";
-	%>
+   String exUrl = "SearchService?s_option=1&pageNum=1&search=";
+   %>
 
-	<!-- 배너 -->
-	<header>
-		<div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
-		<div class="menu-icon" onclick="openNav()">☰</div>
-	</header>
+   <!-- 배너 -->
+   <header>
+      <div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
+      <div class="menu-icon" onclick="openNav()">☰</div>
+   </header>
 
-	<!-- 메뉴 -->
-	<div id="mySidenav" class="sidenav" style="width: 0;">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-			style="color: #545454;">&times;</a>
-		<div class="menu-section">
-			<h2>지역별로 찾기</h2>
-			<div class="menu-items">
-				<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a
-					href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a> <a
-					href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a
-					href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a> <a
-					href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a
-					href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a> <a
-					href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a
-					href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a> <a
-					href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
-			</div>
+   <!-- 메뉴 -->
+   <div id="mySidenav" class="sidenav" style="width: 0;">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+         style="color: #545454;">&times;</a>
+      <div class="menu-section">
+         <h2>지역별로 찾기</h2>
+         <div class="menu-items">
+            <a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a
+               href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a> <a
+               href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a
+               href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a> <a
+               href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a
+               href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a> <a
+               href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a
+               href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a> <a
+               href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
+         </div>
+      </div>
+      <div class="menu-section">
+         <h2>여행사진 공모전</h2>
+         <div class="menu-items">
+            <a href="contestBoard.jsp">참가하기</a>
+         </div>
+      </div>
+      <%
+      if (info != null) {
+      %>
+      <div class="menu-section">
+         <h2>마이 페이지</h2>
+         <div class="menu-itemss">
+            <a href="update.jsp?from=/Drama/detail.jsp?index=<%=index%>">회원정보
+               수정</a> <a href="likeList.jsp">관심 촬영지</a> <a href="contestList.jsp">공모전
+               참가내역</a>
+         </div>
+         <%
+         } else {
+         %>
+         <div class="menu-section">
+            <h2>마이 페이지</h2>
+            <div class="menu-itemss">
+               <a href="login.jsp?from=/Drama/detail.jsp?index=<%=index%>">로그인</a>
+               <a href="join.jsp?from=/Drama/detail.jsp?index=<%=index%>">회원가입</a>
+            </div>
+         </div>
+         <%
+         }
+         %>
+      </div>
+   </div>
+
+   <!-- 상세 페이지 -->
+   <!-- 추가 -->
+   <div class="container">
+      <header class="header">
+         <img src="<%=img_src%>" alt="Aquarium" class="header-img">
+      </header>
+   </div>
+   <section class="info">
+      <div class="tags">
+
+         <%
+         ReviewDAO reviewdao = new ReviewDAO();
+         ArrayList<String> mood = reviewdao.moodRanking(Integer.parseInt(index));
+         for (int i = 0; i < mood.size(); i++) {
+         %>
+         <span>#<%=mood.get(i)%></span>
+         <%
+         }
+         %>
+      </div>
+      <!-- 장소 이름과 좋아요 버튼을 감싸는 컨테이너 추가 -->
+      <div class="place-container">
+         <h1>
+            <%=place%>
+            <%
+            // 촬영지 관심 등록 미등록
+            if (info == null) {
+            %>
+            <button class="star-button"
+               onclick="handleLikeClick(<%=index%>, '', this)">☆</button>
+            <%
+            } else {
+            int n_index = Integer.parseInt(index);
+            FilmLikeDTO dto = new FilmLikeDTO(info.getEmail(), n_index);
+
+            if (f_dao.isLiked(dto)) {
+            %>
+            <button class="star-button"
+               onclick="handleLikeClick(<%=index%>, '<%=info.getEmail()%>', this)">★</button>
+            <%
+            } else {
+            %>
+            <button class="star-button"
+               onclick="handleLikeClick(<%=index%>, '<%=info.getEmail()%>', this)">☆</button>
+            <%
+            }
+            }
+            %>
+         </h1>
+      </div>
+      <p class="address"><%=addr%></p>
+      <p class="hours">
+         영업시간:
+         <%=scene%>
+      </p>
+      <p class="phone">
+         전화번호:
+         <%=time%>
+      </p>
+
+
+
+      <%-- <div class="tags">
+         <div class="drama">
+            <!-- 왼쪽 사진 -->
+            <img src="images/drama_imagessss/<%=drama%>.jpg" alt="드라마 표지"
+               class="image" style="width: 200px; height: 300px;">
+            <!-- 오른쪽 텍스트 -->
+            <div class="text">
+               <h1><%=drama%></h1>
+               <p><%=tel%></p>
+            </div>
+         </div>
+      </div> --%>
+
+      <%
+      boolean isSpecialVideo712 = "712".equals(index);
+      boolean isSpecialVideo714 = "714".equals(index);
+      boolean isSpecialVideo698 = "698".equals(index);
+      %>
+
+      <div class="tags">
+         <div class="drama">
+            <!-- 왼쪽 사진 또는 동영상 -->
+            <%
+            if (isSpecialVideo712) {
+            %>
+            <iframe width="560" height="315"
+               src="https://www.youtube.com/embed/-TlMJbalKS4?si=smqQ2Y8j9xM5SFmb"
+               title="YouTube video player" frameborder="0"
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+            <%
+            } else if (isSpecialVideo714) {
+            %>
+            <iframe width="560" height="315"
+               src="https://www.youtube.com/embed/rbB9Ejl5Xfg?si=TbuLdvtkXimc1QJL"
+               title="YouTube video player" frameborder="0"
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+            <%
+            } else if (isSpecialVideo698) {
+            %>
+            <iframe width="560" height="315"
+               src="https://www.youtube.com/embed/cy0oJypViEw?si=UbE2x0hkKe1e8vQm"
+               title="YouTube video player" frameborder="0"
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <%
+            } else {
+            %>
+            <img src="images/drama_imagessss/<%=drama%>.jpg" alt="드라마 표지"
+               class="image" style="width: 43%; height: 90%;">
+            <%
+            }
+            %>
+            <!-- 오른쪽 텍스트 -->
+            <div class="text">
+               <h1><%=drama%></h1>
+               <p><%=tel%></p>
+            </div>
+         </div>
+      </div>
+
+
+
+
+   </section>
+   <!-- 여기까지 -->
+
+
+
+   <div id="staticMap" style="width: 400 px; height: 400px;"></div>
+
+   <!-- 리뷰 섹션 -->
+   <div class="review">
+      <div class="review-header">
+         <h2 style="font-weight: bold;">Review</h2>
+         <div>
+            <%
+            if (info == null) {
+            %>
+            <button class="review-btn" onclick="reviewLogin()">리뷰 작성하기</button>
+            <%
+            } else {
+            %>
+            <button class="review-btn" id="showpop" onclick="">리뷰 작성하기</button>
+            <%
+            }
+            %>
+            <div class="backgroundpop">
+               <div class="windowpop">
+                  <div class="popup">
+                     <div align="right">
+                        <button id="closepop">닫기</button>
+                     </div>
+
+                     <div style="margin: auto;">
+                        <form class="mb-3" name="myform" id="myform" method="post"
+                           action="ReviewUpdateService">
+                           <input type="text" name="index" style="display: none;"
+                              value="<%=index%>">
+                            <div class="rating-container">
+	                           <fieldset>
+	                           	<div>  
+									<span class="text-bold">별점을 선택해주세요</span>
+								</div> 
+								<div class="rating-options">
+		                              <input type="radio"  name="reviewStar" value="5" id="rate1">
+		                              <label for="rate1">★</label> 
+		                              <input type="radio" name="reviewStar" value="4" id="rate2">
+		                              <label for="rate2">★</label> 
+		                              <input type="radio" name="reviewStar" value="3" id="rate3">
+		                              <label for="rate3">★</label>
+		                              <input type="radio" name="reviewStar" value="2" id="rate4">
+		                              <label for="rate4">★</label> 
+		                              <input type="radio" name="reviewStar" value="1" id="rate5">
+		                              <label for="rate5">★</label> 
+	                              </div>
+	                           </fieldset> 
+                           </div>
+                           <div class="input_checkbox">
+						        <input type="checkbox" value="가족" name="mood"><span>#가족</span>
+						        <input type="checkbox" value="데이트" name="mood"><span>#데이트</span>
+						        <input type="checkbox" value="야경" name="mood"><span>#야경</span>
+						        <input type="checkbox" value="친구" name="mood"><span>#친구</span>
+						        <input type="checkbox" value="맛집" name="mood"><span>#맛집</span>
+						        <input type="checkbox" value="사진 명소" name="mood"><span>#사진 명소</span>
+						        <input type="checkbox" value="산책" name="mood"><span>#산책</span>
+						        <input type="checkbox" value="비오는날" name="mood"><span>#비오는날</span>
+						        <input type="checkbox" value="애견동반" name="mood"><span>#애견동반</span>
+						        <input type="checkbox" value="파티" name="mood"><span>#파티</span>
+                           </div>
+                           <div>
+                              <textarea class="col-auto form-control" name="content"
+                                 id="reviewContents" placeholder="좋은 리뷰을 남겨주시면 큰 힘이 됩니다!"></textarea>
+                           </div>
+                           <div align="center">
+                              <input type="submit" value="리뷰올리기" id="Post_a_review">
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- 리뷰리스트뽑기 -->
+
+      <%
+      for (int i = 0; i < rv_list.size(); i++) {
+      %>
+      <div class="review-item">
+         <div class="rating">
+            <%
+            int rating = rv_list.get(i).getRating();
+            for (int star = 1; star <= 5; star++) {
+               if (star <= rating) {
+            %>
+            <span class="filled">★</span>
+            <%
+            } else {
+            %>
+            <span class="empty">☆</span>
+            <%
+            }
+            }
+            %>
+         </div>
+         <%
+         String[] moods = rv_list.get(i).getMood();
+         for (int j = 0; j < moods.length; j++) {
+         %>
+         <b>#<%=moods[j]%>
+         </b>
+         <%
+         }
+         %>
+         <h3><%=rv_list.get(i).getContent()%></h3>
+         <p class="nickname"><%=rv_list.get(i).getNick()%></p>
+         <p class="date"><%=rv_list.get(i).getDate()%></p>
+      </div>
+      <%
+      }
+      %>
+   </div>
+
+   <div id="lat" style="display: none;"><%=lat%></div>
+   <div id="lon" style="display: none;"><%=lon%></div>
+   <div id="place" style="display: none;"><%=place%></div>
+
+	<footer class="footer">
+		<div id="footerbutton">    
+			<%if(info == null) {%>
+				<button class="btn" onclick="location.href='login.jsp?from=/Drama/detail.jsp?index=<%=index%>'">로그인</button>
+				<button class="btn" onclick="location.href='join.jsp?from=/Drama/detail.jsp?index=<%=index%>'">회원가입</button>
+			<%} else { %>
+				<button class="btn" onclick="location.href='LogoutService?from=/Drama/detail.jsp?index=<%=index%>'">로그아웃</button>
+			<%} %>
+				<button class="btn">한국어</button>
+				<button class="btn">English</button>    
 		</div>
-		<div class="menu-section">
-			<h2>여행사진 공모전</h2>
-			<div class="menu-items">
-				<a href="contestBoard.jsp">참가하기</a>
-			</div>
-		</div>
-		<%
-		if (info != null) {
-		%>
-		<div class="menu-section">
-			<h2>마이 페이지</h2>
-			<div class="menu-itemss">
-				<a href="update.jsp?from=/Drama/detail.jsp?index=<%=index%>">회원정보
-					수정</a> <a href="likeList.jsp">관심 촬영지</a> <a href="contestList.jsp">공모전
-					참가내역</a>
-			</div>
-			<%
-			} else {
-			%>
-			<div class="menu-section">
-				<h2>마이 페이지</h2>
-				<div class="menu-itemss">
-					<a href="login.jsp?from=/Drama/detail.jsp?index=<%=index%>">로그인</a>
-					<a href="join.jsp?from=/Drama/detail.jsp?index=<%=index%>">회원가입</a>
-				</div>
-			</div>
-			<%
-			}
-			%>
-		</div>
-	</div>
+	</footer> 
 
-	<!-- 상세 페이지 -->
-	<!-- 추가 -->
-	<div class="container">
-		<header class="header">
-			<img src="<%=img_src%>" alt="Aquarium" class="header-img">
-		</header>
-	</div>
-	<section class="info">
-		<div class="tags">
-
-			<%
-			ReviewDAO reviewdao = new ReviewDAO();
-			ArrayList<String> mood = reviewdao.moodRanking(Integer.parseInt(index));
-			for (int i = 0; i < mood.size(); i++) {
-			%>
-			<span>#<%=mood.get(i)%></span>
-			<%
-			}
-			%>
-		</div>
-		<!-- 장소 이름과 좋아요 버튼을 감싸는 컨테이너 추가 -->
-		<div class="place-container">
-			<h1>
-				<%=place%>
-				<%
-				// 촬영지 관심 등록 미등록
-				if (info == null) {
-				%>
-				<button class="star-button"
-					onclick="handleLikeClick(<%=index%>, '', this)">☆</button>
-				<%
-				} else {
-				int n_index = Integer.parseInt(index);
-				FilmLikeDTO dto = new FilmLikeDTO(info.getEmail(), n_index);
-
-				if (f_dao.isLiked(dto)) {
-				%>
-				<button class="star-button"
-					onclick="handleLikeClick(<%=index%>, '<%=info.getEmail()%>', this)">★</button>
-				<%
-				} else {
-				%>
-				<button class="star-button"
-					onclick="handleLikeClick(<%=index%>, '<%=info.getEmail()%>', this)">☆</button>
-				<%
-				}
-				}
-				%>
-			</h1>
-		</div>
-		<p class="address"><%=addr%></p>
-		<p class="hours">
-			영업시간:
-			<%=scene%>
-		</p>
-		<p class="phone">
-			전화번호:
-			<%=time%>
-		</p>
-
-
-
-		<%-- <div class="tags">
-			<div class="drama">
-				<!-- 왼쪽 사진 -->
-				<img src="images/drama_imagessss/<%=drama%>.jpg" alt="드라마 표지"
-					class="image" style="width: 200px; height: 300px;">
-				<!-- 오른쪽 텍스트 -->
-				<div class="text">
-					<h1><%=drama%></h1>
-					<p><%=tel%></p>
-				</div>
-			</div>
-		</div> --%>
-
-		<%
-		boolean isSpecialVideo712 = "712".equals(index);
-		boolean isSpecialVideo714 = "714".equals(index);
-		boolean isSpecialVideo698 = "698".equals(index);
-		%>
-
-		<div class="tags">
-			<div class="drama">
-				<!-- 왼쪽 사진 또는 동영상 -->
-				<%
-				if (isSpecialVideo712) {
-				%>
-				<iframe width="560" height="315"
-					src="https://www.youtube.com/embed/-TlMJbalKS4?si=smqQ2Y8j9xM5SFmb"
-					title="YouTube video player" frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-				</iframe>
-				<%
-				} else if (isSpecialVideo714) {
-				%>
-				<iframe width="560" height="315"
-					src="https://www.youtube.com/embed/rbB9Ejl5Xfg?si=TbuLdvtkXimc1QJL"
-					title="YouTube video player" frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-				</iframe>
-				<%
-				} else if (isSpecialVideo698) {
-				%>
-				<iframe width="560" height="315"
-					src="https://www.youtube.com/embed/cy0oJypViEw?si=UbE2x0hkKe1e8vQm"
-					title="YouTube video player" frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-				<%
-				} else {
-				%>
-				<img src="images/drama_imagessss/<%=drama%>.jpg" alt="드라마 표지"
-					class="image" style="width: 43%; height: 90%;">
-				<%
-				}
-				%>
-				<!-- 오른쪽 텍스트 -->
-				<div class="text">
-					<h1><%=drama%></h1>
-					<p><%=tel%></p>
-				</div>
-			</div>
-		</div>
-
-
-
-
-	</section>
-	<!-- 여기까지 -->
-
-
-
-	<div id="staticMap" style="width: 400 px; height: 400px;"></div>
-
-	<!-- 리뷰 섹션 -->
-	<div class="review">
-		<div class="review-header">
-			<h2 style="font-weight: bold;">Review</h2>
-			<div>
-				<%
-				if (info == null) {
-				%>
-				<button class="review-btn" onclick="reviewLogin()">리뷰 작성하기</button>
-				<%
-				} else {
-				%>
-				<button class="review-btn" id="showpop" onclick="">리뷰 작성하기</button>
-				<%
-				}
-				%>
-				<div class="backgroundpop">
-					<div class="windowpop">
-						<div class="popup">
-							<div align="right">
-								<button id="closepop">닫기</button>
-							</div>
-
-							<div style="margin: auto;">
-								<form class="mb-3" name="myform" id="myform" method="post"
-									action="ReviewUpdateService">
-									<input type="text" name="index" style="display: none;"
-										value="<%=index%>">
-									<fieldset
-										style="display: inline-block; direction: rtl; border: 0;">
-										<span class="text-bold">별점을 선택해주세요</span> <input type="radio"
-											name="reviewStar" value="5" id="rate1"><label
-											for="rate1">★</label> <input type="radio" name="reviewStar"
-											value="4" id="rate2"><label for="rate2">★</label> <input
-											type="radio" name="reviewStar" value="3" id="rate3"><label
-											for="rate3">★</label> <input type="radio" name="reviewStar"
-											value="2" id="rate4"><label for="rate4">★</label> <input
-											type="radio" name="reviewStar" value="1" id="rate5"><label
-											for="rate5">★</label>
-									</fieldset>
-									<div>
-										<input type="checkbox" value="가족" name="mood"><span>#가족</span>
-										<input type="checkbox" value="데이트" name="mood"><span>#데이트</span>
-										<input type="checkbox" value="야경" name="mood"><span>#야경</span>
-										<input type="checkbox" value="친구" name="mood"><span>#친구</span>
-										<input type="checkbox" value="맛집" name="mood"><span>#맛집</span>
-										<input type="checkbox" value="사진 명소" name="mood"><span>#사진
-											명소</span> <input type="checkbox" value="산책" name="mood"><span>#산책</span>
-										<input type="checkbox" value="비오는날" name="mood"><span>#비오는날</span>
-										<input type="checkbox" value="애견동반" name="mood"><span>#애견동반</span>
-										<input type="checkbox" value="파티" name="mood"><span>#파티</span>
-									</div>
-									<div>
-										<textarea class="col-auto form-control" name="content"
-											id="reviewContents" placeholder="좋은 리뷰을 남겨주시면 큰 힘이 됩니다!"></textarea>
-									</div>
-									<div align="center">
-										<input type="submit" value="리뷰올리기" id="Post_a_review">
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 리뷰리스트뽑기 -->
-
-		<%
-		for (int i = 0; i < rv_list.size(); i++) {
-		%>
-		<div class="review-item">
-			<div class="rating">
-				<%
-				int rating = rv_list.get(i).getRating();
-				for (int star = 1; star <= 5; star++) {
-					if (star <= rating) {
-				%>
-				<span class="filled">★</span>
-				<%
-				} else {
-				%>
-				<span class="empty">☆</span>
-				<%
-				}
-				}
-				%>
-			</div>
-			<%
-			String[] moods = rv_list.get(i).getMood();
-			for (int j = 0; j < moods.length; j++) {
-			%>
-			<b>#<%=moods[j]%>
-			</b>
-			<%
-			}
-			%>
-			<h3><%=rv_list.get(i).getContent()%></h3>
-			<p class="nickname"><%=rv_list.get(i).getNick()%></p>
-			<p class="date"><%=rv_list.get(i).getDate()%></p>
-		</div>
-		<%
-		}
-		%>
-	</div>
-
-	<div id="lat" style="display: none;"><%=lat%></div>
-	<div id="lon" style="display: none;"><%=lon%></div>
-	<div id="place" style="display: none;"><%=place%></div>
-
-	<%-- 	<footer>
-			<div style="display: block !important; width: 100%; text-align: center; margin-bottom: 10px;">    
-				<%if(info == null) {%>
-					<button class="btn" onclick="location.href='login.jsp?from=/Drama/detail.jsp?index=<%=index%>'">로그인</button>
-					<button class="btn" onclick="location.href='join.jsp?from=/Drama/detail.jsp?index=<%=index%>'">회원가입</button>
-				<%} else { %>
-					<button class="btn" onclick="location.href='LogoutService?from=/Drama/detail.jsp?index=<%=index%>'">로그아웃</button>
-				<%} %>
-					<button class="btn">한국어</button>
-					<button class="btn">English</button>   
-			</div>     
-	 </footer>   --%>
-
-	<!-- JavaScript 파일 연결 -->
-	<script src="js/menu.js"></script>
-	<script src="js/map.js"></script>
-	<!-- 리뷰pop버튼  -->
-	<script>
-	      function show() {
-		    document.querySelector(".backgroundpop").className = "backgroundpop show";
-	      }
-	
-	      function close() {
-	        document.querySelector(".backgroundpop").className = "backgroundpop";
-	      }
-			
-	      function reviewLogin(){
-	    	    alert('로그인이 필요합니다.');
-	    	}
-	      
-	      document.querySelector("#showpop").addEventListener("click", show);
-	      document.querySelector("#closepop").addEventListener("click", close); 
+   <!-- JavaScript 파일 연결 -->
+   <script src="js/menu.js"></script>
+   <script src="js/map.js"></script>
+   <!-- 리뷰pop버튼  -->
+   <script>
+         function show() {
+          document.querySelector(".backgroundpop").className = "backgroundpop show";
+         }
+   
+         function close() {
+           document.querySelector(".backgroundpop").className = "backgroundpop";
+         }
+         
+         function reviewLogin(){
+              alert('로그인이 필요합니다.');
+          }
+         
+         document.querySelector("#showpop").addEventListener("click", show);
+         document.querySelector("#closepop").addEventListener("click", close); 
     </script>
 
-	<!-- 좋아요 기능 JavaScript 추가 -->
+   <!-- 좋아요 기능 JavaScript 추가 -->
 
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1cac00685a32d9d2daf6b4bdb4fc80e"></script>
+   <script type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1cac00685a32d9d2daf6b4bdb4fc80e"></script>
 
 
 
-	<script type="text/javascript">
-	  function handleLikeClick(filmId, email, button) {
-	           if (!email) {
-	               alert("로그인이 필요합니다.");
-	               return;
-	           }
-	           $.ajax({
-	               type: 'POST',
-	               url: '<%=request.getContextPath()%>/FilmLikeService',
-	               data: { 
-	                   f_num: filmId,
-	                   email: email
-	               },
-	               success: function(response) {
-	                   console.log('좋아요 처리 성공:', response);
-	                   if (button.textContent === '★'){
-	                       button.textContent = '☆';
-	                       button.classList.remove('liked');
-	                   } else {
-	                       button.textContent = '★';
-	                       button.classList.add('liked');
-	                   }
-	               },
-	               error: function(xhr, status, error) {
-	                   console.error('좋아요 처리 오류:', error);
-	               }
-	           });
-	       }
-	</script>
+   <script type="text/javascript">
+     function handleLikeClick(filmId, email, button) {
+              if (!email) {
+                  alert("로그인이 필요합니다.");
+                  return;
+              }
+              $.ajax({
+                  type: 'POST',
+                  url: '<%=request.getContextPath()%>/FilmLikeService',
+                  data: { 
+                      f_num: filmId,
+                      email: email
+                  },
+                  success: function(response) {
+                      console.log('좋아요 처리 성공:', response);
+                      if (button.textContent === '★'){
+                          button.textContent = '☆';
+                          button.classList.remove('liked');
+                      } else {
+                          button.textContent = '★';
+                          button.classList.add('liked');
+                      }
+                  },
+                  error: function(xhr, status, error) {
+                      console.error('좋아요 처리 오류:', error);
+                  }
+              });
+          }
+   </script>
 
-	<script>
-		// 이미지 지도에 표시할 마커입니다
-		var lat = parseFloat(document.getElementById('lat').innerText);
-					 var lon = parseFloat(document.getElementById('lon').innerText);
-		var place = document.getElementById('place').innerText;
-		var marker = {
-		    position: new kakao.maps.LatLng(lat, lon), 
-		    text: place // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다
-		};
-		
-		var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div
-		    staticMapOption = { 
-		        center: new kakao.maps.LatLng(lat, lon), // 이미지 지도의 중심좌표
-		        level: 3, // 이미지 지도의 확대 레벨
-		        marker: marker // 이미지 지도에 표시할 마커
-		    };
-		
-		// 이미지 지도를 생성합니다
-		var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
-	</script>
-	<!-- Side navigation script -->
-	<script> 
-	    function redirectToPage() {
-	        window.location.href = 'Realindex.jsp';
-	    }
-		function openNav() {
-			document.getElementById("mySidenav").style.width = "80%";
-		}
+   <script>
+      // 이미지 지도에 표시할 마커입니다
+      var lat = parseFloat(document.getElementById('lat').innerText);
+                var lon = parseFloat(document.getElementById('lon').innerText);
+      var place = document.getElementById('place').innerText;
+      var marker = {
+          position: new kakao.maps.LatLng(lat, lon), 
+          text: place // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다
+      };
+      
+      var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div
+          staticMapOption = { 
+              center: new kakao.maps.LatLng(lat, lon), // 이미지 지도의 중심좌표
+              level: 3, // 이미지 지도의 확대 레벨
+              marker: marker // 이미지 지도에 표시할 마커
+          };
+      
+      // 이미지 지도를 생성합니다
+      var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+   </script>
+   <!-- Side navigation script -->
+   <script> 
+       function redirectToPage() {
+           window.location.href = 'Realindex.jsp';
+       }
+      function openNav() {
+         document.getElementById("mySidenav").style.width = "80%";
+      }
 
-		function closeNav() {
-			document.getElementById("mySidenav").style.width = "0";
-		}
-	</script>
+      function closeNav() {
+         document.getElementById("mySidenav").style.width = "0";
+      }
+   </script>
 </body>
 </html>

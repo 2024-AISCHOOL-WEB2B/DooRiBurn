@@ -170,7 +170,7 @@
    <% 
 	MemberDTO info = (MemberDTO)session.getAttribute("info");   
 	String recentURI = request.getParameter("from");
-	String exUrl = "PracSearch2.jsp?s_option=1&search=";
+	String exUrl = "SearchService?s_option=1&pageNum=1&search=";
    %>
 		 
 	<header>

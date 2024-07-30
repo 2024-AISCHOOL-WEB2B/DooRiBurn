@@ -155,7 +155,7 @@
 	    CommentLikeDAO likeDao = new CommentLikeDAO();
 	    ArrayList<CommentDTO> commentList = comDao.getComment(num);
 
-		String exUrl = "PracSearch2.jsp?s_option=1&search=";
+		String exUrl = "SearchService?s_option=1&pageNum=1&search=";
 	%>
 
 	<header>
@@ -395,7 +395,7 @@
 	<script> 
     function showLoginPrompt() { 
         if (confirm('로그인 후 댓글 좋아요를 할 수 있습니다. 로그인하시겠습니까?')) { 
-            window.location.href = 'login.jsp';
+            window.location.href = 'login.jsp?from=/Drama/contestView.jsp?c_num=<%=cNumParam%>';
         }
     }
 	function CommentLikeClick(cmt_num, email, button, like_cnt) {

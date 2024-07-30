@@ -97,7 +97,7 @@ public ArrayList<ReviewDTO> selectReview(String index) {
 		try {
 			getConnection();
 
-			String sql = "SELECT l.*, m.nick FROM TB_REVIEW l JOIN TB_MEMBER m ON l.email = m.email WHERE l.F_NUM = ?";
+			String sql = "SELECT l.*, m.nick FROM TB_REVIEW l JOIN TB_MEMBER m ON l.email = m.email WHERE l.F_NUM = ? ORDER BY l.R_NUM ASC";
 
 			psmt = conn.prepareStatement(sql);
 

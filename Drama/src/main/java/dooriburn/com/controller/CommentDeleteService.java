@@ -8,17 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dooriburn.com.model.CommentDAO;
+import dooriburn.com.model.CommentLikeDAO;
   
 @WebServlet("/CommentDeleteService")
 public class CommentDeleteService extends HttpServlet { 
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String email = request.getParameter("email");
 		CommentDAO dao = new CommentDAO(); 
+		CommentLikeDAO clDao = new CommentLikeDAO();
 		int cmt_num = Integer.parseInt(request.getParameter("cmt_num")); 
 		int c_num = Integer.parseInt(request.getParameter("c_num")); 
 		
-		int cnt = dao.commentDelete(cmt_num);
+		clDao.removeLike(cmt_num, email); 
+		int cnt = dao.commentDelete(cmt_num); 
+		
 		if (cnt > 0) {
 			System.out.println("댓글 삭제 성공");
 		} else {

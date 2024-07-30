@@ -122,7 +122,7 @@
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
 	FilmLikeDAO dao = new FilmLikeDAO();
 
-	String exUrl = "PracSearch2.jsp?s_option=1&search=";
+	String exUrl = "SearchService?s_option=1&pageNum=1&search=";
 
 	String s_option = request.getParameter("s_option");
 	String search = request.getParameter("search");
