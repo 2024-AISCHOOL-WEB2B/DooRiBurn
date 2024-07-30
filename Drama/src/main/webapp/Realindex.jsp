@@ -170,7 +170,7 @@ footer div {
 
 			<div class="image-container">
 				<a href="detail.jsp?index=712"><img src="images/lotteworld.png"
-					alt="롯데월드"></a> <a href="detail.jsp?index=5043"><img
+					alt="롯데월드"></a> <a href="detail.jsp?index=698"><img
 					src="images/musiclib.png" alt="의정부음악도서관"></a> <a
 					href="detail.jsp?index=714"><img src="images/sbridge.png"
 					alt="양재시민의숲역"></a>
