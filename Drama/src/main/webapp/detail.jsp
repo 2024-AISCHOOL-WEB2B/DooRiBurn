@@ -227,6 +227,8 @@
         border-radius: 25px; 
         box-shadow: none;
         padding: 8px 15px; 
+        font-weight: 400; 
+        font-size: 15px;
 	}  
 .review-btn {
 		background-color: #FFEEB9 !important;  
@@ -242,8 +244,8 @@
     border: none;  
     color: #000 !important;  
     border-radius: 10px;  
-    padding: 7px 13px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */ 
+    padding: 5px 8px; 
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */ 
     cursor: pointer; /* 버튼처럼 보이게 하기 위해 포인터 커서 사용 */
     transition: box-shadow 0.3s ease; /* 호버 시 그림자 효과의 부드러운 전환 */
 }
@@ -267,17 +269,54 @@
     text-align: left; /* 왼쪽 정렬 */
     margin: 5px;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 600;
+    color: black;
 }
-
-.rating-options {
-    display: flex; /* 별점을 수평으로 나열 */
-    gap: 5px; /* 별점 간의 간격 설정 */
-}
+ 
 
 .input_checkbox {
-	margin: 0 20px 10px 20px; 
+	margin: 0 10px 10px 10px; 
 } 
+
+        /* 숨길 checkbox 스타일 */
+        .input_checkbox input[type="checkbox"] {
+            display: none; /* 체크박스를 완전히 숨깁니다 */
+        }
+
+        /* label 스타일 */
+        .input_checkbox .checkbox_wrapper {
+            display: inline-block;
+            margin: 4px; /* 각 체크박스와 라벨 간의 간격 */
+        }
+
+        .input_checkbox label {
+            display: inline-block;  
+            border: 1px solid #e9e9e9; /* 테두리 색상 */
+            padding: 2px;
+            border-radius: 5px;
+            background-color: white; /* 배경 색상 */
+            color: gray !important; /* 글자 색상 */
+            font-weight: normal; /* 기본 글씨 두께 */
+            font-size: 15px !important; /* 폰트 크기 조정 */
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2); /* 기본 입체 효과 */
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s, font-weight 0.3s; /* 부드러운 효과 */
+        }
+
+        /* 체크박스가 체크된 상태의 label 스타일 */
+        .input_checkbox input[type="checkbox"]:checked + label {
+            font-weight: bold; /* 체크된 상태에서 두꺼운 글씨 */
+            box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2); /* 체크된 상태에서 강한 입체 효과 */
+            color: black !important; 
+			border: 1px solid lightgray; /* 테두리 색상 */
+			background-color: #ffeeb9; /* 배경 색상 */
+        }
+
+        /* label의 hover 상태 */
+        .input_checkbox label:hover {
+            background-color: #B0B0B0; /* hover 시 배경 색상 */
+            box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1); /* hover 시 입체 효과 */
+        }
 </style>
 </head>
 <body>
@@ -549,24 +588,63 @@
 	                              </div>
 	                           </fieldset> 
                            </div>
-                           <div class="input_checkbox">
-						        <input type="checkbox" value="가족" name="mood"><span>#가족</span>
-						        <input type="checkbox" value="데이트" name="mood"><span>#데이트</span>
-						        <input type="checkbox" value="야경" name="mood"><span>#야경</span>
-						        <input type="checkbox" value="친구" name="mood"><span>#친구</span>
-						        <input type="checkbox" value="맛집" name="mood"><span>#맛집</span>
-						        <input type="checkbox" value="사진 명소" name="mood"><span>#사진 명소</span>
-						        <input type="checkbox" value="산책" name="mood"><span>#산책</span>
-						        <input type="checkbox" value="비오는날" name="mood"><span>#비오는날</span>
-						        <input type="checkbox" value="애견동반" name="mood"><span>#애견동반</span>
-						        <input type="checkbox" value="파티" name="mood"><span>#파티</span>
+                           <div class="input_checkbox"> 
+						        <div class="checkbox_wrapper">
+						            <input type="checkbox" id="family" value="가족" name="mood">
+						            <label for="family">#가족</label>
+						        </div>
+						
+						        <div class="checkbox_wrapper">
+						            <input type="checkbox" id="date" value="데이트" name="mood">
+						            <label for="date">#데이트</label>
+						        </div>
+						
+						        <div class="checkbox_wrapper">
+						            <input type="checkbox" id="nightView" value="야경" name="mood">
+						            <label for="nightView">#야경</label>
+						        </div>
+						
+						        <div class="checkbox_wrapper">
+						            <input type="checkbox" id="friends" value="친구" name="mood">
+						            <label for="friends">#친구</label>
+						        </div>
+						
+						        <div class="checkbox_wrapper">
+						            <input type="checkbox" id="restaurant" value="맛집" name="mood">
+						            <label for="restaurant">#맛집</label>
+						        </div>
+						
+						        <div class="checkbox_wrapper">
+						            <input type="checkbox" id="photoSpot" value="사진 명소" name="mood">
+						            <label for="photoSpot">#사진 명소</label>
+						        </div>
+						
+						        <div class="checkbox_wrapper">
+						            <input type="checkbox" id="walk" value="산책" name="mood">
+						            <label for="walk">#산책</label>
+						        </div>
+						
+						        <div class="checkbox_wrapper">
+						            <input type="checkbox" id="rainyDay" value="비오는날" name="mood">
+						            <label for="rainyDay">#비오는날</label>
+						        </div>
+						
+						        <div class="checkbox_wrapper">
+						            <input type="checkbox" id="dogFriendly" value="애견동반" name="mood">
+						            <label for="dogFriendly">#애견동반</label>
+						        </div>
+						
+						        <div class="checkbox_wrapper">
+						            <input type="checkbox" id="party" value="파티" name="mood">
+						            <label for="party">#파티</label>
+						        </div>
                            </div>
-                           <div>
+                           <div> 
                               <textarea class="col-auto form-control" name="content"
                                  id="reviewContents" placeholder="좋은 리뷰을 남겨주시면 큰 힘이 됩니다!"></textarea>
                            </div>
                            <div align="center">
-                              <input type="submit" value="리뷰올리기" id="Post_a_review">
+                              <input type="submit" value="작성" id="Post_a_review">
                            </div>
                         </form>
                      </div>
@@ -646,9 +724,10 @@
          }
          
          function reviewLogin(){
-              alert('로그인이 필요합니다.');
-          }
-         
+        	 if (confirm('로그인 후 리뷰를 작성할 수 있습니다. 로그인하시겠습니까?')) { 
+                 window.location.href = 'login.jsp?from=/Drama/detail.jsp?index=<%=index%>';
+             }
+          } 
          document.querySelector("#showpop").addEventListener("click", show);
          document.querySelector("#closepop").addEventListener("click", close); 
     </script>
