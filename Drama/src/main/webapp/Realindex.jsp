@@ -1,3 +1,4 @@
+<%@page import="dooriburn.com.model.RanKingDTO"%>
 <%@page import="dooriburn.com.model.MemberDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dooriburn.com.model.RankingDAO"%>
@@ -60,7 +61,8 @@ footer div {
 
 	<%
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
-	ArrayList<String> ranking = new RankingDAO().Ranking();
+	// 랭킹 불러오기
+	ArrayList<RanKingDTO> ranking = new RankingDAO().Ranking();
 	String exUrl = "PracSearch2.jsp?s_option=1&search=";
 	%>
 	<header>
@@ -129,23 +131,33 @@ footer div {
 		<div class="ranking">
 			<div class="rank-item">
 				<div class="rank-num">1</div>
-				<div class="rank-text"><%=ranking.get(0)%></div>
+				<div class="rank-text" onclick="location.href='detail.jsp?index=<%=ranking.get(0).getF_num() %>'">
+					<%=ranking.get(0).getDrama()%>-<%=ranking.get(0).getF_name()%>
+				</div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">2</div>
-				<div class="rank-text"><%=ranking.get(1)%></div>
+				<div class="rank-text" onclick="location.href='detail.jsp?index=<%=ranking.get(1).getF_num() %>'">
+					<%=ranking.get(1).getDrama()%>-<%=ranking.get(1).getF_name()%>
+				</div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">3</div>
-				<div class="rank-text"><%=ranking.get(2)%></div>
+				<div class="rank-text" onclick="location.href='detail.jsp?index=<%=ranking.get(2).getF_num() %>'">
+					<%=ranking.get(2).getDrama()%>-<%=ranking.get(2).getF_name()%>
+				</div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">4</div>
-				<div class="rank-text"><%=ranking.get(3)%></div>
+				<div class="rank-text" onclick="location.href='detail.jsp?index=<%=ranking.get(3).getF_num() %>'">
+					<%=ranking.get(3).getDrama()%>-<%=ranking.get(3).getF_name()%>
+				</div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">5</div>
-				<div class="rank-text"><%=ranking.get(4)%></div>
+				<div class="rank-text" onclick="location.href='detail.jsp?index=<%=ranking.get(4).getF_num() %>'">
+					<%=ranking.get(4).getDrama()%>-<%=ranking.get(4).getF_name()%>
+				</div>
 			</div>
 		</div>
 
