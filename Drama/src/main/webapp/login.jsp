@@ -209,7 +209,7 @@
                      </div>
                   </div>
                   <div class="row form-group">
-                     <a href="contact.jsp" style="color: #eea236;">회원가입</a>
+                     <a href="join.jsp" style="color: #eea236;">회원가입</a>
                   </div>
                   <% if(error != null){ %>
                   <div class="row form-group">
