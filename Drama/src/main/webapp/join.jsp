@@ -243,6 +243,7 @@
 						<div class="row form-group">
 							<div class="col-md-6">
 								<input type="text" name="nick" id="nick" class="form-control" placeholder="닉네임">
+								<font id="checkNick" size="2"></font>
 							</div>
 						</div>
 						<div class="row form-group">
@@ -317,6 +318,32 @@
 		})
 	}) 
 	</script>	
+	
+	<script>
+	$('#nick').focusout(function(){
+		let userNick = $('#nick').val();
+		
+		$.ajax({
+			url : "NickCheckService",
+			type : "post",
+			data : {userNick: userNick},
+			dataType : 'json',
+			success : function(result){
+				if(result == 0){
+					$("#checkNick").html('사용중인 닉네임 입니다.');
+					$("#checkNick").attr('color', 'red');
+				}else{
+					$("#checkNick").html('사용할 수 있는 닉네임입니다.');
+					$("#checkNick").attr('color', 'green');
+				}
+			},
+			error : function(){
+				alert("서버요청실패");
+			} 
+		})
+	}) 
+	</script>	
+	
 	<script> 
 	    function redirectToPage() {
 	        window.location.href = 'Realindex.jsp';
