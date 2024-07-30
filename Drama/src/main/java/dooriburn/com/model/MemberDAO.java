@@ -185,6 +185,37 @@ public class MemberDAO {
 		return cnt;
 		
 	}
+
+	public int checkNick(String nick) {
+
+		int cnt = 0;
+		
+		getConnection();
+		
+		
+		try {
+			String sql = "SELECT NICK FROM TB_MEMBER WHERE NICK = ?";
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, nick);
+			
+			rs = psmt.executeQuery();
+
+			if (rs.next() || nick.equals("")) { 
+				cnt = 0;
+			} else { 
+				cnt = 1;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		
+		return cnt;
+	}
 	
 
 }

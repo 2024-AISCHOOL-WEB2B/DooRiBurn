@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import dooriburn.com.model.MemberDAO;
 
 
-@WebServlet("/EmailCheckService")
-public class EmailCheckService extends HttpServlet {
+@WebServlet("/NickCheckService")
+public class NickCheckService extends HttpServlet {
 	
 
 	
@@ -22,13 +22,13 @@ public class EmailCheckService extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
-		String email = request.getParameter("userEmail");
+		String nick = request.getParameter("userNick");
 		
 		PrintWriter out = response.getWriter();
 		
 		MemberDAO dao = new MemberDAO();
 		
-		int cnt = dao.checkEmail(email);
+		int cnt = dao.checkNick(nick);
 		
 		out.write(cnt + "");
 	}

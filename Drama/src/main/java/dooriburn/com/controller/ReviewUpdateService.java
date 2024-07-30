@@ -39,25 +39,13 @@ public class ReviewUpdateService extends HttpServlet {
 		String content = request.getParameter("content");
 		String[] mood = request.getParameterValues("mood");
 		
-		System.out.println(email);
-		System.out.println(f_num);
-		System.out.println(rating);
-		System.out.println(content);
-		System.out.println(mood[0]);
-		
-		
 		ReviewDTO dto = new ReviewDTO(email, f_num, rating, content, mood);
 		ReviewDAO dao = new ReviewDAO();
 		
 		int cnt = dao.Insert(dto);
 		
-		if(cnt > 0) {
-			System.out.println("리뷰 저장성공");
-		}else {
-			System.out.println("리뷰 저장실패");
-		}
-		
 		response.sendRedirect("detail.jsp?index="+index);
+		
 	}
 
 }
