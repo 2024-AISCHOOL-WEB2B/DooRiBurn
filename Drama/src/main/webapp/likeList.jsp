@@ -20,13 +20,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>좋아요 누른 촬영지 목록</title>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/PracSearch.css">
 
+<link rel="stylesheet" href="css/Realstyle.css">
+<style type="text/css"></style>
 <style>
+body {
+	background-color: #f4f4f9;
+}
 
- /* 메뉴 위치 우상단으로 조정 */
+/* 메뉴 위치 우상단으로 조정 */
 .menu-icon {
 	position: absolute;
 	top: 10px;
@@ -34,14 +38,15 @@
 	cursor: pointer;
 	color: #545454;
 }
-.sidenav .menu-items a:hover {
-    font-weight: bold !important;
+
+/* 추가: 마이 페이지 하위 목록 세로 정렬을 위해 */
+.sidenav .menu-itemss a:hover {
+	color: #333;
+	font-weight: bold !important;
 }
-body {
-	font-family: 'Arial', sans-serif;
-	margin: 0;
-	padding: 0;
-	background-color: #f4f4f9;
+
+.sidenav .menu-items a:hover {
+	font-weight: bold !important;
 }
 
 h1 {
@@ -61,8 +66,8 @@ a.custom-link {
 	background: #fff;
 	border-radius: 5px;
 	margin: 10px auto;
-	width: 80%;
-	max-width: 800px;
+	width: 50%; /* 80%; */
+	/* max-width: 800px; */
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -86,11 +91,15 @@ a.custom-link:hover {
 @media ( max-width : 768px) {
 	a.custom-link {
 		width: 50%;
-		padding-left: 100px;
+		padding-left: 0px;
+		padding-top: 25px;
 	}
 	.custom-link h2, .custom-link h3 {
 		font-size: 16px;
 		margin-left: 20px;
+	}
+	.sidenav {
+		width: 50%;
 	}
 }
 </style>
@@ -108,44 +117,51 @@ a.custom-link:hover {
 	</header>
 
 	<div id="mySidenav" class="sidenav" style="width: 0;">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:#545454;">&times;</a>
-			<div class="menu-section">
-				<h2>지역별로 찾기</h2>
-				<div class="menu-items">
-					<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a>
-					<a href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a>
-					<a href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a>
-					<a href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a>
-					<a href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a>
-					<a href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a>
-					<a href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a>
-					<a href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a>
-					<a href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
-				</div>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+			style="color: #545454;">&times;</a>
+		<div class="menu-section">
+			<h2>지역별로 찾기</h2>
+			<div class="menu-items">
+				<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a
+					href="<%=exUrl%>인천">인천</a> <a href="<%=exUrl%>대구">대구</a> <a
+					href="<%=exUrl%>대전">대전</a> <a href="<%=exUrl%>광주">광주</a> <a
+					href="<%=exUrl%>울산">울산</a> <a href="<%=exUrl%>세종">세종</a> <a
+					href="<%=exUrl%>경기">경기</a> <a href="<%=exUrl%>충청북도">충북</a> <a
+					href="<%=exUrl%>충청남도">충남</a> <a href="<%=exUrl%>전라북도">전북</a> <a
+					href="<%=exUrl%>전라남도">전남</a> <a href="<%=exUrl%>경상북도">경북</a> <a
+					href="<%=exUrl%>경상남도">경남</a> <a href="<%=exUrl%>강원">강원</a> <a
+					href="<%=exUrl%>제주">제주</a> <a href="#"> </a>
 			</div>
-			<div class="menu-section">
-				<h2>여행사진 공모전</h2>
-				<div class="menu-items">
-					<a href="contestBoard.jsp">참가하기</a>
-				</div>
+		</div>
+		<div class="menu-section">
+			<h2>여행사진 공모전</h2>
+			<div class="menu-items">
+				<a href="contestBoard.jsp">참가하기</a>
 			</div>
-			<%if(info != null){ %>
+		</div>
+		<%
+		if (info != null) {
+		%>
+		<div class="menu-section">
+			<h2>마이 페이지</h2>
+			<div class="menu-itemss">
+				<a href="update.jsp?from=/Drama/likeList.jsp">회원정보 수정</a> <a
+					href="likeList.jsp">관심 촬영지</a> <a href="contestList.jsp">공모전
+					참가내역</a>
+			</div>
+			<%
+			} else {
+			%>
 			<div class="menu-section">
 				<h2>마이 페이지</h2>
 				<div class="menu-itemss">
-					<a href="update.jsp?from=/Drama/likeList.jsp">회원정보 수정</a> 
-					<a href="likeList.jsp">관심 촬영지</a> 
-					<a href="contestList.jsp">공모전 참가내역</a> 
+					<a href="login.jsp?from=/Drama/likeList.jsp">로그인</a> <a
+						href="join.jsp?from=/Drama/likeList.jsp">회원가입</a>
 				</div>
-			<%} else { %>
-				<div class="menu-section">
-					<h2>마이 페이지</h2>
-					<div class="menu-itemss">
-						<a href="login.jsp?from=/Drama/likeList.jsp">로그인</a> 
-						<a href="join.jsp?from=/Drama/likeList.jsp">회원가입</a>  
-					</div>
-				</div>
-			<%}%> 
+			</div>
+			<%
+			}
+			%>
 		</div>
 	</div>
 
@@ -166,7 +182,8 @@ a.custom-link:hover {
 	for (DramaSearchDTO like : likes) {
 	%>
 
-	<a class="custom-link" href="detail.jsp?index=<%=like.getFNum()%>">
+	<a class="custom-link"
+		href="detail.jsp?index=<%=String.format("%.0f", like.getFNum())%>">
 		<h2>
 			📍
 			<%=like.getFName()%>
@@ -186,12 +203,12 @@ a.custom-link:hover {
 	<%
 	}
 	%>
- 
 
-	<script> 
-	    function redirectToPage() {
-	        window.location.href = 'Realindex.jsp';
-	    }
+
+	<script>
+		function redirectToPage() {
+			window.location.href = 'Realindex.jsp';
+		}
 		function openNav() {
 			document.getElementById("mySidenav").style.width = "80%";
 		}
