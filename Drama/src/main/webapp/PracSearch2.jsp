@@ -75,6 +75,46 @@
 .sidenav .menu-items a:hover {
 	font-weight: bold !important;
 }
+
+#page_control {
+    text-align: center; /* 가운데 정렬 */
+    margin-top: 8px; /* 상단 여백 추가 */
+    margin-bottom: 100px !important;
+}
+
+#page_control a {
+    display: inline-block; /* 인라인 블록 요소로 설정하여 한 줄에 나열되도록 함 */
+    padding: 3px 8px; /* 버튼의 패딩 설정 */
+    margin: 0 3px; /* 버튼 사이의 간격 설정 */
+    text-decoration: none; /* 링크에 밑줄 제거 */
+    border: 1px solid #FFEEB9; /* 테두리 추가 */
+    /*background-color: #f0f0f0;*/ /* 배경색 설정 */
+    color: #333; /* 글자색 설정 */
+    background-color: #FFEEB9;
+}
+
+#page_control a:hover {
+    background-color: #FBE090; /* 호버 시 배경색 변경 */
+}
+
+#page_control a:active {
+    background-color: #ffd964; /* 클릭 시 배경색 변경 */
+}
+
+#page_control .current {
+    font-weight: bold; /* 현재 페이지 버튼의 글씨를 두껍게 설정 */
+}
+
+@media screen and (max-width: 768px) { 
+	#page_control {
+        margin-bottom: 100px !important; 
+    } 
+    #page_control a:hover {
+        background-color: #FBE090; 
+    }
+    #page_control a:focus {
+        background-color: #ffd964;  
+    }
 </style>
 </head>
 <body>
