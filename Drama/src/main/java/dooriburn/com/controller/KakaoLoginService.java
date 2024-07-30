@@ -1,4 +1,5 @@
 package dooriburn.com.controller;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,78 +20,46 @@ public class KakaoLoginService extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String nick = request.getParameter("nickname");
         String email = request.getParameter("id");
         String pw = email;
-        
-		MemberDAO dao = new MemberDAO();
-		HttpSession session = request.getSession(); 
-		
-		int check_cnt = dao.checkEmail(email);
-		
-		if(check_cnt==0) {
-			MemberDTO dto = new MemberDTO(email, pw);
-			MemberDTO info = dao.login(dto);
-			String recentURI = request.getParameter("from");
-			
-	        request.getRequestDispatcher("Realindex.jsp").forward(request, response);
-	        
-	        if (info != null) {
-				if (email.equals(info.getEmail()) && pw.equals(info.getPw())) {
-					session.setAttribute("info", info); 
-					System.out.println(info.getEmail()+info.getNick());
-				} else { 
-					if (recentURI != null) {
-						response.sendRedirect("login.jsp?from="+recentURI);
-					} else {
-						response.sendRedirect("login.jsp"); 
-					} 
-				}
-			}
-	        
-		}else {
-			
-			
-			
-			String name = nick;
-			String phone = "kakao";
-			String addr = "kakao";
-			
-			
-			MemberDTO dto = new MemberDTO(email, pw, nick, name, phone, addr);
 
-			
-			String recentURI = request.getParameter("from");
-			
-			int cnt = dao.join(dto);
-			
-			if(cnt > 0) { 
-				if (recentURI != null) {
-					response.sendRedirect(recentURI); 
-				} else {
-					response.sendRedirect("login.jsp"); 
-				} 
-			} else {
-				// 회원가입 실패
-				if (recentURI != null) {
-					response.sendRedirect("join.jsp?from="+recentURI);
-				} else {
-					response.sendRedirect("join.jsp"); 
-				} 
-			}
-		}
+        MemberDAO dao = new MemberDAO();
+        HttpSession session = request.getSession();
 
-        
+        int check_cnt = dao.checkEmail(email);
 
-//        ---------------------------------------------------------------
-		
-        
-        
-        
-        
-        
-        
-        
+        if (check_cnt == 0) {
+            // 로그인 로직
+            MemberDTO dto = new MemberDTO(email, pw);
+            MemberDTO info = dao.login(dto);
+            
+            if (info != null) {
+                session.setAttribute("info", info);
+                System.out.println("로그인 성공: " + info.getEmail() + ", " + info.getNick());
+                response.sendRedirect("Realindex.jsp");
+            } else {
+                System.out.println("로그인 실패");
+                response.sendRedirect("login.jsp");
+            }
+        } else {
+            // 회원가입 로직
+            String name = nick;
+            String phone = "kakao";
+            String addr = "kakao";
+
+            MemberDTO dto = new MemberDTO(email, pw, nick, name, phone, addr);
+            int cnt = dao.join(dto);
+
+            if (cnt > 0) {
+                session.setAttribute("info", dto);
+                System.out.println("회원가입 성공: " + dto.getEmail() + ", " + dto.getNick());
+                response.sendRedirect("Realindex.jsp");
+            } else {
+                System.out.println("회원가입 실패");
+                response.sendRedirect("join.jsp");
+            }
+        }
     }
 }
