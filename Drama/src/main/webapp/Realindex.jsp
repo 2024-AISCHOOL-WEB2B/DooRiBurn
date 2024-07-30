@@ -55,6 +55,9 @@ footer div {
     }
 }
 
+.rank-text{
+	width: 75%;
+}
 </style>
 </head>
 <body>
@@ -133,31 +136,31 @@ footer div {
 			<div class="rank-item">
 				<div class="rank-num">1</div>
 				<div class="rank-text" onclick="location.href='detail.jsp?index=<%=ranking.get(0).getF_num() %>'">
-					<%=ranking.get(0).getDrama()%>-<%=ranking.get(0).getF_name()%>
+					<%=ranking.get(0).getDrama()%> - <%=ranking.get(0).getF_name()%>
 				</div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">2</div>
 				<div class="rank-text" onclick="location.href='detail.jsp?index=<%=ranking.get(1).getF_num() %>'">
-					<%=ranking.get(1).getDrama()%>-<%=ranking.get(1).getF_name()%>
+					<%=ranking.get(1).getDrama()%> - <%=ranking.get(1).getF_name()%>
 				</div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">3</div>
 				<div class="rank-text" onclick="location.href='detail.jsp?index=<%=ranking.get(2).getF_num() %>'">
-					<%=ranking.get(2).getDrama()%>-<%=ranking.get(2).getF_name()%>
+					<%=ranking.get(2).getDrama()%> - <%=ranking.get(2).getF_name()%>
 				</div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">4</div>
 				<div class="rank-text" onclick="location.href='detail.jsp?index=<%=ranking.get(3).getF_num() %>'">
-					<%=ranking.get(3).getDrama()%>-<%=ranking.get(3).getF_name()%>
+					<%=ranking.get(3).getDrama()%> - <%=ranking.get(3).getF_name()%>
 				</div>
 			</div>
 			<div class="rank-item">
 				<div class="rank-num">5</div>
 				<div class="rank-text" onclick="location.href='detail.jsp?index=<%=ranking.get(4).getF_num() %>'">
-					<%=ranking.get(4).getDrama()%>-<%=ranking.get(4).getF_name()%>
+					<%=ranking.get(4).getDrama()%> - <%=ranking.get(4).getF_name()%>
 				</div>
 			</div>
 		</div>
