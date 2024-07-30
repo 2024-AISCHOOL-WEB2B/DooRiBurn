@@ -81,15 +81,15 @@ public class RankingDAO {
 		}
 	}
 	
-	public ArrayList<String> Ranking() {
+	public ArrayList<RanKingDTO> Ranking() {
 		
 		
-		 ArrayList<String> ranking = new ArrayList<>();
+		 ArrayList<RanKingDTO> ranking = new ArrayList<>();
 		 
 		 getConnection();
 		 
 		 try { String sql =
-		 "SELECT F_NAME, DRAMA FROM tb_film_location WHERE F_CLICK IS NOT NULL ORDER BY F_CLICK DESC"; 
+		 "SELECT F_NAME, DRAMA, F_NUM FROM tb_film_location WHERE F_CLICK IS NOT NULL ORDER BY F_CLICK DESC"; 
 		 psmt = conn.prepareStatement(sql);
 		 
 		 rs = psmt.executeQuery();
@@ -98,13 +98,16 @@ public class RankingDAO {
 			 rs.next(); 
 			 String drama = rs.getString("DRAMA");
 			 String f_name = rs.getString("F_NAME"); 
-			 ranking.add( drama+"-"+f_name);
+			 int f_num = rs.getInt("F_NUM");
+			 RanKingDTO dto = new RanKingDTO(drama, f_name, f_num);
+			 ranking.add(dto);
 		 
 		 }
 		 
 		 
 		 } catch (SQLException e) { // TODO Auto-generated catch block
-		 e.printStackTrace(); }finally { close(); }
+		 e.printStackTrace(); 
+		 }finally { close(); }
 		 
 		 return ranking;
 		 
