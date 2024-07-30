@@ -227,15 +227,15 @@
 
 				<div class="col-md-6 animate-box" align="center" onsubmit="return validateForm()">
 					<h3>회원가입</h3>
-               <% if (recentURI != null){ %>
+           		<% if (recentURI != null){ %>
                		<form action="JoinService?from=<%=recentURI%>" method="post" name="JoinForm">
-               <% } else {%>
+                <% } else {%>
                		<form action="JoinService" method="post" name="JoinForm">
-               <% } %> 
+                <% } %>
 						<div class="row form-group">
 							<div class="col-md-6" >
 								<input type="email" name="email" id="email" class="form-control" placeholder="아이디(이메일)" >
-								<font id="checkEmail" size = "2"></font>
+								<font id="checkEmail" size="2"></font>
 							</div>
 							<div class="col-md-6">
 								<input type="password" name="pw" id="password" class="form-control" placeholder="비밀번호">
@@ -291,7 +291,9 @@
 				</div>
 			</div> 
 		</footer>   
-	
+		
+	<!-- 이메일 중복 실시간 체크  -->	
+	<script src="js/jquery-3.6.0.min.js"></script>
 	<script>
 	$('#email').focusout(function(){
 		let userEmail = $('#email').val();
