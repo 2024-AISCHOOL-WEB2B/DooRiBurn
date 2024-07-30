@@ -133,4 +133,90 @@ public ArrayList<DramaSearchDTO> film_detail(String index) {
 		}
 		return likes;
 	}
+	
+	
+// 페이지네이션
+	public int getTotalCount(String s_option, String search) {
+	    int totalCount = 0;
+	    getConnection();
+	    try {
+	        String sql = "SELECT COUNT(*) FROM TB_FILM_LOCATION WHERE 1=1";
+	        if (s_option != null && !s_option.isEmpty()) {
+	            if (s_option.equals("0")) {
+	                sql += " AND DRAMA LIKE ?";
+	            } else if (s_option.equals("1")) {
+	                sql += " AND F_NAME LIKE ?";
+	            }
+	        }
+	        psmt = conn.prepareStatement(sql);
+	        if (s_option != null && !s_option.isEmpty()) {
+	            psmt.setString(1, "%" + search + "%");
+	        }
+	        rs = psmt.executeQuery();
+	        if (rs.next()) {
+	            totalCount = rs.getInt(1);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close();
+	    }
+	    return totalCount;
+	}
+
+	
+	// 페이지네이션을 적용한 검색 결과를 가져오는 메서드
+	public List<DramaSearchDTO> getSearchResults(String s_option, String search, int pageNumber, int pageSize) {
+	    List<DramaSearchDTO> results = new ArrayList<>();
+	    int startRow = (pageNumber - 1) * pageSize + 1;
+	    int endRow = pageNumber * pageSize;
+	    
+	    try {
+	        getConnection();
+	        String sql = "SELECT * FROM ( " +
+	                     "  SELECT a.*, ROWNUM rnum FROM ( " +
+	                     "    SELECT * FROM TB_FILM_LOCATION WHERE 1=1";
+	        if (s_option != null && !s_option.isEmpty()) {
+	            if (s_option.equals("0")) {
+	                sql += " AND DRAMA LIKE ?";
+	            } else if (s_option.equals("1")) {
+	                sql += " AND F_NAME LIKE ?";
+	            }
+	        }
+	        sql += "    ORDER BY F_NUM ASC " +
+	               "  ) a WHERE ROWNUM <= ? " +
+	               ") WHERE rnum >= ?";
+	        
+	        psmt = conn.prepareStatement(sql);
+	        int paramIndex = 1;
+	        if (s_option != null && !s_option.isEmpty()) {
+	            psmt.setString(paramIndex++, "%" + search + "%");
+	        }
+	        psmt.setInt(paramIndex++, endRow);
+	        psmt.setInt(paramIndex, startRow);
+	        rs = psmt.executeQuery();
+	        while (rs.next()) {
+	            DramaSearchDTO dto = new DramaSearchDTO(
+	                rs.getDouble("F_NUM"),  // int로 변경
+	                rs.getString("DRAMA"),
+	                rs.getString("F_ADDR"),
+	                rs.getDouble("LAT"),
+	                rs.getDouble("LON"),
+	                rs.getString("F_NAME"),
+	                rs.getString("F_TEL"),
+	                rs.getString("F_TIME"),
+	                rs.getString("SCENE"),
+	                rs.getString("F_IMG")
+	            );
+	            results.add(dto);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close();
+	    }
+	    return results;
+	}
+
 }
+ 
