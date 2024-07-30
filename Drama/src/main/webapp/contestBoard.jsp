@@ -66,7 +66,7 @@
 		int cnt = dao.getCount();  
 		// 페이징 처리 ////////////////////////////////////////////////////////////// 
 		
-		int pageSize = 5; // 한 페이지에 출력될 글 수 
+		int pageSize = 2; // 한 페이지에 출력될 글 수 
 		 
 		int pageNum = 1; // 현 페이지 정보 설정
 		if (request.getParameter("pageNum") != null){
@@ -170,30 +170,30 @@
 	<!-- 페이징 처리 -->
 	<div id="page_control">
 		<% if(cnt != 0){  
-				// 전체 페이지수 계산
-				int pageCount = cnt / pageSize + (cnt%pageSize==0?0:1);
-				
-				// 한 페이지에 보여줄 페이지 블럭
-				int pageBlock = 5;
-				 
-				int startPage = ((pageNum-1)/pageBlock)*pageBlock+1;
-				 
-				int endPage = startPage + pageBlock-1;
-				if(endPage > pageCount){
-					endPage = pageCount;
-				}
-				if(startPage > pageBlock) { %>
-					<a href="contestBoard.jsp?pageNum=<%=startPage - pageBlock%>">◀</a>
-				<%} %>
-			    
-				<% for(int i=startPage ; i <= endPage ; i++) { %>
-					<a href="contestBoard.jsp?pageNum=<%=i%>"><%=i %></a>
-				<%} %>
-			    
-				<% if(endPage < pageCount){ %>
-					<a href="contestBoard.jsp?pageNum=<%=startPage + pageBlock%>">▶</a>
-				<%} %>
+			// 전체 페이지수 계산
+			int pageCount = cnt / pageSize + (cnt%pageSize==0?0:1);
+			
+			// 한 페이지에 보여줄 페이지 블럭
+			int pageBlock = 5;
+			 
+			int startPage = ((pageNum-1)/pageBlock)*pageBlock+1;
+			 
+			int endPage = startPage + pageBlock-1;
+			if(endPage > pageCount){
+				endPage = pageCount;
+			}
+			if(startPage > pageBlock) { %>
+				<a href="contestBoard.jsp?pageNum=<%=startPage - pageBlock%>">◀</a>
 			<%} %>
+		    
+			<% for(int i=startPage ; i <= endPage ; i++) { %>
+				<a href="contestBoard.jsp?pageNum=<%=i%>"><%=i %></a>
+			<%} %>
+		    
+			<% if(endPage < pageCount){ %>
+				<a href="contestBoard.jsp?pageNum=<%=startPage + pageBlock%>">▶</a>
+			<%} %>
+		<%} %>
 	</div>
 
  

@@ -1,3 +1,5 @@
+<%@page import="dooriburn.com.model.DramaSearchDTO"%>
+<%@page import="dooriburn.com.model.DramaSearchDAO"%>
 <%@page import="dooriburn.com.model.FilmLikeDTO"%>
 <%@page import="dooriburn.com.model.FilmLikeDAO"%>
 <%@page import="java.net.URLDecoder"%>
@@ -88,7 +90,24 @@
 
 	HttpURLConnection conn = null;
 	String exUrl = "PracSearch2.jsp?s_option=1&search=";
+	
+	// 페이징 처리 ////////////////////////////////////////////////////////////// 
 	int cnt = 0; // 검색결과 개수 
+	
+	DramaSearchDAO DSdao = new DramaSearchDAO();
+	  
+	int pageSize = 5; // 한 페이지에 출력될 글 수 
+	 
+	int pageNum = 1; // 현 페이지 정보 설정
+	if (request.getParameter("pageNum") != null){
+		pageNum = Integer.parseInt(request.getParameter("pageNum"));
+	}  
+	
+	int startRow = (pageNum - 1) * pageSize + 1;  // 첫행번호를 계산 
+	
+	// 게시글 목록 가져오기
+    List<DramaSearchDTO> list = DSdao.getSearchList(startRow, pageSize); 
+	 
 	try {
 		URL url = new URL(
 		"http://localhost:5002/search?s_option=" + s_option + "&search=" + URLEncoder.encode(search, "UTF-8"));
@@ -105,7 +124,7 @@
 			StringBuilder response_data = new StringBuilder();
 
 			while ((inputLine = in.readLine()) != null) {
-		response_data.append(inputLine);
+				response_data.append(inputLine);
 			}
 			in.close();
 
@@ -247,14 +266,50 @@
 
 		<%
 		}
-		%>
-
-
-
+		%> 
 	</div>
 	<%
 	}
 	%>
+	
+	
+	
+	<!-- 페이징 처리 -->
+	<div id="page_control">
+		<% if(cnt != 0){  
+				// 전체 페이지수 계산
+				int pageCount = cnt / pageSize + (cnt%pageSize==0?0:1);
+				
+				// 한 페이지에 보여줄 페이지 블럭
+				int pageBlock = 5;
+				 
+				int startPage = ((pageNum-1)/pageBlock)*pageBlock+1;
+				 
+				int endPage = startPage + pageBlock-1;
+				if(endPage > pageCount){
+					endPage = pageCount;
+				}
+				if(startPage > pageBlock) { %>
+					<a href="PracSearch2.jsp?s_option=<%=s_option%>&search=<%=search%>?pageNum=<%=startPage - pageBlock%>">◀</a>
+				<%} %>
+			    
+				<% for(int i=startPage ; i <= endPage ; i++) { %>
+					<a href="PracSearch2.jsp?s_option=<%=s_option%>&search=<%=search%>?pageNum=<%=i%>"><%=i %></a>
+				<%} %>
+			    
+				<% if(endPage < pageCount){ %>
+					<a href="PracSearch2.jsp?s_option=<%=s_option%>&search=<%=search%>?pageNum=<%=startPage + pageBlock%>">▶</a>
+				<%} %>
+			<%} %>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- Side navigation script -->
 	<script> 
 	    function redirectToPage() {
