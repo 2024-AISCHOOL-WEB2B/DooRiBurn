@@ -115,6 +115,13 @@
     #page_control a:focus {
         background-color: #ffd964;  
     }
+@media (max-width: 768px) {
+    .search-container {
+        width: 60%;
+        height: auto;
+        flex-direction: row;
+        padding: 10px;
+    }
 </style>
 </head>
 <body>
@@ -195,8 +202,7 @@
 			<div class="search-container" style="height: 30px;">
 				<select name="s_option" style="margin-right: 7px;">
 					<option value="0" <%="0".equals(s_option) ? "selected" : ""%>>드라마</option>
-					<option value="1" <%="1".equals(s_option) ? "selected" : ""%>>장소
-						및 지역</option>
+					<option value="1" <%="1".equals(s_option) ? "selected" : ""%>>장소/지역</option>
 				</select> <input name="search" type="text" placeholder="검색"
 					value="<%=search != null ? search : ""%>"
 					style="flex-grow: 1; margin-right: 5px;">

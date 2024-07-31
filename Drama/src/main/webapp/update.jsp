@@ -183,7 +183,7 @@ input[type="submit"]:hover {
 		String recentURI = request.getParameter("from");
 	%>	
 	<header>
-		<div class="banner">여기가 거기여?</div>
+		<div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
 		<div class="menu-icon" onclick="openNav()">☰</div>
 	</header>
 
