@@ -167,16 +167,23 @@
 }
 
 #reviewContents { 
-	margin: 0 20px 0 20px; 
-   width: 90%;
-   height: 150px;
-   padding: 10px;
-   box-sizing: border-box;
-   border: solid 1.5px #D3D3D3;
-   border-radius: 5px;
-   font-size: 16px;
-   resize: none;
+    margin: 0 20px; 
+    width: 90%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+    outline: none; /* 포커스 시 기본 윤곽선 제거 */
 }
+
+/* 포커스 상태에서 테두리 색상 변경 */
+#reviewContents:focus {
+    border-color: #FFA500; /* 주황색으로 테두리 색상 변경 */
+}
+
    /* 메뉴 위치 우상단으로 조정 */ 
    . menu-icon { 
    position : absolute;
@@ -240,6 +247,7 @@
         padding: 8px 15px;
 	}
 #closepop { 
+	margin: 5px 5px 0 0;
     background-color: #f9f9f9;
     border: none;  
     color: #000 !important;  
@@ -305,11 +313,11 @@
 
         /* 체크박스가 체크된 상태의 label 스타일 */
         .input_checkbox input[type="checkbox"]:checked + label {
-            font-weight: bold; /* 체크된 상태에서 두꺼운 글씨 */
-            box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2); /* 체크된 상태에서 강한 입체 효과 */
+            font-weight: 500; /* 체크된 상태에서 두꺼운 글씨 */
+            box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.2); /* 체크된 상태에서 강한 입체 효과 */
             color: black !important; 
 			border: 1px solid lightgray; /* 테두리 색상 */
-			background-color: #ffeeb9; /* 배경 색상 */
+			background-color: #FFF183; /* 배경 색상 */ 
         }
 
         /* label의 hover 상태 */
