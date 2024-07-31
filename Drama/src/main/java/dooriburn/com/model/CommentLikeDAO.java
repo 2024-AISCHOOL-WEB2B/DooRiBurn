@@ -172,6 +172,24 @@ public class CommentLikeDAO {
          return liked;
       }
 
- 
+      // 댓 좋아요 전체~! 삭제
+      public int removeAllLike(int cmt_num) {
+         int cnt = 0;
+         dbOpen();
+
+         try {
+            String sql = "DELETE FROM TB_COMMENT_LIKE WHERE CMT_NUM = ? ";
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, cmt_num);
+
+            cnt = psmt.executeUpdate();
+            
+         } catch (SQLException e) { 
+        	 e.printStackTrace(); 
+         } finally {
+            dbClose();
+         }
+         return cnt;
+      }
    
 }

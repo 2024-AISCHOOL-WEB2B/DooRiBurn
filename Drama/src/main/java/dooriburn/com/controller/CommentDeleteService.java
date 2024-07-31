@@ -21,7 +21,7 @@ public class CommentDeleteService extends HttpServlet {
 		int cmt_num = Integer.parseInt(request.getParameter("cmt_num")); 
 		int c_num = Integer.parseInt(request.getParameter("c_num")); 
 		
-		clDao.removeLike(cmt_num, email); 
+		clDao.removeAllLike(cmt_num); 
 		int cnt = dao.commentDelete(cmt_num); 
 		
 		if (cnt > 0) {
