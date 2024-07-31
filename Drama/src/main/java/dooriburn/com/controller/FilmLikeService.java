@@ -26,8 +26,8 @@ public class FilmLikeService extends HttpServlet {
 		FilmLikeDTO dto = new FilmLikeDTO(email, f_num);
 		FilmLikeDAO dao = new FilmLikeDAO();
 
-		System.out.println(email);
-		System.out.println(f_num);
+//		System.out.println(email);
+//		System.out.println(f_num);
 		String message;
 
 		if (dao.isLiked(dto)) {
