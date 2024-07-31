@@ -67,11 +67,11 @@ public class RankingDAO {
 			
 			int cnt = psmt.executeUpdate();
 			
-			if(cnt > 0) {
-				System.out.println("카운팅 성공");
-			}else {
-				System.out.println("카운팅 실패");
-			}
+//			if(cnt > 0) {
+//				System.out.println("카운팅 성공");
+//			}else {
+//				System.out.println("카운팅 실패");
+//			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
