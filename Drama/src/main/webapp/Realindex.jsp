@@ -55,29 +55,21 @@
 }
 
 footer {
-    margin-bottom: 50px; 
-    background-color: #f9f9f9 !important;
-}
- 
-footer div {
-    display: block !important;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 10px;  
-    background-color: #f9f9f9 !important;
-} 
-@media (max-width: 600px) {
-    footer div {
-        margin-bottom: 100px !important;  
-    }
+   margin-bottom: 50px;
 }
 
-	/* 버튼과 저작권 정보 사이에 여백 추가, 중간배열 */
-	.button-container {
-	    margin-bottom: 20px; 
-		display: flex; 
-		justify-content: center;
-	}
+footer div {
+   display: block !important;
+   width: 100%;
+   text-align: center;
+   margin-bottom: 10px;
+}
+
+@media ( max-width : 600px) {
+   footer div {
+      margin-bottom: 100px !important;
+   }
+}
 
 .carousel-caption {
    position: absolute;
@@ -108,7 +100,20 @@ footer div {
 
 .rank-text {
    width: 75%;
-} 
+}
+
+@media (max-width: 768px) {
+    .search-container {
+        width: 65%;
+        height: auto;
+        flex-direction: row;
+        padding: 10px;
+    }
+
+/* 
+.d-none {
+   display: none;
+} */
 </style>
 </head>
 <body>
@@ -248,21 +253,21 @@ footer div {
 
             <div class="carousel-inner">
                <div class="carousel-item active">
-                  <a href="detail.jsp?index=712"> <img
+                  <a href="detail.jsp?index=712"> </a> <img
                      src="images/lotteworld.png" class="d-block w-100" alt="...">
                      <div class="carousel-caption d-block">
                         <!-- <h4 style="color: white;">롯데월드</h4> -->
                      </div>
                </div>
                <div class="carousel-item">
-                  <a href="detail.jsp?index=698"> <img src="images/musiclib.png"
+                  <a href="detail.jsp?index=698"> </a> <img src="images/musiclib.png"
                      class="d-block w-100" alt="...">
                      <div class="carousel-caption d-block">
                         <!-- <h6 style="color: white;">의정부음악도서관</h6> -->
                      </div>
                </div>
                <div class="carousel-item">
-                  <a href="detail.jsp?index=714"> <img src="images/sbridge.png"
+                  <a href="detail.jsp?index=714"> </a> <img src="images/sbridge.png"
                      class="d-block w-100" alt="...">
                      <div class="carousel-caption d-block">
                         <!-- <h4 style="color: white;">서강대교</h4> -->
@@ -285,19 +290,25 @@ footer div {
       </div>
    </div>
 
-
-	<footer>
-		<div style="display: block !important; width: 100%; text-align: center; margin-bottom: 10px;">    
-			<%if(info == null) {%>
-				<button class="btn" onclick="location.href='login.jsp'">로그인</button>
-				<button class="btn" onclick="location.href='join.jsp'">회원가입</button>
-			<%} else { %>
-				<button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
-			<%} %>
-				<button class="btn">한국어</button>
-				<button class="btn">English</button>   
-		</div>     
-	 </footer>  
+         <footer>
+            <div
+               style="display: block !important; width: 100%; text-align: center; margin-bottom: 10px;">
+               <%
+               if (info == null) {
+               %>
+               <button class="btn" onclick="location.href='login.jsp'">로그인</button>
+               <button class="btn" onclick="location.href='join.jsp'">회원가입</button>
+               <%
+               } else {
+               %>
+               <button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
+               <%
+               }
+               %>
+               <button class="btn">한국어</button>
+               <button class="btn">English</button>
+            </div>
+         </footer>
          <!-- Side navigation script -->
          <script>
             var myCarousel = document.querySelector('#myCarousel')
