@@ -191,6 +191,12 @@ input[type="submit"]:hover {
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
 			style="color: #545454;">&times;</a>
 		<div class="menu-section">
+		      <%if(info !=null) {%>
+      	<h1><b><%=info.getNick() %></b> 님 환영합니다</h1>
+      <%}else{%>
+      <h1><b>로그인</b>을 해주세요</h1>
+      <%}%>
+      <br>
 			<h2>지역별로 찾기</h2>
 			<div class="menu-items">
 				<a href="<%=exUrl%>서울">서울</a> <a href="<%=exUrl%>부산">부산</a> <a
@@ -211,23 +217,40 @@ input[type="submit"]:hover {
 			</div>
 		</div>
 		<%
-		if (info != null) {
-		%>
-		<div class="menu-section">
-			<h2>마이 페이지</h2>
-			<div class="menu-itemss">
-				<a href="update.jsp">회원정보 수정</a> <a href="likeList.jsp">관심 촬영지</a> <a
-					href="contestList.jsp">공모전 참가내역</a>
-				<%
-				} else {
-				%>
-				<div class="menu-section">
-					<h2>마이 페이지</h2>
-					<div class="menu-itemss">
-						<a href="login.jsp">로그인</a> <a href="contact.jsp">회원가입</a>
-						<%
-						}
-						%>
+      if (info != null) {
+      %>
+      <div class="menu-section">
+         <h2>마이 페이지</h2>
+         <div class="menu-itemss">
+         
+            <a href="update.jsp">회원정보 수정</a> <a href="likeList.jsp">관심 촬영지</a> <a
+               href="contestList.jsp">공모전 참가내역</a>
+         </div>
+         
+         <% if (info.getEmail().equals("admin@gmail.com")) {%>
+         <div class="menu-section">
+         <h2> <a href="memberList.jsp" style="color: black;  text-decoration-line: none;">관리자 회원관리</a></h2>
+         </div>
+         
+         <%} %>
+         
+         <div class="menu-section">
+         	<h2 > <a href="LogoutService" style="color: black;  text-decoration-line: none;">로그아웃</a></h2>
+            </div>
+         <%
+         } else {
+         %>
+         <div class="menu-section">
+            <h2>마이 페이지</h2>
+            <div class="menu-itemss">
+               <a href="login.jsp">로그인</a> <a href="join.jsp">회원가입</a>
+            </div>
+         </div>
+          
+         </div>
+         <%
+         }
+         %>
 					</div>
 				</div>
 			</div>

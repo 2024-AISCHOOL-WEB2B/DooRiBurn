@@ -1,3 +1,4 @@
+<%@page import="dooriburn.com.model.MemberDAO"%>
 <%@page import="dooriburn.com.model.MemberDTO"%>
 <%@page import="dooriburn.com.model.ContestDAO"%>
 <%@page import="dooriburn.com.model.ContestDTO"%> 
@@ -11,7 +12,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>contestBoard</title>
+	<title>memberList</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" /> 
 	
@@ -61,13 +62,12 @@
 	<body>
 		<%    
 		MemberDTO info = (MemberDTO) session.getAttribute("info"); 
-		ContestDAO dao = new ContestDAO();
-		
+		MemberDAO m_dao = new MemberDAO();
 		// 게시판 DB에 있는 글 개수 확인
-		int cnt = dao.getCount();
+		int cnt = m_dao.getCount();
 		// 페이징 처리 ////////////////////////////////////////////////////////////// 
 		
-		int pageSize = 5; // 한 페이지에 출력될 글 수 
+		int pageSize = 10; // 한 페이지에 출력될 글 수 
 		 
 		int pageNum = 1; // 현 페이지 정보 설정
 		if (request.getParameter("pageNum") != null){
@@ -77,7 +77,8 @@
 		int startRow = (pageNum - 1) * pageSize + 1;  // 첫행번호를 계산 
 		
 		// 게시글 목록 가져오기
-        ArrayList<ContestDTO> list = dao.getBoardList(startRow, pageSize); 
+		// 회원 목록 가져오기
+		ArrayList<MemberDTO> m_list = m_dao.getMemberList(startRow, pageSize);
 		
 		String exUrl = "SearchService?s_option=2&pageNum=1&search=";
 	%>	
@@ -160,36 +161,34 @@
 	
  	<div style="clear: both; text-align: center; margin-top: 20px;"> 
  	<br>
- 		<h3 style="display: inline-block;">관광사진 공모전</h3>
- 		<h5>드라마 주인공이 된 나를 뽐내고 상품도 받아가자!</h5>
+ 		<h3 style="display: inline-block;">회원관리</h3>
+ 		<h5>총 회원수 : <%=cnt %> </h5>
  	</div>
  	<div class="container">
 		<div class="row">
 			<table class="table table-striped" style="text-align: center; border:1px solid #dddddd">
 				<thead>
 					<tr style="background-color: #eeeeee; clear: both;">
-						<th style="white-space: nowrap;">번호</th>
-						<th style="text-align: center;">제목</th> 
-						<th style="text-align: center;">공모일</th> 
+						<th style="text-align: center;">이메일</th> 
+						<th style="text-align: center;">이름</th>
+						<th style="text-align: center;">닉네임</th>
+						<th style="text-align: center;">회원삭제</th>
+						 
 					</tr>
 				</thead>
 				<tbody>
-					<% for (ContestDTO dto : list) { %>
+					<% for (MemberDTO dto : m_list) { %>
 						<tr>
-							<td><%= dto.getC_num() %></td>
-							<td><a style="color:#000" href="contestView.jsp?c_num=<%= dto.getC_num() %>"><%= dto.getC_title() %></a></td>
-							<td><%= dto.getC_create_date() %> ~ <%= dto.getC_delete_date() %></td>
+							<td><%= dto.getEmail()%></td>
+							<td><%= dto.getName() %></td>
+							<td><%= dto.getNick() %></td>
+							<td><a href="DeleteMemberService?email=<%=dto.getEmail() %>" style="color: black;  text-decoration-line: none;">X</a></td>
 					 	</tr>
 					<% } %> 
 				</tbody>
 			</table>  
 		</div> 
-		<% if (info != null) { %>
-			<a href="contestList.jsp" class="btn btn-primary pull-left">참가 목록</a>
-		<% } %>
-		<% if (info != null && info.getEmail().equals("admin@gmail.com")) { %>
-			<a href="contestPost.jsp" class="btn btn-primary pull-right">글 작성</a> 
-		<% } %>  
+		
 	</div>
 	<!-- 페이징 처리 -->
 	<div id="page_control">
@@ -207,15 +206,15 @@
 				endPage = pageCount;
 			}
 			if(startPage > pageBlock) { %>
-				<a href="contestBoard.jsp?pageNum=<%=startPage - pageBlock%>">◀</a>
+				<a href="memberList.jsp?pageNum=<%=startPage - pageBlock%>">◀</a>
 			<%} %>
 		    
 			<% for(int i=startPage ; i <= endPage ; i++) { %>
-				<a href="contestBoard.jsp?pageNum=<%=i%>"><%=i %></a>
+				<a href="memberList.jsp?pageNum=<%=i%>"><%=i %></a>
 			<%} %>
 		    
 			<% if(endPage < pageCount){ %>
-				<a href="contestBoard.jsp?pageNum=<%=startPage + pageBlock%>">▶</a>
+				<a href="memberList.jsp?pageNum=<%=startPage + pageBlock%>">▶</a>
 			<%} %>
 		<%} %>
 	</div>

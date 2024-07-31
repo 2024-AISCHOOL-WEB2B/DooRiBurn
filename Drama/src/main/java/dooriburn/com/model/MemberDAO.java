@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MemberDAO {
 
@@ -215,6 +216,80 @@ public class MemberDAO {
 		
 		return cnt;
 	}
-	 
+	
+	// 공모전 게시판 페이징 위한 List 생성
+		public ArrayList<MemberDTO> getMemberList(int startRow, int pageSize){
+			ArrayList<MemberDTO> memberList = new ArrayList<>();
+		    
+			getConnection();
+			try { 
+				// 글 re_ref 최신글 위쪽(내림차순), re_seq (오름차순)
+				// DB 데이터를 원하는만큼씩 잘라내기 : 
+				 String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, EMAIL, NAME, NICK " +
+	                     "FROM (SELECT * FROM TB_MEMBER ORDER BY EMAIL DESC)) " +
+	                     "WHERE RNUM BETWEEN ? AND ?";
+		        
+				psmt = conn.prepareStatement(sql); 
+				psmt.setInt(1, startRow); //시작행 (시작 row 인덱스 번호)
+				psmt.setInt(2, startRow + pageSize - 1); // 끝행
+					
+				// 4. sql 실행
+				rs = psmt.executeQuery();
+				// 5. 데이터처리 ( 글1개의 정보 -> DTO 1개에 담음 -> ArrayList 1칸 )
+				while(rs.next()) {
+				// 데이터가 있을때마다 글 1개의 정보를 저장하는 객체 생성
+					MemberDTO dto = new MemberDTO();
+						
+					dto.setEmail(rs.getString("EMAIL")); 
+					dto.setName(rs.getString("NAME")); 
+					dto.setNick(rs.getString("NICK")); 
+						   
+					memberList.add(dto);	
+				} 
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}		
+			return memberList;
+		}
+		
+		// 게시판 글 개수 카운트
+		public int getCount() {
+			int cnt = 0; 
+			getConnection();
+			try { 
+				String sql = "SELECT COUNT(*) FROM TB_MEMBER";
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				if (rs.next()) {
+					cnt = rs.getInt(1); 
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			return cnt;
+		}
+
+		public int delete(String email) {
+		    int cnt = 0; 
+		    getConnection();
+		    try { 
+		        String sql = "DELETE FROM TB_MEMBER WHERE EMAIL = ?";
+		        psmt = conn.prepareStatement(sql);
+		        psmt.setString(1, email);
+		        
+		        cnt = psmt.executeUpdate();  // executeUpdate()는 삭제된 행의 수를 반환합니다
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        close();
+		    }
+		    return cnt;
+		}
+
+		
 
 }
