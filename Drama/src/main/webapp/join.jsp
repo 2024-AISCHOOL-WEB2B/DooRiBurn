@@ -149,23 +149,6 @@
 	</style> 
 	</head>
 	<body> 
-	
-	<script>
-        function validateForm() {
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
-            var nick = document.getElementById("nick").value;
-            var name = document.getElementById("name").value;
-            var phone = document.getElementById("phone").value;
-            var addr = document.getElementById("addr").value;
-
-            if (email == "" || password == "" || nick == "" || name == "" || phone == "" || addr == "") {
-                alert("모든 필드를 입력해 주세요.");
-                return false;
-            }
-            return true;
-        }
-    </script>
     
    <% 
 	MemberDTO info = (MemberDTO)session.getAttribute("info");   
@@ -292,57 +275,85 @@
 			</div> 
 		</footer>   
 		
-	<!-- 이메일 중복 실시간 체크  -->	
+	<!-- 이메일 닉네임 중복 확인  -->	
 	<script src="js/jquery-3.6.0.min.js"></script>
 	<script>
-	$('#email').focusout(function(){
-		let userEmail = $('#email').val();
-		
-		$.ajax({
-			url : "EmailCheckService",
-			type : "post",
-			data : {userEmail: userEmail},
-			dataType : 'json',
-			success : function(result){
-				if(result == 0){
-					$("#checkEmail").html('사용할 수 없는 이메일입니다.');
-					$("#checkEmail").attr('color', 'red');
-				}else{
-					$("#checkEmail").html('사용할 수 있는 이메일입니다.');
-					$("#checkEmail").attr('color', 'green');
-				}
-			},
-			error : function(){
-				alert("서버요청실패");
-			} 
-		})
-	}) 
-	</script>	
-	
-	<script>
-	$('#nick').focusout(function(){
-		let userNick = $('#nick').val();
-		
-		$.ajax({
-			url : "NickCheckService",
-			type : "post",
-			data : {userNick: userNick},
-			dataType : 'json',
-			success : function(result){
-				if(result == 0){
-					$("#checkNick").html('사용중인 닉네임 입니다.');
-					$("#checkNick").attr('color', 'red');
-				}else{
-					$("#checkNick").html('사용할 수 있는 닉네임입니다.');
-					$("#checkNick").attr('color', 'green');
-				}
-			},
-			error : function(){
-				alert("서버요청실패");
-			} 
-		})
-	}) 
-	</script>	
+        var emailValid = false;
+        var nickValid = false;
+
+        function validateForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var nick = document.getElementById("nick").value;
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("phone").value;
+            var addr = document.getElementById("addr").value;
+
+            if (email == "" || password == "" || nick == "" || name == "" || phone == "" || addr == "") {
+                alert("모든 필드를 입력해 주세요.");
+                return false;
+            }
+            if (!emailValid) {
+                alert("유효하지 않은 이메일입니다.");
+                return false;
+            }
+            if (!nickValid) {
+                alert("유효하지 않은 닉네임입니다.");
+                return false;
+            }
+            return true;
+        }
+
+        $(document).ready(function(){
+            $('#email').focusout(function(){
+                let userEmail = $('#email').val();
+
+                $.ajax({
+                    url : "EmailCheckService",
+                    type : "post",
+                    data : {userEmail: userEmail},
+                    dataType : 'json',
+                    success : function(result){
+                        if(result == 0){
+                            $("#checkEmail").html('사용할 수 없는 이메일입니다.').css('color', 'red');
+                            emailValid = false;
+                        }else{
+                            $("#checkEmail").html('사용할 수 있는 이메일입니다.').css('color', 'green');
+                            emailValid = true;
+                        }
+                    },
+                    error : function(){
+                        alert("서버요청실패");
+                        emailValid = false;
+                    }
+                });
+            });
+
+            $('#nick').focusout(function(){
+                let userNick = $('#nick').val();
+
+                $.ajax({
+                    url : "NickCheckService",
+                    type : "post",
+                    data : {userNick: userNick},
+                    dataType : 'json',
+                    success : function(result){
+                        if(result == 0){
+                            $("#checkNick").html('사용중인 닉네임 입니다.').css('color', 'red');
+                            nickValid = false;
+                        }else{
+                            $("#checkNick").html('사용할 수 있는 닉네임입니다.').css('color', 'green');
+                            nickValid = true;
+                        }
+                    },
+                    error : function(){
+                        alert("서버요청실패");
+                        nickValid = false;
+                    }
+                });
+            });
+        });
+    </script>
 	
 	<script> 
 	    function redirectToPage() {
