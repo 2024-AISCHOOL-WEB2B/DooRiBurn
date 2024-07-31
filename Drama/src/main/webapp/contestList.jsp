@@ -125,7 +125,7 @@
 	<!-- 공모전 목록 -->
 	<div style="clear: both; text-align: center; margin-top: 50px;"> 
  		<br>
- 		<h3 style="display: inline-block;">참가한 공모전 목록</h3>
+ 		<h3 style="display: inline-block;">관광사진 공모전 참가내역</h3>
  	</div> 
  	<div class="container contest-list-container">
 		<div class="row">

@@ -115,6 +115,13 @@
     #page_control a:focus {
         background-color: #ffd964;  
     }
+@media (max-width: 768px) {
+    .search-container {
+        width: 60%;
+        height: auto;
+        flex-direction: row;
+        padding: 10px;
+    }
 </style>
 </head>
 <body>

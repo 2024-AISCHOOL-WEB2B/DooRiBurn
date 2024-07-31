@@ -574,7 +574,7 @@
 
                      <div style="margin: auto;">
                         <form class="mb-3" name="myform" id="myform" method="post"
-                           action="ReviewUpdateService">
+                           action="ReviewUpdateService" onsubmit="return validateForm()">
                            <input type="text" name="index" style="display: none;"
                               value="<%=index%>">
                             <div class="rating-container">
@@ -809,6 +809,26 @@
       function closeNav() {
          document.getElementById("mySidenav").style.width = "0";
       }
+   </script>
+   <!-- 리뷰 작성 조건 -->
+   <script>
+   function validateForm() {
+	    var reviewStar = document.querySelector('input[name="reviewStar"]:checked');
+	    var content = document.getElementById("reviewContents").value;
+	    var moodCheckboxes = document.querySelectorAll('input[name="mood"]:checked');
+	    
+	    if (!reviewStar) {
+	        alert("별점을 선택해 주야 됩니다");
+	        return false;
+	    }else if (content.trim() === "") {
+	    	alert("내용을 입력하셔야 됩니다.");
+	        return false;
+		}else if (moodCheckboxes.length === 0) {
+			alert("분위기 태그를 선택해야 됩니다.");
+	        return false;
+		}
+	    return true;
+   }
    </script>
 </body>
 </html>
