@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONException;
 
 @WebServlet("/SearchService")
 public class SearchService extends HttpServlet {
@@ -26,11 +27,9 @@ public class SearchService extends HttpServlet {
 
         String s_option = request.getParameter("s_option");
         String search = request.getParameter("search");
-        int pageNum = Integer.parseInt(request.getParameter("pageNum")) ;
+        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
         int pageSize = 10; // 한 페이지에 출력될 글 수
-        pageNum = pageNum; // 현 페이지 정보 설정
-        
-        System.err.println(pageNum);
+
         if (request.getParameter("pageNum") != null) {
             pageNum = Integer.parseInt(request.getParameter("pageNum"));
         }
@@ -75,15 +74,21 @@ public class SearchService extends HttpServlet {
                         scene.add(jsonObject.optString("장소설명", ""));
                         index.add(jsonObject.optInt("index", -1));
                     }
+                    request.setAttribute("index", index);
                 } else {
                     request.setAttribute("message", "No results found.");
                 }
             } else {
                 request.setAttribute("message", "GET request not worked");
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            request.setAttribute("message", "Error: " + e.getMessage());
+            request.setAttribute("index", null);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("message", "Error: " + e.getMessage());
+            request.setAttribute("index", null);
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -94,7 +99,7 @@ public class SearchService extends HttpServlet {
         request.setAttribute("places", places);
         request.setAttribute("img_src", img_src);
         request.setAttribute("scene", scene);
-        request.setAttribute("index", index);
+        
         request.setAttribute("pageNum", pageNum);
         request.setAttribute("pageSize", pageSize);
         request.setAttribute("cnt", cnt);

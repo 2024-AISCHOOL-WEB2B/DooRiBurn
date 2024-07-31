@@ -155,7 +155,7 @@
 	    CommentLikeDAO likeDao = new CommentLikeDAO();
 	    ArrayList<CommentDTO> commentList = comDao.getComment(num);
 
-		String exUrl = "SearchService?s_option=1&pageNum=1&search=";
+		String exUrl = "SearchService?s_option=2&pageNum=1&search=";
 	%>
 
 	<header>

@@ -72,7 +72,7 @@
 	<body>
 		<%  
 			MemberDTO info = (MemberDTO)session.getAttribute("info"); 
-			String exUrl = "SearchService?s_option=1&pageNum=1&search=";
+		String exUrl = "SearchService?s_option=2&pageNum=1&search=";
 		 %>
 	<header>
 		<div class="banner">여기가 거기여?</div>

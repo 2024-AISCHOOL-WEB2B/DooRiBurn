@@ -118,7 +118,7 @@ footer div {
    MemberDTO info = (MemberDTO) session.getAttribute("info");
    // 랭킹 불러오기
    ArrayList<RanKingDTO> ranking = new RankingDAO().Ranking();
-   String exUrl = "SearchService?s_option=1&pageNum=1&search=";
+   String exUrl = "SearchService?s_option=2&pageNum=1&search=";
    %>
    <header>
       <div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
@@ -177,8 +177,9 @@ footer div {
          <div class="search-container" style="height: 50px;">
             <select name="s_option" style="margin-right: 7px;font-size: 11px;">
                <!-- name="category" -> s_option -->
-               <option value="1">장소/지역</option>
                <option value="0">드라마</option>
+               <option value="1">장소</option>
+               <option value="2">지역</option>
             </select> <input name="search" type="text" placeholder="검색"
                style="flex-grow: 1; margin-right: 5px; font-size: 13px;">
             <button type="submit">

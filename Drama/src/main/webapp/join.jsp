@@ -153,7 +153,7 @@
    <% 
 	MemberDTO info = (MemberDTO)session.getAttribute("info");   
 	String recentURI = request.getParameter("from");
-	String exUrl = "SearchService?s_option=1&pageNum=1&search=";
+	String exUrl = "SearchService?s_option=2&pageNum=1&search=";
    %>
 		 
 	<header>

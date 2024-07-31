@@ -122,7 +122,8 @@
 	MemberDTO info = (MemberDTO) session.getAttribute("info");
 	FilmLikeDAO dao = new FilmLikeDAO();
 
-	String exUrl = "SearchService?s_option=1&pageNum=1&search=";
+	String exUrl = "SearchService?s_option=2&pageNum=1&search=";
+
 
 	String s_option = request.getParameter("s_option");
 	String search = request.getParameter("search");
@@ -195,11 +196,12 @@
 			<div class="search-container" style="height: 30px;">
 				<select name="s_option" style="margin-right: 7px;">
 					<option value="0" <%="0".equals(s_option) ? "selected" : ""%>>드라마</option>
-					<option value="1" <%="1".equals(s_option) ? "selected" : ""%>>장소
-						및 지역</option>
+					<option value="1" <%="1".equals(s_option) ? "selected" : ""%>>장소</option>
+						<option value="2" <%="2".equals(s_option) ? "selected" : ""%>>지역</option>
 				</select> <input name="search" type="text" placeholder="검색"
 					value="<%=search != null ? search : ""%>"
 					style="flex-grow: 1; margin-right: 5px;">
+					<input name="pageNum" value="1" style="display: none">
 				<button type="submit">
 					<img src="<%=request.getContextPath()%>/images/search.png" alt="검색"
 						style="width: 40px; height: 40px;" />
@@ -209,6 +211,7 @@
 	</div>
 
 	<%
+	if(index!=null){
 	for (int i = 0; i < index.size(); i++) {
 		String seen = scene.get(i).length() > 50 ? scene.get(i).substring(0, 40) + "..." : scene.get(i);
 	%>
@@ -248,9 +251,12 @@
 		%>
 	</div>
 	<%
-	}
+	}}else{
 	%>
 
+	<div class="banner" style="height:20px; font-size:x-large;">'<%=search %>' 에 대한</div><br>
+	<div class="banner" style="height:20px; font-size:x-large;">검색결과가 없습니다.</div>
+	<% } %>
 	<!-- 페이징 처리 -->
 	<div id="page_control">
 		<%

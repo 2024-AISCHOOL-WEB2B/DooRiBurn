@@ -78,7 +78,7 @@
 		// 게시글 목록 가져오기
         ArrayList<ContestDTO> list = dao.getBoardList(startRow, pageSize); 
 		
-		String exUrl = "SearchService?s_option=1&pageNum=1&search=";
+		String exUrl = "SearchService?s_option=2&pageNum=1&search=";
 	%>	
 	<header>
 		<div class="banner" onclick="redirectToPage()">여기가 거기여?</div>
