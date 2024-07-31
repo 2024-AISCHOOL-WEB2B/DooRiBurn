@@ -180,12 +180,12 @@ footer div {
    <div class="main-content">
       <form action="SearchService" method="get">
          <div class="search-container" style="height: 50px;">
-            <select name="s_option" style="margin-right: 7px;font-size: 11px;">
+            <select name="s_option" style="margin-right: 7px;font-size: 13px;">
                <!-- name="category" -> s_option -->
                <option value="1">장소/지역</option>
                <option value="0">드라마</option>
             </select> <input name="search" type="text" placeholder="검색"
-               style="flex-grow: 1; margin-right: 5px; font-size: 13px;">
+               style="flex-grow: 1; margin-right: 5px; font-size: 18px;">
             <button type="submit">
                <img src="images/search.png" style="width: 40px; height: 40px;" />
             </button>
@@ -234,7 +234,7 @@ footer div {
    
 
 
-      <div class="intro">
+<div class="intro">
          <h2 class="highlight">그 해 우리는 그 장소!</h2>
          <h2 class="highlight">나도 가 볼까?</h2>
 
@@ -253,29 +253,32 @@ footer div {
 
             <div class="carousel-inner">
                <div class="carousel-item active">
-                  <a href="detail.jsp?index=712"> </a> <img
+                  <a href="detail.jsp?index=712"> <img
                      src="images/lotteworld.png" class="d-block w-100" alt="...">
-                     <div class="carousel-caption d-block">
-                        <!-- <h4 style="color: white;">롯데월드</h4> -->
-                     </div>
+                  </a>
+                  <div class="carousel-caption d-block">
+                     <!-- <h4 style="color: white;">롯데월드</h4> -->
+                  </div>
                </div>
                <div class="carousel-item">
-                  <a href="detail.jsp?index=698"> </a> <img src="images/musiclib.png"
+                  <a href="detail.jsp?index=698"> <img src="images/musiclib.png"
                      class="d-block w-100" alt="...">
-                     <div class="carousel-caption d-block">
-                        <!-- <h6 style="color: white;">의정부음악도서관</h6> -->
-                     </div>
+                  </a>
+                  <div class="carousel-caption d-block">
+                     <!-- <h6 style="color: white;">의정부음악도서관</h6> -->
+                  </div>
                </div>
                <div class="carousel-item">
-                  <a href="detail.jsp?index=714"> </a> <img src="images/sbridge.png"
+                  <a href="detail.jsp?index=714"> <img src="images/sbridge.png"
                      class="d-block w-100" alt="...">
-                     <div class="carousel-caption d-block">
-                        <!-- <h4 style="color: white;">서강대교</h4> -->
-                     </div>
+                  </a>
+                  <div class="carousel-caption d-block">
+                     <!-- <h4 style="color: white;">서강대교</h4> -->
+                  </div>
                </div>
             </div>
-            
-            
+
+
             <button class="carousel-control-prev" type="button"
                data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -290,48 +293,48 @@ footer div {
       </div>
    </div>
 
-         <footer>
-            <div
-               style="display: block !important; width: 100%; text-align: center; margin-bottom: 10px;">
-               <%
-               if (info == null) {
-               %>
-               <button class="btn" onclick="location.href='login.jsp'">로그인</button>
-               <button class="btn" onclick="location.href='join.jsp'">회원가입</button>
-               <%
-               } else {
-               %>
-               <button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
-               <%
-               }
-               %>
-               <button class="btn">한국어</button>
-               <button class="btn">English</button>
-            </div>
-         </footer>
-         <!-- Side navigation script -->
-         <script>
-            var myCarousel = document.querySelector('#myCarousel')
-            var carousel = new bootstrap.Carousel(myCarousel)
+   <footer>
+      <div
+         style="display: block !important; width: 100%; text-align: center; margin-bottom: 10px;">
+         <%
+         if (info == null) {
+         %>
+         <button class="btn" onclick="location.href='login.jsp'">로그인</button>
+         <button class="btn" onclick="location.href='join.jsp'">회원가입</button>
+         <%
+         } else {
+         %>
+         <button class="btn" onclick="location.href='LogoutService'">로그아웃</button>
+         <%
+         }
+         %>
+         <button class="btn">한국어</button>
+         <button class="btn">English</button>
+      </div>
+   </footer>
+   <!-- Side navigation script -->
+   <script>
+      var myCarousel = document.querySelector('#myCarousel')
+      var carousel = new bootstrap.Carousel(myCarousel)
 
-            function redirectToPage() {
-               window.location.href = 'Realindex.jsp';
-            }
-            function openNav() {
-               document.getElementById("mySidenav").style.width = "80%";
-            }
+      function redirectToPage() {
+         window.location.href = 'Realindex.jsp';
+      }
+      function openNav() {
+         document.getElementById("mySidenav").style.width = "80%";
+      }
 
-            function closeNav() {
-               document.getElementById("mySidenav").style.width = "0";
-            }
-         </script>
+      function closeNav() {
+         document.getElementById("mySidenav").style.width = "0";
+      }
+   </script>
 
-         <!-- JavaScript 파일 연결 -->
-         <!-- 여기서는 없어도 되긴 함 detail에서 먼저 js 만들고 여기도 연결해 봄 -->
-         <!-- <script src="js/menu.js"></script> -->
-         <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-         <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+   <!-- JavaScript 파일 연결 -->
+   <!-- 여기서는 없어도 되긴 함 detail에서 먼저 js 만들고 여기도 연결해 봄 -->
+   <!-- <script src="js/menu.js"></script> -->
+   <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+   <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
