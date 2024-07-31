@@ -496,15 +496,10 @@
 	    	
 			return false;
 	    }else{
-	    	console.log("test1")
 	    	document.querySelector("form").submit();
 	    	return true;
 	    }
-	    console.log("test2")
 	    
-	    /* else { 
-	        document.querySelector("form").submit();
-	    } */
 	}
 	</script>
 
