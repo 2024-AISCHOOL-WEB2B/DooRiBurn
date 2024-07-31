@@ -159,7 +159,7 @@ a.custom-link:hover {
             <a href="contestBoard.jsp">참가하기</a>
          </div>
       </div>
-      <%
+   <%
       if (info != null) {
       %>
       <div class="menu-section">
@@ -190,16 +190,6 @@ a.custom-link:hover {
             </div>
          </div>
           
-         </div>
-         <%
-         }
-         %>
-         <div class="menu-section">
-            <h2>마이 페이지</h2>
-            <div class="menu-itemss">
-               <a href="login.jsp?from=/Drama/likeList.jsp">로그인</a> <a
-                  href="join.jsp?from=/Drama/likeList.jsp">회원가입</a>
-            </div>
          </div>
          <%
          }
