@@ -381,7 +381,8 @@
 						<tr>  
 							<td>
 								<input type="hidden" name="c_num" value="<%= cNumParam %>"><br>
-								<input type="submit" id="uploadInput" value="댓글 작성" onclick="checkLogin()">
+								<button type="button" id="uploadInput" value="댓글 작성" onclick="checkLogin()">댓글 작성</button>
+								<!-- <input type="submit" id="uploadInput" value="댓글 작성" onclick="checkLogin()"> -->
 							</td>
 						</tr>  
 					</table>
@@ -480,16 +481,30 @@
 	</script> 
 	<!-- 로그인시 댓글 작성할 수 있게 confirm -->
 	<script>
-	function checkLogin() {
+	function checkLogin(event) {
 	    var loggedIn = <%= info != null ? "true" : "false" %>;
+	    var file = document.getElementById("file").value;
 	    if (!loggedIn) {
 	        var confirmLogin = confirm("로그인 후에 댓글을 작성할 수 있습니다. 로그인 페이지로 이동하시겠습니까?");
 	        if (confirmLogin) {
 	            window.location.href = "login.jsp?from=/Drama/contestView.jsp?c_num=<%=cNumParam%>"; 
 	        }
-	    } else { 
-	        document.querySelector("form").submit();
+	        return false;
+	    } else if(file == ""){
+	    	
+	    	alert("사진 업로드 해주세요.");
+	    	
+			return false;
+	    }else{
+	    	console.log("test1")
+	    	document.querySelector("form").submit();
+	    	return true;
 	    }
+	    console.log("test2")
+	    
+	    /* else { 
+	        document.querySelector("form").submit();
+	    } */
 	}
 	</script>
 
