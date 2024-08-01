@@ -2,6 +2,8 @@
 
 <img src="https://github.com/user-attachments/assets/3d036458-d9c5-49b3-8eb8-6c660e2b9b82" width="70%" height="70%"/>
 
+## 🍀 Project
+지역 관광 활성화를 위한 드라마 촬영지 검색 서비스
 
 ## 🍀 Team
 🤍 김두리
