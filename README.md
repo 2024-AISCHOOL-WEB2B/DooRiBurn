@@ -8,10 +8,7 @@
 ## 🍀 Project
 지역 관광 활성화를 위한 드라마 촬영지 검색 서비스
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/0d7d96c2-7597-48de-93ad-7758ee0d72e8" width="50%">
-</p>
-
+<br>
 
 ## 🍀 Team
 🤍 김두리
@@ -19,6 +16,7 @@
 🤍 양세진
 🤍 한재옥
  
+<br>
 
 ## 🍀 Main Tools
 ![java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white) ![python](https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white) ![flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white) ![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white) 
