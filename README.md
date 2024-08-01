@@ -1,6 +1,9 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=FFEEB9&height=150&section=header&text=dooRiBurn&fontSize=50" />
 
-<img src="https://github.com/user-attachments/assets/3d036458-d9c5-49b3-8eb8-6c660e2b9b82" width="70%" height="70%"/>
+![스크린샷_1-8-2024_132430_](https://github.com/user-attachments/assets/78527cb2-d338-4fca-ac3a-084390a3ac55)
+
+
+
 
 ## 🍀 Project
 지역 관광 활성화를 위한 드라마 촬영지 검색 서비스
