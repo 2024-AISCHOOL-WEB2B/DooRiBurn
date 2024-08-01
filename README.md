@@ -8,6 +8,11 @@
 ## 🍀 Project
 지역 관광 활성화를 위한 드라마 촬영지 검색 서비스
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0d7d96c2-7597-48de-93ad-7758ee0d72e8" width="50%">
+</p>
+
+
 ## 🍀 Team
 🤍 김두리
 🤍 박소영
